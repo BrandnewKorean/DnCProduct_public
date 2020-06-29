@@ -21,6 +21,8 @@ $(function(){
 		location.href='JoinTerms';
 	});
 	
+	// wowowowoowowowo
+	
 	$('.head_message').animate({
 		'opacity': 1
 	}, 2000);
