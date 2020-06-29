@@ -64,10 +64,12 @@
 		text-align: center;
 		opacity: 0;
 		background-color: rgba(255, 255, 255, 0);
+		color: white;
 	}
 	.head_message > a{
 		font-size: 20pt;
 		background-color: rgba(255, 255, 255, 0);
+		color: red;
 	}
 	.container{
 		width: 90%;
@@ -77,11 +79,16 @@
 	}
 	.cmenu{
 		position: relative;
-		display: inline-block;
-		margin: 5px;
-		width: 45%;
+		margin: 10px;
+		width: 100%;
 		height: 300px;
 		background-color: red;
+	}
+	#diary{
+		display: inline-block;
+		position: relative;
+		width: 40%;
+		height: 100%;
 	}
 	.footer{
 		position: relative;
