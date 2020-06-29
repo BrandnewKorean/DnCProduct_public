@@ -16,7 +16,6 @@
 		</div>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
-	<!--  -->
 	<div class="intro">
 		<canvas id=w_canvas></canvas>
 		<div class="head_message">
