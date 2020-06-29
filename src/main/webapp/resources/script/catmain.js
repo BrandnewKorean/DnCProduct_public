@@ -16,12 +16,9 @@ $(function(){
 //		if(image_index > 10) image_index = 1;
 //	}, 4000);
 	
-	
 	$('#join').click(function() {
 		location.href='JoinTerms';
 	});
-	
-	// wowowowoowowowo
 	
 	$('.head_message').animate({
 		'opacity': 1
