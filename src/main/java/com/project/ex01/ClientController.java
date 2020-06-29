@@ -36,4 +36,13 @@ public class ClientController {
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
+	
+	@RequestMapping(value="JoinTerms")
+		public ModelAndView JoinTerms(ModelAndView mv) {
+			mv.setViewName("cat/join/JoinTerms");
+			return mv;
+		}
+	
+	
+	
 }
