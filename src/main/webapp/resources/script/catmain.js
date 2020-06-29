@@ -16,6 +16,12 @@ $(function(){
 //		if(image_index > 10) image_index = 1;
 //	}, 4000);
 	
+	
+	$('#join').click(function() {
+		location.href='JoinTerms';
+	})
+	
+	
 	$('.head_message').animate({
 		'opacity': 1
 	}, 2000);
@@ -71,6 +77,7 @@ $(function(){
 			}, 500);
 			$('.tmenu_result').html('');
 		}
+		
 	});
 	
 	$('#home').click(function(e){
