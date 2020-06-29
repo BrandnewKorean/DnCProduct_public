@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Join Terms</title>
-
+<link rel="stylesheet" type="text/css" href="resources/css/cat/join/joinTerms.css?ver=<%= System.currentTimeMillis()%>">
 <script type="text/javascript">
 	function checkterms(cat){
 		var agreecheck1 = document.term.agree1.checked;
@@ -31,7 +31,7 @@
 
 <form name="term" action="JoinForm" onsubmit="checkterms(this)" method="post">
 	<input type="radio" name="agree1" id="agree1"> 이용약관 동의(필수)<br><br>
-		<div style="border:1px solid black; padding: 10px; overflow: scroll; width: 500px; height:150px; ">
+		<div>
 							여러분을 환영합니다.
 				D&C 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 D&C 서비스의 이용과 관련하여 D&C 서비스를 제공하는 D&C 주식회사(이하 ‘D&C’)와 이를 이용하는 D&C 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 D&C 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 				
@@ -151,9 +151,8 @@
 				적용 일자: 2020년 06월 29일
 		</div>
 	<br><br><br>
-	
 	<input type="radio" name="agree2" id="agree2"> 개인정보 동의(필수)<br><br>
-	<div style="border: 1px solid black; padding:10px; overflow: scroll; width: 500px; height: 150px;">
+	<div>
 						정보통신망법 규정에 따라 D&C에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 				
 				1. 수집하는 개인정보
@@ -214,7 +213,7 @@
 	
 	
 	<input type="radio"> 위치 서비스 동의(선택)<br>
-		<div style="border: 1px solid black; padding: 10px; overflow: scroll; width: 500px; height: 150px;">
+		<div>
 			위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 D&C 위치기반 서비스를 이용할 수 있습니다.
 
 
@@ -289,10 +288,7 @@
 				이메일 주소 : privacy@D&C.com
 		</div>
 		<br><br><br>
-		
-		
 	<input type="radio"> 광고 수신 여부 동의(선택)<br><br><br><br>
-		
 	<button type="submit">확인</button> 
 </form>
 <button onclick="location.href='catmain'">취소</button>
