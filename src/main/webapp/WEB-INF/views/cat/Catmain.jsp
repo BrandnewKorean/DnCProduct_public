@@ -42,7 +42,6 @@
 		<br>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/rainyday.js/0.1.2/rainyday.min.js"></script> -->
 	<script type="text/javascript" src="resources/script/snow.js?ver=<%= System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>

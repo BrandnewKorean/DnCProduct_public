@@ -4,8 +4,8 @@ $(function(){
 	var width = wCanvas.width;
 	var height = wCanvas.height;
 	
-	var select = prompt("선택 : 1.눈 2.비");
-	
+//	var select = prompt("선택 : 1.눈 2.비");
+	var select = 1;
 	var maxparts = 100;
 	var parts = [];
 	var angle = 0;
