@@ -19,8 +19,7 @@ $(function(){
 	
 	$('#join').click(function() {
 		location.href='JoinTerms';
-	})
-	
+	});
 	
 	$('.head_message').animate({
 		'opacity': 1
