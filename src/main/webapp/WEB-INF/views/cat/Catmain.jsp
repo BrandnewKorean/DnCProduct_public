@@ -18,6 +18,7 @@
 	</div>
 	<div class="intro">
 		<canvas id=w_canvas></canvas>
+		<!--  -->
 		<div class="head_message">
 		All information about Cat<br>
 		<a>Show off your pet and get useful information</a>
