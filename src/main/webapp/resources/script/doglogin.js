@@ -5,5 +5,3 @@ $('#submit').click(function(){
 	
 	$('.tmenu_result').html('');
 });
-
-//wowowowoow
