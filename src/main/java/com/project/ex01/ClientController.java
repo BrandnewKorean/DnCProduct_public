@@ -38,11 +38,8 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="JoinTerms")
-		public ModelAndView JoinTerms(ModelAndView mv) {
-			mv.setViewName("cat/join/JoinTerms");
-			return mv;
-		}
-	
-	
-	
+	public ModelAndView JoinTerms(ModelAndView mv) {
+		mv.setViewName("cat/join/JoinTerms");
+		return mv;
+	}
 }
