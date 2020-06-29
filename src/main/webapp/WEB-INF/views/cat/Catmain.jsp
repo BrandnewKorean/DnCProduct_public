@@ -17,9 +17,7 @@
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	<div class="intro">
-		<div class="head_image" id="head_image">
-			<canvas id=w_canvas></canvas>
-		</div>
+		<canvas id=w_canvas></canvas>
 		<div class="head_message">
 		All information about Cat<br>
 		<a>Show off your pet and get useful information</a>
@@ -42,7 +40,7 @@
 		<br>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="resources/script/snow.js?ver=<%= System.currentTimeMillis()%>"></script>
+	<script type="text/javascript" src="resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

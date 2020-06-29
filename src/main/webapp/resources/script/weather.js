@@ -1,9 +1,20 @@
 $(function(){
 	var wCanvas = document.getElementById('w_canvas');
 	var ctx = wCanvas.getContext('2d');
+	
+	wCanvas.width = window.innerWidth;
+	wCanvas.height = window.innerHeight * 0.7;
+	
 	var width = wCanvas.width;
 	var height = wCanvas.height;
 	
+	$(window).resize(function() {
+		wCanvas.width = window.innerWidth;
+		wCanvas.height = window.innerHeight * 0.7;
+	
+		width = wCanvas.width;
+		height = wCanvas.height;
+	});
 //	var select = prompt("선택 : 1.눈 2.비");
 	var select = 1;
 	var maxparts = 100;
@@ -14,7 +25,7 @@ $(function(){
 		parts.push({
 			x: Math.random()*width,
 			y: Math.random()*height,
-			r: Math.random()*2+1,
+			r: Math.random()*10+1,
 			d: Math.random()*maxparts
 		});
 	}
