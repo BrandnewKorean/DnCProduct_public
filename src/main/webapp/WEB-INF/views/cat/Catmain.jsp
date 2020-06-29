@@ -26,7 +26,7 @@
 	<div class="container">
 		<div class=cmenu>
 			<div id=diary></div>
-			귀여운 반려묘의 하루하루를 기록해보세요
+			귀여운 반려묘의 하루하루를 기록해보세요~
 		</div>
 		<div class=cmenu id=service></div>
 		<div class=cmenu></div>
