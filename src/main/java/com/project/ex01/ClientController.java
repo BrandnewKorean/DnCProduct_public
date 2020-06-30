@@ -6,7 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 // master push
-// Yong
+
 
 @Controller
 public class ClientController {
