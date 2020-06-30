@@ -3,7 +3,7 @@ package com.project.ex01;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+// master test
 @Controller
 public class ClientController {
 	
