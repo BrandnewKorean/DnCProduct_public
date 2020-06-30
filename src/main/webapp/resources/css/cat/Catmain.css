@@ -28,10 +28,12 @@
 		right: 10px;
 		bottom: 0;
 		display: inline-block;
+		background-color: rgba(255,255,255,0);
 	}
 	.tmenu > span{
 		font-family: "NanumPen";
 		font-size: 18pt;
+		background-color: rgba(255,255,255,0);
 	}
 	.tmenu_result{
 		position: absolute;
@@ -80,15 +82,45 @@
 	.cmenu{
 		position: relative;
 		margin: 10px;
-		width: 100%;
+		width: 98%;
 		height: 300px;
-		background-color: red;
+		text-align: left;
+		border: 1px solid;
 	}
 	#diary{
 		display: inline-block;
 		position: relative;
 		width: 40%;
 		height: 100%;
+		background-image: url("/ex01/resources/image/diary.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: rgba(255,255,255,0);
+	}
+	#diary_message{
+		display: inline-block;
+		top: 5%;
+		left: 45%;
+		position: absolute;
+		background-color: rgba(255,255,255,0);
+		font-size: 50pt;
+		font-family: "NanumPen";
+	}
+	#diary_message > a{
+		font-size: 20pt;
+		background-color: rgba(255,255,255,0);
+	}
+	#cat_footprint{
+		position: absolute;
+		background-image: url("/ex01/resources/image/cat_footprint.png");
+		background-color: rgba(255,255,255,0);
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+		right: 10px;
+		bottom: 10px;
+		display: none;
 	}
 	.footer{
 		position: relative;

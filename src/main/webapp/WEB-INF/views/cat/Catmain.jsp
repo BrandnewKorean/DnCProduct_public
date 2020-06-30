@@ -25,8 +25,14 @@
 	</div>
 	<div class="container">
 		<div class=cmenu>
-			<div id=diary></div>
-			귀여운 반려묘의 하루하루를 기록해보세요~~~
+			<div id=diary>
+				<div id=cat_footprint></div>
+			</div>
+			<div id=diary_message>
+				귀여운 반려묘의<br>
+				하루하루를 기록해보세요<br>
+				<a>저희는 당신을 위해 private한 다이어리 공간을 제공합니다</a>
+			</div>
 		</div>
 		<div class=cmenu id=service></div>
 		<div class=cmenu></div>

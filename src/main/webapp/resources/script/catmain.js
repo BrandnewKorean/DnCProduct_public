@@ -40,6 +40,15 @@ $(function(){
 		var newPosition = scrollTop + "px";
 		
 		$('.header').css('top', newPosition);
+		console.log($('#diary').offset().top);
+		console.log(scrollBottom);
+		if(scrollBottom >= $('#diary').offset().top + 300){
+			$('#cat_footprint').css('display','block');
+			$('#cat_footprint').animate({
+				width: '25%',
+				height: '40%'
+			}, 500);
+		}
 	});
 	
 	$('.text').hover(function(){
