@@ -27,7 +27,9 @@
 </head>
 <body>
 
-<h1>D&C 회원가입 동의 약관</h1>
+<img id="termsimg" src="resources/image/logoe.png">
+
+<h1>D&C 회원가입 동의 약관</h1><br><br>
 
 <form name="term" action="JoinForm" onsubmit="checkterms(this)" method="post">
 	<input type="radio" name="agree1" id="agree1"> 이용약관 동의(필수)<br><br>
@@ -289,9 +291,12 @@
 		</div>
 		<br><br><br>
 	<input type="radio"> 광고 수신 여부 동의(선택)<br><br><br><br>
-	<button type="submit">확인</button> 
+	<button type="submit">확인여부 동의(선택)</button> 
+	<button onclick="location.href='catmain'">취소</button>
+	
 </form>
-<button onclick="location.href='catmain'">취소</button>
+
+
 
 </body>
 </html>
