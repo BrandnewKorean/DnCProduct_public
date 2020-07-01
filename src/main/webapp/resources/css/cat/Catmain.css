@@ -8,7 +8,7 @@
 	src: url("/ex01/resources/font/NanumPen.ttf");
 }
 	*{
-		background-color: white;
+		background-color: LavenderBlush;
 	}
 	body{
 		margin: 0;
@@ -19,7 +19,7 @@
 		margin: 0;
 		width: 100%;
 		z-index: 100;
-		background-color: rgba(255,255,255,0.95);
+		background-color: Lavender;
 		font-family: "BrushScriptBT";
 		font-size: 25pt;
 	}
@@ -66,7 +66,7 @@
 		text-align: center;
 		opacity: 0;
 		background-color: rgba(255, 255, 255, 0);
-		color: white;
+		color: RebeccaPurple;
 	}
 	.head_message > a{
 		font-size: 20pt;
@@ -126,8 +126,8 @@
 		position: relative;
 		width: 100%;
 		text-align: center;
-		background-color: black;
-		color: white;
+		background-color: Lavender;
+		color: SlateGrey;
 	}
 	.logo{
 		position: absolute;
@@ -140,4 +140,7 @@
 		border-radius: 50%;
 		width: 100px;
 		height: 100px;
+	}
+	#catmainlogo{
+		background-color: Lavender;
 	}
