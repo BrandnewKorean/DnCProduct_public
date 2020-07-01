@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="header">
-		<a href="catmain"><img id="catmainlogo" src="resources/image/logob.png" id="logo" width=7%></a>
+		<a href="catmain"><img id="catmainlogo" src="resources/image/logob.png" width=7%></a>
 		<div class=tmenu>
 			<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
 		</div>
