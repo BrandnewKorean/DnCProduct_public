@@ -77,11 +77,10 @@
 		width: 90%;
 		margin: 0 auto;
 		text-align: center;
-		background-color: yellow;
 	}
 	.cmenu{
 		position: relative;
-		margin: 10px;
+		margin: 10px 10px 50px 10px;
 		width: 98%;
 		height: 300px;
 		text-align: left;
@@ -121,6 +120,39 @@
 		right: 10px;
 		bottom: 10px;
 		display: none;
+	}
+	#store_message{
+		display: inline-block;
+		top: 5%;
+		left: 15%;
+		position: absolute;
+		background-color: rgba(255,255,255,0);
+		font-size: 50pt;
+		font-family: "NanumPen";
+		text-align: right;
+	}
+	#store{
+		display: inline-block;
+		position: relative;
+		float: right;
+		width: 45%;
+		height: 100%;
+		background-image: url("/ex01/resources/image/store.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: rgba(255,255,255,0);
+		overflow: hidden;
+	}
+	#truck{
+		position: absolute;
+		background-image: url("/ex01/resources/image/truck.png");
+		background-color: rgba(255,255,255,0);
+		background-repeat: no-repeat;
+		background-size: cover;
+		width: 30%;
+		height: 30%;
+		right: 10px;
+		bottom: 10px;
 	}
 	.footer{
 		position: relative;

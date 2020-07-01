@@ -40,14 +40,38 @@ $(function(){
 		var newPosition = scrollTop + "px";
 		
 		$('.header').css('top', newPosition);
-		console.log($('#diary').offset().top);
 		console.log(scrollBottom);
+		
+		if(scrollBottom <= $('#diary').offset().top + 240){
+			console.log('cat foootprint init');
+			$('#cat_footprint').stop();
+			$('#cat_footprint').css({
+				width: '100%',
+				height: '100%',
+				display: 'none'
+			});
+		}
+		
 		if(scrollBottom >= $('#diary').offset().top + 300){
+			console.log('cat foootprint animate');
 			$('#cat_footprint').css('display','block');
 			$('#cat_footprint').animate({
 				width: '25%',
 				height: '40%'
 			}, 500);
+		}
+		
+		if(scrollBottom <= $('#truck').offset().top){
+			console.log('truck init');
+			$('#truck').stop();
+			$('#truck').css('right','0');
+		}
+		
+		if(scrollBottom >= $('#store').offset().top + 300){
+			console.log('cat foootprint init');
+			$('#truck').animate({
+				right: '110%'
+			}, 1000);
 		}
 	});
 	
@@ -99,16 +123,6 @@ $(function(){
 	},function(){
 		$(this).css({
 			cursor:'url("/ex01/resources/cursor/cat_default.cur"), auto'
-		});
-	});
-	
-	$('.cmenu').hover(function(){
-		$(this).css({
-			border: "3px solid aqua"
-		});
-	},function(){
-		$(this).css({
-			border: ""
 		});
 	});
 });
