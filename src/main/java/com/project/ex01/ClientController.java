@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
+// test
+
 @Controller
 public class ClientController {
 	
@@ -49,10 +51,6 @@ public class ClientController {
 		mv.setViewName("cat/join/JoinForm");
 		return mv;
 	}
-	
-	
-	
-	
 	
 	
 }
