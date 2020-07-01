@@ -26,7 +26,7 @@
 			icheck=idCheck();
 		}); // idcheck
 		
-		$('#joinpw').focuout(function() {
+		$('#joinpw').focusout(function() {
 			pcheck=pwCheck();
 		}); // pwcheck
 		
@@ -34,10 +34,30 @@
 			ncheck=nameCheck();
 		}); // joinname
 		
+		$('#joinbirthday').focusout(function() {
+			bcheck=birthdayCheck();
+		}); // birthday
 		
+		$('#joinemail').focusout(function() {
+			echeck=emailCheck();
+		}); // email
+		
+		$('#joinaddress').focusout(function() {
+			acheck=addressCheck();
+		}); // address
 	
 	}); // ready
 	
+	
+	function allCheck() {
+		if(icheck==true && pcheck==true && ncheck==true
+				&& bcheck==true && echeck==true && acheck==true)
+			return true;
+		else{
+			alert('모든 항목이 필수 입력 항목입니다.');
+			return false;
+		}
+	} // allcheck
 	
 	
 	
@@ -48,45 +68,67 @@
 </head>
 <body>
 
-<img id="joinformimg" src="resources/image/logoe.png">
+<img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
 
 <h1>D&C 회원가입</h1>
 <br><br>
 
 <form action="catmain" method="post">
 
-<div class="jointext">I D : 
-	<input id="joinid" type="text">
+<div class="jointext">아이디<br>
+	<input id="joinid" name="id" type="text">
 	<br>
 	<span id="idmessage" style="color: red"></span>
 </div>
 
-<div class="jointext">P W :
-	<input id="joinpw" type="password">
-	<span id="pwmessage"></span>
+<br>
+
+<div class="jointext">비밀번호<br>
+	<input id="joinpw" name="password" type="password">
+	<br>
+	<span style="color: red" id="pwmessage"></span>
 </div>
 
-<div class="jointext">Name :
-	<input id="joinname" type="text">
-	<span id="namemessage"></span>
+<br>
+
+<div class="jointext">이름<br>
+	<input id="joinname" name="name" type="text">
+	<br>
+	<span style="color: red" id="namemessage"></span>
 </div>
 
-<div class="jointext">Birthd :
-	<input type="date">
+<br>
+
+<div class="jointext">생년월일<br>
+	<input id="joinbirthday" name="birthday" type="date" ><br>
+	<br>
+	<span style="color: red" id="birthdaymessage"></span>
 </div>
 
-<div class="jointext">E-mail : 
-	<input type="email">
+<br>
+
+<div class="jointext" >E-mail<br> 
+	<input id="joinemail" name="email" type="email" value="@gmail.com">
+	<br>
+	<span style="color: red" id="emailmessage"></span>
 </div>
 
-<div class="jointext">Address : 
-	<input type="text">
+<br>
+
+<div class="jointext">주소<br>
+	<input id="joinaddress" name="address" type="text">
+	<br>
+	<span style="color: red" id="addressmessage"></span>
 </div>
+
+<br>
 
 <br><br>
 
-<button type="submit">확인</button>
+<button type="submit" onclick="return allCheck()">확인</button>
 <button onclick="location.href='catmain'">취소</button>
+
+<br><br><br>
 
 </form>
 

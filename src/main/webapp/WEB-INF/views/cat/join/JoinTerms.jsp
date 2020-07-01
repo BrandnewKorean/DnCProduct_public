@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<img id="termsimg" src="resources/image/logoe.png">
+<img id="termsimg" src="resources/image/logoe.png" onclick="location.href='catmain'">
 
 <h1>D&C 회원가입 동의 약관</h1><br><br>
 
