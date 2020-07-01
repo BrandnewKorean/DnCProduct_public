@@ -13,9 +13,10 @@
 $(function() {
 	$('#termssubmit').click(function(e) {
 		e.preventDefault();
+		
 		var agreecheck1 = document.term.agree1.checked;
 		var agreecheck2 = document.term.agree2.checked;
-		console.log(agreecheck1);
+		
 		if( agreecheck1 && agreecheck2 ) {
 			$('#termsform').submit();
 		} else if (!agreecheck1){
