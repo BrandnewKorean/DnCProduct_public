@@ -5,8 +5,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Join Terms</title>
+<script src="resources/script/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/cat/join/joinTerms.css?ver=<%= System.currentTimeMillis()%>">
+
 <script type="text/javascript">
+
+$(function() {
+	$('#termssubmit').click(function(e) {
+		e.preventDefault();
+		var agreecheck1 = document.term.agree1.checked;
+		var agreecheck2 = document.term.agree2.checked;
+		console.log(agreecheck1);
+		if( agreecheck1 && agreecheck2 ) {
+			$('#termsform').submit();
+		} else if (!agreecheck1){
+			alert('이용약관 동의는 필수 선택 항목입니다.');
+		} else {
+			alert('개인정보 동의는 필수 선택 항목입니다.');
+		}
+
+		
+	});
+});
+
+
+/*
 	function checkterms(cat){
 		var agreecheck1 = document.term.agree1.checked;
 		var agreecheck2 = document.term.agree2.checked;
@@ -22,6 +45,8 @@
 		}// agree2
 		
 	} // checkterms
+	
+	*/
 </script>
 
 </head>
@@ -31,7 +56,7 @@
 
 <h1>D&C 회원가입 동의 약관</h1><br><br>
 
-<form name="term" action="JoinForm" onsubmit="checkterms(this)" method="post">
+<form name="term" action="JoinForm" method="post" id='termsform'>
 	<input type="radio" name="agree1" id="agree1"> 이용약관 동의(필수)<br><br>
 		<div>
 							여러분을 환영합니다.
@@ -291,7 +316,7 @@
 		</div>
 		<br><br><br>
 	<input type="radio"> 광고 수신 여부 동의(선택)<br><br><br><br>
-	<button type="submit">확인</button> 
+	<button id="termssubmit">확인</button> 
 	<button onclick="location.href='catmain'">취소</button>
 	
 	<br><br><br><br>
