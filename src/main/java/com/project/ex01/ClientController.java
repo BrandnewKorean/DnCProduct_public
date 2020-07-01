@@ -5,13 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
-<<<<<<< HEAD
-// master push
-
-=======
-// test
->>>>>>> refs/remotes/origin/BrooklynKimBranch
-
 @Controller
 public class ClientController {
 	
@@ -50,4 +43,16 @@ public class ClientController {
 		mv.setViewName("cat/join/JoinTerms");
 		return mv;
 	}
+	
+	@RequestMapping(value="JoinForm")
+	public ModelAndView JoinForm(ModelAndView mv) {
+		mv.setViewName("cat/join/JoinForm");
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
 }
