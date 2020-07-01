@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dg&Ct</title>
-<link rel="icon" type="image/png" href="resources/image/test.png">
+<title>D&C</title>
+<link rel="icon" type="image/png" href="resources/image/logof.png">
 <link rel="stylesheet" type="text/css" href="resources/css/Homepage.css?ver=<%= System.currentTimeMillis()%>">
 </head>
 <body>

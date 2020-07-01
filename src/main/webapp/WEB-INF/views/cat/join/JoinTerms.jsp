@@ -291,8 +291,10 @@
 		</div>
 		<br><br><br>
 	<input type="radio"> 광고 수신 여부 동의(선택)<br><br><br><br>
-	<button type="submit">확인여부 동의(선택)</button> 
+	<button type="submit">확인</button> 
 	<button onclick="location.href='catmain'">취소</button>
+	
+	<br><br><br><br>
 	
 </form>
 

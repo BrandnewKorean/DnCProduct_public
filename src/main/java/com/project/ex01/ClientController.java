@@ -42,4 +42,12 @@ public class ClientController {
 		mv.setViewName("cat/join/JoinTerms");
 		return mv;
 	}
+	
+	@RequestMapping(value="JoinForm")
+	public ModelAndView JoinForm(ModelAndView mv) {
+		mv.setViewName("cat/join/JoinForm");
+		return mv;
+	}
+	
+	
 }
