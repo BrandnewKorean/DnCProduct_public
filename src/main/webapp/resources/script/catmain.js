@@ -37,7 +37,6 @@ $(function(){
 	$(window).scroll(function(){
 		var scrollTop = $(window).scrollTop();
 		var scrollBottom = scrollTop + window.innerHeight;
-		var newPosition = scrollTop + "px";
 		
 		$('.header').css('top', newPosition);
 		console.log(scrollBottom);
