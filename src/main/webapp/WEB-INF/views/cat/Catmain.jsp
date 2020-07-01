@@ -24,27 +24,22 @@
 		</div>
 	</div>
 	<div class="container">
-		<div class=cmenu>
-			<div id=diary>
-				<div id=cat_footprint></div>
-			</div>
-			<div id=diary_message>
-				반려묘와의<br>
-				추억을 기록해보세요<br>
-				<a>다양한 다이어리 환경을 제공합니다</a>
-			</div>
+		<div class=cmenu id=diary>
+			<div id=cat_footprint></div>
 		</div>
-		<div class=cmenu>
-			<div id=store_message>
-				반려묘에게 필요한 물품을<br>
-				쉽게 구입해보세요<br>
-			</div>
-			<div id=store>
-				<div id=truck></div>
-			</div>
+		<div class=cmenu id=diary_message>
+			반려묘와의<br>
+			추억을 기록해보세요<br>
+			<a>당신의 추억을 위한 개인 공간을 제공해드립니다</a>
 		</div>
-		<div class=cmenu></div>
-		<div class=cmenu></div>
+		<div class=cmenu id=store>
+			<div id=truck></div>
+		</div>
+		<div class=cmenu id=store_message>
+			반려묘를 위한 물품을<br>
+			쉽게 구입해보세요<br>
+			<a>다양한 물품들이 구비되어 있습니다</a>
+		</div>
 	</div>
 	<div class="footer">
 		<div class=logo></div>

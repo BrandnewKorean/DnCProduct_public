@@ -15,6 +15,28 @@ $(function(){
 //		});
 //		if(image_index > 10) image_index = 1;
 //	}, 4000);
+	var containerWidth = parseInt($('.container').css('width'));
+	
+	if(containerWidth < 800){
+		$('.cmenu').css('width','100%');
+	}else{
+		$('.cmenu').css('width','50%');
+	}
+	
+	var cmenuWidth = parseInt($('.cmenu').css('width'));
+	$('.cmenu').css('height', (cmenuWidth*0.6)+'px');
+	
+	$(window).resize(function(){
+		containerWidth = parseInt($('.container').css('width'));
+		cmenuWidth = parseInt($('.cmenu').css('width'));
+		
+		if(containerWidth < 800){
+			$('.cmenu').css('width','100%');
+		}else{
+			$('.cmenu').css('width','50%');
+		}
+		$('.cmenu').css('height', (cmenuWidth * 0.6)+'px');
+	});
 	
 	$('#join').click(function() {
 		location.href='JoinTerms';
@@ -38,21 +60,7 @@ $(function(){
 		var scrollTop = $(window).scrollTop();
 		var scrollBottom = scrollTop + window.innerHeight;
 		
-		$('.header').css('top', newPosition);
-		console.log(scrollBottom);
-		
-		if(scrollBottom <= $('#diary').offset().top + 240){
-			console.log('cat foootprint init');
-			$('#cat_footprint').stop();
-			$('#cat_footprint').css({
-				width: '100%',
-				height: '100%',
-				display: 'none'
-			});
-		}
-		
 		if(scrollBottom >= $('#diary').offset().top + 300){
-			console.log('cat foootprint animate');
 			$('#cat_footprint').css('display','block');
 			$('#cat_footprint').animate({
 				width: '25%',
@@ -60,16 +68,9 @@ $(function(){
 			}, 500);
 		}
 		
-		if(scrollBottom <= $('#truck').offset().top){
-			console.log('truck init');
-			$('#truck').stop();
-			$('#truck').css('right','0');
-		}
-		
 		if(scrollBottom >= $('#store').offset().top + 300){
-			console.log('cat foootprint init');
 			$('#truck').animate({
-				right: '110%'
+				right: '60%'
 			}, 1000);
 		}
 	});
