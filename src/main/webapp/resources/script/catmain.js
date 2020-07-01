@@ -75,6 +75,11 @@ $(function(){
 		}
 	});
 	
+	$('#catmainlogo').click(function(e){
+		e.stopImmediatePropagation();
+		location.href="catmain";
+	});
+	
 	$('.text').hover(function(){
 		$(this).css({
 				color:'red',
@@ -89,7 +94,7 @@ $(function(){
 		}
 	);
 	
-	$('#login').on('click', function(e){
+	$('#login').click(function(e){
 		e.stopImmediatePropagation();
 		if($('.tmenu_result').html() == ''){
 			$('.tmenu_result').animate({
