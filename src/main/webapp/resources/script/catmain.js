@@ -15,6 +15,28 @@ $(function(){
 //		});
 //		if(image_index > 10) image_index = 1;
 //	}, 4000);
+	var containerWidth = parseInt($('.container').css('width'));
+	
+	if(containerWidth < 800){
+		$('.cmenu').css('width','100%');
+	}else{
+		$('.cmenu').css('width','50%');
+	}
+	
+	var cmenuWidth = parseInt($('.cmenu').css('width'));
+	$('.cmenu').css('height', (cmenuWidth*0.6)+'px');
+	
+	$(window).resize(function(){
+		containerWidth = parseInt($('.container').css('width'));
+		cmenuWidth = parseInt($('.cmenu').css('width'));
+		
+		if(containerWidth < 800){
+			$('.cmenu').css('width','100%');
+		}else{
+			$('.cmenu').css('width','50%');
+		}
+		$('.cmenu').css('height', (cmenuWidth * 0.6)+'px');
+	});
 	
 	$('#join').click(function() {
 		location.href='JoinTerms';
@@ -37,11 +59,7 @@ $(function(){
 	$(window).scroll(function(){
 		var scrollTop = $(window).scrollTop();
 		var scrollBottom = scrollTop + window.innerHeight;
-		var newPosition = scrollTop + "px";
 		
-		$('.header').css('top', newPosition);
-		console.log($('#diary').offset().top);
-		console.log(scrollBottom);
 		if(scrollBottom >= $('#diary').offset().top + 300){
 			$('#cat_footprint').css('display','block');
 			$('#cat_footprint').animate({
@@ -49,6 +67,17 @@ $(function(){
 				height: '40%'
 			}, 500);
 		}
+		
+		if(scrollBottom >= $('#store').offset().top + 300){
+			$('#truck').animate({
+				right: '60%'
+			}, 1000);
+		}
+	});
+	
+	$('#catmainlogo').click(function(e){
+		e.stopImmediatePropagation();
+		location.href="catmain";
 	});
 	
 	$('.text').hover(function(){
@@ -65,7 +94,7 @@ $(function(){
 		}
 	);
 	
-	$('#login').on('click', function(e){
+	$('#login').click(function(e){
 		e.stopImmediatePropagation();
 		if($('.tmenu_result').html() == ''){
 			$('.tmenu_result').animate({
@@ -99,16 +128,6 @@ $(function(){
 	},function(){
 		$(this).css({
 			cursor:'url("/ex01/resources/cursor/cat_default.cur"), auto'
-		});
-	});
-	
-	$('.cmenu').hover(function(){
-		$(this).css({
-			border: "3px solid aqua"
-		});
-	},function(){
-		$(this).css({
-			border: ""
 		});
 	});
 });

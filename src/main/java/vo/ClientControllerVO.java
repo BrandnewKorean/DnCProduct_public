@@ -7,7 +7,7 @@ public class ClientControllerVO {
 	private String password;
 	private String name;
 	private Date birthday;
-	private String email; 
+	private String email;
 	private String address;
 	
 	public String getId() {return id;}
