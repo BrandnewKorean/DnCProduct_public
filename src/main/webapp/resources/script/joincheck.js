@@ -13,7 +13,6 @@ function idCheck() {
 }; // idcheck
 
 function pwCheck() {
-<<<<<<< HEAD
 	var joinpw=$('#joinpw').val();   
 	var passwordlength=joinpw.length;
 	
@@ -81,29 +80,7 @@ function addressCheck(){
 		$('#addressmessage').html('');
 		return true;
 	}
-  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
 	var joinpw=$('#joinpw').val();
 	var passwordlength=joinpw.length; // ('#joinpw').length가 아니라 joinpw.legth가 되어야한다.
 	
@@ -173,7 +150,5 @@ function addressCheck() {
 	}else{
 		$('#addressmessage').html('');
 		return true;
-	}
-	
-}; // address
->>>>>>> refs/remotes/origin/master
+	}	
+} // address
