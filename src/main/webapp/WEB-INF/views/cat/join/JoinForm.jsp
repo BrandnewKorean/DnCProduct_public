@@ -73,7 +73,7 @@
 <h1>D&C 회원가입</h1>
 <br><br>
 
-<form action="catmain" method="post">
+<form action="join" method="post">
 
 <div class="jointext">아이디<br>
 	<input id="joinid" name="id" type="text">
@@ -108,7 +108,7 @@
 <br>
 
 <div class="jointext" >E-mail<br> 
-	<input id="joinemail" name="email" type="email" value="@gmail.com">
+	<input id="joinemail" name="email" type="email">
 	<br>
 	<span style="color: red" id="emailmessage"></span>
 </div>
