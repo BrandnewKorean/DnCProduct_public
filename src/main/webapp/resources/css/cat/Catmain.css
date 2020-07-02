@@ -9,6 +9,7 @@
 }
 	*{
 		background-color: LavenderBlush;
+		overflow-x: hidden;  
 	}
 	body{
 		margin: 0;
@@ -76,10 +77,9 @@
 		color: red;
 	}
 	.container{
-		width: 98%;
+		width: 95%;
 		margin: 0 auto;
 		text-align: center;
-		border: 1px solid;
 		margin-top: 80px;
 	}
 	.cmenu{
@@ -88,7 +88,6 @@
 		width: 50%;
 		background-color: rgba(255,255,255,0);
 		margin: 0;
-		table-layout: fixed;
 	}
 	.cmenu > a{
 		font-size: 20pt;
@@ -99,7 +98,6 @@
 		background-image: url("/ex01/resources/image/diary.png");
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-color: white;
 	}
 	#diary_message{
 		background-color: rgba(255,255,255,0);
@@ -144,6 +142,93 @@
 		height: 30%;
 		right: -30%;
 		bottom: 5%;
+	}
+	#board{
+		float: left;
+	}
+	#board_message{
+		font-size: 50pt;
+		font-family: "NanumPen";
+		text-align: center;
+	}
+	#gps{
+		float: right;
+		background-image: url("/ex01/resources/image/map.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		overflow: hidden;
+	}
+	.location{
+		position: absolute;
+		background-image: url("/ex01/resources/image/location.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-color: rgba(255,255,255,0);
+		width: 5%;
+		height: 11%;
+		transform: rotate(310deg);
+		display: none;
+	}
+	#location1{
+		left: 54%;
+		top: 63%;
+	}
+	#location2{
+		left: 60%;
+		top: 65%;
+	}
+	#location3{
+		left: 54%;
+		top: 79%;
+	}
+	#location4{
+		left: 52%;
+		top: 70%;
+	}
+	#location5{
+		left: 59%;
+		top: 72%;
+	}
+	#gps_message{
+		font-size: 50pt;
+		font-family: "NanumPen";
+		text-align: center;
+	}
+	.main_menu{
+		display: table;
+		width: 100%;
+		table-layout: fixed;
+		background-color: red;
+		list-style-type: none;
+		text-align: center;
+		text-decoration: none;
+		margin: 0;
+	}
+	.main_menu > li{
+		display: table-cell;
+		margin: 2px;
+		padding: 2px;
+		height: 300px;
+		background-color: yellow;
+		border-radius: 50%;
+		vertical-align: middle;
+	}
+	.main_menu > li:hover{
+		background-color: green;
+		color: white;
+		cursor: url("/ex01/resources/cursor/cat_hover.cur");
+	}
+	.main_menu > li > a{
+		width: 100%;
+		background-color: rgba(255,255,255,0);
+		text-decoration: none;
+		color: black;
+		font-family: "NanumPen";
+		font-size: 25pt;
+	}
+	.main_menu > li:hover > a{
+		color: white;
+		cursor: url("/ex01/resources/cursor/cat_hover.cur");
 	}
 	.footer{
 		position: relative;
