@@ -110,7 +110,6 @@ public class ClientController {
 		}
 		return mv;
 	}
-<<<<<<< HEAD
 	
 	@RequestMapping(value="idDuplicateCheck")
 	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
@@ -125,6 +124,4 @@ public class ClientController {
 		return mv;
 	}
 	
-=======
->>>>>>> refs/remotes/origin/master
 } // class
