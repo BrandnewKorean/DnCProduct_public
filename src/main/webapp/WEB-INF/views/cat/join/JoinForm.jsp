@@ -21,8 +21,8 @@
 	
 	$(function(){
 		
-		$('#joinid').focus();
-		$('#joinid').focusout(function() {
+		$('#id').focus();
+		$('#id').focusout(function() {
 			icheck=idCheck();
 		}); // idcheck
 		
@@ -59,11 +59,7 @@
 		}
 	} // allcheck
 	
-	
-	
 </script>
-
-
 
 </head>
 <body>
@@ -77,6 +73,7 @@
 
 <div class="jointext">아이디<br>
 	<input id="joinid" name="id" type="text">
+ 	<input type="button" value="중복확인" id="idDuplicate" onclick="idDuplicateCheck()"> 
 	<br>
 	<span id="idmessage" style="color: red"></span>
 </div>
@@ -126,14 +123,27 @@
 <br><br>
 
 <button type="submit" onclick="return allCheck()">확인</button>
-<button onclick="location.href='catmain'">취소</button>
+<input type="button" onclick="location.href='home'" value="취소" readonly>
+
+<!-- <button onclick="location.href='home'">취소</button> -->
 
 <br><br><br>
-
 </form>
 
-
-
+<!-- <button onclick="location.href='home'">취소</button> -->
 
 </body>
+<script>
+	function idDuplicateCheck() {	
+		console.log('why?');
+		if(icheck==false){ icheck=idCheck();
+		}else{
+		var uri="idDuplicateCheck?id"+$('#id').val();
+		window.open(uri,"_blank",
+		"toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=500,height=400");		
+		}
+	}	
+</script>
+
+
 </html>

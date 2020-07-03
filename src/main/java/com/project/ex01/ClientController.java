@@ -62,9 +62,25 @@ public class ClientController {
 	public ModelAndView join(ModelAndView mv, ClientVO cv) throws IOException{
 		
 		service.insert(cv);
+		if (service.insert(cv) > 0) {
 		mv.setViewName("cat/Catmain");
+		}else {
+			mv.setViewName("cat/join/JoinTerms");
+		}
 		return mv;
 	}
 	
+	@RequestMapping(value="idDuplicateCheck")
+	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
+		mv.addObject("ID", cv.getId());
+		cv= service.selectOne(cv);
+		if(cv!=null) {
+			mv.addObject("idUse","F");
+		}else {
+			mv.addObject("idUse", "T");
+		}
+		mv.setViewName("cat/join/idDuplicateCheck");
+		return mv;
+	}
 	
 } // class
