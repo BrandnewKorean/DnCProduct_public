@@ -103,6 +103,7 @@ function allCheck(){
 
 <link rel="stylesheet" type="text/css" href="resources/css/cat/join/joinForm.css?ver=<%= System.currentTimeMillis()%>">
 <script src="resources/script/jquery-3.2.1.min.js"></script>
+<<<<<<< HEAD
 <script src="resources/script/joincheck.js"></script>
 
 
@@ -156,77 +157,78 @@ function allCheck(){
 	
 </script>
 
+=======
+<script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
+>>>>>>> refs/remotes/origin/master
 </head>
 <body>
 
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
 
 <h1>D&C 회원가입</h1>
-<br><br>
 
 <form action="join" method="post">
+<<<<<<< HEAD
 
 <div class="jointext">아이디<br>
 	<input id="joinid" name="id" type="text">
  	<input type="button" value="중복확인" id="idDuplicate" onclick="idDuplicateCheck()"> 
+=======
+	<div class="jointext">아이디<br>
+		<input id="joinid" name="id" type="text">
+		<br>
+		<span id="idmessage" style="color: red"></span>
+	</div>
+>>>>>>> refs/remotes/origin/master
 	<br>
-	<span id="idmessage" style="color: red"></span>
-</div>
-
-<br>
-
-<div class="jointext">비밀번호<br>
-	<input id="joinpw" name="password" type="password">
+	<div class="jointext">비밀번호<br>
+		<input id="joinpw" name="password" type="password">
+		<br>
+		<span style="color: red" id="pwmessage"></span>
+	</div>
 	<br>
-	<span style="color: red" id="pwmessage"></span>
-</div>
-
-<br>
-
-<div class="jointext">이름<br>
-	<input id="joinname" name="name" type="text">
+	<div class="jointext">이름<br>
+		<input id="joinname" name="name" type="text">
+		<br>
+		<span style="color: red" id="namemessage"></span>
+	</div>
 	<br>
-	<span style="color: red" id="namemessage"></span>
-</div>
-
-<br>
-
-<div class="jointext">생년월일<br>
-	<input id="joinbirthday" name="birthday" type="date" ><br>
+	<div class="jointext">생년월일<br>
+		<input id="joinbirthday" name="birthday" type="date" ><br>
+		<br>
+		<span style="color: red" id="birthdaymessage"></span>
+	</div>
 	<br>
-	<span style="color: red" id="birthdaymessage"></span>
-</div>
-
-<br>
-
-<div class="jointext" >E-mail<br> 
-	<input id="joinemail" name="email" type="email">
+	<div class="jointext" >E-mail<br> 
+		<input id="joinemail" name="email" type="email">
+		<br>
+		<span style="color: red" id="emailmessage"></span>
+	</div>
 	<br>
-	<span style="color: red" id="emailmessage"></span>
-</div>
-
-<br>
-
-<div class="jointext">주소<br>
-	<input id="joinaddress" name="address" type="text">
+	<div class="jointext">주소<br>
+		<input id="joinaddress" name="address" type="text">
+		<br>
+		<span style="color: red" id="addressmessage"></span>
+	</div>
 	<br>
-	<span style="color: red" id="addressmessage"></span>
-</div>
-
-<br>
-
-<br><br>
-
+	<br><br>
 <button type="submit" onclick="return allCheck()">확인</button>
+<<<<<<< HEAD
 <input type="button" onclick="location.href='home'" value="취소" readonly>
 
 <!-- <button onclick="location.href='home'">취소</button> -->
 
+=======
+<button onclick="location.href='catmain'">취소</button>
+>>>>>>> refs/remotes/origin/master
 <br><br><br>
 </form>
+<<<<<<< HEAD
 
 <!-- <button onclick="location.href='home'">취소</button> -->
 
+=======
+>>>>>>> refs/remotes/origin/master
 </body>
 <script>
 	function idDuplicateCheck() {	

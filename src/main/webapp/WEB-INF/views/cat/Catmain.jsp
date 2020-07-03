@@ -16,7 +16,13 @@
 		<a href="catmain"><img id="catmainlogo" src="resources/image/logob.png" id="logo" width=7%></a>
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
 		<div class=tmenu>
-			<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
+			<c:if test="${logID == null }">
+				<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
+			</c:if>
+			<c:if test="${logID != null}">
+				<div id=profile_image></div>
+				${logID} 님 환영합니다
+			</c:if>
 		</div>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
