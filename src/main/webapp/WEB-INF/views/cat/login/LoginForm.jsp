@@ -18,8 +18,8 @@
 <body>
 <div class=login_form>
 <h5>로그인</h5>
-<input type="text" placeholder="ID"><br>
-<input type="password" placeholder="PW"><br><br>
+<input type="text" id=id placeholder="ID"><br>
+<input type="password" id=password placeholder="PW"><br><br>
 <button id=submit>확인</button>
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>

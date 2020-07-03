@@ -61,4 +61,10 @@
 								destroy-method="clearCache">
 		<beans:constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />						
 	</beans:bean>
+	
+	<!-- JsonView -->
+	<beans:bean id="jsonView" class="net.sf.json.spring.web.servlet.view.JsonView"/>
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<beans:property name="order" value="1"></beans:property>
+	</beans:bean>
 </beans:beans>

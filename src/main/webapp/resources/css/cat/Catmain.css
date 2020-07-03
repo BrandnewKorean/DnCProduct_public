@@ -9,7 +9,6 @@
 }
 	*{
 		background-color: LavenderBlush;
-		overflow-x: hidden;  
 	}
 	body{
 		margin: 0;
@@ -40,7 +39,7 @@
 	}
 	.tmenu_result{
 		position: absolute;
-		right:10px;
+		right:20px;
 		top: 110%;
 		width: 150px;
 		border-radius: 10px;
@@ -54,10 +53,12 @@
 		width: 100%;
 		opacity: 0.8;
 		padding: 0;
+		overflow-x: hidden;
 	}
 	.intro > #w_canvas{
 		background-color: rgba(255,255,255,0);
 		margin: 0;
+		
 	}
 	.head_message{
 		position: absolute;
@@ -203,6 +204,7 @@
 		text-align: center;
 		text-decoration: none;
 		margin: 0;
+		padding: 0;
 	}
 	.main_menu > li{
 		display: table-cell;

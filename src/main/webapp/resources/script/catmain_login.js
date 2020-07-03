@@ -12,4 +12,8 @@ $(function(){
 			});
 		}
 	);
+	
+	$('#catmainlogo').click(function(){
+		location.href = "catmain";
+	});
 });

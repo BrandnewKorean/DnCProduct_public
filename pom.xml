@@ -167,6 +167,18 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 		
+		<!-- JSON : Lib4Spring -->
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib-ext-spring</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<!-- JSON : Jackson2 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.7.2</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>

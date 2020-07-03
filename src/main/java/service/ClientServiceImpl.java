@@ -9,14 +9,13 @@ import jdbcUtil.ClientDAO;
 import vo.ClientVO;
 
 @Service
-public class ClientServiceImpl implements ClientService{// ClientServiceImpl 커서두고 Ctrl 1 누르고 add를 하면 자동완성
+public class ClientServiceImpl implements ClientService{
 	
 	@Autowired
 	ClientDAO dao;
 
 	@Override
 	public List<ClientVO> selectList() {
-		
 		return dao.selectList();
 	}
 
