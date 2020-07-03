@@ -6,7 +6,7 @@ public class CatBorad {
 	private String title;
 	private String content;
 	private int cnt;
-	private int comments;
+	private int comments; 
 	
 	public int getSeq() {return seq;}
 	public String getId() {return id;}
