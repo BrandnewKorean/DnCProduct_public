@@ -54,13 +54,5 @@ I   D :
     </script>
   </c:if>	
 </div></div>	
-
-
-
-
-
-
-
-
 </body>
 </html>
