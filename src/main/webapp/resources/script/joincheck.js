@@ -15,21 +15,19 @@ function idCheck() {
 function pwCheck() {
 	var joinpw=$('#joinpw').val();
 	var passwordlength=joinpw.length; // ('#joinpw').length가 아니라 joinpw.legth가 되어야한다.
-	
 	if(joinpw.length < 5 || joinpw.length > 20){
 		$('#pwmessage').html('Password는 5글자 이상 입력해야합니다.');
 		return false;
-	}else if(joinpw.replace(/[!-*]/gi,'').length >= passwordlength){
+	}else if(joinpw.replace(/[!@#$%^&*\(\)-=_+\'\"?\/\\~`\[\]\{\}]/gi,'').length >= passwordlength){
 		$('#pwmessage').html('Password는 특수문자가 반드시 포함되어야 합니다.');
 		return false;
-	}else if(joinpw.replace(/[a-z.0-9.!-*]/gi,'').length>0){
+	}else if(joinpw.replace(/[ㄱ-힣]/gi,'').length < passwordlength){
 		$('#pwmessage').html('Password는 숫자나 영문자 또는 특수문자로만 입력해주세요.');
 		return false;
 	}else{
 		$('#pwmessage').html('');
 		return true;
 	}
-	
 }; // pwCheck()
 
 function nameCheck() {

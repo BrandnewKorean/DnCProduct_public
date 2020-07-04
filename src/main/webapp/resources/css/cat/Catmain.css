@@ -9,7 +9,7 @@
 }
 	*{
 		background-color: LavenderBlush;
-		overflow-x: hidden;  
+		 
 	}
 	body{
 		margin: 0;
@@ -54,6 +54,7 @@
 		width: 100%;
 		opacity: 0.8;
 		padding: 0;
+		overflow-x: hidden; 
 	}
 	.intro > #w_canvas{
 		background-color: rgba(255,255,255,0);

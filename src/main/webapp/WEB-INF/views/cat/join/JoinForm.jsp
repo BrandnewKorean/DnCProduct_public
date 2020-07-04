@@ -17,7 +17,7 @@
 	var ncheck = false;
 	var bcheck = false;
 	var echeck = false;
-	var acheck = false;
+	//var acheck = false;
 	
 	$(function(){
 		
@@ -42,22 +42,35 @@
 			echeck=emailCheck();
 		}); // email
 		
-		$('#joinaddress').focusout(function() {
+		/* $('#joinaddress').focusout(function() {
 			acheck=addressCheck();
-		}); // address
+		}); // address */
 	
 	}); // ready
 	
 	
 	function allCheck() {
-		if(icheck==true && pcheck==true && ncheck==true
+		if(/* icheck==true && pcheck==true && ncheck==true
 				&& bcheck==true && echeck==true && acheck==true)
-			return true;
+			return true; */
+			icheck==true && pcheck==true && ncheck==true
+			&& bcheck==true && echeck==true)
+		return true;
 		else{
-			alert('모든 항목이 필수 입력 항목입니다.');
+			alert('주소를 제외한 모든 항목이 필수 입력 항목입니다.');
 			return false;
 		}
 	} // allcheck
+	
+	function idDuplicateCheck() {
+		
+		if(iCheck==false){iCheck=idCheck();}
+		else{
+			var url = "idDuplicateCheck?id"+$('#joinid').val();
+			window.open(url,"_blank",
+			"toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=500,height=400");
+		}
+	} //idDuplicateCheck()
 	
 	
 	
@@ -77,6 +90,7 @@
 
 <div class="jointext">아이디<br>
 	<input id="joinid" name="id" type="text">
+	<input type="button" value="중복확인" id="idDuplicate" onclick="idDuplicateCheck()"> <!-- id와 onclick(선언형 함수)명이 동일해서 충돌되는 현상 -->
 	<br>
 	<span id="idmessage" style="color: red"></span>
 </div>
@@ -126,14 +140,15 @@
 <br><br>
 
 <button type="submit" onclick="return allCheck()">확인</button>
-<button onclick="location.href='catmain'">취소</button>
+<!-- <button onclick="location.href='catmain'">취소</button> -->
+<input type="button" onclick="location.href='catmain'" readonly value="취소">
 
 <br><br><br>
 
 </form>
 
 
-
+<br><br><br>
 
 </body>
 </html>
