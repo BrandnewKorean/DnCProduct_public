@@ -59,7 +59,6 @@ function idCheck() {
 function pwCheck() {
 	var joinpw=$('#joinpw').val();
 	var passwordlength=joinpw.length; // ('#joinpw').length가 아니라 joinpw.legth가 되어야한다.
-	
 	if(joinpw.length < 5 || joinpw.length > 20){
 		$('#pwmessage').html('Password는 5글자 이상 입력해야합니다.');
 		return false;
