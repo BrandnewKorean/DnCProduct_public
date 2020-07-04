@@ -106,4 +106,24 @@ public class ClientController {
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
+	
+	@RequestMapping(value="idDuplicateCheck")
+	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
+		
+		// client로 부터 전달된 id의 존재 여부 확인 : selectOne()
+		// => NotNull(존재)이면 사용불가
+		// => Null(미존재)이면 사용가능
+		
+		mv.addObject("ID", cv.getId());
+		cv = service.selectOne(cv);
+		
+		if(cv != null) {
+			mv.addObject("idUse","F");
+		}else {
+			mv.addObject("idUse","T");
+		}
+		mv.setViewName("join/idDuplicateCheck");
+		return mv;
+	} // idDuplicateCheck
+	
 } // class

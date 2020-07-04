@@ -14,6 +14,7 @@ public class ClientVO {
 	public String getBirthday() {return birthday;}
 	public String getEmail() {return email;}
 	public String getAddress() {return address;}
+	
 	public void setId(String id) {this.id = id;}
 	public void setPassword(String password) {this.password = password;}
 	public void setName(String name) {this.name = name;}
