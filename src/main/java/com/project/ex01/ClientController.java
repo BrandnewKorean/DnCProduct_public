@@ -66,5 +66,21 @@ public class ClientController {
 		return mv;
 	}
 	
+// ** Id Dup Check
+	@RequestMapping(value = "/idDupCheck")
+	public ModelAndView idDupCheck(ModelAndView mv, ClientVO cv) {
+		// client 로 부터 전달된 id 의 존재 여부 확인 : selectOne()
+		// => notNull (존재하면) : 사용불가
+		// => Null (존재하지 않으면) : 사용가능 (먼저 입력한 ID 보관 )
+		mv.addObject("ID", cv.getId());
+		cv = service.selectOne(cv);
+		if (cv != null) // 사용불가
+			mv.addObject("idUse", "F");
+		else
+			mv.addObject("idUse", "T");
+			mv.setViewName("cat/join/idDupCheck");
+			return mv;
+	}// idDupCheck
+	
 	
 } // class
