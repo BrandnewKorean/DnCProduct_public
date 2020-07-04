@@ -14,15 +14,20 @@
 <body>
 	<div class="header">
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
-		<div class=tmenu>
-			<c:if test="${logID == null }">
+		<c:if test="${logID == null }">
+			<div class=tmenu>
 				<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
-			</c:if>
+			</div>
+		</c:if>
 			<c:if test="${logID != null}">
-				<div id=profile_image></div>
-				${logID} 님 환영합니다
+				<div id=client>
+					<div id=profile_image></div>
+					${logID}<br>
+					<button>Myinfo</button>
+					<button>logout</button>
+				</div>
 			</c:if>
-		</div>
+		
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	<div class="intro">
