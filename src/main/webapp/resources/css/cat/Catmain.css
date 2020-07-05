@@ -9,7 +9,6 @@
 }
 	*{
 		background-color: LavenderBlush;
-		 
 	}
 	body{
 		margin: 0;
@@ -23,8 +22,6 @@
 		width: 100%;
 		z-index: 100;
 		background-color: Lavender;
-		font-family: "BrushScriptBT";
-		font-size: 25pt;
 	}
 	.tmenu{
 		position: absolute;
@@ -38,9 +35,26 @@
 		font-size: 18pt;
 		background-color: rgba(255,255,255,0);
 	}
+	#client{
+		position: absolute;
+		display: inline-block;
+		top: 0;
+		right: 0;
+		background-color: blue;
+		height: 100%;
+		width: 20%;
+		text-align: center;
+	}
+	#profile_image{
+		float: left;
+		width: 30%;
+		height: 100%;
+		border: 1px solid;
+		border-radius: 50%;
+	}
 	.tmenu_result{
 		position: absolute;
-		right:10px;
+		right:20px;
 		top: 110%;
 		width: 150px;
 		border-radius: 10px;
@@ -54,11 +68,12 @@
 		width: 100%;
 		opacity: 0.8;
 		padding: 0;
-		overflow-x: hidden; 
+		overflow-x: hidden;
 	}
 	.intro > #w_canvas{
 		background-color: rgba(255,255,255,0);
 		margin: 0;
+		
 	}
 	.head_message{
 		position: absolute;
@@ -204,6 +219,7 @@
 		text-align: center;
 		text-decoration: none;
 		margin: 0;
+		padding: 0;
 	}
 	.main_menu > li{
 		display: table-cell;

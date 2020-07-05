@@ -1,3 +1,47 @@
+var icheck = false;
+var pcheck = false;
+var ncheck = false;
+var bcheck = false;
+var echeck = false;
+var acheck = false;
+$(function(){
+	$('#joinid').focus();
+	$('#joinid').focusout(function() {
+		icheck=idCheck();
+	}); // idcheck
+	
+	$('#joinpw').focusout(function() {
+		pcheck=pwCheck();
+	}); // pwcheck
+	
+	$('#joinname').focusout(function() {
+		ncheck=nameCheck();
+	}); // joinname
+	
+	$('#joinbirthday').focusout(function() {
+		bcheck=birthdayCheck();
+	}); // birthday
+	
+	$('#joinemail').focusout(function() {
+		echeck=emailCheck();
+	}); // email
+	
+	$('#joinaddress').focusout(function() {
+		acheck=addressCheck();
+	}); // address
+
+}); // ready
+
+function allCheck() {
+	if(icheck==true && pcheck==true && ncheck==true
+			&& bcheck==true && echeck==true && acheck==true)
+		return true;
+	else{
+		alert('모든 항목이 필수 입력 항목입니다.');
+		return false;
+	}
+} // allcheck
+
 function idCheck() {
 	var joinid = $('#joinid').val();
 	if(joinid.length < 4 || joinid.length > 20){
