@@ -124,4 +124,19 @@ public class ClientController {
 		return mv;
 	}
 	
+	@RequestMapping(value="selectOne")
+	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
+		mv.addObject("ID", cv.getId());
+		cv = service.selectOne(cv);
+		if(cv==null) {
+			mv.addObject("check", "F");
+		}else {
+			mv.addObject("check","T");
+		}
+		
+		return mv;
+	}
+	
+	
+	
 } // class

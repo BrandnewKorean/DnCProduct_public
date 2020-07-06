@@ -27,25 +27,15 @@
 			<button id="termssubmit">확인</button> 
 			<button onclick="location.href='catmain'">취소</button>
 		</div>
-<<<<<<< HEAD
 		<br><br><br>
 	<input type="radio"> 광고 수신 여부 동의(선택)<br><br><br><br>
-<<<<<<< HEAD
 	<button type="submit">확인</button> 
-=======
 	<button id="termssubmit">확인</button> 
->>>>>>> refs/remotes/origin/master
 	<button onclick="location.href='catmain'">취소</button>
 	
 	<br><br><br><br>
 	
 </form>
-
-
-
-=======
-	</form>
 </div>
->>>>>>> refs/remotes/origin/master
 </body>
 </html>
