@@ -118,26 +118,8 @@ $(function(){
 		}
 	);
 	
-	$('#login').click(function(e){
-		e.stopImmediatePropagation();
-		if($('.tmenu_result').html() == ''){
-			$('.tmenu_result').animate({
-				height: '150px'
-			}, 500);
-			
-			$.ajax({
-				url: 'catloginf',
-				success: function(result){
-					$('.tmenu_result').html(result);
-				}
-			});
-		}else{
-			$('.tmenu_result').animate({
-				height: '0px'
-			}, 500);
-			$('.tmenu_result').html('');
-		}
-		
+	$('#login').click(function(){
+		location.href = 'catloginf';
 	});
 	
 	$('#home').click(function(e){

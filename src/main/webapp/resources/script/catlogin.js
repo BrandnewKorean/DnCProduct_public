@@ -12,7 +12,7 @@ $(function(){
 			success: function(data){
 				if(data.code == 0){
 					alert('로그인 완료되었습니다');
-					location.reload();
+					location.href = 'catmain';
 				}else if(data.code == 1){
 					alert('비밀번호가 일치하지 않습니다');
 				}else if(data.code == 2){
@@ -21,6 +21,10 @@ $(function(){
 					alert('내부 오류로 인해 로그인 할 수 없습니다');
 				}
 			}
-		})
+		});
 	});
+	
+	$('#cancel').click(function(){
+		location.href = 'catmain';
+	})
 });

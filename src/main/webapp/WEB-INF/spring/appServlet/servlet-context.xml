@@ -29,8 +29,8 @@
     <beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
     	<beans:property name="host" value="smtp.gmail.com"/>
     	<beans:property name="port" value="587"/>
-    	<beans:property name="username" value="javadevelopersystem@gmail.com"/>
-    	<beans:property name="password" value="rlaqudrms12@"/>
+    	<beans:property name="username" value="DnCProductSystem@gmail.com"/>
+    	<beans:property name="password" value="DnCProduct123!"/>
     	<beans:property name="javaMailProperties">
     		<beans:props>
     			<beans:prop key="mail.smtp.auth">true</beans:prop>
@@ -44,7 +44,7 @@
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl"/>
 		<beans:property name="username" value="system"/>
-		<beans:property name="password" value="dhfkzmf"/>
+		<beans:property name="password" value="oracle"/>
 	</beans:bean>
 	
 	<!-- Mybatis 설정 -->
