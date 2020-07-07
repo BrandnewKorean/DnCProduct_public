@@ -4,6 +4,7 @@ var ncheck = false;
 var bcheck = false;
 var echeck = false;
 var acheck = false;
+
 $(function(){
 	$('#joinid').focus();
 	$('#joinid').focusout(function() {
@@ -26,13 +27,20 @@ $(function(){
 		echeck=emailCheck();
 	}); // email
 	
-	$('#joinaddress').focusout(function() {
+	$('#userAddr').focusout(function() {
 		acheck=addressCheck();
 	}); // address
-
 }); // ready
 
 function allCheck() {
+	
+	console.log("icheck=>"+icheck);
+	console.log("pcheck=>"+pcheck);
+	console.log("ncheck=>"+ncheck);
+	console.log("bcheck=>"+bcheck);
+	console.log("echeck=>"+echeck);
+	console.log("acheck=>"+acheck);
+	
 	if(icheck==true && pcheck==true && ncheck==true
 			&& bcheck==true && echeck==true && acheck==true)
 		return true;
@@ -53,37 +61,42 @@ function allCheck() {
 }	*/
 
 function idCheck() {
-
-		var id;
-		$.ajax({
-			type:'Get',
-			url:'selectOne',
-			success:function(data){
-				id=data.id;
-			} // success
-		});//ajax
-	
 	var joinid = $('#joinid').val();
+	var temp;
+	
 	if(joinid.length < 4 || joinid.length > 20){
 		$('#idmessage').html('ID는 4글자 이상 15글자 이하만 가능합니다.');
 		return false;
 	}else if (joinid.replace(/[a-z.0-9]/gi,'').length>0){
 		$('#idmessage').html('ID는 영문자와 숫자로만 입력해주세요.');
 		return false;
-	}else if(id==null){
-		$('idmessage').html('ID가 중복됩니다. 다른 아이디를 입력해주세요.');
-		return false;
 	}else{
-		$('#idmessage').html('');
-		return true;
+		$.ajax({
+			url: 'selectOne',
+			type: 'post',
+			data: {id: joinid},	
+			async:false,
+			success: function(data){
+				if(data.result){
+					$('#idmessage').html('');
+					temp = data.result;
+				}else{
+					$('#idmessage').html('중복된 아이디입니다');
+					temp = data.result;
+				}
+			}
+		});//ajax
+		return temp;
 	}
-}; // idcheck
+	
+} // idcheck
 
 function pwCheck() {
 	var joinpw=$('#joinpw').val();   
-	var passwordlength=joinpw.length;
+	var passwordlength=joinpw.length; // ('#joinpw').length가 아니라 joinpw.legth가 되어야한다.
+	console.log("password Test");
 	
-	if(joinpw.length < 5|| joinpw.length > 20){
+	if(joinpw.length < 5 || joinpw.length > 20){
 		$('#pwmessage').html('Password는 5글자 이상 입력해야합니다.');
 		return false;                
 	}else if(joinpw.replace(/[!-*]/gi,'').length>=passwordlength){
@@ -97,7 +110,7 @@ function pwCheck() {
 		return true;
 	}
 	
-}; // pwCheck()
+} // pwCheck()
 
 function nameCheck() {
 	var joinname=$('#joinname').val();
@@ -113,7 +126,7 @@ function nameCheck() {
 		$('#namemessage').html('');
 		return true;
 	}
-}; // nameCheck()
+} // nameCheck()
 
 function birthdayCheck() {
 	var joinbirthday = $('#joinbirthday').val();
@@ -126,7 +139,7 @@ function birthdayCheck() {
 		return true;
 	}
 	
-}; // birthday 
+} // birthday 
 
 function emailCheck() {
 	var joinemail = $('#joinemail').val();
@@ -138,16 +151,16 @@ function emailCheck() {
 		return true;
 	}
 	
-}; // email
-
+} // email
 
 function addressCheck() {
-	var joinaddress = $('#joinaddress').val();
+	var joinaddress = $('#userAddr').val();
+	
 	if(joinaddress.length == 0){
 		$('#addressmessage').html('주소를 정확하게 입력해주세요.');
 		return false;
 	}else{
 		$('#addressmessage').html('');
 		return true;
-	}	
-} // address
+	}
+}// address

@@ -1,6 +1,5 @@
 package com.project.ex01;
 
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -100,15 +99,14 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="join")
-	public ModelAndView join(ModelAndView mv, ClientVO cv) throws IOException{
-		
-		service.insert(cv);
+	public ModelAndView join(ModelAndView mv, ClientVO cv) {
 		if (service.insert(cv) > 0) {
 		mv.setViewName("cat/Catmain");
 		}else {
 			mv.setViewName("cat/join/JoinTerms");
 		}
 		return mv;
+		
 	}
 	
 	@RequestMapping(value="idDuplicateCheck")
@@ -124,16 +122,25 @@ public class ClientController {
 		return mv;
 	}
 	
-	@RequestMapping(value="selectOne")
+	
+	@RequestMapping(value="selectOne", method=RequestMethod.POST)
 	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
-		mv.addObject("ID", cv.getId());
 		cv = service.selectOne(cv);
-		if(cv==null) {
-			mv.addObject("check", "F");
+		if(cv != null) { //들어있다
+			mv.addObject("result",false);
 		}else {
-			mv.addObject("check","T");
+			mv.addObject("result",true);
+			System.out.println("this is true");
 		}
 		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	@RequestMapping(value = "juso")
+	public ModelAndView juso(ModelAndView mv) {
+		mv.setViewName("popup/jusoPopup");
 		return mv;
 	}
 	
