@@ -7,7 +7,7 @@ public class Users_Con {
 	
 	public String getId() {return id;}
 	public String getAd() {return ad;}
-	public String getLoc() {return loc;}
+	public String getLoc() {return loc;} 
 	
 	public void setId(String id) {this.id = id;}
 	public void setAd(String ad) {this.ad = ad;}

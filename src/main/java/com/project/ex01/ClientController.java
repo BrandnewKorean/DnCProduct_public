@@ -105,7 +105,7 @@ public class ClientController {
 		}else {
 			mv.setViewName("cat/join/JoinTerms");
 		}
-		return mv;
+		return mv;		
 	}
 	
 	@RequestMapping(value="idDuplicateCheck")

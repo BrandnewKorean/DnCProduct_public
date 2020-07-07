@@ -27,7 +27,7 @@ public class ClientVO {
 
 	@Override
 	public String toString() {
-		return "UsersrVO [id=" + id + ", password=" + password + ", name=" + name + ", birthday=" + birthday
+		return "ClientVO [id=" + id + ", password=" + password + ", name=" + name + ", birthday=" + birthday
 				+ ", email=" + email + ", address=" + address + "]";
 	}
 
