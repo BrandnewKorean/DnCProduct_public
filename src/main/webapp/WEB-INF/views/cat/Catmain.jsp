@@ -16,18 +16,16 @@
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
 		<c:if test="${logID == null }">
 			<div class=tmenu>
-				<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
+				<span class=text id=home>Home</span>&nbsp;|&nbsp;<span class=text id=join>Join</span>&nbsp;|&nbsp;<span class=text id=login>Login</span>
 			</div>
 		</c:if>
 			<c:if test="${logID != null}">
-				<div id=client>
-					<div id=profile_image></div>
-					${logID}<br>
-					<button>Myinfo</button>
-					<button>logout</button>
+				<div id=profile_image></div>
+				<div id=client_info>
+					<div id=client_result></div>
+					<button id=logout>logout</button>
 				</div>
 			</c:if>
-		
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	<div class="intro">
@@ -80,7 +78,7 @@
 	</c:if>
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
-			<li><a href="#" id=menu1>Diary</a></li>
+			<li><a href="diaryf" id=menu1>Diary</a></li>
 			<li><a href="#">Store</a></li>
 			<li><a href="#">Board</a></li>
 			<li><a href="#">Location Service</a></li>

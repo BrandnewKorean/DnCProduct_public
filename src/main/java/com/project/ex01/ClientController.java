@@ -19,6 +19,49 @@ public class ClientController {
 	@Autowired
 	ClientService service;
 	
+	@RequestMapping(value = "diaryf")
+	public ModelAndView diaryf(HttpServletRequest request, ModelAndView mv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		if(id != null) {
+			mv.setViewName("cat/diary/DiaryForm");
+		}else {
+			mv.setViewName("cat/Catmain");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "logout")
+	public ModelAndView logout(HttpServletRequest request, ModelAndView mv) {
+		if(request.getSession().getAttribute("logID") != null) {
+			request.getSession().invalidate();
+			mv.addObject("result", true);
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "clientInfo")
+	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code) {
+		ClientVO cv = new ClientVO();
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		if(id != null) {
+			cv.setId(id);
+			cv = service.selectOne(cv);
+		}
+		
+		if(code.equals("json")) {
+			mv.addObject("cv", cv);
+			mv.setViewName("jsonView");
+		}else {
+			mv.addObject("client", cv);
+			mv.setViewName("cat/login/Myinfo");
+		}
+		return mv;
+	}
+	
 	@RequestMapping(value = "termsuse")
 	public ModelAndView termsuse(ModelAndView mv) {
 		mv.setViewName("cat/join/TermsofUse");
