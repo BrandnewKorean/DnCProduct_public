@@ -1,7 +1,5 @@
 package com.project.ex01;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -15,26 +13,30 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MailController {
-
+	
 	@Autowired
 	private JavaMailSender mailSender;
 	
 	@RequestMapping(value="mailSending")
-	public ModelAndView mailSending (ModelAndView mv, String address) {
+	public ModelAndView mailSending(ModelAndView mv, String address) {
 		Random random = new Random();
-		String number="";
+		String number = "";
 		
-		for(int i=0; i<5;i++) {
-			number+=String.valueOf(random.nextInt(10));
-		}
+		for(int i=0; i < 5; i++) {
+			number += String.valueOf(random.nextInt(10));
+		} // for
 		
-		String setfrom ="DnCProductSystem@gmail.com";
-		String tomail=address;
-		String title="[DnCProduct]인증번호를 보내드립니다";
-		String content="<h1>DNCProduct</h1>"+ "<h3>아래 인증번호를 입력해주시면 가입절차가 완료됩니다</h3>"
+		
+		String setfrom = "DnCProductSystem@gmail.com";
+		String tomail = address;
+		String title = "[D&C] 회원가입 인증 번호 보내드립니다.";
+		String content = 
+				"<h1>DnCProduct</h1>"
+				+ "<h3>아래 인증번호를 입력해주시면 가입 승인이 완료 됩니다.</h3>"
 				+ "<p style=\"font-weight:bold; font-size:15px;\">"+ number+ "</p>"
 				+ "<hr>"
-				+ "DnCProduct 에 방문해주셔서 감사합니다.";
+				+ "DncProduct 에 방문해주셔서 감사합니다.";
+		
 		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
@@ -43,15 +45,16 @@ public class MailController {
 			messageHelper.setFrom(setfrom);
 			messageHelper.setTo(tomail);
 			messageHelper.setSubject(title);
-			messageHelper.setText(content, true);
+			messageHelper.setText(content,true);
 			
 			mailSender.send(message);
-			mv.addObject("result", true);
+			mv.addObject("result",number);
+			
 		} catch (Exception e) {
-			System.out.println("mailSending Exception =>"+e.toString());
-			mv.addObject("result", false);
+			System.out.println("mailSending Exception => "+e.toString());
+			mv.addObject("result",false);
 		}
+		mv.setViewName("jsonView");
 		return mv;
-	}
-	
-}
+	}// mailsending
+} // class

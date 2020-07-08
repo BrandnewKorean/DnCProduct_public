@@ -9,6 +9,7 @@
 <script src="resources/script/jquery-3.2.1.min.js"></script>
 <script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
 <script>
+
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
@@ -19,73 +20,71 @@ function goPopup(){
 }
 
 function jusoCallBack(roadFullAddr){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		$('#userAddr').val(roadFullAddr);		
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.	
+		$('#userAddr').val(roadFullAddr);
+		acheck=addressCheck();
 }
 </script>
-
 </head>
 <body>
-	<form action="join" method="post">
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
 <h1>D&C 회원가입</h1>
-	
 	<div class="jointext">
-		<label for=joinid>아이디</label><br>
-		<input id="joinid" name="id" type="text">
-		<br>
-		<span style="color: red" id="idmessage"></span>
+		<label for="joinid">아이디</label><br>
+		<input id="joinid" name="id" type="text"><br>
+		<span style="color: red;" id="idmessage"></span>
 	</div>
-	
+	<br>
 	<div class="jointext">
-		<label for=joinpw>비밀번호</label><br>
-		<input id="joinpw" name="password" type="password">
-		<br>
+		<label for="joinpw">비밀번호 </label><br>
+		<input id="joinpw" name="password" type="password"><br>
 		<span style="color: red" id="pwmessage"></span>
 	</div>
-	
 	<br>
-	
-	<div class="jointext">이름<br>
+	<div class="jointext">
+	<label for="joinname">이름</label>
+	<br>
 		<input id="joinname" name="name" type="text">
 		<br>
 		<span style="color: red" id="namemessage"></span>
 	</div>
 	<br>
-	
-	<div class="jointext">생년월일<br>
+	<div class="jointext">
+	<label for="joinbirthday">생년월일</label>
+	<br>
 		<input id="joinbirthday" name="birthday" type="date" ><br>
 		<br>
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
 	<br>
-	
-	<div class="jointext" >E-mail<br> 
-		<input id="joinemail" name="email" type="email"><button onclick="emailConfirmButton()">인증받기</button>
+	<div class="jointext" >
+	<label for="joinemail">E-mail</label>
+	<br>
+		<input id="joinemail" name="email" type="email"><button onclick="emailConfirmButton()">인증하기</button>
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
 	<br>
-	
-	<div class="jointext" >E-mail 인증<br> 
-		<input id="joinemailconfirm" name="emailconfirm" type="text">
+	<div class="jointext" >
+	<label for="joinemail">E-mail 인증</label>
+	<br> 
+		<input id="joinemailconfirm" name="emailconfirm" type="text" value="인증번호 입력" style="color: gray"  >
+		<br>
+		<span style="color: red" id="emailmessage"></span>
 	</div>
 	<br>
-	<div class="jointext">주소검색<br>
-		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" required="true" readonly="true"/>
+	<div class="jointext">
+	<label for="userAddr">주소</label><br>
+		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" readonly/>
 		<button type="button" class="btn btn-warning" onclick="goPopup()">주소검색</button>
 		<br>
 		<span style="color: red" id="addressmessage"></span>
 	</div>
 	<br>
 	<br><br>
-	
 <button type="submit" onclick="return allCheck()">확인</button>
 <!-- <button onclick="location.href='catmain'">취소</button> -->
 <input type="button" onclick="location.href='catmain'" readonly value="취소">
-
-<br><br><br>
-</form>
 <br><br><br>
 </body>
 </html>

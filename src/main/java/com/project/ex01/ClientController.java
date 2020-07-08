@@ -105,30 +105,16 @@ public class ClientController {
 		}else {
 			mv.setViewName("cat/join/JoinTerms");
 		}
-		return mv;		
-	}
-	
-	@RequestMapping(value="idDuplicateCheck")
-	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
-		mv.addObject("ID", cv.getId());
-		cv= service.selectOne(cv);
-		if(cv!=null) {
-			mv.addObject("idUse","F");
-		}else {
-			mv.addObject("idUse", "T");
-		}
-		mv.setViewName("cat/join/idDuplicateCheck");
 		return mv;
 	}
 	
-	@RequestMapping(value="selectOne", method=RequestMethod.POST)
+	@RequestMapping(value="selectOne",method=RequestMethod.POST)
 	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
 		cv = service.selectOne(cv);
-		if(cv != null) { //들어있다
+		if(cv!=null) {
 			mv.addObject("result",false);
 		}else {
 			mv.addObject("result",true);
-			System.out.println("this is true");
 		}
 		
 		mv.setViewName("jsonView");

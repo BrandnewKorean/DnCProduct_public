@@ -30,17 +30,18 @@ $(function(){
 	}); // email
 	
 	$('#joinemailconfirm').focusout(function(){
-		eccheck=emailCheck();
+		eccheck=emailConfirm();
 	});
 	
 	$('#userAddr').focusout(function() {
+		console.log("this is the local variable that is supposed to be inputted => " + $('#userAddr').val());
 		acheck=addressCheck();
-	}); // address
+	}); // address	
 }); // ready
 
 function allCheck() {
 	if(icheck==true && pcheck==true && ncheck==true
-			&& bcheck==true && echeck==true && acheck==true)
+			&& bcheck==true && echeck==true && acheck==true){
 		$.ajax({
 			url:'join',
 			type:'post',
@@ -61,8 +62,8 @@ function allCheck() {
 				}
 			} // success
 		});
-	else{
-		alert('모든 항목이 필수 입력 항목입니다.');
+	}else{
+		alert('모든 항목이 필수 입력 항목입니다.');	
 	}
 } // allcheck
 
@@ -93,8 +94,7 @@ function idCheck() {
 			}
 		});//ajax
 		return result;
-	}
-	
+	}	
 } // idcheck
 
 function pwCheck() {
@@ -103,7 +103,7 @@ function pwCheck() {
 	if(joinpw.length < 5 || joinpw.length > 20){
 		$('#pwmessage').html('Password는 5글자 이상 입력해야합니다.');
 		return false;                
-	}else if(joinpw.replace(/[!@#$%^&*\(\)-=_+\'\"?\/\\~`\[\]\{\}]/gi,'').length>=passwordlength){
+	}else if(joinpw.replace(/[!@#$%^&*\(\)-=_+\'\"?\/\\~`\[\]\{\}]/,'').length>=passwordlength){
 		$('#pwmessage').html('Password는 특수문자가 반드시 포함되어야 합니다.');
 		return false;
 	}else if(joinpw.replace(/[ㄱ-힣]/gi,'').length < passwordlength){
@@ -159,7 +159,7 @@ function emailCheck() {
 function emailConfirmButton(){
 	$.ajax({
 		url: 'mailSending',
-		data:{addrress:$('#joinmail').val()},
+		data:{address: $('#joinemail').val()},
 		async:false,
 		success:function (data){
 			if(data.result == false){
@@ -176,18 +176,17 @@ function emailConfirm(){
 	if(number == null){
 		$('#emailmessage').html('이메일 인증 버튼을 눌러주세요.');
 		return false;
-	}else if(number != $('#joinmailconfirm').val()){
+	}else if(number != $('#joinemailconfirm').val()){
 		$('#emailmessage').html('인증번호가 일치하지 않습니다.');
 		return false;
 	}else{
-		$('emailmessage').html('인증 완료 되었습니다.');
+		$('#emailmessage').html('인증 완료 되었습니다.');
 		return true;
 	}
 }
 
 function addressCheck() {
 	var joinaddress = $('#userAddr').val();
-	
 	if(joinaddress.length == 0){
 		$('#addressmessage').html('주소를 정확하게 입력해주세요.');
 		return false;
