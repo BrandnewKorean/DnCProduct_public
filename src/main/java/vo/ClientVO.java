@@ -21,6 +21,8 @@ public class ClientVO {
 	public void setBirthday(String birthday) {this.birthday = birthday;}
 	public void setEmail(String email) {this.email = email;}
 	public void setAddress(String address) {this.address = address;}
+	
+	
 
 	@Override
 	public String toString() {

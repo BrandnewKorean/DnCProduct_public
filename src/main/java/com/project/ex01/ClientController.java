@@ -100,13 +100,14 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="join")
-	public ModelAndView join(ModelAndView mv, ClientVO cv) throws IOException{
-		
+	public ModelAndView join(ModelAndView mv, ClientVO cv){
+		System.out.println("client CV => "+cv);
 		service.insert(cv);
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
 	
+	/*
 	@RequestMapping(value="idDuplicateCheck")
 	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
 		
@@ -125,5 +126,27 @@ public class ClientController {
 		mv.setViewName("join/idDuplicateCheck");
 		return mv;
 	} // idDuplicateCheck
+	*/
+	
+	@RequestMapping(value="selectOne",method=RequestMethod.POST)
+	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
+		cv = service.selectOne(cv);
+		
+		
+		if(cv!=null) {
+			mv.addObject("result",false);
+		}else {
+			mv.addObject("result",true);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value="juso")
+	public ModelAndView juso(ModelAndView mv) {
+		mv.setViewName("popup/jusoPopup");
+		return mv;
+	}
 	
 } // class

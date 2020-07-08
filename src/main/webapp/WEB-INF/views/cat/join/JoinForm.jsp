@@ -8,148 +8,107 @@
 
 <link rel="stylesheet" type="text/css" href="resources/css/cat/join/joinForm.css?ver=<%= System.currentTimeMillis()%>">
 <script src="resources/script/jquery-3.2.1.min.js"></script>
-<<<<<<< HEAD
+
 <script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
-=======
-<script src="resources/script/joincheck.js"></script>
 
 
 <script>
-	var icheck = false;
-	var pcheck = false;
-	var ncheck = false;
-	var bcheck = false;
-	var echeck = false;
-	//var acheck = false;
+
+function goPopup(){
+	// 주소검색을 수행할 팝업 페이지를 호출합니다.
+	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+	var pop = window.open("juso","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	
-	$(function(){
-		
-		$('#joinid').focus();
-		$('#joinid').focusout(function() {
-			icheck=idCheck();
-		}); // idcheck
-		
-		$('#joinpw').focusout(function() {
-			pcheck=pwCheck();
-		}); // pwcheck
-		
-		$('#joinname').focusout(function() {
-			ncheck=nameCheck();
-		}); // joinname
-		
-		$('#joinbirthday').focusout(function() {
-			bcheck=birthdayCheck();
-		}); // birthday
-		
-		$('#joinemail').focusout(function() {
-			echeck=emailCheck();
-		}); // email
-		
-		/* $('#joinaddress').focusout(function() {
-			acheck=addressCheck();
-		}); // address */
-	
-	}); // ready
-	
-	
-	function allCheck() {
-		if(/* icheck==true && pcheck==true && ncheck==true
-				&& bcheck==true && echeck==true && acheck==true)
-			return true; */
-			icheck==true && pcheck==true && ncheck==true
-			&& bcheck==true && echeck==true)
-		return true;
-		else{
-			alert('주소를 제외한 모든 항목이 필수 입력 항목입니다.');
-			return false;
-		}
-	} // allcheck
-	
-	function idDuplicateCheck() {
-		
-		if(iCheck==false){iCheck=idCheck();}
-		else{
-			var url = "idDuplicateCheck?id"+$('#joinid').val();
-			window.open(url,"_blank",
-			"toolbar=no,menubar=yes,scrollbars=yes,resizable=yes,width=500,height=400");
-		}
-	} //idDuplicateCheck()
-	
+	// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+function jusoCallBack(roadFullAddr){
+		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.	
+		$('#userAddr').val(roadFullAddr);
+		acheck=addressCheck();
+}
 	
 	
 </script>
 
 
 
->>>>>>> refs/remotes/origin/BrooklynKimBranch
 </head>
 <body>
+
+	<form action="join" method="post">
 
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
 
 <h1>D&C 회원가입</h1>
 
-<form action="join" method="post">
-<<<<<<< HEAD
-	<div class="jointext">아이디<br>
-		<input id="joinid" name="id" type="text">
-		<br>
-		<span id="idmessage" style="color: red"></span>
-	</div>
-=======
-
-<div class="jointext">아이디<br>
-	<input id="joinid" name="id" type="text">
-	<input type="button" value="중복확인" id="idDuplicate" onclick="idDuplicateCheck()"> <!-- id와 onclick(선언형 함수)명이 동일해서 충돌되는 현상 -->
->>>>>>> refs/remotes/origin/BrooklynKimBranch
+	<div class="jointext">
+	<label for="joinid">아이디</label>
 	<br>
-	<div class="jointext">비밀번호<br>
+	<input id="joinid" name="id" type="text">	
+		<br>
+		<span style="color: red" id="idmessage"></span>
+	</div>
+	<br>
+	<div class="jointext">
+	<label for="joinpw">비밀번호 </label>
+	<br>
 		<input id="joinpw" name="password" type="password">
 		<br>
 		<span style="color: red" id="pwmessage"></span>
 	</div>
 	<br>
-	<div class="jointext">이름<br>
+	<div class="jointext">
+	<label for="joinname">이름</label>
+	<br>
 		<input id="joinname" name="name" type="text">
 		<br>
 		<span style="color: red" id="namemessage"></span>
 	</div>
 	<br>
-	<div class="jointext">생년월일<br>
+	<div class="jointext">
+	<label for="joinbirthday">생년월일</label>
+	<br>
 		<input id="joinbirthday" name="birthday" type="date" ><br>
 		<br>
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
 	<br>
-	<div class="jointext" >E-mail<br> 
+	<div class="jointext" >	
 		<input id="joinemail" name="email" type="email">
+		<label for="joinemail">E-mail</label><button onclick="emailConfirmButton()">인증하기</button>
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
 	<br>
-	<div class="jointext">주소<br>
-		<input id="joinaddress" name="address" type="text">
+	<div class="jointext" >
+	<label for="joinemail">E-mail 인증</label>
+	<br> 
+		<input id="joinemailconfirm" name="emailconfirm" type="text" value="인증번호 입력" style="color: gray"  >
+		<br>
+		<span style="color: red" id="emailmessage"></span>
+	</div>
+	<br>
+	<div class="jointext">
+	<label for="userAddr">주소</label><br>
+		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" required="true" readonly="true"/>
+		<button type="button" class="btn btn-warning" onclick="goPopup()">주소검색</button>
 		<br>
 		<span style="color: red" id="addressmessage"></span>
+	
 	</div>
 	<br>
 	<br><br>
 <button type="submit" onclick="return allCheck()">확인</button>
-<<<<<<< HEAD
-<button onclick="location.href='catmain'">취소</button>
-=======
 <!-- <button onclick="location.href='catmain'">취소</button> -->
 <input type="button" onclick="location.href='catmain'" readonly value="취소">
 
->>>>>>> refs/remotes/origin/BrooklynKimBranch
 <br><br><br>
 </form>
-<<<<<<< HEAD
-=======
 
 
 <br><br><br>
 
->>>>>>> refs/remotes/origin/BrooklynKimBranch
 </body>
 </html>
