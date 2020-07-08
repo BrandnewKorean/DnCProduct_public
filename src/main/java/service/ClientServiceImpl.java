@@ -28,6 +28,10 @@ public class ClientServiceImpl implements ClientService{
 	public int insert(ClientVO cv) {
 		return dao.insert(cv);
 	}
-
+	
+	@Override
+	public int update(ClientVO cv) {
+		return dao.update(cv);
+	}
 
 } // class

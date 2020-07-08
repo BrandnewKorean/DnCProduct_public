@@ -18,11 +18,13 @@
 	<div id=profile>
 		<input type="hidden" id=image value="${client.profile}">
 	</div>
-	id : ${cv.id}<br>
-	name : ${cv.name}<br>
-	birthday : ${cv.birthday}<br>
-	email : ${cv.email}<br>
-	address : ${cv.address}<br>
+	id : ${cv.id}<input type="hidden" id=cid value="${cv.id}"><br>
+	<input type="hidden" id=cpassword value="${cv.password }">
+	name : <input type="text" id=cname value="${cv.name}"><br>
+	birthday : <input type="date" id=cbirthday value="${cv.birthday}"><br>
+	email : <input type="email" id=cemail value="${cv.email}"><br>
+	address : <input type="text" id=caddress value="${cv.address}"><br>
+	<button id=update>수정</button>
 	<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
 	<script type="text/javascript" src="resources/script/myinfo.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>

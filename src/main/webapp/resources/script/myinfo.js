@@ -15,4 +15,25 @@ $(function(){
 			backgroundSize: "cover"
 		});
 	}
+	
+	$('#update').click(function(){
+		$.ajax({
+			url: 'update',
+			data:{
+				id: $('#cid').val(),
+				password: $('#cpassword').val(),
+				name: $('#cname').val(),
+				birthday: $('#cbirthday').val(),
+				email: $('#cemail').val(),
+				address: $('#caddress').val(),
+			},
+			success: function(data){
+				if(data.code == 0){
+					alert('수정성공');
+				}else if(data.code == 1){
+					alert('수정 실패');
+				}
+			}
+		});
+	});
 });

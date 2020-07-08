@@ -36,6 +36,61 @@ public class ClientController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "logout")
+	public ModelAndView logout(HttpServletRequest request, ModelAndView mv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		if(id != null) {
+			request.getSession().invalidate();
+			mv.addObject("result", true);
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "clientInfo")
+	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code) {
+		ClientVO cv = new ClientVO();
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		cv.setId(id);
+		cv = service.selectOne(cv);
+		mv.addObject("cv", cv);
+		
+		if(code.equals("json")) {
+			mv.setViewName("jsonView");
+		}else {
+			mv.setViewName("cat/login/Myinfo");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "updatef")
+	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
+		ClientVO cv = new ClientVO();
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		cv.setId(id);
+		cv = service.selectOne(cv);
+		
+		mv.addObject("cv", cv);
+		mv.setViewName("cat/login/MyinfoUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value = "update")
+	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
+		if(service.update(cv) > 0) {
+			mv.addObject("code", 0);
+		}else {
+			mv.addObject("code", 1);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
 		String password = cv.getPassword();
