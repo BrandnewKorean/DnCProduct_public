@@ -1,25 +1,44 @@
 @charset "UTF-8";
 
+/*
 *{
 	
 	margin: 0 auto;
 	 text-align: center; 
 	background-color: LavenderBlush;
 }
+*/
 #joinformimg{
 	width: 10%;
 	height: 15%;
 	margin: 30px 0 0 0;
 }
-/* 
-#jointext{
-	text-align: left;
+ 
+.jointext{
+	width: 180px;
+	height: 30px;
+	color: red;
+	border:1px solid red;
+	border-radius: 100px 50px 100px 50px;
 } 
+
+.innerdiv{
+	diplay: inline;
+	width: 90px;
+	height: 60px;
+	border: 1px solid blue;
+}
+
 input{
 	text-align: center;
-} */
+} 
 span{
-	color: red;
 	font-size: 12px;
+}
+
+.label{
+	margin: 0 auto;
+	text-align: center;
+	
 }
 
