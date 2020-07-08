@@ -1,5 +1,10 @@
 $(function(){
 	var image = 2;
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var today = year+'년'+month+"월"+day+"일";
 	
 	$('.intro').css({
 		backgroundImage: 'url("/ex01/resources/interval/diary/interval'+1+'.jpg")',
@@ -28,4 +33,79 @@ $(function(){
 		image++;
 		if(image > 10) image = 1;
 	}, 5100);
+	
+	$('#year').text(year);
+	$('#month').text(month);
+	$('#date').text(today);
+	build(year, month-1, day);
+	
+	$('.year_btn').click(function(){
+		if($(this).text() == '+'){
+			$('#year').text(++year);
+		}else{
+			$('#year').text(--year);
+		}
+		build(year, month-1, day);
+	});
+	
+	$('.month_btn').click(function(){
+		if($(this).text() == '+'){
+			if(month < 12) $('#month').text(++month);
+		}else{
+			if(month > 1) $('#month').text(--month);
+		}
+		build(year, month-1, day);
+	});
+	
 });
+
+function build(y, m, d){
+	var week = ['일','월','화','수','목','금','토'];
+	var cal = new Date(y,m,1);
+	var start = cal.getDay();
+	var end;
+	
+	switch(m+1){
+	case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+		end = 31;
+		break;
+	case 4: case 6: case 9: case 11:
+		end = 30;
+		break;
+	case 2:
+		if((year % 400 == 0) || (year % 4 == 0 && year % 100 != 0)){
+			end = 29;
+		}else{
+			end = 28;
+		}
+		break;
+	}
+	
+	$('#calendar').empty();
+	$('#calendar').append('<div class=table_row></div>');
+	
+	for(var i=0;i<7;i++){
+		$('#calendar').append('<div class=week>'+week[i]+'</div>');
+	}
+	
+	for(var i=0;i<42;i++){
+		if(i % 7 == 0) $('#calendar').append('<div class=table_row></div>');
+		if(i>=start && (i-start+1)<=end){
+			$('#calendar').append('<div class=days>'+(i-start+1)+'</div>');
+		}else{
+			$('#calendar').append('<div class=days>&nbsp;</div>');
+		}
+	}
+	
+	$('.days').click(function(){
+		if($(this).html() != '&nbsp;'){
+			$('.days').css({
+				backgroundColor: "yellow"
+			});
+			$(this).css({
+				backgroundColor: "red"
+			});
+			$('#date').text(y+"년"+(m+1)+"월"+$(this).text()+"일");
+		}
+	});
+}

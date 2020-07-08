@@ -18,8 +18,16 @@
 	</div>
 	<div class=container>
 		<div id=diary>
-			<div id=calendar>달력</div>
-			<textarea id=write placeholder="여기에 내용을 입력해주세요"></textarea>
+			<div id=paper_range>
+				<div id=calendar_wrap>
+					<button class=year_btn>-</button><a id=year></a><button class=year_btn>+</button>
+					<button class=month_btn>-</button><a id=month></a><button class=month_btn>+</button>
+					<div id=calendar></div>
+				</div>
+				<a id=date></a>
+				<textarea id=write placeholder="여기에 내용을 입력해주세요"></textarea>
+				<button>글쓰기</button>
+			</div>
 		</div>
 	</div>
 </body>
