@@ -1,9 +1,14 @@
 package com.project.ex01;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
+
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,8 +31,27 @@ public class MailController {
 		String setfrom ="DnCProductSystem@gmail.com";
 		String tomail=address;
 		String title="[DnCProduct]인증번호를 보내드립니다";
-		String content="<h1>DNCProduct</h1>";
+		String content="<h1>DNCProduct</h1>"+ "<h3>아래 인증번호를 입력해주시면 가입절차가 완료됩니다</h3>"
+				+ "<p style=\"font-weight:bold; font-size:15px;\">"+ number+ "</p>"
+				+ "<hr>"
+				+ "DnCProduct 에 방문해주셔서 감사합니다.";
 		
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+			
+			messageHelper.setFrom(setfrom);
+			messageHelper.setTo(tomail);
+			messageHelper.setSubject(title);
+			messageHelper.setText(content, true);
+			
+			mailSender.send(message);
+			mv.addObject("result", true);
+		} catch (Exception e) {
+			System.out.println("mailSending Exception =>"+e.toString());
+			mv.addObject("result", false);
+		}
 		return mv;
-	}//mailSending
+	}
+	
 }

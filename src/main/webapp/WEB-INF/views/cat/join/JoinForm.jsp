@@ -61,12 +61,16 @@ function jusoCallBack(roadFullAddr){
 	<br>
 	
 	<div class="jointext" >E-mail<br> 
-		<input id="joinemail" name="email" type="email">
+		<input id="joinemail" name="email" type="email"><button onclick="emailConfirmButton()">인증받기</button>
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
 	<br>
 	
+	<div class="jointext" >E-mail 인증<br> 
+		<input id="joinemailconfirm" name="emailconfirm" type="text">
+	</div>
+	<br>
 	<div class="jointext">주소검색<br>
 		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" required="true" readonly="true"/>
 		<button type="button" class="btn btn-warning" onclick="goPopup()">주소검색</button>
