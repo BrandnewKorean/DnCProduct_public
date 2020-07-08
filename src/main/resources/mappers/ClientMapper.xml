@@ -8,7 +8,7 @@
 		select id,password,name,birthday,email,address from client order by id
 	</select>
 
-	<select id="selectOne" resultType="vo.ClientVO">
+	<select id="selectOne"  resultType="vo.ClientVO">
 		select * from client where id=#{id}
 	</select>
 

@@ -5,13 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>D&C Join</title>
-
 <link rel="stylesheet" type="text/css" href="resources/css/cat/join/joinForm.css?ver=<%= System.currentTimeMillis()%>">
 <script src="resources/script/jquery-3.2.1.min.js"></script>
-
 <script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
-
-
 <script>
 
 function goPopup(){
@@ -28,19 +24,10 @@ function jusoCallBack(roadFullAddr){
 		$('#userAddr').val(roadFullAddr);
 		acheck=addressCheck();
 }
-	
-	
 </script>
-
-
-
 </head>
 <body>
-
-	<form action="join" method="post">
-
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
-
 <h1>D&C 회원가입</h1>
 
 	
@@ -52,11 +39,13 @@ function jusoCallBack(roadFullAddr){
 		</div>
 	<br>
 		<span style="color: red" id="idmessage"></span>
+
 	</div>
 	
 	
 	<br>
 	<div class="jointext">
+
 	<label for="joinpw">비밀번호 </label>
 	<br>
 		<input id="joinpw" name="password" type="password" placeholder="비밀번호">
@@ -80,10 +69,12 @@ function jusoCallBack(roadFullAddr){
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
 	<br>
+
 	<div class="jointext" >	
 		<label for="joinemail">E-mail</label><br>
 		<input id="joinemail" name="email" type="email" placeholder="E-mail">
 		<button onclick="emailConfirmButton()">인증하기</button>
+
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
@@ -98,23 +89,16 @@ function jusoCallBack(roadFullAddr){
 	<br>
 	<div class="jointext">
 	<label for="userAddr">주소</label><br>
-		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" required="true" readonly="true"/>
+		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" readonly/>
 		<button type="button" class="btn btn-warning" onclick="goPopup()">주소검색</button>
 		<br>
 		<span style="color: red" id="addressmessage"></span>
-	
 	</div>
 	<br>
 	<br><br>
 <button type="submit" onclick="return allCheck()">확인</button>
 <!-- <button onclick="location.href='catmain'">취소</button> -->
 <input type="button" onclick="location.href='catmain'" readonly value="취소">
-
 <br><br><br>
-</form>
-
-
-<br><br><br>
-
 </body>
 </html>

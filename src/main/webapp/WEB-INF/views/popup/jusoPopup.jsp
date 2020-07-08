@@ -3,7 +3,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="resources/css/cat/join/addrlinkSample.css?ver=<%= System.currentTimeMillis()%>">
 <script src="resources/script/jquery-3.2.1.min.js"></script>
 <script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
 <title>Insert title here</title>
@@ -23,7 +22,7 @@ function init(){
 	var confmKey = "devU01TX0FVVEgyMDIwMDcwNjE1NTU0NzEwOTkyODg=";
 	var resultType = "4"; // 도로명주소 검색결과 화면 출력내용, 1 : 도로명, 2 : 도로명+지번, 3 : 도로명+상세건물명, 4 : 도로명+지번+상세건물명
 	var inputYn= "<%=inputYn%>";
-	
+	var roadFullAddr = "<%=roadFullAddr%>";
 	if(inputYn != "Y"){
 		document.form.confmKey.value = confmKey;
 		document.form.returnUrl.value = url;

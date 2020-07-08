@@ -27,7 +27,10 @@
 			<button id="termssubmit">확인</button> 
 			<button onclick="location.href='catmain'">취소</button>
 		</div>
-	</form>
+	
+	<br><br><br><br>
+	
+</form>
 </div>
 </body>
 </html>

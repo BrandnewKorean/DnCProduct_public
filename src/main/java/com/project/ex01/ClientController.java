@@ -1,6 +1,5 @@
 package com.project.ex01;
 
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -100,39 +99,18 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value="join")
-	public ModelAndView join(ModelAndView mv, ClientVO cv){
-		System.out.println("client CV => "+cv);
-		service.insert(cv);
-		mv.setViewName("cat/Catmain");
+	public ModelAndView join(ModelAndView mv, ClientVO cv) {
+		if (service.insert(cv) > 0) {
+			mv.setViewName("cat/Catmain");
+		}else {
+			mv.setViewName("cat/join/JoinTerms");
+		}
 		return mv;
 	}
-	
-	/*
-	@RequestMapping(value="idDuplicateCheck")
-	public ModelAndView idDuplicateCheck(ModelAndView mv, ClientVO cv) {
-		
-		// client로 부터 전달된 id의 존재 여부 확인 : selectOne()
-		// => NotNull(존재)이면 사용불가
-		// => Null(미존재)이면 사용가능
-		
-		mv.addObject("ID", cv.getId());
-		cv = service.selectOne(cv);
-		
-		if(cv != null) {
-			mv.addObject("idUse","F");
-		}else {
-			mv.addObject("idUse","T");
-		}
-		mv.setViewName("join/idDuplicateCheck");
-		return mv;
-	} // idDuplicateCheck
-	*/
 	
 	@RequestMapping(value="selectOne",method=RequestMethod.POST)
 	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
 		cv = service.selectOne(cv);
-		
-		
 		if(cv!=null) {
 			mv.addObject("result",false);
 		}else {
@@ -143,10 +121,9 @@ public class ClientController {
 		return mv;
 	}
 	
-	@RequestMapping(value="juso")
+	@RequestMapping(value = "juso")
 	public ModelAndView juso(ModelAndView mv) {
 		mv.setViewName("popup/jusoPopup");
 		return mv;
 	}
-	
 } // class

@@ -2,9 +2,8 @@
 
 /*
 *{
-	
 	margin: 0 auto;
-	 text-align: center; 
+	text-align: center; 
 	background-color: LavenderBlush;
 }
 */
@@ -31,7 +30,7 @@
 
 input{
 	text-align: center;
-} 
+}
 span{
 	font-size: 12px;
 }
