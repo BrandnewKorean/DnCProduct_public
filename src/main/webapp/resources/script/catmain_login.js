@@ -31,7 +31,6 @@ $(function(){
 	});
 	
 	$('#profile_image').click(function(){
-		console.log('click');
 		$('#client_info').slideToggle('slow',function(){
 			$.ajax({
 				url: 'clientInfo',
@@ -57,6 +56,15 @@ $(function(){
 				}else{
 					alert('로그인 후 사용하세요');
 				}
+			}
+		});
+	});
+	
+	$('#updatef').click(function(){
+		$.ajax({
+			url: 'updatef',
+			success: function(result){
+				$('#client_result').html(result);
 			}
 		});
 	});

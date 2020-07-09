@@ -24,6 +24,8 @@
 				<div id=client_info>
 					<div id=client_result></div>
 					<button id=logout>logout</button>
+					<button id=updatef>update</button>
+					<button id=delete>delete</button>
 				</div>
 			</c:if>
 		<div class=tmenu_result id=tmenu_result></div>

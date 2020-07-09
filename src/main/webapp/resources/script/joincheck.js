@@ -51,7 +51,7 @@ function allCheck() {
 				name: $('#joinname').val(),
 				birthday:$('#joinbirthday').val(),
 				email:$('#joinemail').val(),
-				addrress:$('#joinadrress').val()
+				address:$('#userAddr').val()
 			},
 			success:function(data){
 				if(data.result){

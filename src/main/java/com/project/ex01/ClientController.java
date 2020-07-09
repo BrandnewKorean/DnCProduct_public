@@ -2,6 +2,7 @@ package com.project.ex01;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,61 @@ public class ClientController {
 	@RequestMapping(value = "termslocation")
 	public ModelAndView termslocation(ModelAndView mv) {
 		mv.setViewName("cat/join/TermsofLocationInformation");
+		return mv;
+	}
+	
+	@RequestMapping(value = "logout")
+	public ModelAndView logout(HttpServletRequest request, ModelAndView mv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		if(id != null) {
+			request.getSession().invalidate();
+			mv.addObject("result", true);
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "clientInfo")
+	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code) {
+		ClientVO cv = new ClientVO();
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		cv.setId(id);
+		cv = service.selectOne(cv);
+		mv.addObject("cv", cv);
+		
+		if(code.equals("json")) {
+			mv.setViewName("jsonView");
+		}else {
+			mv.setViewName("cat/login/Myinfo");
+		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "updatef")
+	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
+		ClientVO cv = new ClientVO();
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		cv.setId(id);
+		cv = service.selectOne(cv);
+		
+		mv.addObject("cv", cv);
+		mv.setViewName("cat/login/MyinfoUpdate");
+		return mv;
+	}
+	
+	@RequestMapping(value = "update")
+	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
+		if(service.update(cv) > 0) {
+			mv.addObject("code", 0);
+		}else {
+			mv.addObject("code", 1);
+		}
+		
+		mv.setViewName("jsonView");
 		return mv;
 	}
 	
@@ -101,10 +157,11 @@ public class ClientController {
 	@RequestMapping(value="join")
 	public ModelAndView join(ModelAndView mv, ClientVO cv) {
 		if (service.insert(cv) > 0) {
-			mv.setViewName("cat/Catmain");
+			mv.addObject("result", true);
 		}else {
-			mv.setViewName("cat/join/JoinTerms");
+			mv.addObject("result", false);
 		}
+		mv.setViewName("jsonView");
 		return mv;
 	}
 	
@@ -120,6 +177,34 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	@RequestMapping(value = "delete")
+	public ModelAndView delete(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
+		
+		String id = "";
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("logID") != null) {
+			id = (String) session.getAttribute("logID");
+		} else {
+			// login 하도록 유도 후에 메서드 return 으로 종료
+			mv.addObject("message", "~~ 로그인 후에 하세요 ~~");
+			mv.setViewName("login/loginForm");
+			return mv;
+		}
+		cv.setId(id);
+		mv.setViewName("jsonView");
+		if(service.delete(cv) > 0) {
+			mv.addObject("code", 0);
+			session.invalidate();
+
+		}else {
+			mv.addObject("code", 1);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	
 	@RequestMapping(value = "juso")
 	public ModelAndView juso(ModelAndView mv) {

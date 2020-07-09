@@ -15,4 +15,12 @@
 	<insert id="insert">
 		insert into client(id,password,name,birthday,email,address) values(#{id},#{password},#{name},#{birthday},#{email},#{address})
 	</insert>
+	
+	<update id="update">
+		update client set password=#{password}, name=#{name}, birthday=#{birthday}, email=#{email}, address=#{address} where id=#{id}
+	</update>
+	
+  <delete id="delete">
+	delete from client where id=#{id}
+  </delete>
 </mapper>
