@@ -4,6 +4,7 @@ $(function(){
 	var year = date.getFullYear();
 	var month = date.getMonth()+1;
 	var day = date.getDate();
+	var today = year+"-"+month+"-"+day;
 	
 	$('.intro').css({
 		backgroundImage: 'url("/ex01/resources/interval/diary/interval'+1+'.jpg")',
@@ -40,6 +41,7 @@ $(function(){
 	$('#selected_day').text(day);
 	
 	build(year, month-1, day);
+	loadData(today);
 	
 	$('.year_btn').click(function(){
 		if($(this).text() == '+'){
@@ -61,6 +63,29 @@ $(function(){
 	
 });
 
+function loadData(selected){
+	console.log(selected);
+	$.ajax({
+		url: 'diary',
+		type: 'get',
+		data: {wdate: selected},
+		success: function(data){
+			switch(data.code){
+			case 0:
+				$('#content').html(data.dv.content);
+				break;
+			case 1:
+				$('#content').html("내용이 없습니다");
+				break;
+			case 2:
+				alert('로그인 후 사용하세요');
+				location.href = "catmain";
+				break;
+			}
+		}
+	});
+}
+
 function build(y, m, d){
 	var week = ['일','월','화','수','목','금','토'];
 	var cal = new Date(y,m,1);
@@ -69,10 +94,7 @@ function build(y, m, d){
 	var selectedYear = parseInt($('#selected_year').text());
 	var selectedMonth = parseInt($('#selected_month').text());
 	var selectedDay = parseInt($('#selected_day').text());
-	
-	console.log('selected year = '+selectedYear);
-	console.log('selected month = '+selectedMonth);
-	console.log('selected day = '+selectedDay);
+	var selected = selectedYear+"-"+selectedMonth+"-"+selectedDay;
 	
 	switch(m+1){
 	case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -125,6 +147,11 @@ function build(y, m, d){
 			$('#selected_year').text(y);
 			$('#selected_month').text(m+1);
 			$('#selected_day').text($(this).text());
+			selectedYear = parseInt($('#selected_year').text());
+			selectedMonth = parseInt($('#selected_month').text());
+			selectedDay = parseInt($('#selected_day').text());
+			selected = selectedYear+"-"+selectedMonth+"-"+selectedDay;
+			loadData(selected);
 		}
 	});
 }
