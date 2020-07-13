@@ -24,7 +24,6 @@ public class DiaryController {
 	
 	@RequestMapping(value = "diary")
 	public ModelAndView diary(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
-		System.out.println(dv);
 		String id = (String)request.getSession().getAttribute("logID");
 		
 		if(id != null) {

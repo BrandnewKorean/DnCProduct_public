@@ -67,7 +67,7 @@ function loadData(selected){
 	console.log(selected);
 	$.ajax({
 		url: 'diary',
-		type: 'get',
+		type: 'post',
 		data: {wdate: selected},
 		success: function(data){
 			switch(data.code){

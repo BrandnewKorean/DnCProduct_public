@@ -5,10 +5,10 @@ public class DiaryVO {
 	private String id;
 	private String content;
 	private String regdate;
-	public String getDate() {
+	public String getWdate() {
 		return wdate;
 	}
-	public void setDate(String wdate) {
+	public void setWdate(String wdate) {
 		this.wdate = wdate;
 	}
 	public String getId() {
