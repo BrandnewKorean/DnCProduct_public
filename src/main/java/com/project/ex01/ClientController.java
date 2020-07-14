@@ -1,9 +1,10 @@
 package com.project.ex01;
 
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,9 @@ public class ClientController {
 	
 	@Autowired
 	ClientService service;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	@RequestMapping(value = "termsuse")
 	public ModelAndView termsuse(ModelAndView mv) {
@@ -50,8 +54,7 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "clientInfo")
-	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code) {
-		ClientVO cv = new ClientVO();
+	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code, ClientVO cv) {
 		String id = (String)request.getSession().getAttribute("logID");
 		
 		cv.setId(id);
@@ -65,6 +68,24 @@ public class ClientController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value="delete")
+	public ModelAndView delete(ModelAndView mv, HttpServletRequest request, ClientVO cv) {
+		String id = "";
+		HttpSession session = request.getSession(false);
+		id = (String)session.getAttribute("logID");
+		cv.setId(id);
+		System.out.println(cv);
+		if(service.delete(cv) > 0) {
+			session.invalidate();
+			mv.addObject("code",0);
+		}else {
+			mv.addObject("code",1);
+		}
+		mv.setViewName("jsonView");
+		
+		return mv;
+	} // delete
 	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
@@ -97,7 +118,7 @@ public class ClientController {
 		cv = service.selectOne(cv);
 		
 		if(cv != null) {
-			if(password.equals(cv.getPassword())) {
+			if(passwordEncoder.matches(password, cv.getPassword())) {
 				request.getSession().setAttribute("logID", cv.getId());
 				mv.addObject("code", 0);
 			}else {
@@ -155,11 +176,14 @@ public class ClientController {
 	
 	@RequestMapping(value="join")
 	public ModelAndView join(ModelAndView mv, ClientVO cv) {
+		cv.setPassword(passwordEncoder.encode(cv.getPassword()));
+
 		if (service.insert(cv) > 0) {
-			mv.setViewName("cat/Catmain");
+			mv.addObject("result",true);
 		}else {
-			mv.setViewName("cat/join/JoinTerms");
+			mv.addObject("result",false);
 		}
+		mv.setViewName("jsonView");
 		return mv;
 	}
 	

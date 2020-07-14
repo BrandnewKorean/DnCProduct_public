@@ -68,4 +68,12 @@ $(function(){
 			}
 		});
 	});
+	
+	$('#diaryf').click(function(){
+		location.href="diaryf";
+	});
+	
+	$('#catboard').click(function(){
+		location.href="catboard";
+	});
 });
