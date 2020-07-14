@@ -14,9 +14,10 @@
   		where seq=#{seq}
   	</select>
   	
- <!--  	<insert id="insert">
-  		insert into catboard values ((select nvl(max(seq),0)+1 from catboard),#{id),#{title},#{content},#{regdate},#{cnt},#{comments})
+ 	<insert id="insert">
+  		insert into catboard values
+  		 ((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content},#{regdate},#{cnt},#{comments})
   			
-  	</insert>    -->
+  	</insert>
   
   </mapper>

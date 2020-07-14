@@ -79,7 +79,7 @@ $(function(){
 	
 	
 	
-	$('#catboardli').click(function(){
+	$('#catboard').click(function(){
 		location.href="catboard";
 	}) // catbaordclick
 	
