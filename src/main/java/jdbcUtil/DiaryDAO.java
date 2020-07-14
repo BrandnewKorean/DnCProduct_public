@@ -14,7 +14,18 @@ public class DiaryDAO {
 	private static final String NameSpace = "ex01.mappers.DiaryMapper.";
 	
 	public DiaryVO selectOne(DiaryVO dv) {
-		System.out.println(dv);
 		return sqlsession.selectOne(NameSpace+"selectOne", dv);
+	}
+	
+	public int insert(DiaryVO dv) {
+		return sqlsession.insert(NameSpace+"insert", dv);
+	}
+	
+	public int delete(DiaryVO dv) {
+		return sqlsession.delete(NameSpace+"delete", dv);
+	}
+	
+	public int update(DiaryVO dv) {
+		return sqlsession.update(NameSpace+"update", dv);
 	}
 }

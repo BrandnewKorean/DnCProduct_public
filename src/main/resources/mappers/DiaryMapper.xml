@@ -7,4 +7,16 @@
 	<select id="selectOne" resultType="vo.DiaryVO">
 		select * from catdiary where wdate=#{wdate} and id=#{id}
 	</select>
+	
+	<insert id="insert">
+		insert into catdiary(wdate,id,content) values(#{wdate},#{id},#{content})
+	</insert>
+	
+	<delete id="delete">
+		delete catdiary where wdate=#{wdate} and id=#{id}
+	</delete>
+	
+	<update id="update">
+		update catdiary set content=#{content} where wdate=#{wdate} and id=#{id}
+	</update>
 </mapper>
