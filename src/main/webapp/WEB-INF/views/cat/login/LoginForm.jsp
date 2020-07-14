@@ -17,6 +17,9 @@
 	input{
 		width: 100px;
 	}
+	*{
+		background-color: LavenderBlush;
+	}
 </style>
 </head>
 <body>

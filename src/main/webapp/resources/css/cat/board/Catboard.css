@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+*{
+	background-color: snow;
+}
+
+body{
+	text-align: center;
+}
+
+#table {width: 80%; display: table; margin: 0 auto; text-align: center;}
+
+#rowtitle{color: MidnightBlue; font-size: 30px; font-weight: bold;}
+
+.row {display: table-row;}
+
+.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
+
+.col1 {width: 10%;}
+
+.col2 {width: 10%;}
+
+.col3 {width: 20%;}
+
+.col4 {width: 20%;}
+
+.col5 {width: 20%;}
+
+.col6 {width: 10%;}
+
+.col7 {width: 10%;}
+

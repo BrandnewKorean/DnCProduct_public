@@ -180,6 +180,23 @@
 			<version>2.7.2</version>
 		</dependency>
 		
+		
+		<!-- 시큐리티 코드 추가 적용 -->
+		<!--스프링시큐리티 core 라이브러리-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.4.RELEASE</version>
+		</dependency>
+		
+		<!--스프링시큐리티 config 라이브러리-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.4.RELEASE</version>
+		</dependency>
+		
+		
 	</dependencies>
     <build>
         <plugins>

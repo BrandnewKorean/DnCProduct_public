@@ -16,42 +16,48 @@ $(function(){
 		});
 	}
 	
+	
 	$('#update').click(function(){
 		$.ajax({
 			url: 'update',
+			type: 'get',
 			data:{
 				id: $('#cid').val(),
 				password: $('#cpassword').val(),
 				name: $('#cname').val(),
 				birthday: $('#cbirthday').val(),
-				email: $('#cemail').val(),
-				address: $('#caddress').val(),
+				//email: $('#cemail').val(),
+				address: $('#caddress').val()
 			},
 			success: function(data){
 				if(data.code == 0){
-					alert('수정성공');
+					alert('수정 성공 했습니다.');
 				}else if(data.code == 1){
-					alert('수정 실패');
+					alert('수정 실패 했습니다.');
 				}
 			}
-		});
-	}); // update
+		}) // ajax
+	
+	}) // update
+	
 	
 	$('#delete').click(function(){
 		$.ajax({
-			url : 'delete',
-			data : {
-				id:$('#cid').val()
-			},
+			url:'delete',
+			type: 'get',
 			success: function(data){
 				if(data.code == 0){
-					alert('삭제 성공');
-				}else if(data.code == 1){
-					alert('삭제 실패')
+					alert('탈퇴 성공');
+				}else{
+					alert('탈퇴 실패');
 				}
-				location.href = 'catmain';
+				location.href='catmain';
 			}
-		}); // ajax
-	}); // delete
+		})
+		
+	}) // delete
 	
-});
+	
+	
+}); // ready
+

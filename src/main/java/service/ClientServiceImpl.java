@@ -32,11 +32,12 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public int update(ClientVO cv) {
 		return dao.update(cv);
-	}
+	} // update
 	
 	@Override
 	public int delete(ClientVO cv) {
 		return dao.delete(cv);
-	}
+	} 
+
 
 } // class

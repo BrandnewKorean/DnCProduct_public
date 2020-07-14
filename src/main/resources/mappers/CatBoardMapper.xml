@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="ex01.mappers.CatBoardMapper">
+  	
+  	<select id="selectList" resultType="vo.CatBoardVO">
+  		select seq,id,title,content,regdate,cnt,comments from CatBoard
+  	</select>
+  	
+  	<select id="selectOne" resultType="vo.CatBoardVO">
+  		select seq,id,title,content,regdate,cnt,comments from CatBoard 
+  		where seq=#{seq}
+  	</select>
+  	
+ <!--  	<insert id="insert">
+  		insert into catboard values ((select nvl(max(seq),0)+1 from catboard),#{id),#{title},#{content},#{regdate},#{cnt},#{comments})
+  			
+  	</insert>    -->
+  
+  </mapper>

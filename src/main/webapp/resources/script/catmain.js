@@ -122,10 +122,6 @@ $(function(){
 		location.href = 'catloginf';
 	});
 	
-	$('#delete').click(function(){
-		location.href = 'delete';
-	});
-	
 	$('#home').click(function(e){
 		e.stopImmediatePropagation();
 		location.href = "home";

@@ -36,8 +36,6 @@ public class MailController {
 				+ "<p style=\"font-weight:bold; font-size:15px;\">"+ number+ "</p>"
 				+ "<hr>"
 				+ "DncProduct 에 방문해주셔서 감사합니다.";
-		
-		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");

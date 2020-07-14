@@ -31,6 +31,7 @@ $(function(){
 	});
 	
 	$('#profile_image').click(function(){
+		console.log('click');
 		$('#client_info').slideToggle('slow',function(){
 			$.ajax({
 				url: 'clientInfo',
@@ -58,14 +59,32 @@ $(function(){
 				}
 			}
 		});
-	});
+	}); // logout
 	
 	$('#updatef').click(function(){
 		$.ajax({
-			url: 'updatef',
+			url:'updatef',
 			success: function(result){
 				$('#client_result').html(result);
 			}
-		});
-	});
-});
+		}); 
+	}); // updatef
+	
+	
+	
+	$('#diaryf').click(function(){
+		location.href="diaryf";
+	}) // dairyf
+	
+	
+	
+	
+	$('#catboardli').click(function(){
+		location.href="catboard";
+	}) // catbaordclick
+	
+	
+	
+	
+	
+}); // ready
