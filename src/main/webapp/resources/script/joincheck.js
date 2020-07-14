@@ -51,7 +51,7 @@ function allCheck() {
 				name: $('#joinname').val(),
 				birthday:$('#joinbirthday').val(),
 				email:$('#joinemail').val(),
-				addrress:$('#joinadrress').val()
+				address:$('#userAddr').val()
 			},
 			success:function(data){
 				if(data.result){
@@ -180,7 +180,7 @@ function emailConfirm(){
 		$('#emailmessage').html('인증번호가 일치하지 않습니다.');
 		return false;
 	}else{
-		$('#emailmessage').html('인증 완료 되었습니다.');
+		$('#emailmessage').css('color','blue').html('인증 완료 되었습니다.');
 		return true;
 	}
 }

@@ -1,12 +1,16 @@
 @charset "UTF-8";
 
-/*
-*{
-	margin: 0 auto;
-	text-align: center; 
-	background-color: LavenderBlush;
-}
-*/
+
+/* *{
+	   position: absolute;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+
+} */
+
 #joinformimg{
 	width: 10%;
 	height: 15%;
@@ -14,11 +18,16 @@
 }
  
 .jointext{
-	width: 180px;
-	height: 30px;
-	color: red;
-	border:1px solid red;
-	border-radius: 100px 50px 100px 50px;
+	display: block;
+    position: relative;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    background: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    vertical-align: top;
 } 
 
 .innerdiv{
@@ -32,7 +41,22 @@ input{
 	text-align: center;
 }
 span{
-	font-size: 12px;
+	display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    line-height: 29px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    z-index: 10;
+    *position: absolute;
+    *top: 0;
+    *left: 0;
+    apperance: none;
+    -webkit-apperance: none;
 }
 
 .label{

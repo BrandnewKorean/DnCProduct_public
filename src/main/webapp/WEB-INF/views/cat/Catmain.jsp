@@ -19,13 +19,17 @@
 				<span class=text id=home>Home</span>&nbsp;|&nbsp;<span class=text id=join>Join</span>&nbsp;|&nbsp;<span class=text id=login>Login</span>
 			</div>
 		</c:if>
-			<c:if test="${logID != null}">
-				<div id=profile_image></div>
-				<div id=client_info>
-					<div id=client_result></div>
-					<button id=logout>logout</button>
-				</div>
-			</c:if>
+		
+		<c:if test="${logID != null}">
+			<div id=profile_image></div>
+			<div id=client_info>
+				<div id=client_result></div>
+				<button id=logout>logout</button>
+				<button id=updatef>update</button>
+				<button id=delete>회원탈퇴</button>
+			</div>
+		</c:if>
+		
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	<div class="intro">
@@ -78,9 +82,9 @@
 	</c:if>
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
-			<li><a href="diaryf" id=menu1>Diary</a></li>
+			<li id=diaryf><a>Diary</a></li>
 			<li><a href="#">Store</a></li>
-			<li><a href="#">Board</a></li>
+			<li id=catboard><a>Board</a></li>
 			<li><a href="#">Location Service</a></li>
 		</ul>
 		<script type="text/javascript" src="resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>

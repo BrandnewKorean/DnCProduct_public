@@ -59,5 +59,32 @@ $(function(){
 				}
 			}
 		});
-	});
-});
+	}); // logout
+	
+	$('#updatef').click(function(){
+		$.ajax({
+			url:'updatef',
+			success: function(result){
+				$('#client_result').html(result);
+			}
+		}); 
+	}); // updatef
+	
+	
+	
+	$('#diaryf').click(function(){
+		location.href="diaryf";
+	}) // dairyf
+	
+	
+	
+	
+	$('#catboard').click(function(){
+		location.href="catboard";
+	}) // catbaordclick
+	
+	
+	
+	
+	
+}); // ready

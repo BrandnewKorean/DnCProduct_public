@@ -9,5 +9,7 @@ public interface ClientService {
 	List<ClientVO> selectList(); 
 	ClientVO selectOne(ClientVO cv);
 	int insert(ClientVO cv);
+	int update(ClientVO cv);
+	int delete(ClientVO cv);
 
 } // interface

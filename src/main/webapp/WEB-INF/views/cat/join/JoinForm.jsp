@@ -34,9 +34,9 @@ function jusoCallBack(roadFullAddr){
 	<label for="joinid" class="label">아이디</label>
 	<br>
 	<div class="jointext">
-		<div class="innerdiv">
-			<input id="joinid" name="id" type="text" placeholder="아이디">	
-		</div>
+			<span class="innerinput">
+				<input id="joinid" name="id" type="text" placeholder="아이디">	
+			</span>	
 	<br>
 		<span style="color: red" id="idmessage"></span>
 
