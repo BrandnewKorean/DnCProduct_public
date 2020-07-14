@@ -10,4 +10,5 @@ public interface ClientService {
 	ClientVO selectOne(ClientVO cv);
 	int insert(ClientVO cv);
 	int update(ClientVO cv);
+	int delete(ClientVO cv);
 } // interface

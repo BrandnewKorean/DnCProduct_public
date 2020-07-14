@@ -42,4 +42,67 @@ public class DiaryController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	@RequestMapping(value = "diarywrite")
+	public ModelAndView diarywrite(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		int count;
+		
+		if(id != null) {
+			dv.setId(id);
+			count = service.insert(dv);
+			if(count > 0) {
+				mv.addObject("code", 0);
+			}else {
+				mv.addObject("code", 1);
+			}
+		}else {
+			mv.addObject("code", 2);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "diarydelete")
+	public ModelAndView diarydelete(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		int count;
+		
+		if(id != null) {
+			dv.setId(id);
+			count = service.delete(dv);
+			if(count > 0) {
+				mv.addObject("code", 0);
+			}else {
+				mv.addObject("code", 1);
+			}
+		}else {
+			mv.addObject("code", 2);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "diaryupdate")
+	public ModelAndView diaryupdate(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
+		String id = (String)request.getSession().getAttribute("logID");
+		int count;
+		
+		if(id != null) {
+			dv.setId(id);
+			count = service.update(dv);
+			if(count > 0) {
+				mv.addObject("code", 0);
+			}else {
+				mv.addObject("code", 1);
+			}
+		}else {
+			mv.addObject("code", 2);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
 }

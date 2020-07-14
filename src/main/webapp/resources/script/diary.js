@@ -1,3 +1,5 @@
+var selected = null;
+
 $(function(){
 	var image = 2;
 	var date = new Date();
@@ -5,6 +7,11 @@ $(function(){
 	var month = date.getMonth()+1;
 	var day = date.getDate();
 	var today = year+"-"+month+"-"+day;
+	selected = today;
+	
+	$('#catmainlogo').click(function(){
+		location.href = 'catmain';
+	});
 	
 	$('.intro').css({
 		backgroundImage: 'url("/ex01/resources/interval/diary/interval'+1+'.jpg")',
@@ -61,6 +68,137 @@ $(function(){
 		build(year, month-1, day);
 	});
 	
+	$('#writef').click(function(){
+		var result = 1;
+		
+		if($('#content').text() == "내용이 없습니다"){
+			$('#content').empty();
+			$('#content').append('<textarea id=diary_text></textarea>');
+			$('#content').append('<button id=diarywrite>글쓰기</button>');
+		}else{
+			if(confirm('기존의 내용을 지우고 다시 입력하시겠습니까?')){
+				$.ajax({
+					url: 'diarydelete',
+					data: {wdate: selected},
+					async: false,
+					success: function(data){
+						if(data.code == 0){
+							result = data.code;
+						}else if(data.code == 1){
+							alert('삭제 실패');
+						}else{
+							alert('로그인 후 사용하세요');
+							location.href = 'catmain';
+						}
+					}
+				});
+				if(result == 0){
+					$('#content').empty();
+					$('#content').append('<textarea id=diary_text></textarea>');
+					$('#content').append('<button id=diarywrite>글쓰기</button>');
+				}
+			}
+		}
+		
+		$('#diarywrite').click(function(){
+			if($('#diary_text').val() == ''){
+				alert('내용을 입력해주세요');
+				return;
+			}
+			var dv = {
+				wdate: selected,
+				content: $('#diary_text').val()
+			}
+			$.ajax({
+				url: 'diarywrite',
+				data: dv,
+				success: function(data){
+					if(data.code == 0){
+						alert('작성 성공');
+						location.reload();
+					}else if(data.code == 1){
+						alert('작성 실패');
+					}else{
+						alert('로그인 후 사용하세요');
+						location.href = 'catmain';
+					}
+				}
+			});
+		});
+	});
+	
+	$('#edit').click(function(){
+		var content;
+		if($('#content').text() == "내용이 없습니다"){
+			alert('입력된 내용이 없습니다');
+			return;
+		}
+		$.ajax({
+			url: 'diary',
+			data: {wdate: selected},
+			async: false,
+			success: function(data){
+				if(data.code == 0){
+					content = data.dv.content;
+				}else if(data.code == 1){
+					alert('작성목록 불러오기 실패');
+				}else{
+					alert('로그인 후 사용하세요');
+					location.href = 'catmain';
+				}
+			}
+		});
+		console.log(content);
+		$('#content').empty();
+		$('#content').append('<textarea id=diary_text>'+content+'</textarea>');
+		$('#content').append('<button id=diaryupdate>수정</button>');
+		
+		$('#diaryupdate').click(function(){
+			if($('#diary_text').val() == ''){
+				alert('내용을 입력해주세요');
+				return;
+			}
+			var dv = {
+				wdate: selected,
+				content: $('#diary_text').val()
+			}
+			$.ajax({
+				url: 'diaryupdate',
+				data: dv,
+				success: function(data){
+					if(data.code == 0){
+						alert('수정 성공');
+						location.reload();
+					}else if(data.code == 1){
+						alert('수정 실패');
+					}else{
+						alert('로그인 후 사용하세요');
+						location.href = 'catmain';
+					}
+				}
+			});
+		});
+	});
+	
+	$('#delete').click(function(){
+		if(confirm('정말로 삭제하시겠습니까?')){
+			$.ajax({
+				url: 'diarydelete',
+				data: {wdate: selected},
+				success: function(data){
+					if(data.code == 0){
+						alert('삭제가 완료되었습니다');
+						location.reload();
+					}else if(data.code == 1){
+						alert('삭제 실패');
+					}else{
+						alert('로그인 후 사용하세요');
+						location.href = 'catmain';
+					}
+				}
+			});
+		}
+	});
 });
 
 function loadData(selected){
@@ -94,7 +232,7 @@ function build(y, m, d){
 	var selectedYear = parseInt($('#selected_year').text());
 	var selectedMonth = parseInt($('#selected_month').text());
 	var selectedDay = parseInt($('#selected_day').text());
-	var selected = selectedYear+"-"+selectedMonth+"-"+selectedDay;
+	selected = selectedYear+"-"+selectedMonth+"-"+selectedDay;
 	
 	switch(m+1){
 	case 1: case 3: case 5: case 7: case 8: case 10: case 12:

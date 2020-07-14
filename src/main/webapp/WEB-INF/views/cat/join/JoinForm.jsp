@@ -29,22 +29,34 @@ function jusoCallBack(roadFullAddr){
 <body>
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
 <h1>D&C 회원가입</h1>
-	<div class="jointext">
-		<label for="joinid">아이디</label><br>
-		<input id="joinid" name="id" type="text"><br>
-		<span style="color: red;" id="idmessage"></span>
-	</div>
+
+	
+	<label for="joinid" class="label">아이디</label>
 	<br>
 	<div class="jointext">
-		<label for="joinpw">비밀번호 </label><br>
-		<input id="joinpw" name="password" type="password"><br>
+			<span class="innerinput">
+				<input id="joinid" name="id" type="text" placeholder="아이디">	
+			</span>	
+	<br>
+		<span style="color: red" id="idmessage"></span>
+
+	</div>
+	
+	
+	<br>
+	<div class="jointext">
+
+	<label for="joinpw">비밀번호 </label>
+	<br>
+		<input id="joinpw" name="password" type="password" placeholder="비밀번호">
+		<br>
 		<span style="color: red" id="pwmessage"></span>
 	</div>
 	<br>
 	<div class="jointext">
 	<label for="joinname">이름</label>
 	<br>
-		<input id="joinname" name="name" type="text">
+		<input id="joinname" name="name" type="text" placeholder="이름">
 		<br>
 		<span style="color: red" id="namemessage"></span>
 	</div>
@@ -52,15 +64,17 @@ function jusoCallBack(roadFullAddr){
 	<div class="jointext">
 	<label for="joinbirthday">생년월일</label>
 	<br>
-		<input id="joinbirthday" name="birthday" type="date" ><br>
+		<input id="joinbirthday" name="birthday" type="date"><br>
 		<br>
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
 	<br>
-	<div class="jointext" >
-	<label for="joinemail">E-mail</label>
-	<br>
-		<input id="joinemail" name="email" type="email"><button onclick="emailConfirmButton()">인증하기</button>
+
+	<div class="jointext" >	
+		<label for="joinemail">E-mail</label><br>
+		<input id="joinemail" name="email" type="email" placeholder="E-mail">
+		<button onclick="emailConfirmButton()">인증하기</button>
+
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
@@ -68,7 +82,7 @@ function jusoCallBack(roadFullAddr){
 	<div class="jointext" >
 	<label for="joinemail">E-mail 인증</label>
 	<br> 
-		<input id="joinemailconfirm" name="emailconfirm" type="text" value="인증번호 입력" style="color: gray"  >
+		<input id="joinemailconfirm" name="emailconfirm" type="text" placeholder="E-mail 인증번호"  >
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>

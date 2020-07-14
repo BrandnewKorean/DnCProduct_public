@@ -25,6 +25,7 @@
 					<div id=client_result></div>
 					<button id=logout>logout</button>
 					<button id=updatef>update</button>
+					<button id=delete>회원탈퇴</button>
 				</div>
 			</c:if>
 		<div class=tmenu_result id=tmenu_result></div>
