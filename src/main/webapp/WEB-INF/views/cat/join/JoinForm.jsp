@@ -69,7 +69,6 @@ function jusoCallBack(roadFullAddr){
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
 	
-
 	<div class="jointext" >	
 		<label for="joinemail">E-mail</label><br>
 		<input id="joinemail" name="email" type="email" placeholder="E-mail">

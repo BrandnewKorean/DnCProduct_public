@@ -35,6 +35,5 @@ public class CatBoardServiceImpl implements CatBoardService {
 	public int countUp(CatBoardVO bv) {
 		return dao.countUp(bv);
 	} // countup
-	
 
 } // CatBoardServiceImpl

@@ -1,16 +1,14 @@
 $(function(){
 	$('#submit').on('click', function(){
 		var vo = {
-				
 			id: $('#id').val(),
 			password: $('#password').val()
-			
-			} // vo
+		}
 		
 		$.ajax({
 			url: 'login',
 			Type: 'get',
-			data: vo, // 위에서 변수로 선언
+			data: vo,
 			success: function(data){
 				if(data.code == 0){
 					alert('로그인 완료되었습니다');

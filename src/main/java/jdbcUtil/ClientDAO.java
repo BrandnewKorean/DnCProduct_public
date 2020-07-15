@@ -38,6 +38,5 @@ public class ClientDAO {
 	
 	public int delete(ClientVO cv) {
 		return sqlsession.delete(NameSpace+"delete",cv);
-	} // delete
-
+	}
 } // class

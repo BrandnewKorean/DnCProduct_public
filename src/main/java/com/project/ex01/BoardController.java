@@ -55,8 +55,6 @@ public class BoardController {
 		
 	} // catboardinsert
 	
-	
-	
 	@RequestMapping(value="catboardview")
 	public ModelAndView catboardview(ModelAndView mv, CatBoardVO bv) {
 		
