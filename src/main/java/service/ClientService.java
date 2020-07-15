@@ -11,5 +11,4 @@ public interface ClientService {
 	int insert(ClientVO cv);
 	int update(ClientVO cv);
 	int delete(ClientVO cv);
-
 } // interface

@@ -64,6 +64,5 @@ public class BoardController {
 
 		
 		
-		
 	}//catboarddetail
 } // class
