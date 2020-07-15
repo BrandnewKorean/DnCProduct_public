@@ -94,13 +94,18 @@ public class BoardController {
 		return mv;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="catboarddelete")
+	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null) {
+			if(service.delete(bv)>0) {
+				mv.setViewName("redirect:catboard");
+			}else{
+				mv.setViewName("redirect:catboardview?seq="+bv.getSeq());
+			}
+		}else {
+			mv.setViewName("redirect:catmain?seq="+bv.getSeq());
+		}
+		return mv;
+	}
 } // class

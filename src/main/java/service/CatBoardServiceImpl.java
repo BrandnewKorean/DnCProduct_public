@@ -40,5 +40,10 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.update(bv);
 	}
 	
+	@Override
+	public int delete(CatBoardVO bv) {
+		return dao.delete(bv);
+	}
+	
 
 } // CatBoardServiceImpl

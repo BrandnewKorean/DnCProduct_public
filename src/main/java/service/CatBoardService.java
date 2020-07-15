@@ -15,5 +15,7 @@ public interface CatBoardService {
 	int insert(CatBoardVO bv); // insert
 	
 	int update(CatBoardVO bv); // update
+	
+	int delete(CatBoardVO bv); // delete
 
 } // interface
