@@ -18,7 +18,18 @@
   		<!-- insert into catboard values ((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content},#{regdate},#{cnt},#{comments})  
   		values 다음에 공백 있으면 안된다!!!!!!!!! -->
   		insert into catboard(seq,id,title,content) values((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content})  
- 	</insert>   
+ 	</insert>
+ 	
+ 	<update id="countUp">
+ 		update catboard set cnt=cnt+1 where seq=#{seq}
+ 	</update>
+ 	
+ 	<update id="update">
+ 		update catboard set title=#{title},content=#{content},regdate=sysdate where seq=#{seq}
+ 	</update>
 
+	<delete id="delete">
+		delete from catboard where seq=#{seq}
+	</delete>
   
   </mapper>

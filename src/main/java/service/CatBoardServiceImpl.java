@@ -30,5 +30,20 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.insert(bv);
 	} // insert
 	
+	@Override
+	public int countUp(CatBoardVO bv) {
+		return dao.countUp(bv);
+	}
+	
+	@Override
+	public int update(CatBoardVO bv) {
+		return dao.update(bv);
+	}
+	
+	@Override
+	public int delete(CatBoardVO bv) {
+		return dao.delete(bv);
+	}
+	
 
 } // CatBoardServiceImpl

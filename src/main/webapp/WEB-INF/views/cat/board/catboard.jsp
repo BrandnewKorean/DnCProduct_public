@@ -6,11 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
+<script src="resources/script/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>고양이 게시판</title>
-
-<link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
-
 </head>
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
@@ -31,7 +30,7 @@
 				<div class="row">
 					<span class="cell col1">${bb.seq}</span>
 					<span class="cell col2">${bb.id}</span>
-					<span class="cell col3">${bb.title}</span>
+					<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
 					<span class="cell col4">${bb.regdate}</span>
 					<span class="cell col5">${bb.cnt}</span>
 					<span class="cell col6">${bb.comments}</span>

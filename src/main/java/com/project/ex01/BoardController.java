@@ -3,6 +3,7 @@ package com.project.ex01;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,8 +50,62 @@ public class BoardController {
 		}else {
 			mv.addObject("bcode", 2);
 		}
-		
 		mv.setViewName("jsonView");
 		return mv;
 	} // catboardinsert
+	
+	@RequestMapping(value="catboardview")
+	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		//글번호로 글검색
+		service.countUp(bv);
+		bv=service.selectOne(bv);
+		mv.addObject("bv", bv);
+		mv.setViewName("cat/board/catboardview");
+		return mv;
+		
+	}//catboardview
+	
+	@RequestMapping(value="catboardupdatef")
+	public ModelAndView catboardupdatef (ModelAndView mv, CatBoardVO bv) {
+		bv=service.selectOne(bv);
+		
+		mv.addObject("dnc", bv);
+		mv.setViewName("cat/board/catboardupdatef");
+		
+		return mv;
+	}//catboardupdatef()
+	
+	
+	@RequestMapping(value="catboardupdate")
+	public ModelAndView catboardupdate(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		String id=(String)request.getSession().getAttribute("logID");
+		
+		if(id!=null) {
+			if(service.update(bv)>0) {
+				mv.addObject("bcode",0);
+			}else{
+				mv.addObject("bcode",1);
+			}
+		}else {
+			mv.addObject("bcode",2);
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value="catboarddelete")
+	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null) {
+			if(service.delete(bv)>0) {
+				mv.setViewName("redirect:catboard");
+			}else{
+				mv.setViewName("redirect:catboardview?seq="+bv.getSeq());
+			}
+		}else {
+			mv.setViewName("redirect:catmain?seq="+bv.getSeq());
+		}
+		return mv;
+	}
 } // class
