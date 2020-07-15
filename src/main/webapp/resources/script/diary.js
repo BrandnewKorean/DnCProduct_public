@@ -73,7 +73,7 @@ $(function(){
 		
 		if($('#content').text() == "내용이 없습니다"){
 			$('#content').empty();
-			$('#content').append('<textarea id=diary_text></textarea>');
+			$('#content').append('<textarea id=diary_text></textarea><br>');
 			$('#content').append('<button id=diarywrite>글쓰기</button>');
 		}else{
 			if(confirm('기존의 내용을 지우고 다시 입력하시겠습니까?')){
@@ -94,7 +94,7 @@ $(function(){
 				});
 				if(result == 0){
 					$('#content').empty();
-					$('#content').append('<textarea id=diary_text></textarea>');
+					$('#content').append('<textarea id=diary_text></textarea><br>');
 					$('#content').append('<button id=diarywrite>글쓰기</button>');
 				}
 			}
@@ -150,7 +150,7 @@ $(function(){
 		});
 		console.log(content);
 		$('#content').empty();
-		$('#content').append('<textarea id=diary_text>'+content+'</textarea>');
+		$('#content').append('<textarea id=diary_text>'+content+'</textarea><br>');
 		$('#content').append('<button id=diaryupdate>수정</button>');
 		
 		$('#diaryupdate').click(function(){

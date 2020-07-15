@@ -18,7 +18,9 @@ body{
 		height: 500px;
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-position: center center;
 		opacity: 0;
+		margin: 0 auto;
 	}
 	.container{
 		position: relative;
