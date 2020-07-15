@@ -19,6 +19,12 @@
   		values 다음에 공백 있으면 안된다!!!!!!!!! -->
   		insert into catboard(seq,id,title,content) values((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content})  
  	</insert>   
+ 	
+ 	<update id="countUp">
+ 		update catboard set cnt=cnt+1 where seq=#{seq}
+ 	</update>
+ 	
+ 	
 
   
   </mapper>

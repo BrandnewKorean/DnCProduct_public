@@ -27,14 +27,14 @@ function jusoCallBack(roadFullAddr){
 </script>
 </head>
 <body>
-<img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png">
-<h1>D&C 회원가입</h1>
+<img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png" style="text-align: center">
 
-	
-	<label for="joinid" class="label">아이디</label>
+<h1 style="text-align: center; color: blue;">D&C 회원가입</h1>
+
 	<br>
 	<div class="jointext">
-			<span class="innerinput">
+	<label for="joinid" class="label">아이디</label><br>
+			<span>
 				<input id="joinid" name="id" type="text" placeholder="아이디">	
 			</span>	
 	<br>
@@ -68,12 +68,12 @@ function jusoCallBack(roadFullAddr){
 		<br>
 		<span style="color: red" id="birthdaymessage"></span>
 	</div>
-	<br>
+	
 
 	<div class="jointext" >	
 		<label for="joinemail">E-mail</label><br>
 		<input id="joinemail" name="email" type="email" placeholder="E-mail">
-		<button onclick="emailConfirmButton()">인증하기</button>
+		<br><button onclick="emailConfirmButton()">인증하기</button>
 
 		<br>
 		<span style="color: red" id="emailmessage"></span>
@@ -90,6 +90,7 @@ function jusoCallBack(roadFullAddr){
 	<div class="jointext">
 	<label for="userAddr">주소</label><br>
 		<input type="text" id="userAddr" name="address" class="form-control" placeholder="주소입력" readonly/>
+		<br>
 		<button type="button" class="btn btn-warning" onclick="goPopup()">주소검색</button>
 		<br>
 		<span style="color: red" id="addressmessage"></span>

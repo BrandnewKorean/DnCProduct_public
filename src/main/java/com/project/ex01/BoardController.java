@@ -56,4 +56,25 @@ public class BoardController {
 	} // catboardinsert
 	
 	
+	
+	@RequestMapping(value="catboardview")
+	public ModelAndView catboardview(ModelAndView mv, CatBoardVO bv) {
+		
+		service.countUp(bv);
+		
+		bv = service.selectOne(bv);
+		
+		if(bv != null) {
+			mv.addObject("view",bv);
+			mv.setViewName("board/catboardview");
+		}else {
+			mv.setViewName("catboard");
+		}
+		
+		mv.setViewName("jsonView");
+		return mv;
+		
+	} // catboardview
+	
+	
 } // class
