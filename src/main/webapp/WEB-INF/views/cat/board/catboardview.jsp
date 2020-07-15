@@ -9,6 +9,8 @@
 <title>BoardView</title>
 </head>
 <body>
+<h2>View</h2>
+	<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정하기</button>
 	<span>${bv.title}</span>
 	<hr>	
 	<textarea>${bv.content}</textarea>

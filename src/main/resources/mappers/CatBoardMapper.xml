@@ -21,7 +21,11 @@
  	</insert>
  	
  	<update id="countUp">
- 		update board set cnt=cnt+1 where seq=#{seq}
+ 		update catboard set cnt=cnt+1 where seq=#{seq}
+ 	</update>
+ 	
+ 	<update id="update">
+ 		update catboard set title=#{title},content=#{content},regdate=sysdate where seq=#{seq}
  	</update>
 
   

@@ -13,5 +13,7 @@ public interface CatBoardService {
 	int countUp(CatBoardVO bv); // countUp
 	
 	int insert(CatBoardVO bv); // insert
+	
+	int update(CatBoardVO bv); // update
 
 } // interface
