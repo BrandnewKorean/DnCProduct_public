@@ -28,7 +28,7 @@
 				}
 			}
 		});
-	}
+	}//catboardinsert()
 </script>
 </head>
 <body>

@@ -10,6 +10,8 @@ public interface CatBoardService {
 	
 	CatBoardVO selectOne(CatBoardVO bv); // selectOne
 	
+	int countUp(CatBoardVO bv); // countUp
+	
 	int insert(CatBoardVO bv); // insert
 
 } // interface

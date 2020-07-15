@@ -3,6 +3,7 @@ package com.project.ex01;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,11 +50,20 @@ public class BoardController {
 		}else {
 			mv.addObject("bcode", 2);
 		}
-		
 		mv.setViewName("jsonView");
 		return mv;
-		
 	} // catboardinsert
 	
-	
+	@RequestMapping(value="catboardview")
+	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		//글번호로 글검색
+		bv=service.selectOne(bv);
+		mv.addObject("bv", bv);
+		mv.setViewName("cat/board/catboardview");
+		return mv;
+
+		
+		
+		
+	}//catboarddetail
 } // class
