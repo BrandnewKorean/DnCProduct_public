@@ -97,7 +97,7 @@ public class BoardController {
 	@RequestMapping(value="catboarddelete")
 	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
-		if(session!=null) {
+		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.setViewName("redirect:catboard");
 			}else{
