@@ -80,9 +80,9 @@
 	</c:if>
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
-			<li><a href="diaryf" id=menu1>Diary</a></li>
+			<li id=diaryf><a>Diary</a></li>
 			<li><a href="#">Store</a></li>
-			<li><a href="#">Board</a></li>
+			<li id=catboard><a>Board</a></li>
 			<li><a href="#">Location Service</a></li>
 		</ul>
 		<script type="text/javascript" src="resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
