@@ -13,8 +13,8 @@ public class CatBoardDAO {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
 	
+	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
 	
 	public List<CatBoardVO> selectList(){
 		return sqlsession.selectList(NameSpace+"selectList");

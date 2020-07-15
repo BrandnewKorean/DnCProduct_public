@@ -31,8 +31,7 @@ $(function(){
 	});
 	
 	$('#profile_image').click(function(){
-		console.log('click');
-		$('#client_info').slideToggle('slow',function(){
+	$('#client_info').slideToggle('slow',function(){
 			$.ajax({
 				url: 'clientInfo',
 				data: {code: "not"},
@@ -70,21 +69,30 @@ $(function(){
 		}); 
 	}); // updatef
 	
-	
-	
 	$('#diaryf').click(function(){
 		location.href="diaryf";
-	}) // dairyf
-	
-	
-	
+	}); // dairyf
 	
 	$('#catboard').click(function(){
 		location.href="catboard";
-	}) // catbaordclick
+	}); // catbaordclick
+
 	
 	
+	$('#updatef').click(function(){
+		$.ajax({
+			url: 'updatef',
+			success: function(result){
+				$('#client_result').html(result);
+			}
+		});
+	});
 	
+	$('#diaryf').click(function(){
+		location.href="diaryf";
+	});
 	
-	
-}); // ready
+	$('#catboard').click(function(){
+		location.href="catboard";
+	});
+});

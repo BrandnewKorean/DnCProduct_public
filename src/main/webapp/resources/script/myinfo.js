@@ -16,7 +16,6 @@ $(function(){
 		});
 	}
 	
-	
 	$('#update').click(function(){
 		$.ajax({
 			url: 'update',
@@ -56,8 +55,5 @@ $(function(){
 		})
 		
 	}) // delete
-	
-	
-	
 }); // ready
 

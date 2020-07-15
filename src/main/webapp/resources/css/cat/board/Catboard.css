@@ -8,6 +8,13 @@ body{
 	text-align: center;
 }
 
+#catboard_menu{
+	margin:0 auto;
+	width: 80%;
+	text-align: right;
+	margin-bottom: 10px;
+}
+
 #table {width: 80%; display: table; margin: 0 auto; text-align: center;}
 
 #rowtitle{color: MidnightBlue; font-size: 30px; font-weight: bold;}

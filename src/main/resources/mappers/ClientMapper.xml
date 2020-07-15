@@ -24,5 +24,4 @@
 		delete from client where id=#{id}
 	</delete>
 	
-	
 </mapper>

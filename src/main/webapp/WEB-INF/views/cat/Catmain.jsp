@@ -19,7 +19,6 @@
 				<span class=text id=home>Home</span>&nbsp;|&nbsp;<span class=text id=join>Join</span>&nbsp;|&nbsp;<span class=text id=login>Login</span>
 			</div>
 		</c:if>
-		
 		<c:if test="${logID != null}">
 			<div id=profile_image></div>
 			<div id=client_info>
@@ -29,7 +28,6 @@
 				<button id=delete>회원탈퇴</button>
 			</div>
 		</c:if>
-		
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	<div class="intro">
