@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatBoardDAO;
 import vo.CatBoardVO;
+import vo.PageVO;
 
 @Service
 public class CatBoardServiceImpl implements CatBoardService {
@@ -45,5 +46,8 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.delete(bv);
 	}
 	
-
+	@Override
+	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
+		return dao.pageList(pvo);
+	}
 } // CatBoardServiceImpl

@@ -42,8 +42,7 @@
 </c:if>
 
 <c:if  test="${dnc==null }">
-
-
+	<span>등록된 글이 없습니다</span>
 </c:if>
 
 

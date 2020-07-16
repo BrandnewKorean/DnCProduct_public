@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import vo.CatBoardVO;
+import vo.PageVO;
 
 @Repository
 public class CatBoardDAO {
@@ -40,6 +41,17 @@ public class CatBoardDAO {
 	
 	public int delete(CatBoardVO bv) {
 		return sqlsession.delete(NameSpace+"delete",bv);
+	}
+	
+	public int totalRowCount() {
+		return sqlsession.selectOne(NameSpace+"totalRowCount");
+	}
+	
+	
+	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
+		pvo.setTotalCount(totalRowCount());
+		pvo.setList(sqlsession.selectList(NameSpace+"pageList",pvo));
+		return pvo;
 	}
 
 } // boardDAO
