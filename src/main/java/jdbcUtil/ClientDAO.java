@@ -31,5 +31,12 @@ public class ClientDAO {
 	public int insert(ClientVO cv) {
 		return sqlsession.insert(NameSpace+"insert",cv);
 	}
-
+	
+	public int update(ClientVO cv) {
+		return sqlsession.update(NameSpace+"update",cv);
+	}
+	
+	public int delete(ClientVO cv) {
+		return sqlsession.delete(NameSpace+"delete",cv);
+	}
 } // class

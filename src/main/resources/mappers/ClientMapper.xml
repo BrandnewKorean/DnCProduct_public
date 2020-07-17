@@ -8,11 +8,20 @@
 		select id,password,name,birthday,email,address from client order by id
 	</select>
 
-	<select id="selectOne" resultType="vo.ClientVO">
+	<select id="selectOne"  resultType="vo.ClientVO">
 		select * from client where id=#{id}
 	</select>
 
 	<insert id="insert">
-		insert into client values(#{id},#{password},#{name},#{birthday},#{email},#{address})
+		insert into client(id,password,name,birthday,email,address) values(#{id},#{password},#{name},#{birthday},#{email},#{address})
 	</insert>
+	
+	<update id = "update">
+		update client set password=#{password}, name=#{name}, birthday=#{birthday}, address=#{address} where id=#{id}
+	</update>
+	
+	<delete id = "delete">
+		delete from client where id=#{id}
+	</delete>
+
 </mapper>

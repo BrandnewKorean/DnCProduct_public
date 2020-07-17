@@ -3,7 +3,7 @@ package vo;
 public class CatComment {
 	private int seq;
 	private String id;
-	private String content;
+	private String content; 
 	
 	public int getSeq() {return seq;}
 	public String getId() {return id;}

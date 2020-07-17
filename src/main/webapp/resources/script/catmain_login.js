@@ -31,7 +31,6 @@ $(function(){
 	});
 	
 	$('#profile_image').click(function(){
-		console.log('click');
 		$('#client_info').slideToggle('slow',function(){
 			$.ajax({
 				url: 'clientInfo',
@@ -59,5 +58,22 @@ $(function(){
 				}
 			}
 		});
+	});
+	
+	$('#updatef').click(function(){
+		$.ajax({
+			url: 'updatef',
+			success: function(result){
+				$('#client_result').html(result);
+			}
+		});
+	});
+	
+	$('#diaryf').click(function(){
+		location.href="diaryf";
+	});
+	
+	$('#catboard').click(function(){
+		location.href="catboard";
 	});
 });

@@ -18,11 +18,11 @@
 	<div id=profile>
 		<input type="hidden" id=image value="${client.profile}">
 	</div>
-	id : ${client.id}<br>
-	name : ${client.name}<br>
-	birthday : ${client.birthday}<br>
-	email : ${client.email}<br>
-	address : ${client.address}<br>
+	ID : ${cv.id}<br>
+	Name : ${cv.name}<br>
+	Birthday : ${cv.birthday}<br>
+	E-mail : ${cv.email}<br>
+	Address : ${cv.address}<br>
 	<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
 	<script type="text/javascript" src="resources/script/myinfo.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
