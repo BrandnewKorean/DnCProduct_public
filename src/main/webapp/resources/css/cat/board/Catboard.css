@@ -29,6 +29,26 @@ body{
 
 .col3 {width: 50%;}
 
+.col3 > a{
+	text-decoration: none;
+	color: black;
+}
+.col3 > a:hover{
+	color: blue;
+	font-weight: bold;
+}
+
+.col1 > a{
+	text-decoration: none;
+	color: black;
+}
+.col1 > a:hover{
+	color: blue;
+	font-weight: bold;
+}
+
+
+
 .col4 {width: 10%;}
 
 .col5 {width: 5%;}

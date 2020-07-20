@@ -33,5 +33,13 @@ public class CatBoardDAO {
 	public int countUp(CatBoardVO bv) {
 		return sqlsession.update(NameSpace+"countUp",bv);
 	} // board count
+	
+	public int update(CatBoardVO bv) {
+		return sqlsession.update(NameSpace+"update",bv);
+	}// update
+	
+	public int delete(CatBoardVO bv) {
+		return sqlsession.delete(NameSpace+"delete",bv);
+	} // delete
 
 } // boardDAO

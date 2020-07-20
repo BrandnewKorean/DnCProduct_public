@@ -1,8 +1,11 @@
 package com.project.ex01;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +39,11 @@ public class BoardController {
 	@RequestMapping(value="catboardinsert")
 	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
 		String id = (String)request.getSession().getAttribute("logID");
+		
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		bv.setRegdate(fm.format(current));
 
 		if(id != null) {
 			bv.setId(id);
@@ -62,17 +70,63 @@ public class BoardController {
 		
 		bv = service.selectOne(bv);
 		
-		if(bv != null) {
-			mv.addObject("view",bv);
-			mv.setViewName("board/catboardview");
-		}else {
-			mv.setViewName("catboard");
-		}
+		mv.addObject("bv", bv);
+		mv.setViewName("cat/board/catboardview");
+		return mv;
+	} // catboardview
+	
+	@RequestMapping(value="catboardupdate")
+	public ModelAndView catboardupdate(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
 		
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		bv.setRegdate(fm.format(current));
+		
+		if(id!=null) {
+			if(service.update(bv)>0) {
+				mv.addObject("bcode",0);
+			}else {
+				mv.addObject("bcode",1);
+			}
+		}else {
+			mv.addObject("bcode",2);
+		}
 		mv.setViewName("jsonView");
 		return mv;
+	} // catboardupdate
+	
+	
+	
+	@RequestMapping(value="catboardupdatef")
+	public ModelAndView catboardupdatef(ModelAndView mv, CatBoardVO bv) {
+		bv = service.selectOne(bv);
 		
-	} // catboardview
+		mv.addObject("dnc",bv);
+		mv.setViewName("cat/board/catboardupdatef");
+		
+		return mv;
+	} // catboardupdatef
+	
+	
+	@RequestMapping(value="catboarddelete")
+	public ModelAndView catboarddelete(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
+		HttpSession session = request.getSession(false);
+		
+		if(session != null && session.getAttribute("logID")!=null) {
+			if(service.delete(bv)>0) {
+				mv.addObject("bcode",0);
+			}else {
+				mv.addObject("bcode",1);
+			}
+		}else {
+			mv.addObject("bcode",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}  // delete
 	
 	
 } // class
