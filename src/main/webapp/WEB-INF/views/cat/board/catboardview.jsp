@@ -29,15 +29,17 @@ function catboarddelete(){
 		}
 	});
 }
-
-
 </script>
-
-
-
-
 <body>
-<button onclick="location.href = 'catboard'">이전으로</button>
+<c:choose>
+	<c:when test="${view}">
+		<button onclick="location.href = 'catboard?code=image'">이전으로</button>
+	</c:when>
+	<c:otherwise>
+		<button onclick="location.href = 'catboard?code=list'">이전으로</button>
+	</c:otherwise>
+</c:choose>
+
 <h2>View</h2>
 	<input type="hidden" id="seq" value="${bv.seq }">
 	<span>${bv.title}</span>

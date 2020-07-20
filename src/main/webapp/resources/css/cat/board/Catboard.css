@@ -35,5 +35,25 @@ body{
 
 .col6 {width: 5%;}
 
+.container{
+	position: relative;
+	margin: 0 auto;
+	width: 80%;
+	background-color: green;
+}
 
+.block{
+	display: inline-block;
+	position: relative;
+	margin: 2px;
+	width: 23%;
+	background-color: yellow;
+}
 
+.image{
+	display: block;
+	margin: 0 auto;
+	width: 90%;
+	height: 200px;
+	background-color: red;
+}
