@@ -23,6 +23,7 @@ $(function(){
 	$('.intro').css({
 		backgroundImage: 'url("/ex01/resources/interval/diary/interval'+1+'.jpg")',
 	});
+	
 	$('.intro').animate({
 		opacity: "0.8"
 	},1000);
@@ -114,33 +115,64 @@ $(function(){
 				if(result == 0){
 					$('#content').empty();
 					$('#content').append('<label id=diary_image for=diaryupload><input type="file" id=diaryupload multiple></label><br>');
+					$('#content').append('<div id=filepreview></div>');
 					$('#content').append('<textarea id=diary_text></textarea><br>');
 					$('#content').append('<button id=diarywrite>글쓰기</button>');
 				}
 			}
 		}
-		
-		var sel_files;
-		
+				
 		$('#diaryupload').change(function(e){
+			$('#filepreview').empty();
 			console.log(e.target.files);
 			var files = e.target.files;
 			var fileArr = Array.prototype.slice.call(files);
 			
+			if(fileArr.length > 1){
+				$('#filepreview').append('<button id=pre_button><</button>');
+				$('#filepreview').append('<button id=next_button>></button>');
+			}
+			
+			var i = 0;
 			fileArr.forEach(function(f){
 				if(!f.type.match("image.*")){
 					alert('이미지 확장자만 가능합니다');
 					return;
 				}
 				
-				sel_files += f;
-				
 				var reader = new FileReader();
 				reader.onload = function(e){
+					if(i == 0){
+						$('#filepreview').append('<img id=image'+i+' src="'+e.target.result+'" width=100% height=100% style="display: block;">');
+					}else{
+						$('#filepreview').append('<img id=image'+i+' src="'+e.target.result+'" width=100% height=100% style="display: none;">');
+					}
 					
-					$('#filepreview').append('<img src="'+e.target.result+'" width=7%>')
+					i++;
 				}
 				reader.readAsDataURL(f);
+			});
+			
+			i = 0;
+			
+			$('#pre_button').click(function(){
+				i--;
+				if(i < 0) i = fileArr.length-1;
+				for(var j=0;j<fileArr.length;j++){
+					$('#image'+j).css('display','none');
+				}
+				$('#image'+i).css('display','block');
+				console.log('pre click '+i);
+			});
+			
+			$('#next_button').click(function(){
+				i++;
+				if(i > fileArr.length-1) i = 0;
+				for(var j=0;j<fileArr.length;j++){
+					$('#image'+j).css('display','none');
+				}
+				$('#image'+i).css('display','block');
+				console.log('next click '+i);
 			});
 		});
 		
@@ -152,11 +184,8 @@ $(function(){
 			var formData = new FormData();
 			formData.append('wdate', selected);
 			formData.append('content', $('#diary_text').val());
-			for(var i=0;i<sel_files.length;i++){
-				console.log(sel_files[i]);
-			}
-//			formData.append('files',$('#diaryupload')[0].files[0]);
-//			
+			formData.append('files',$('#diaryupload')[0].files);
+			
 //			$.ajax({
 //				url: 'diarywrite',
 //				type: 'post',
