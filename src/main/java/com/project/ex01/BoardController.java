@@ -26,7 +26,7 @@ public class BoardController {
 		
 		mv.addObject("dnc",list);
 		mv.setViewName("cat/board/catboard");
-		
+		 
 		return mv;
 	} // boardlist
 	

@@ -46,5 +46,10 @@ public class CatBoardServiceImpl implements CatBoardService {
 	public int delete(CatBoardVO bv) {
 		return dao.delete(bv);
 	} // delete
+	
+	@Override
+	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
+		return dao.pageList(pvo);
+	}
 
 } // CatBoardServiceImpl
