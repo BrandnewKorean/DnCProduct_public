@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,7 @@
 			<span class="cell col6">댓글</span>
 		</div>
 		<c:if test="${dnc != '[]'}">
-			<c:forEach var="bb" items="${dnc}">
+			<c:forEach var="bb" items="${list}">
 				<div class="row">
 					<span class="cell col1">${bb.seq}</span>
 					<span class="cell col2">${bb.id}</span>
@@ -38,6 +38,39 @@
 			</c:forEach>	
 		</c:if>
 	</div>
+<div>
+<c:choose>
+	<c:when test="${startPage>perPageNO }">
+		<a href="catboard?currentPage=1">First</a>&nbsp;
+		<a href="catboard?currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
+	</c:when>
+	<c:otherwise>
+		<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
+	</c:otherwise>
+</c:choose>
+
+<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	<c:choose>
+		<c:when test="${i==currentPage}">
+			<font size="5" color="Orange">${i }</font>
+		</c:when>
+		<c:otherwise>
+			<a href="catboard?currentPage=${i }">${i }</a>
+		</c:otherwise>	
+	</c:choose>
+</c:forEach>
+
+<c:choose>
+	<c:when test="${endPage<totalPageNo }">
+		<a href="catboard?currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
+		<a href="catboard?currentPage=${totalPageNo}">&nbsp;Last</a>
+	</c:when>
+	<c:otherwise>
+		<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
+	</c:otherwise>
+</c:choose>
+</div>
+	
 	<c:if test="${dnc == '[]'}">
 		<div id=testd>
 			<span>등록된 글이 없습니다</span>

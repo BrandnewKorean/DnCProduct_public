@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body{
-		margin: 0;
+		margin: 0 0;
 		cursor: url("/ex01/resources/cursor/cat_default.cur"), auto;
 	}
 	.header{
@@ -106,7 +106,45 @@ body{
 	}
 	#diary_text{
 		width: 90%;
-		height: 400px;
+		height: 200px;
 		background-color: rgba(255,255,255,0);
 		resize: none;
+	}
+	#diaryupload{
+		display: none;
+	}
+	#diary_image{
+		background-image: url("/ex01/resources/image/diary_upload_button.png");
+	}
+	#diary_image:hover{
+		filter: invert(100%);
+	}
+	#filepreview{
+		position: relative;
+		width: 90%;
+		height: 200px;
+		background-color: yellow;
+		text-align: left;
+		margin: 0 auto;
+		border: 3px solid;
+	}
+	#pre_button{
+		position: absolute;
+		top: 50%;
+		left: -20px;
+		border: none;
+		border-radius: 50%;
+		background-color: lime;
+		outline: none;
+		font-size: 25pt;
+	}
+	#next_button{
+		position: absolute;
+		top: 50%;
+		right: -20px;
+		border: none;
+		border-radius: 50%;
+		background-color: lime;
+		outline: none;
+		font-size: 25pt;
 	}

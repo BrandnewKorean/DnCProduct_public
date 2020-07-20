@@ -55,4 +55,4 @@ public class MailController {
 		mv.setViewName("jsonView");
 		return mv;
 	}// mailsending
-} // class
+}
