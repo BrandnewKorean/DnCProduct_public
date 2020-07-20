@@ -1,21 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+	#viewtoggle{
+		position: relative;
+		display: inline-block;
+		width: 50px;
+		background-color: gray;
+		border: none;
+		vertical-align: middle;
+		border: 1px solid;
+		padding: 1px;
+	}
+	#viewtoggle > span{
+		position: absolute;
+		background-color: white;
+		width: 20px;
+		height: 20px;
+		left: 3px;
+		transition: .4s;
+	}
+	#viewtoggle > input:checked + span{
+		transform: translateX(26px);
+	}
+	#viewtoggle > input{
+		opacity: 0;
+	}
+</style>
 <link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
 <script src="resources/script/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>고양이 게시판</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var view = document.getElementById('view');
+	
+	$('#view').click(function(){
+		if(view.checked){
+			console.log('true');
+			$('#test').val(view.checked);
+		}else{
+			console.log('false');
+			$('#test').val(view.checked);
+		}
+	});
+});
+</script>
 </head>
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
 	<div id=catboard_menu>
+		<label id=viewtoggle>
+			<input id=view type="checkbox">
+			<span></span>
+		</label>
 		<button onclick="location.href='catboardinsertf'">글쓰기</button>
 	</div>
+	<input type="text" id=test>
 	<div id="table">
 		<div class="row" id="rowtitle">
 			<span class="cell col1">번호</span>
@@ -25,7 +70,7 @@
 			<span class="cell col5">조회</span>
 			<span class="cell col6">댓글</span>
 		</div>
-		<c:if test="${dnc != '[]'}">
+		<c:if test="${list != '[]'}">
 			<c:forEach var="bb" items="${list}">
 				<div class="row">
 					<span class="cell col1">${bb.seq}</span>
@@ -38,41 +83,44 @@
 			</c:forEach>	
 		</c:if>
 	</div>
-<div>
-<c:choose>
-	<c:when test="${startPage>perPageNO }">
-		<a href="catboard?currentPage=1">First</a>&nbsp;
-		<a href="catboard?currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
-	</c:when>
-	<c:otherwise>
-		<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
-	</c:otherwise>
-</c:choose>
-
-<c:forEach var="i" begin="${startPage }" end="${endPage }">
-	<c:choose>
-		<c:when test="${i==currentPage}">
-			<font size="5" color="Orange">${i }</font>
-		</c:when>
-		<c:otherwise>
-			<a href="catboard?currentPage=${i }">${i }</a>
-		</c:otherwise>	
-	</c:choose>
-</c:forEach>
-
-<c:choose>
-	<c:when test="${endPage<totalPageNo }">
-		<a href="catboard?currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
-		<a href="catboard?currentPage=${totalPageNo}">&nbsp;Last</a>
-	</c:when>
-	<c:otherwise>
-		<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
-	</c:otherwise>
-</c:choose>
-</div>
 	
-	<c:if test="${dnc == '[]'}">
-		<div id=testd>
+	<c:if test="${list != '[]'}">
+		<div>
+			<c:choose>
+				<c:when test="${startPage>perPageNO }">
+					<a href="catboard?currentPage=1">First</a>&nbsp;
+					<a href="catboard?currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
+				</c:when>
+				<c:otherwise>
+					<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:choose>
+					<c:when test="${i==currentPage}">
+						<font size="5" color="Orange">${i }</font>
+					</c:when>
+					<c:otherwise>
+						<a href="catboard?currentPage=${i }">${i }</a>
+					</c:otherwise>	
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${endPage<totalPageNo }">
+					<a href="catboard?currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
+					<a href="catboard?currentPage=${totalPageNo}">&nbsp;Last</a>
+				</c:when>
+				<c:otherwise>
+					<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</c:if>
+	
+	<c:if test="${list == '[]'}">
+		<div>
 			<span>등록된 글이 없습니다</span>
 		</div>
 	</c:if>

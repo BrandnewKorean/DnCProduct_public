@@ -1,5 +1,8 @@
 package com.project.ex01;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +23,7 @@ public class BoardController {
 	CatBoardService service;
 	
 	@RequestMapping(value="catboard")
-	public ModelAndView catboard(ModelAndView mv, PageVO<CatBoardVO> pvo) {
+	public ModelAndView catboard(ModelAndView mv, PageVO<CatBoardVO> pvo) throws ParseException {
 		// ** paging 1 **
 		//1. paging 준비
 		// DAO의 pagelist를 처리하기 위해 필요한 값을 계산
@@ -41,6 +44,43 @@ public class BoardController {
 		//DB에서 필요한 값들을 set
 		// 출력할 Row List, totalCount(totalRowCount)
 		pvo=service.pageList(pvo);
+		
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		for(int i=0;i<pvo.getList().size();i++) {
+			Date reg = fm.parse(pvo.getList().get(i).getRegdate());
+			long diff = current.getTime() - reg.getTime();
+			long diffsec = (diff / 1000 % 60);
+			long diffmin = (diff / (60 * 1000) % 60);
+			long diffhour = (diff / (60 * 60 * 1000));
+			long diffday = (diff / (24*60*60*1000));
+			
+			if(diffday <= 0) {
+				if(diffhour <= 0) {
+					if(diffmin <= 0) {
+						if(diffsec < 30) {
+							pvo.getList().get(i).setRegdate("방금");
+						}else {
+							pvo.getList().get(i).setRegdate(diffsec+"초 전");
+						}
+					}else {
+						pvo.getList().get(i).setRegdate(diffmin+"분 전");
+					}
+				}else {
+					pvo.getList().get(i).setRegdate(diffhour+"시간 전");
+				}
+			}else {
+				if(diffday > 0 && diffday < 7) {
+					pvo.getList().get(i).setRegdate(diffday+"일 전");
+				}else {
+					SimpleDateFormat fm2 = new SimpleDateFormat("yyyy/MM/dd");
+					Date r = fm2.parse(pvo.getList().get(i).getRegdate());
+					String regdate = fm2.format(r);
+					pvo.getList().get(i).setRegdate(regdate);
+				}
+			}
+		}
 		
 		//3) 결과처리
 		// totalCount 를 이용해서 totalPageNo 계산
@@ -87,7 +127,12 @@ public class BoardController {
 	@RequestMapping(value="catboardinsert")
 	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
 		String id = (String)request.getSession().getAttribute("logID");
-
+		
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
+		bv.setRegdate(fm.format(current));
+		
 		if(id != null) {
 			bv.setId(id);
 			if(service.insert(bv) > 0) {
@@ -129,6 +174,10 @@ public class BoardController {
 	@RequestMapping(value="catboardupdate")
 	public ModelAndView catboardupdate(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		String id=(String)request.getSession().getAttribute("logID");
+		
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		bv.setRegdate(fm.format(current));
 		
 		if(id!=null) {
 			if(service.update(bv)>0) {
