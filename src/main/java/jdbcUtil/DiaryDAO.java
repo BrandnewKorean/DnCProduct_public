@@ -1,5 +1,7 @@
 package jdbcUtil;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,5 +29,9 @@ public class DiaryDAO {
 	
 	public int update(DiaryVO dv) {
 		return sqlsession.update(NameSpace+"update", dv);
+	}
+	
+	public List<DiaryVO> selectList(DiaryVO dv){
+		return sqlsession.selectList(NameSpace+"selectList", dv);
 	}
 }

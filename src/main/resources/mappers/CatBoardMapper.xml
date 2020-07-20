@@ -40,5 +40,5 @@
 		select * from (select rownum rm, b.* from (select * from catboard order by seq desc) b) 
 		where rm between #{startno} and #{endno}
 	</select>
-  
+
   </mapper>

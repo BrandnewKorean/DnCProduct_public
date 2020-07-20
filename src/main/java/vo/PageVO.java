@@ -59,5 +59,5 @@ public class PageVO<T> {
 		return "PageVO [list=" + list + ", currentPage=" + currentPage + ", perPage=" + perPage + ", totalCount=" + totalCount
 				+ ", startno=" + startno + ", endno=" + endno + ", perPageNO=" + perPageNO + "]";
 	}
-
+	
 } // class

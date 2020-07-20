@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +31,10 @@ public class DiaryServiceImpl implements DiaryService{
 	@Override
 	public int update(DiaryVO dv) {
 		return dao.update(dv);
+	}
+
+	@Override
+	public List<DiaryVO> selectList(DiaryVO dv) {
+		return dao.selectList(dv);
 	}
 }

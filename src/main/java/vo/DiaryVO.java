@@ -1,6 +1,8 @@
 package vo;
 
 public class DiaryVO {
+	private String start;
+	private String end;
 	private String wdate;
 	private String id;
 	private String content;
@@ -29,9 +31,21 @@ public class DiaryVO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public String getStart() {
+		return start;
+	}
+	public void setStart(String start) {
+		this.start = start;
+	}
+	public String getEnd() {
+		return end;
+	}
+	public void setEnd(String end) {
+		this.end = end;
+	}
 	
 	@Override
 	public String toString() {
-		return "DiaryVO [wdate=" + wdate + ", id=" + id + ", content=" + content + ", regdate=" + regdate + "]";
+		return "DiaryVO [wdate=" + wdate + ", id=" + id + ", content=" + content + ", regdate=" + regdate + "]\n";
 	}
 }
