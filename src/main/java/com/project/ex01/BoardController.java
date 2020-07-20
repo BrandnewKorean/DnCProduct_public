@@ -81,7 +81,7 @@ public class BoardController {
 	@RequestMapping(value = "catboardinsertf")
 	public ModelAndView catboardinsertf(ModelAndView mv) {
 		mv.setViewName("cat/board/catboardinsertf");
-		return mv;
+		return mv;	
 	}
 	
 	@RequestMapping(value="catboardinsert")

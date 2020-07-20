@@ -32,14 +32,13 @@
 		delete from catboard where seq=#{seq}
 	</delete>
 	
+	<select id="totalRowCount" resultType="int">
+  		select count(*) from catboard
+  	</select>
+	
 	<select id="pageList" resultType="vo.CatBoardVO">
 		select * from (select rownum rm, b.* from (select * from catboard order by seq desc) b) 
 		where rm between #{startno} and #{endno}
 	</select>
-  
-  	<select id="totalRowCount" resultType="int">
-  		select count(*) from catboard
-  	</select>
-  	
   
   </mapper>
