@@ -50,6 +50,19 @@ $(function(){
 	});
 });
 </script>
+
+<script>
+$(function(){
+	$('#searchBtn').on("click",function(){
+	self.location="listcri"
+	+"${pageMaker.makeQuery(1)}"
+	+"&serchType="
+	+$("#searchType").val()
+	+"&keyword="
+	+$("#keyword").val();
+	});
+}); // ready 
+</script>
 </head>
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
@@ -60,7 +73,9 @@ $(function(){
 		</label>
 		<button onclick="location.href='catboardinsertf'">글쓰기</button>
 	</div>
-	<input type="text" id=test>
+	<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword }">
+	<button id="searchBtn">Search</button>
+
 	<div id="table">
 		<div class="row" id="rowtitle">
 			<span class="cell col1">번호</span>

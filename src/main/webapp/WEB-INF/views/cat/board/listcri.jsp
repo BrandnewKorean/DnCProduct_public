@@ -43,7 +43,7 @@ $(function(){
 	<td>작성일</td><td>조회수</td><td>댓글</td>
 </tr>
 </table>
-<c:forEach var="bb" items="${list }">
+<c:forEach var="bb" items="${dnc }">
 	<tr align="center" height=30> 
 		<td>${bb.seq}</td>
 		<td align="left">
