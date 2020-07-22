@@ -186,6 +186,8 @@ $(function(){
 			formData.append('content', $('#diary_text').val());
 			formData.append('files',$('#diaryupload')[0].files);
 			
+			console.log($('#diaryupload')[0].files);
+			
 //			$.ajax({
 //				url: 'diarywrite',
 //				type: 'post',
@@ -199,6 +201,7 @@ $(function(){
 //						location.reload();
 //					}else if(data.code == 1){
 //						alert('파일 업로드 실패');
+//						location.reload();
 //					}else if(data.code == 2){
 //						alert('작성 실패');
 //						location.reload();
