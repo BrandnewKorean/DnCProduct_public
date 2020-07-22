@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
@@ -42,7 +43,8 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="catboard")
-	public ModelAndView catboard(ModelAndView mv, PageVO<CatBoardVO> pvo) throws ParseException {
+	public ModelAndView catboard(HttpServletRequest request, ModelAndView mv, PageVO<CatBoardVO> pvo, @RequestParam(defaultValue = "list") String code) throws ParseException {
+		System.out.println(code);
 		// ** paging 1 **
 		//1. paging 준비
 		// DAO의 pagelist를 처리하기 위해 필요한 값을 계산
@@ -125,6 +127,12 @@ public class BoardController {
 		
 		if(endPageNo>totalPageNo) endPageNo=totalPageNo;
 		
+//		if(code.equals("image")) mv.addObject("view", true);
+//		else mv.addObject("view", false);
+		
+		if(code.equals("image")) request.getSession().setAttribute("view", true);
+		else request.getSession().setAttribute("view", false);
+		
 		mv.addObject("startPage",startPageNo);
 		mv.addObject("endPage",endPageNo);
 		mv.addObject("perPageNO",pvo.getPerPageNO());
@@ -146,6 +154,7 @@ public class BoardController {
 	@RequestMapping(value="catboardinsert")
 	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
 		String id = (String)request.getSession().getAttribute("logID");
+		boolean view = (boolean)request.getSession().getAttribute("view");
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -164,6 +173,7 @@ public class BoardController {
 		}else {
 			mv.addObject("bcode", 2);
 		}
+		mv.addObject("view", view);
 		mv.setViewName("jsonView");
 		return mv;
 	} // catboardinsert

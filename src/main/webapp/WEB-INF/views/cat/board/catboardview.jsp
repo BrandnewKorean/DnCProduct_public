@@ -18,10 +18,10 @@ function catboarddelete(){
 		},
 		success:function(data){
 			if(data.bcode==0){
-				alert('삭제성공');
+				alert('삭제 되었습니다.');
 				location.href="catboard";
 			}else if(data.bcode==1){
-				alert('삭제실패');
+				alert('삭제 실패했습니다');
 			}else{
 				alert('로그인 후 이용해주세요');
 				location.href="catmain";
@@ -29,15 +29,17 @@ function catboarddelete(){
 		}
 	});
 }
-
-
 </script>
-
-
-
-
 <body>
-<button onclick="location.href = 'catboard'">이전으로</button>
+<c:choose>
+	<c:when test="${view}">
+		<button onclick="location.href = 'catboard?code=image'">이전으로</button>
+	</c:when>
+	<c:otherwise>
+		<button onclick="location.href = 'catboard?code=list'">이전으로</button>
+	</c:otherwise>
+</c:choose>
+
 <h2>View</h2>
 	<input type="hidden" id="seq" value="${bv.seq }">
 	<span>${bv.title}</span>

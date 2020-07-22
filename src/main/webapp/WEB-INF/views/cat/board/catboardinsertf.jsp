@@ -19,7 +19,8 @@
 			success: function(data){
 				if(data.bcode == 0){
 					alert('글이 등록되었습니다');
-					location.href = 'catboard';
+					if(data.view) location.href = 'catboard?code=image';
+					else location.href = 'catboard?code=list';
 				}else if(data.bcode == 1){
 					alert('글 등록에 실패했습니다');
 				}else{
@@ -33,7 +34,7 @@
 </head>
 <body>
 	<div class=header>
-		<img src="resources/image/logod.png" width=7%>
+		<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
 		<div id=header_menu>
 			<input type="submit" onclick="catboardinsert()" value="발행">
 		</div>

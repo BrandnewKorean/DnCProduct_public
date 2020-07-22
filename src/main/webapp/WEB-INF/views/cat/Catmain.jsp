@@ -81,7 +81,7 @@
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
 			<li id=diaryf><a>Diary</a></li>
-			<li><a href="#">Store</a></li>
+			<li><a href="store">Store</a></li>
 			<li id=catboard><a>Board</a></li>
 			<li><a href="#">Location Service</a></li>
 		</ul>

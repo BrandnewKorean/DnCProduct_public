@@ -88,7 +88,7 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "diarywrite", method=RequestMethod.POST)
-	public ModelAndView diarywrite(HttpServletRequest request, MultipartFile files, ModelAndView mv, DiaryVO dv) throws IllegalStateException, IOException {
+	public ModelAndView diarywrite(HttpServletRequest request, MultipartFile[] files, ModelAndView mv, DiaryVO dv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		DiaryUploadVO duv = new DiaryUploadVO();
 		
@@ -97,17 +97,19 @@ public class DiaryController {
 			dv.setId(id);
 			count = service.insert(dv);
 			if(count > 0) {
-				if(!files.isEmpty()) {
-					String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.getOriginalFilename();
-					duv.setWdate(dv.getWdate());
-					duv.setId(id);
-					duv.setFilename(filename);
-					String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
-					files.transferTo(new File(route+filename));
-					if(uservice.insert(duv) > 0) {
-						mv.addObject("code", 0);
-					}else {
-						mv.addObject("code", 1);
+				for(int i=0;i<files.length;i++) {
+					if(!files[i].isEmpty()) {
+						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files[i].getOriginalFilename();
+						duv.setWdate(dv.getWdate());
+						duv.setId(id);
+						duv.setFilename(filename);
+						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
+						files[i].transferTo(new File(route+filename));
+						if(uservice.insert(duv) > 0) {
+							mv.addObject("code", 0);
+						}else {
+							mv.addObject("code", 1);
+						}
 					}
 				}
 			}else {

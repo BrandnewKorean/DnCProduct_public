@@ -41,11 +41,9 @@ $(function(){
 	
 	$('#view').click(function(){
 		if(view.checked){
-			console.log('true');
-			$('#test').val(view.checked);
+			location.href = 'catboard?code=image';
 		}else{
-			console.log('false');
-			$('#test').val(view.checked);
+			location.href = 'catboard?code=list';
 		}
 	});
 });
@@ -68,14 +66,19 @@ $(function(){
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
 	<div id=catboard_menu>
 		<label id=viewtoggle>
-			<input id=view type="checkbox">
+			<c:if test="${!view}">
+				<input id=view type="checkbox">
+			</c:if>
+			<c:if test="${view}">
+				<input id=view type="checkbox" checked="checked">
+			</c:if>
 			<span></span>
 		</label>
 		<button onclick="location.href='catboardinsertf'">글쓰기</button>
 	</div>
 	<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword }">
 	<button id="searchBtn">Search</button>
-
+	<c:if test="${!view}">
 	<div id="table">
 		<div class="row" id="rowtitle">
 			<span class="cell col1">번호</span>
@@ -91,7 +94,7 @@ $(function(){
 					<span class="cell col1">${bb.seq}</span>
 					<span class="cell col2">${bb.id}</span>
 					<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
-					<span class="cell col4">${bb.regdate}</span>
+				-	<span class="cell col4">${bb.regdate}</span>
 					<span class="cell col5">${bb.cnt}</span>
 					<span class="cell col6">${bb.comments}</span>
 				</div>
@@ -103,8 +106,8 @@ $(function(){
 		<div>
 			<c:choose>
 				<c:when test="${startPage>perPageNO }">
-					<a href="catboard?currentPage=1">First</a>&nbsp;
-					<a href="catboard?currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
+					<a href="catboard?code=image&&currentPage=1">First</a>&nbsp;
+					<a href="catboard?code=image&&currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
 				</c:when>
 				<c:otherwise>
 					<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
@@ -117,15 +120,15 @@ $(function(){
 						<font size="5" color="Orange">${i }</font>
 					</c:when>
 					<c:otherwise>
-						<a href="catboard?currentPage=${i }">${i }</a>
+						<a href="catboard?code=image&&currentPage=${i }">${i }</a>
 					</c:otherwise>	
 				</c:choose>
 			</c:forEach>
 			
 			<c:choose>
 				<c:when test="${endPage<totalPageNo }">
-					<a href="catboard?currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
-					<a href="catboard?currentPage=${totalPageNo}">&nbsp;Last</a>
+					<a href="catboard?code=image&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
+					<a href="catboard?code=image&&currentPage=${totalPageNo}">&nbsp;Last</a>
 				</c:when>
 				<c:otherwise>
 					<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
