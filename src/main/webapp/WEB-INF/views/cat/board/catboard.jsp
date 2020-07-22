@@ -1,94 +1,174 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+	#viewtoggle{
+		position: relative;
+		display: inline-block;
+		width: 50px;
+		background-color: gray;
+		border: none;
+		vertical-align: middle;
+		border: 1px solid;
+		padding: 1px;
+	}
+	#viewtoggle > span{
+		position: absolute;
+		background-color: white;
+		width: 20px;
+		height: 20px;
+		left: 3px;
+		transition: .4s;
+	}
+	#viewtoggle > input:checked + span{
+		transform: translateX(26px);
+	}
+	#viewtoggle > input{
+		opacity: 0;
+	}
+</style>
+<link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
+<script src="resources/script/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>고양이 게시판</title>
-
-<link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
-<script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-
-// 	function catboardview(seq){
-// 		location.href = 'catboardview?seq='+seq;
-// 	}
+$(function(){
+	var view = document.getElementById('view');
 	
+	$('#view').click(function(){
+		if(view.checked){
+			location.href = 'catboard?code=image';
+		}else{
+			location.href = 'catboard?code=list';
+		}
+	});
+});
 </script>
 </head>
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
 	<div id=catboard_menu>
+		<label id=viewtoggle>
+			<c:if test="${!view}">
+				<input id=view type="checkbox">
+			</c:if>
+			<c:if test="${view}">
+				<input id=view type="checkbox" checked="checked">
+			</c:if>
+			<span></span>
+		</label>
 		<button onclick="location.href='catboardinsertf'">글쓰기</button>
 	</div>
-	<div id="table">
-		<div class="row" id="rowtitle">
-			<span class="cell col1">번호</span>
-			<span class="cell col2">작성자</span>
-			<span class="cell col3">제목</span>
-			<span class="cell col4">작성일</span>
-			<span class="cell col5">조회</span>
-			<span class="cell col6">댓글</span>
+	<c:if test="${!view}">
+		<div id="table">
+			<div class="row" id="rowtitle">
+				<span class="cell col1">번호</span>
+				<span class="cell col2">작성자</span>
+				<span class="cell col3">제목</span>
+				<span class="cell col4">작성일</span>
+				<span class="cell col5">조회</span>
+				<span class="cell col6">댓글</span>
+			</div>
+			<c:if test="${list != '[]'}">
+				<c:forEach var="bb" items="${list}">
+					<div class="row">
+						<span class="cell col1">${bb.seq}</span>
+						<span class="cell col2">${bb.id}</span>
+						<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
+						<span class="cell col4">${bb.regdate}</span>
+						<span class="cell col5">${bb.cnt}</span>
+						<span class="cell col6">${bb.comments}</span>
+					</div>
+				</c:forEach>
+			</c:if>
 		</div>
+		
 		<c:if test="${list != '[]'}">
-			<c:forEach var="bb" items="${dnc}">
-				<div class="row">
-					<%-- <span class="cell col1" onclick="catboardview(${bb.seq})">${bb.seq}</span> --%>
-					<span class="cell col1"><a href='catboardview?seq=${bb.seq}'>${bb.seq}</a></span>
-					<span class="cell col2">${bb.id}</span>
-					<%-- <span class="cell col3" onclick="catboardview(${bb.seq})">${bb.title}</span> --%>
-					<span class="cell col3"><a href='catboardview?seq=${bb.seq}'>${bb.title}</a></span>
-					<span class="cell col4">${bb.regdate}</span>
-					<span class="cell col5">${bb.cnt}</span>
-					<span class="cell col6">${bb.comments}</span>
-				</div>
-			</c:forEach>	
+			<div>
+				<c:choose>
+					<c:when test="${startPage>perPageNO }">
+						<a href="catboard?code=list&&currentPage=1">First</a>&nbsp;
+						<a href="catboard?code=list&&currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
+					</c:when>
+					<c:otherwise>
+						<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
+					</c:otherwise>
+				</c:choose>
+				
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<c:choose>
+						<c:when test="${i==currentPage}">
+							<font size="5" color="Orange">${i }</font>
+						</c:when>
+						<c:otherwise>
+							<a href="catboard?code=list&&currentPage=${i }">${i }</a>
+						</c:otherwise>	
+					</c:choose>
+				</c:forEach>
+				
+				<c:choose>
+					<c:when test="${endPage<totalPageNo }">
+						<a href="catboard?code=list&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
+						<a href="catboard?code=list&&currentPage=${totalPageNo}">&nbsp;Last</a>
+					</c:when>
+					<c:otherwise>
+						<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</c:if>
-	</div>
-<div>
-<c:choose>
-	<c:when test="${startPage>perPageNO }">
-		<a href="catboard?currentPage=1"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-</svg></a>&nbsp;
-		<a href="catboard?currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
-	</c:when>
-	<c:otherwise>
-		<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
-	</c:otherwise>
-</c:choose>
-
-<c:forEach var="i" begin="${startPage }" end="${endPage }">
-	<c:choose>
-		<c:when test="${i==currentPage}">
-			<font size="5" color="Orange">${i }</font>
-		</c:when>
-		<c:otherwise>
-			<a href="catboard?currentPage=${i }">${i }</a>
-		</c:otherwise>	
-	</c:choose>
-</c:forEach>
-
-<c:choose>
-	<c:when test="${endPage<totalPageNo }">
-		<a href="catboard?currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
-		<a href="catboard?currentPage=${totalPageNo}">&nbsp;Last</a>
-	</c:when>
-	<c:otherwise>
-		<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
-	</c:otherwise>
-</c:choose>
-</div>
-	
+	</c:if>
+	<c:if test="${view}">
+		<div class=container>
+			<c:forEach var="bb" items="${list}">
+				<div class=block>
+					<a href="catboardview?seq=${bb.seq}"><div class=image></div></a>
+					<a href="catboardview?seq=${bb.seq}">${bb.title}</a><br>
+					조회수 : ${bb.cnt}&nbsp;댓글 : ${bb.comments}
+				</div>
+			</c:forEach>
+		</div>
+		<div>
+			<c:choose>
+				<c:when test="${startPage>perPageNO }">
+					<a href="catboard?code=image&&currentPage=1">First</a>&nbsp;
+					<a href="catboard?code=image&&currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
+				</c:when>
+				<c:otherwise>
+					<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
+				</c:otherwise>
+			</c:choose>
+			
+			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:choose>
+					<c:when test="${i==currentPage}">
+						<font size="5" color="Orange">${i }</font>
+					</c:when>
+					<c:otherwise>
+						<a href="catboard?code=image&&currentPage=${i }">${i }</a>
+					</c:otherwise>	
+				</c:choose>
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${endPage<totalPageNo }">
+					<a href="catboard?code=image&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
+					<a href="catboard?code=image&&currentPage=${totalPageNo}">&nbsp;Last</a>
+				</c:when>
+				<c:otherwise>
+					<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</c:if>
 	<c:if test="${list == '[]'}">
-		<div id=testd>
+		<div>
 			<span>등록된 글이 없습니다</span>
 		</div>
 	</c:if>
-	<div id=test>
-	</div>
 </body>
 </html>

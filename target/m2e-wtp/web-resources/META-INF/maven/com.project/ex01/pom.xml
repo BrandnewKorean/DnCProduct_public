@@ -143,6 +143,8 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
+		
 		<dependency>
 			<groupId>com.sun.mail</groupId>
 			<artifactId>javax.mail</artifactId>
@@ -180,6 +182,8 @@
 			<version>2.7.2</version>
 		</dependency>
 		
+		
+		<!-- 시큐리티 코드 추가 적용 -->
 		<!--스프링시큐리티 core 라이브러리-->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -196,7 +200,7 @@
 		
 	</dependencies>
 	
-		<!-- repository 등록 -->
+	<!-- repository 등록 -->
 	<repositories>
 		<repository>
 			<id>Talan Repository</id>
@@ -242,4 +246,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

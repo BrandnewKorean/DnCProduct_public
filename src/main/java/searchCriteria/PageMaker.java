@@ -4,7 +4,8 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
-	private int totalRow; 
+
+	private int totalRow;
 	private int startPageNo;
 	private int endPageNo;
 	private boolean prev;
@@ -14,42 +15,36 @@ public class PageMaker {
 	
 	private Search search;
 	
-	// set
-	
 	public void setSearch(Search search) {
 		this.search=search;
 	}
 	
-	public void settotalRow(int totalRow) {
-		this.totalRow = totalRow;
+	public void setTotalRow(int totalRow) {
+		this.totalRow=totalRow;
+		calcData();
 	}
 	
 	public void calcData() {
-		endPageNo = (int)(Math.ceil(search.getCurrentPage()/(double)displayPageNo)*displayPageNo);
+		endPageNo=(int)(Math.ceil(search.getCurrentPage()/(double)displayPageNo)*displayPageNo);
 		
-		startPageNo = (endPageNo-displayPageNo)+1;
+		startPageNo=(endPageNo-displayPageNo)+1;
 		
-		lastPageNo = (int)Math.ceil(totalRow/(double)search.getPerPage());
+		lastPageNo=(int)Math.ceil(totalRow/(double)search.getPerPage());
 		
-		if(endPageNo>lastPageNo) endPageNo = lastPageNo;
-		
-		prev = startPageNo == 1? false:true;
-		next = endPageNo == lastPageNo?false:true;
-		
-	} // calcdata
-	
-	
-	// get
+		if(endPageNo>lastPageNo)endPageNo=lastPageNo;
+		prev = startPageNo==1?false:true;
+		next=endPageNo==lastPageNo?false:true;
+	}
 	
 	public int getTotalRow() {
 		return totalRow;
 	}
 	
-	public int getStartPageNo() {
+	public int getstartPageNo() {
 		return startPageNo;
 	}
 	
-	public int getEndPageNo() {
+	public int getendPageNo() {
 		return endPageNo;
 	}
 	
@@ -65,43 +60,38 @@ public class PageMaker {
 		return displayPageNo;
 	}
 	
-	public int getLastPageNo() {
+	public int getlastPageNo() {
 		return lastPageNo;
 	}
 	
-	public Criteria getSearch() {
+	public Search getSearch() {
 		return search;
 	}
 	
-	
 	public String makeQuery(int currentPage) {
-		UriComponents UriComponents = 
-				UriComponentsBuilder.newInstance()
-				.queryParam("currentPage", currentPage)
-				.queryParam("perPage", search.getPerPage())
-				.build();
-		
-		return UriComponents.toUriString();
+		UriComponents uriComponents =
+			UriComponentsBuilder.newInstance()
+			.queryParam("currentPage", currentPage)
+			.queryParam("PerPage", search.getPerPage())
+			.build();
+		return uriComponents.toUriString();
 	}
 	
-	
 	public String makeSearch(int currentPage) {
-		UriComponents UriComponents = 
+		UriComponents uriComponents=
 				UriComponentsBuilder.newInstance()
-				.queryParam("currentPage", currentPage)
+				.queryParam("currentPage",currentPage)
 				.queryParam("perPage",search.getPerPage())
-				.queryParam("searchType",search.getSeachType())
-				.queryParam("keyword",search.getKeyword())
+				.queryParam("searchType",search.getSerchType())
+				.queryParam("keyword", search.getKeyword())
 				.build();
-		
-		return UriComponents.toUriString();
+		return uriComponents.toUriString();
 	}
 
 	@Override
 	public String toString() {
 		return "PageMaker [totalRow=" + totalRow + ", startPageNo=" + startPageNo + ", endPageNo=" + endPageNo
 				+ ", prev=" + prev + ", next=" + next + ", displayPageNo=" + displayPageNo + ", lastPageNo="
-				+ lastPageNo + ", search=" + search + "]";
-	}
-
-} // class
+				+ lastPageNo + ", criteria=" + search + "]";
+	}//toString()
+}//class
