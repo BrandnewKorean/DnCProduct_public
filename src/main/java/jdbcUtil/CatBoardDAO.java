@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import searchCriteria.Search;
 import vo.CatBoardVO;
 import vo.PageVO;
 
@@ -16,6 +17,16 @@ public class CatBoardDAO {
 	private SqlSession sqlsession;
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
+	
+	public int searchRowCount(Search search) {
+		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
+	}
+	
+	
+	
+	public List<CatBoardVO> searchList(Search search){
+		return sqlsession.selectList(NameSpace+"searchList",search);
+	}
 	
 	public List<CatBoardVO> selectList(){
 		return sqlsession.selectList(NameSpace+"selectList");
