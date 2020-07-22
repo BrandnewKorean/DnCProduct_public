@@ -23,17 +23,37 @@ body{
 
 .cell {display: table-cell; padding: 3px; border-bottom: 1px solid #DDD;}
 
-.col1 {width: 5%;}
+.col1 {width: 10%;}
 
 .col2 {width: 10%;}
 
-.col3 {width: 50%;}
+.col3 {width: 40%;}
+
+.col3 > a{
+	text-decoration: none;
+	color: black;
+}
+.col3 > a:hover{
+	color: blue;
+	font-weight: bold;
+}
+
+.col1 > a{
+	text-decoration: none;
+	color: black;
+}
+.col1 > a:hover{
+	color: blue;
+	font-weight: bold;
+}
+
+
 
 .col4 {width: 10%;}
 
-.col5 {width: 5%;}
+.col5 {width: 10%;}
 
-.col6 {width: 5%;}
+.col6 {width: 10%;}
 
 .container{
 	position: relative;

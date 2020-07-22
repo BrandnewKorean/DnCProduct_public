@@ -34,7 +34,7 @@
 </head>
 <body>
 	<div class=header>
-		<img src="resources/image/logod.png" width=7%>
+		<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
 		<div id=header_menu>
 			<input type="submit" onclick="catboardinsert()" value="발행">
 		</div>

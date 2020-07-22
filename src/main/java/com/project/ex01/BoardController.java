@@ -3,7 +3,6 @@ package com.project.ex01;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import searchCriteria.PageMaker;
+import searchCriteria.Search;
 import service.CatBoardService;
 import vo.CatBoardVO;
 import vo.PageVO;
@@ -22,6 +23,24 @@ import vo.PageVO;
 public class BoardController {
 	@Autowired
 	CatBoardService service;
+	
+	
+	@RequestMapping(value="listcri")
+	public ModelAndView catboardsearch(ModelAndView mv, Search search) {
+		search.setSnoEno();
+		mv.addObject("dnc",service.searchList(search));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSearch(search);
+		
+		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		mv.addObject("pageMaker",pageMaker);
+		
+		mv.setViewName("cat/board/listcri");
+		return mv;
+	}
+	
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(HttpServletRequest request, ModelAndView mv, PageVO<CatBoardVO> pvo, @RequestParam(defaultValue = "list") String code) throws ParseException {

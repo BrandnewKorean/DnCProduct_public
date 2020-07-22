@@ -18,10 +18,10 @@ function catboarddelete(){
 		},
 		success:function(data){
 			if(data.bcode==0){
-				alert('삭제성공');
+				alert('삭제 되었습니다.');
 				location.href="catboard";
 			}else if(data.bcode==1){
-				alert('삭제실패');
+				alert('삭제 실패했습니다');
 			}else{
 				alert('로그인 후 이용해주세요');
 				location.href="catmain";
