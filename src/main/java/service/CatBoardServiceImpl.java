@@ -31,7 +31,10 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.criList(search);
 	}
 	
-
+	@Override
+	public int totalRowCount() {
+		return dao.totalRowCount();
+	}
 	
 	@Override
 	public List<CatBoardVO> selectList(){
@@ -49,26 +52,23 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.insert(bv);
 	} // insert
 	
-	
 	@Override
 	public int countUp(CatBoardVO bv) {
 		return dao.countUp(bv);
-	} // countup
-	
+	}
 	
 	@Override
 	public int update(CatBoardVO bv) {
 		return dao.update(bv);
-	} // update
+	}
 	
 	@Override
 	public int delete(CatBoardVO bv) {
 		return dao.delete(bv);
-	} // delete
+	}
 	
 	@Override
 	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
 		return dao.pageList(pvo);
 	}
-
 } // CatBoardServiceImpl

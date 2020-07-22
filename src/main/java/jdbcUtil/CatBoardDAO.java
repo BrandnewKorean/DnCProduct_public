@@ -18,11 +18,11 @@ public class CatBoardDAO {
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
 	
-	
-	// searchCiriteria
 	public int searchRowCount(Search search) {
 		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
 	}
+	
+	
 	
 	public List<CatBoardVO> searchList(Search search){
 		return sqlsession.selectList(NameSpace+"searchList",search);
@@ -31,9 +31,6 @@ public class CatBoardDAO {
 	public List<CatBoardVO> criList(Search search){
 		return sqlsession.selectList(NameSpace+"criList",search);
 	}
-	
-	
-	
 	
 	public List<CatBoardVO> selectList(){
 		return sqlsession.selectList(NameSpace+"selectList");
@@ -64,7 +61,6 @@ public class CatBoardDAO {
 	public int totalRowCount() {
 		return sqlsession.selectOne(NameSpace+"totalRowCount");
 	}
-	
 	
 	
 	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {

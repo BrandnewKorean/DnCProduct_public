@@ -7,13 +7,13 @@ import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
+	List<CatBoardVO> searchList(Search search);
 	
-	// search
 	int searchRowCount(Search search);
-	List<CatBoardVO> searchList(Search seach);
-	// page criteria
-	List<CatBoardVO> criList(Search search);
 	
+	int totalRowCount();
+	
+	List<CatBoardVO> criList(Search search);
 	
 	List<CatBoardVO> selectList(); // selectList
 	

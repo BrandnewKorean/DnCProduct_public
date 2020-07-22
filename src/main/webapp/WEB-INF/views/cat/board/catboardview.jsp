@@ -1,60 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/board/catboardview.css?ver=<%=System.currentTimeMillis()%>">
+<title>BoardView</title>
 </head>
-
 <script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
-
-
-	<script type="text/javascript">
-		function catboarddelete() {
-			$.ajax({
-				url:'catboarddelete',
-				data:{
-					seq:$('#seq').val()
-				},
-				success:function(data){
-					if(data.bcode==0){
-						alert('삭제 되었습니다.');
-						location.href='catboard';
-					}else if(data.bcode==1){
-						alert('삭제 실패했습니다. 다시 시도해주세요.');
-					}else{
-						alert('로그인 후 시도해주세요.');
-						location.href='catmain'
-					}
-				}
-			}) // ajax
-		} // function	
-	
-	</script>
-
-
+<script type="text/javascript">
+function catboarddelete(){
+	$.ajax({
+		url:'catboarddelete',
+		data:{
+			seq:$('#seq').val()
+		},
+		success:function(data){
+			if(data.bcode==0){
+				alert('삭제 되었습니다.');
+				location.href="catboard";
+			}else if(data.bcode==1){
+				alert('삭제 실패했습니다');
+			}else{
+				alert('로그인 후 이용해주세요');
+				location.href="catmain";
+			}
+		}
+	});
+}
+</script>
 <body>
+<c:choose>
+	<c:when test="${view}">
+		<button onclick="location.href = 'catboard?code=image'">이전으로</button>
+	</c:when>
+	<c:otherwise>
+		<button onclick="location.href = 'catboard?code=list'">이전으로</button>
+	</c:otherwise>
+</c:choose>
 
-<button onclick="location.href='catboard'">이전으로</button>
-
-	<input type="hidden" id="seq" value="${bv.seq}">
+<h2>View</h2>
+	<input type="hidden" id="seq" value="${bv.seq }">
 	<span>${bv.title}</span>
-	
-<hr>
-
+	<hr>
 <pre>
 ${bv.content}
 </pre>
-
 	<c:if test="${logID==bv.id}">
-		<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정</button>
-		<button onclick="catboarddelete()">삭제</button>
+		<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정하기</button>
+		<button onclick="catboarddelete()">삭제하기</button>
 	</c:if>
-
 </body>
 </html>

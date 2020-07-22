@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
@@ -23,24 +24,27 @@ public class BoardController {
 	@Autowired
 	CatBoardService service;
 	
+	
 	@RequestMapping(value="listcri")
 	public ModelAndView catboardsearch(ModelAndView mv, Search search) {
-		search.setStartnoEndno();
-		
+		search.setSnoEno();
 		mv.addObject("dnc",service.searchList(search));
 		
-		PageMaker pagemaker = new PageMaker();
-		pagemaker.setSearch(search);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setSearch(search);
 		
-		pagemaker.settotalRow(service.searchRowCount(search));
+		pageMaker.setTotalRow(service.searchRowCount(search));
 		
-		mv.addObject("pagemaker",pagemaker);
+		mv.addObject("pageMaker",pageMaker);
+		
+		mv.setViewName("cat/board/listcri");
 		return mv;
 	}
 	
 	
 	@RequestMapping(value="catboard")
-	public ModelAndView catboard(ModelAndView mv, PageVO<CatBoardVO> pvo) throws ParseException {
+	public ModelAndView catboard(HttpServletRequest request, ModelAndView mv, PageVO<CatBoardVO> pvo, @RequestParam(defaultValue = "list") String code) throws ParseException {
+		System.out.println(code);
 		// ** paging 1 **
 		//1. paging 준비
 		// DAO의 pagelist를 처리하기 위해 필요한 값을 계산
@@ -51,16 +55,20 @@ public class BoardController {
 		}else {
 			pvo.setCurrentPage(currentPage);
 		}
+
 		int startRowno=(currentPage-1)*pvo.getPerPage()+1;
 		int endRowno=(startRowno+pvo.getPerPage())-1;
 		pvo.setStartno(startRowno);
 		pvo.setEndno(endRowno);
+		
 		//2) service
 		//DB에서 필요한 값들을 set
 		// 출력할 Row List, totalCount(totalRowCount)
 		pvo=service.pageList(pvo);
+		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		for(int i=0;i<pvo.getList().size();i++) {
 			Date reg = fm.parse(pvo.getList().get(i).getRegdate());
 			long diff = current.getTime() - reg.getTime();
@@ -68,6 +76,7 @@ public class BoardController {
 			long diffmin = (diff / (60 * 1000) % 60);
 			long diffhour = (diff / (60 * 60 * 1000));
 			long diffday = (diff / (24*60*60*1000));
+			
 			if(diffday <= 0) {
 				if(diffhour <= 0) {
 					if(diffmin <= 0) {
@@ -93,6 +102,7 @@ public class BoardController {
 				}
 			}
 		}
+		
 		//3) 결과처리
 		// totalCount 를 이용해서 totalPageNo 계산
 		// totalCount 가 70이면 totalPageNo는? (1page당 5개씩 출력)
@@ -100,6 +110,7 @@ public class BoardController {
 		int totalPageNo = pvo.getTotalCount()/pvo.getPerPage();
 		if(pvo.getTotalCount()%pvo.getPerPage() >0)
 			totalPageNo+=1;
+		
 		//  ** paging 2 **
 		//sPageNo, ePageNo 계산
 		//필요한 값 : currentPage, perPageNo
@@ -110,44 +121,46 @@ public class BoardController {
 		//
 		//	2) naver 카페 글, 11번가 상품 리스트 type
 		//		startPage : (((currentPage-1)/perPageNo)*perPageNo)+1
+		
 		int startPageNo=((currentPage-1)/pvo.getPerPageNO())*pvo.getPerPageNO()+1;
 		int endPageNo=startPageNo+pvo.getPerPageNO()-1;
+		
 		if(endPageNo>totalPageNo) endPageNo=totalPageNo;
+		
+//		if(code.equals("image")) mv.addObject("view", true);
+//		else mv.addObject("view", false);
+		
+		if(code.equals("image")) request.getSession().setAttribute("view", true);
+		else request.getSession().setAttribute("view", false);
+		
 		mv.addObject("startPage",startPageNo);
 		mv.addObject("endPage",endPageNo);
 		mv.addObject("perPageNO",pvo.getPerPageNO());
+		
 		mv.addObject("totalPageNo",totalPageNo);
 		mv.addObject("currentPage",currentPage);
+		
 		mv.addObject("list",pvo.getList());
 		mv.setViewName("cat/board/catboard");
 		return mv;
 	}// catboardpage
 	
-//	@RequestMapping(value="catboard")
-//	public ModelAndView catboard(ModelAndView mv) {
-//		List<CatBoardVO> list = service.selectList();
-//		
-//		mv.addObject("dnc",list);
-//		mv.setViewName("cat/board/catboard");
-//		 
-//		return mv;
-//	} // boardlist
-	
 	@RequestMapping(value = "catboardinsertf")
 	public ModelAndView catboardinsertf(ModelAndView mv) {
 		mv.setViewName("cat/board/catboardinsertf");
-		return mv;
+		return mv;	
 	}
 	
 	@RequestMapping(value="catboardinsert")
 	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
 		String id = (String)request.getSession().getAttribute("logID");
+		boolean view = (boolean)request.getSession().getAttribute("view");
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
 		bv.setRegdate(fm.format(current));
-
+		
 		if(id != null) {
 			bv.setId(id);
 			if(service.insert(bv) > 0) {
@@ -160,38 +173,45 @@ public class BoardController {
 		}else {
 			mv.addObject("bcode", 2);
 		}
-		
+		mv.addObject("view", view);
 		mv.setViewName("jsonView");
 		return mv;
-		
 	} // catboardinsert
 	
 	@RequestMapping(value="catboardview")
-	public ModelAndView catboardview(ModelAndView mv, CatBoardVO bv) {
-		
+	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		//글번호로 글검색
 		service.countUp(bv);
-		
-		bv = service.selectOne(bv);
-		
+		bv=service.selectOne(bv);
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
-	} // catboardview
+		
+	}//catboardview
+	
+	@RequestMapping(value="catboardupdatef")
+	public ModelAndView catboardupdatef (ModelAndView mv, CatBoardVO bv) {
+		bv=service.selectOne(bv);
+		
+		mv.addObject("dnc", bv);
+		mv.setViewName("cat/board/catboardupdatef");
+		
+		return mv;
+	}//catboardupdatef()
+	
 	
 	@RequestMapping(value="catboardupdate")
-	public ModelAndView catboardupdate(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
-		
-		String id = (String)request.getSession().getAttribute("logID");
+	public ModelAndView catboardupdate(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+		String id=(String)request.getSession().getAttribute("logID");
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		
 		bv.setRegdate(fm.format(current));
 		
 		if(id!=null) {
 			if(service.update(bv)>0) {
 				mv.addObject("bcode",0);
-			}else {
+			}else{
 				mv.addObject("bcode",1);
 			}
 		}else {
@@ -199,29 +219,15 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	} // catboardupdate
-	
-	
-	
-	@RequestMapping(value="catboardupdatef")
-	public ModelAndView catboardupdatef(ModelAndView mv, CatBoardVO bv) {
-		bv = service.selectOne(bv);
-		
-		mv.addObject("dnc",bv);
-		mv.setViewName("cat/board/catboardupdatef");
-		
-		return mv;
-	} // catboardupdatef
-	
+	}
 	
 	@RequestMapping(value="catboarddelete")
-	public ModelAndView catboarddelete(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
+	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
-		
-		if(session != null && session.getAttribute("logID")!=null) {
+		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.addObject("bcode",0);
-			}else {
+			}else{
 				mv.addObject("bcode",1);
 			}
 		}else {
@@ -229,7 +235,5 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}  // delete
-	
-	
+	}
 } // class
