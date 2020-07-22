@@ -25,9 +25,6 @@
 		outline-color: red;
 		background-color: rgba(0,0,0,0.2);
 	}
-	*{
-		background-color: LavenderBlush;
-	}
 </style>
 </head>
 <body>

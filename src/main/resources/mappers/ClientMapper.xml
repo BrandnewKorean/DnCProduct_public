@@ -23,5 +23,5 @@
 	<delete id = "delete">
 		delete from client where id=#{id}
 	</delete>
-	
+
 </mapper>

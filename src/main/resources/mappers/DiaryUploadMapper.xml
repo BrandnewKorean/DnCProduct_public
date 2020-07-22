@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ex01.mappers.DiaryUploadMapper">
+	<select id="selectList" resultType="vo.DiaryUploadVO">
+		select * from catdiary_upload where wdate=#{wdate} and id=#{id}
+	</select>
+
+	<insert id="insert">
+		insert into catdiary_upload values(#{wdate},#{id},#{filename})
+	</insert>
+</mapper>

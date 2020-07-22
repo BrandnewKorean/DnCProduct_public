@@ -30,7 +30,6 @@ $(function(){
 	}); // email
 	
 	$('#joinemailconfirm').focusout(function(){
-		
 		eccheck=emailConfirm();
 	});
 	
@@ -168,7 +167,6 @@ function emailConfirmButton(){
 			}else{
 				alert('인증 메일이 발송되었습니다.');
 				number = data.result;
-				console.log(number);
 			}
 		} // if
 	});
