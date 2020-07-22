@@ -15,7 +15,7 @@
 		$('#searchButton').on("click",function(){
 			self.location="listcri"
 			+"${pageMaker.makeQuery(1)}"
-			+"$searchType").val()
+			+$("#searchType").val()
 			+"&keyword="
 			+$("#keyword").val();
 		});
@@ -44,7 +44,7 @@
 			<td>번호</td>		<td>작성자</td>		<td>제목</td>		<td>작성일</td>	<td>조회</td>		<td>댓글</td>
 		</tr>
 	
-	<c:forEach var="bb" items="${list}">
+	<c:forEach var="bb" items="${dnc}">
 		<tr align="center" height=30>
 			<td>${bb.seq}</td>
 			<td align="left">
