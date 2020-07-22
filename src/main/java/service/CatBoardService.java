@@ -2,32 +2,18 @@ package service;
 
 import java.util.List;
 
-import vo.CatBoardVO;
-
-public interface CatBoardService {
-	
-	List<CatBoardVO> selectList(); // selectList
-	
-	CatBoardVO selectOne(CatBoardVO bv); // selectOne
-	
-	int insert(CatBoardVO bv); // insert
-	
-	int countUp(CatBoardVO bv); // countup
-	
-	int update(CatBoardVO bv); // update
-	
-	int delete(CatBoardVO bv); // delete
-	
-
-} // interface
-package service;
-
-import java.util.List;
-
+import searchCriteria.Search;
 import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
+	
+	// search
+	int searchRowCount(Search search);
+	List<CatBoardVO> searchList(Search seach);
+	// page criteria
+	List<CatBoardVO> criList(Search search);
+	
 	
 	List<CatBoardVO> selectList(); // selectList
 	

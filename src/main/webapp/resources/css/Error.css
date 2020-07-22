@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+*{
+	text-align: center;
+	margin: 0 auto;
+}
+
+#errorimg{
+	max-width: 100%;
+	max-height: 100%;
+}

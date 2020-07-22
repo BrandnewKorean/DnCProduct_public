@@ -67,4 +67,35 @@
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
+	
+	
+    <!-- Exception 설정 -->
+	<beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	
+		<beans:property name="exceptionMappings">
+			
+			
+			<beans:props>
+				<beans:prop key="org.springframework.jdbc.UncategorizedSQLException">
+					exceptionpage/sqlExceptionMessage</beans:prop>
+				<beans:prop key="java.lang.NullPointerException">
+					exceptionpage/nullpointerException</beans:prop>
+				<beans:prop key="org.springframework.jdbc.UncategorizedSQLException">
+					exceptionpage/sqlExceptionMessage</beans:prop>
+				<beans:prop key="java.lang.IllegalArgumentException">
+					exceptionpage/ilExceptionMessage</beans:prop>
+					
+			</beans:props>
+			
+			
+		</beans:property >
+		
+			<beans:property name="defaultErrorView"
+									value="exceptionpage/allException"></beans:property>
+										<!-- 404PAGE 처리는 WEB.XML -->
+	</beans:bean>
+	
+
+
+	
 </beans:beans>

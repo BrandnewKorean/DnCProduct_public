@@ -6,13 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatBoardDAO;
+import searchCriteria.Search;
 import vo.CatBoardVO;
+import vo.PageVO;
 
 @Service
 public class CatBoardServiceImpl implements CatBoardService {
 	
 	@Autowired
 	CatBoardDAO dao;
+	
+	@Override
+	public int searchRowCount(Search search) {
+		return dao.searchRowCount(search);
+	}
+	
+	@Override
+	public List<CatBoardVO> searchList(Search search){
+		return dao.searchList(search);
+	}
+	
+	@Override
+	public List<CatBoardVO> criList(Search search){
+		return dao.criList(search);
+	}
+	
+
 	
 	@Override
 	public List<CatBoardVO> selectList(){
