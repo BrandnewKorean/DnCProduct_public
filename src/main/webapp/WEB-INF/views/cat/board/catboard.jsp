@@ -94,14 +94,14 @@ $(function(){
 					<span class="cell col1">${bb.seq}</span>
 					<span class="cell col2">${bb.id}</span>
 					<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
-				-	<span class="cell col4">${bb.regdate}</span>
+					<span class="cell col4">${bb.regdate}</span>
 					<span class="cell col5">${bb.cnt}</span>
 					<span class="cell col6">${bb.comments}</span>
 				</div>
 			</c:forEach>	
 		</c:if>
 	</div>
-	
+	</c:if>
 	<c:if test="${list != '[]'}">
 		<div>
 			<c:choose>
