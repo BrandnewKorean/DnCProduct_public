@@ -7,15 +7,13 @@ import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
-	
-	
-	
 	List<CatBoardVO> searchList(Search search);
 	
 	int searchRowCount(Search search);
 	
 	int totalRowCount();
 	
+	List<CatBoardVO> criList(Search search);
 	
 	List<CatBoardVO> selectList(); // selectList
 	
@@ -30,7 +28,4 @@ public interface CatBoardService {
 	int delete(CatBoardVO bv); // delete
 	
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
-	
-	
-
 } // interface

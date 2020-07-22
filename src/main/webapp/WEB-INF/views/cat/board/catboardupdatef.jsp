@@ -40,12 +40,8 @@
 	<textarea id="content" placeholder="내용">${dnc.content}</textarea>
 	<button onclick="catboardupdate()">확인</button>
 </c:if>
-
 <c:if  test="${dnc==null }">
 	<span>등록된 글이 없습니다</span>
 </c:if>
-
-
-
 </body>
 </html>

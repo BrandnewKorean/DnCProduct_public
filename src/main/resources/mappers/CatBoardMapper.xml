@@ -8,17 +8,17 @@
  <sql id="search">
  	<choose>
  		<when test="searchType=='title'.toString()">
-			and title like CONCAT(CONCAT('%',#{keyword}),'%')) 		
+			and title like CONCAT(CONCAT('%',#{keyword}),'%'))
  		</when>
  		<when test="searchType=='content'.toString()">
-			and content like CONCAT(CONCAT('%',#{keyword}),'%')) 		
+			and content like CONCAT(CONCAT('%',#{keyword}),'%'))
  		</when>
  		<when test="searchType=='id'.toString()">
-			and id like CONCAT(CONCAT('%',#{keyword}),'%')) 		
+			and id like CONCAT(CONCAT('%',#{keyword}),'%'))
  		</when>
  		<when test="searchType=='titlecontent'.toString()">
-			and title like CONCAT(CONCAT('%',#{keyword}),'%') 
-			or content like CONCAT(CONCAT('%',#{keyword}),'%')) 	
+			and title like CONCAT(CONCAT('%',#{keyword}),'%')
+			or content like CONCAT(CONCAT('%',#{keyword}),'%'))
  		</when>
  		<otherwise>)</otherwise>
  	</choose>

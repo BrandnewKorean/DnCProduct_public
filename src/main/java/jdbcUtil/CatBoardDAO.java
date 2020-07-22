@@ -28,6 +28,10 @@ public class CatBoardDAO {
 		return sqlsession.selectList(NameSpace+"searchList",search);
 	}
 	
+	public List<CatBoardVO> criList(Search search){
+		return sqlsession.selectList(NameSpace+"criList",search);
+	}
+	
 	public List<CatBoardVO> selectList(){
 		return sqlsession.selectList(NameSpace+"selectList");
 	} // list

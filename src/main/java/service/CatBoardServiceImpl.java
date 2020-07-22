@@ -27,6 +27,11 @@ public class CatBoardServiceImpl implements CatBoardService {
 	}
 	
 	@Override
+	public List<CatBoardVO> criList(Search search){
+		return dao.criList(search);
+	}
+	
+	@Override
 	public int totalRowCount() {
 		return dao.totalRowCount();
 	}

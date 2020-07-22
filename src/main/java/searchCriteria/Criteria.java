@@ -32,7 +32,7 @@ public class Criteria {
 	public int getPerPage() {
 		return perPage;
 	}
-	public int getSno() {
+	public int getStartno() {
 		return startno;
 	}
 	public int getEndno() {
