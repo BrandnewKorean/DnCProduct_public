@@ -41,14 +41,31 @@ $(function(){
 	
 	$('#view').click(function(){
 		if(view.checked){
-			location.href = 'catboard?code=image';
+			location.replace('catboard?code=image');
 		}else{
-			location.href = 'catboard?code=list';
+			location.replace('catboard?code=list');
 		}
+	});
+	
+	$('#searchButton').on("click",function(){
+		var code;
+		if(view.checked) code = "image";
+		else code = "list";
+		
+		self.location='catboard'
+		+"${pageMaker.makeQuery(1)}"
+		+"&searchType="
+		+$("#searchType").val()
+		+"&keyword="
+		+$("#keyword").val()
+		+"&code="
+		+code;
 	});
 });
 </script>
+
 </head>
+
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
 	<div id=catboard_menu>
@@ -89,36 +106,27 @@ $(function(){
 		
 		<c:if test="${list != '[]'}">
 			<div>
-				<c:choose>
-					<c:when test="${startPage>perPageNO }">
-						<a href="catboard?code=list&&currentPage=1">First</a>&nbsp;
-						<a href="catboard?code=list&&currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
-					</c:when>
-					<c:otherwise>
-						<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="${pageMaker.prev}">
+					<a href="catboard${pageMaker.makeSearch(1)}&code=list">《</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=list">&nbsp;</a>
+				</c:if>
 				
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+				<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 					<c:choose>
-						<c:when test="${i==currentPage}">
-							<font size="5" color="Orange">${i }</font>
+						<c:when test="${pageMaker.search.currentPage==i}">
+							<font size="5" color="orange">${i}</font>&nbsp;
 						</c:when>
+						
 						<c:otherwise>
-							<a href="catboard?code=list&&currentPage=${i }">${i }</a>
-						</c:otherwise>	
+							<a href="catboard${pageMaker.makerSearch(i)}&code=list">${i}</a>&nbsp;
+						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 				
-				<c:choose>
-					<c:when test="${endPage<totalPageNo }">
-						<a href="catboard?code=list&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
-						<a href="catboard?code=list&&currentPage=${totalPageNo}">&nbsp;Last</a>
-					</c:when>
-					<c:otherwise>
-						<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
-					</c:otherwise>
-				</c:choose>
+				<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
+					<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=list">&nbsp;&nbsp;</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=list">》&nbsp;&nbsp;</a>
+				</c:if>
 			</div>
 		</c:if>
 	</c:if>
@@ -127,42 +135,33 @@ $(function(){
 			<c:forEach var="bb" items="${list}">
 				<div class=block>
 					<a href="catboardview?seq=${bb.seq}"><div class=image></div></a>
-					<a href="catboardview?seq=${bb.seq}">${bb.title}</a><br>
+					<a href="catboardview?seq=${bb.seq}" style="text-decoration: none;">${bb.title}</a><br>
 					조회수 : ${bb.cnt}&nbsp;댓글 : ${bb.comments}
 				</div>
 			</c:forEach>
 		</div>
 		<div>
-			<c:choose>
-				<c:when test="${startPage>perPageNO }">
-					<a href="catboard?code=image&&currentPage=1">First</a>&nbsp;
-					<a href="catboard?code=image&&currentPage=${startPage-1}">prev</a>&nbsp;&nbsp;
-				</c:when>
-				<c:otherwise>
-					<font color="gray">First&nbsp;Prev&nbsp;&nbsp;</font>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="${pageMaker.prev}">
+				<a href="catboard${pageMaker.makeSearch(1)}&code=image">《</a>
+				<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">&nbsp;</a>
+			</c:if>
 			
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 				<c:choose>
-					<c:when test="${i==currentPage}">
-						<font size="5" color="Orange">${i }</font>
+					<c:when test="${pageMaker.search.currentPage==i}">
+						<font size="5" color="orange">${i}</font>&nbsp;
 					</c:when>
+					
 					<c:otherwise>
-						<a href="catboard?code=image&&currentPage=${i }">${i }</a>
-					</c:otherwise>	
+						<a href="catboard${pageMaker.makerSearch(i)}&code=image">${i}</a>&nbsp;
+					</c:otherwise>
 				</c:choose>
 			</c:forEach>
 			
-			<c:choose>
-				<c:when test="${endPage<totalPageNo }">
-					<a href="catboard?code=image&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
-					<a href="catboard?code=image&&currentPage=${totalPageNo}">&nbsp;Last</a>
-				</c:when>
-				<c:otherwise>
-					<font color="gray">&nbsp;&nbsp;Next&nbsp;Last</font>
-				</c:otherwise>
-			</c:choose>
+			<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
+				<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">&nbsp;&nbsp;</a>
+				<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">》&nbsp;&nbsp;</a>
+			</c:if>
 		</div>
 	</c:if>
 	<c:if test="${list == '[]'}">
@@ -170,5 +169,24 @@ $(function(){
 			<span>등록된 글이 없습니다</span>
 		</div>
 	</c:if>
+	
+	<br><br><br><br>
+	
+	
+		<div id="searchBar">
+		<select name="searchBar" id="searchType">
+			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
+			<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+			<option value="content" <c:out value="${pageMaker.search.searchType eq 'content' ? 'selected':''}" />>내용</option>
+			<option value="id" <c:out value="${pageMaker.search.searchType eq 'id' ? 'selected':''}" />>작성자</option>
+			<option value="titlecontent" <c:out value="${pageMaker.search.searchType eq 'titlecontent' ? 'selected':''}" />>제목+내용</option>
+		</select>
+		
+		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+		<button id="searchButton">검색</button>
+	</div>
+	
+
+	
 </body>
 </html>

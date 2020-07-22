@@ -22,8 +22,6 @@ public class CatBoardDAO {
 		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
 	}
 	
-	
-	
 	public List<CatBoardVO> searchList(Search search){
 		return sqlsession.selectList(NameSpace+"searchList",search);
 	}
