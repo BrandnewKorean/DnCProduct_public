@@ -2,10 +2,20 @@ package service;
 
 import java.util.List;
 
+import searchCriteria.Search;
 import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
+	
+	
+	
+	List<CatBoardVO> searchList(Search search);
+	
+	int searchRowCount(Search search);
+	
+	int totalRowCount();
+	
 	
 	List<CatBoardVO> selectList(); // selectList
 	
@@ -20,5 +30,7 @@ public interface CatBoardService {
 	int delete(CatBoardVO bv); // delete
 	
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
+	
+	
 
 } // interface
