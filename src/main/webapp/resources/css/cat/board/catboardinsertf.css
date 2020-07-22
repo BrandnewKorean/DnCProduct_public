@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body{
 	margin: 0;
+	background-color: lavender;
 }
 .header{
 	position: -webkit-sticky;
@@ -18,12 +19,12 @@ body{
 	bottom: 0;
 }
 #header_menu > input{
-	background-color: green;
+	background-color: Plum;
 	color: white;
 	width: 100px;
 	height: 40px;
 	border-radius: 5px;
-	border: 2px solid gray;
+	border: 2px solid Plum;
 	font-size: 15pt;
 }
 .container{
