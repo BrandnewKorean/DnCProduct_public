@@ -68,7 +68,7 @@
 	<div align="center">
 		<c:if test="${pageMaker.prev}">
 			<a href="listcri${pageMaker.makeSearch(1)}">《</a>
-			<a href="listcri${pageMaker.makeSearch(pageMaker.startPageNo-1}">&nbsp;</a>
+			<a href="listcri${pageMaker.makeSearch(pageMaker.startPageNo-1)}">&nbsp;</a>
 		</c:if>
 	
 	<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">

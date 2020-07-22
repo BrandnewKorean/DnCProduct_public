@@ -70,7 +70,7 @@
 	
 	
     <!-- Exception 설정 -->
-	<beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	 <beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 	
 		<beans:property name="exceptionMappings">
 			
@@ -92,7 +92,7 @@
 		
 			<beans:property name="defaultErrorView"
 									value="exceptionpage/allException"></beans:property>
-										<!-- 404PAGE 처리는 WEB.XML -->
+										 
 	</beans:bean>
 	
 
