@@ -118,7 +118,7 @@ $(function(){
 						</c:when>
 						
 						<c:otherwise>
-							<a href="catboard${pageMaker.makerSearch(i)}&code=list">${i}</a>&nbsp;
+							<a href="catboard${pageMaker.makeSearch(i)}&code=list">${i}</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
@@ -153,7 +153,7 @@ $(function(){
 					</c:when>
 					
 					<c:otherwise>
-						<a href="catboard${pageMaker.makerSearch(i)}&code=image">${i}</a>&nbsp;
+						<a href="catboard${pageMaker.makeSearch(i)}&code=image">${i}</a>&nbsp;
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

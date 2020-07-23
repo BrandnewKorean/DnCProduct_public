@@ -18,7 +18,6 @@ import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardService;
 import vo.CatBoardVO;
-import vo.PageVO;
 
 @Controller
 public class BoardController {
