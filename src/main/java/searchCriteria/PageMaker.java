@@ -33,7 +33,7 @@ public class PageMaker {
 		
 		if(endPageNo>lastPageNo)endPageNo=lastPageNo;
 		prev = startPageNo==1?false:true;
-		next=endPageNo==lastPageNo?false:true;
+		next = endPageNo==lastPageNo?false:true;
 	}
 	
 	public int getTotalRow() {
@@ -82,7 +82,7 @@ public class PageMaker {
 				UriComponentsBuilder.newInstance()
 				.queryParam("currentPage",currentPage)
 				.queryParam("perPage",search.getPerPage())
-				.queryParam("searchType",search.getSerchType())
+				.queryParam("searchType",search.getSearchType())
 				.queryParam("keyword", search.getKeyword())
 				.build();
 		return uriComponents.toUriString();
