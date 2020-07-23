@@ -49,12 +49,13 @@ $(function(){
 });
 </script>
 
+
 <script>
 $(function(){
-	$('#searchBtn').on("click",function(){
-	self.location="listcri"
+	$('#searchButton').on("click",function(){
+	location.href="listcri"
 	+"${pageMaker.makeQuery(1)}"
-	+"&serchType="
+	+"&searchType="
 	+$("#searchType").val()
 	+"&keyword="
 	+$("#keyword").val();
@@ -76,8 +77,19 @@ $(function(){
 		</label>
 		<button onclick="location.href='catboardinsertf'">글쓰기</button>
 	</div>
+	
+	<div id="searchBar">
+	<select name="searchType" id="searchType">
+		<option value="null" ><c:out value="${pageMaker.search.searchType==null?'':''}"/>---</option>
+		<option value="title"> <c:out value="${pageMaker.search.searchType eq 'title'?'selected':'' }"/>Title</option>
+		<option value="content"> <c:out value="${pageMaker.search.searchType eq 'content'?'selected':'' }"/>Content</option>
+		<option value="id"> <c:out value="${pageMaker.search.searchType eq 'id'?'selected':'' }"/>ID</option>
+		<option value="titlecontent"> <c:out value="${pageMaker.search.searchType eq 'titlecontent'?'selected':'' }"/>TitleConent</option>
+	</select>
 	<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword }">
-	<button id="searchBtn">Search</button>
+	<button id="searchButton">Search</button>
+</div>
+	
 	<c:if test="${!view}">
 	<div id="table">
 		<div class="row" id="rowtitle">
@@ -125,6 +137,7 @@ $(function(){
 				</c:choose>
 			</c:forEach>
 			
+			</c:if>
 			<c:choose>
 				<c:when test="${endPage<totalPageNo }">
 					<a href="catboard?code=image&&currentPage=${endPage+1}">&nbsp;&nbsp;Next</a>
@@ -135,7 +148,6 @@ $(function(){
 				</c:otherwise>
 			</c:choose>
 		</div>
-	</c:if>
 	
 	<c:if test="${list == '[]'}">
 		<div>

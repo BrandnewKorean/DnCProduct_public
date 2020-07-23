@@ -37,13 +37,13 @@ public class BoardController {
 		
 		mv.addObject("pageMaker",pageMaker);
 		
-		mv.setViewName("cat/board/listcri");
+		mv.setViewName("cat/board/catboard");
 		return mv;
 	}
 	
 	
 	@RequestMapping(value="catboard")
-	public ModelAndView catboard(HttpServletRequest request, ModelAndView mv, PageVO<CatBoardVO> pvo, @RequestParam(defaultValue = "list") String code) throws ParseException {
+	public ModelAndView catboard(Search search,HttpServletRequest request, ModelAndView mv, PageVO<CatBoardVO> pvo, @RequestParam(defaultValue = "list") String code) throws ParseException {
 		System.out.println(code);
 		// ** paging 1 **
 		//1. paging 준비
