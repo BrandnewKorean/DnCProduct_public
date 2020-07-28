@@ -11,4 +11,8 @@
 	<insert id="insert">
 		insert into catdiary_upload values(#{wdate},#{id},#{filename})
 	</insert>
+	
+	<delete id="delete">
+		delete catdiary_upload where wdate=#{wdate} and id=#{id}
+	</delete>
 </mapper>

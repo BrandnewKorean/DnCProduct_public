@@ -7,4 +7,5 @@ import vo.DiaryUploadVO;
 public interface DiaryUploadService {
 	List<DiaryUploadVO> selectList(DiaryUploadVO duv);
 	int insert(DiaryUploadVO duv);
+	int delete(DiaryUploadVO duv);
 }

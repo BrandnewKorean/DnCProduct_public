@@ -198,6 +198,12 @@
 			<version>4.2.4.RELEASE</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.30.9</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<!-- repository 등록 -->
