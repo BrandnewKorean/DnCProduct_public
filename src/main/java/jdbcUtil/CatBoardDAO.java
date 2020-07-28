@@ -66,5 +66,12 @@ public class CatBoardDAO {
 		pvo.setList(sqlsession.selectList(NameSpace+"pageList",pvo));
 		return pvo;
 	}
+	
+	
+	public int updatecomments(int seq) {
+		return sqlsession.update(NameSpace+"updatecomments",seq);
+	}
+	
+	
 
 } // boardDAO

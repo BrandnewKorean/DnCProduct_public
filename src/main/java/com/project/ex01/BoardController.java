@@ -1,28 +1,70 @@
 package com.project.ex01;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
+import service.CatBoardCommentService;
 import service.CatBoardService;
+import vo.CatBoardCommentVO;
 import vo.CatBoardVO;
 
 @Controller
 public class BoardController {
 	@Autowired
 	CatBoardService service;
+	
+	@Autowired
+	CatBoardCommentService cservice;
+	
+	
+	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
+	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
+		String id = (String)session.getAttribute("logID");
+		// getAttribute("id") 확인
+		bcv.setId(id);
+	
+		if(id != null) {
+			bcv.setId(id);
+			System.out.println(bcv);
+			int ccount = cservice.insert(bcv);
+			int count=service.updatecomments(bcv.getSeq());
+			
+			if(ccount>0 && count>0) {
+				mv.addObject("code", 0); // 정상 등록
+			}else if(ccount>0) {
+				mv.addObject("code", 1); // 댓글 등록 안됬을 경우
+			}else if(count>0){
+				mv.addObject("code", 2); // comments 숫자 올리기 실패
+			}else {
+				mv.addObject("code", 3); // 둘다 실패
+			}
+		}else {
+			mv.addObject("code", 4); // 로그인 안되있을 때
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	} // writecomment
+	
+	
+	
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
@@ -121,6 +163,12 @@ public class BoardController {
 		//글번호로 글검색
 		service.countUp(bv);
 		bv=service.selectOne(bv);
+		
+		//여기서부터
+		List<CatBoardCommentVO> comment = cservice.select(bv.getSeq());
+		mv.addObject("comment", comment);
+		//여기까지 추가
+		
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;

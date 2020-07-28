@@ -73,5 +73,12 @@
 		select * from (select rownum rm, b.* from (select * from catboard order by seq desc) b) 
 		where rm between #{startno} and #{endno}
 	</select>
+	
+	
+	<update id="updatecomments">
+		update catboard set comments=comments+1, cnt=cnt-1 where seq=#{seq}
+	</update>
+	
+	
 
   </mapper>

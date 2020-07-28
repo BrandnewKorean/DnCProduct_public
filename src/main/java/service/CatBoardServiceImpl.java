@@ -1,20 +1,21 @@
 package service;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import jdbcUtil.CatBoardDAO;
 import searchCriteria.Search;
 import vo.CatBoardVO;
 import vo.PageVO;
-
 @Service
 public class CatBoardServiceImpl implements CatBoardService {
 	
 	@Autowired
 	CatBoardDAO dao;
+	
+	@Override
+	public int updatecomments(int seq) {
+		return dao.updatecomments(seq);
+	}
 	
 	@Override
 	public int searchRowCount(Search search) {

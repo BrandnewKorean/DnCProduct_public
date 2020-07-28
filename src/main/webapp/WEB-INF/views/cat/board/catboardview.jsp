@@ -9,6 +9,7 @@
 <title>BoardView</title>
 </head>
 <script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="resources/script/writecomment.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script type="text/javascript">
 function catboarddelete(){
 	$.ajax({
@@ -30,6 +31,7 @@ function catboarddelete(){
 	});
 }
 </script>
+
 <body>
 <c:choose>
 	<c:when test="${view}">
@@ -47,6 +49,37 @@ function catboarddelete(){
 <pre>
 ${bv.content}
 </pre>
+
+<hr>
+
+<h5>comments(${vo.comments})</h5>
+<span>
+	<c:if test="${comment == '[]'}">
+		<div>
+			<div>등록된 댓글이 없습니다.</div>
+		</div>
+	</c:if>
+	
+	<c:if test="${comment != '[]'}">
+		<c:forEach var="c" items="${comment}" varStatus="vs">
+		<hr>
+			<div>
+				<div class=td1>${c.content}</div>
+				<div class=td2>${c.id}</div>
+			</div>
+			
+		</c:forEach>
+	</c:if>
+</span>
+
+<span>
+	<div>
+		<textarea id=content placeholder="내용"></textarea>
+		<button class=submit onclick="writeComment()">작성</button>
+	</div>
+</span>
+
+
 	<c:if test="${logID==bv.id}">
 		<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정하기</button>
 		<button onclick="catboarddelete()">삭제하기</button>
