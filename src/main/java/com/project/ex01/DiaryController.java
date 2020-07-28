@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -62,18 +63,14 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "iswrited")
-	public ModelAndView iswrited2(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
+	public ModelAndView iswrited(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
 		String id = (String)request.getSession().getAttribute("logID");
 		List<String> writed = new ArrayList<String>();
-		
-		System.out.println(dv.getStart());
-		System.out.println(dv.getEnd());
 		List<DiaryVO> list;
 		
 		if(id != null) {
 			dv.setId(id);
 			list = service.selectList(dv);
-			System.out.println(list);
 			for(int i=0;i<list.size();i++) {
 				if(list.get(i) != null) {
 					writed.add(list.get(i).getWdate());
@@ -88,29 +85,32 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "diarywrite", method=RequestMethod.POST)
-	public ModelAndView diarywrite(HttpServletRequest request, MultipartFile[] files, ModelAndView mv, DiaryVO dv) throws IllegalStateException, IOException {
+	public ModelAndView diarywrite(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, DiaryVO dv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		DiaryUploadVO duv = new DiaryUploadVO();
 		
 		int count;
+		
 		if(id != null) {
 			dv.setId(id);
 			count = service.insert(dv);
 			if(count > 0) {
-				for(int i=0;i<files.length;i++) {
-					if(!files[i].isEmpty()) {
-						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files[i].getOriginalFilename();
+				if(!files.isEmpty()) {
+					for(int i=0;i<files.size();i++) {
+						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
 						duv.setWdate(dv.getWdate());
 						duv.setId(id);
 						duv.setFilename(filename);
 						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
-						files[i].transferTo(new File(route+filename));
+						files.get(i).transferTo(new File(route+filename));
 						if(uservice.insert(duv) > 0) {
 							mv.addObject("code", 0);
 						}else {
 							mv.addObject("code", 1);
 						}
 					}
+				}else {
+					mv.addObject("code", 0);
 				}
 			}else {
 				mv.addObject("code", 2);
@@ -145,7 +145,7 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "diaryupdate")
-	public ModelAndView diaryupdate(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
+	public ModelAndView diaryupdate(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, DiaryVO dv, DiaryUploadVO duv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		int count;
 		
@@ -153,7 +153,24 @@ public class DiaryController {
 			dv.setId(id);
 			count = service.update(dv);
 			if(count > 0) {
-				mv.addObject("code", 0);
+				if(!files.isEmpty()) {
+					duv.setWdate(dv.getWdate());
+					duv.setId(id);
+					uservice.delete(duv);
+					for(int i=0;i<files.size();i++) {
+						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
+						duv.setFilename(filename);
+						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
+						files.get(i).transferTo(new File(route+filename));
+						if(uservice.insert(duv) > 0) {
+							mv.addObject("code", 0);
+						}else {
+							mv.addObject("code", 1);
+						}
+					}
+				}else {
+					mv.addObject("code", 0);
+				}
 			}else {
 				mv.addObject("code", 1);
 			}

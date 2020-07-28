@@ -22,4 +22,8 @@ public class DiaryUploadDAO {
 	public int insert(DiaryUploadVO duv) {
 		return sqlsession.insert(NameSpace+"insert", duv);
 	}
+	
+	public int delete(DiaryUploadVO duv) {
+		return sqlsession.delete(NameSpace+"delete", duv);
+	}
 }

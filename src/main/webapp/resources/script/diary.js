@@ -124,7 +124,6 @@ $(function(){
 				
 		$('#diaryupload').change(function(e){
 			$('#filepreview').empty();
-			console.log(e.target.files);
 			var files = e.target.files;
 			var fileArr = Array.prototype.slice.call(files);
 			
@@ -162,7 +161,6 @@ $(function(){
 					$('#image'+j).css('display','none');
 				}
 				$('#image'+i).css('display','block');
-				console.log('pre click '+i);
 			});
 			
 			$('#next_button').click(function(){
@@ -172,7 +170,6 @@ $(function(){
 					$('#image'+j).css('display','none');
 				}
 				$('#image'+i).css('display','block');
-				console.log('next click '+i);
 			});
 		});
 		
@@ -184,38 +181,46 @@ $(function(){
 			var formData = new FormData();
 			formData.append('wdate', selected);
 			formData.append('content', $('#diary_text').val());
-			formData.append('files',$('#diaryupload')[0].files);
 			
-			console.log($('#diaryupload')[0].files);
+			for(var i=0;i<$('#diaryupload')[0].files.length;i++){
+				formData.append('files',$('#diaryupload')[0].files[i]);
+			}
 			
-//			$.ajax({
-//				url: 'diarywrite',
-//				type: 'post',
-//				data: formData,
-//				enctype: 'multipart/form-data',
-//				processData: false,
-//				contentType: false,
-//				success: function(data){
-//					if(data.code == 0){
-//						alert('작성 성공');
-//						location.reload();
-//					}else if(data.code == 1){
-//						alert('파일 업로드 실패');
-//						location.reload();
-//					}else if(data.code == 2){
-//						alert('작성 실패');
-//						location.reload();
-//					}else{
-//						alert('로그인 후 사용하세요');
-//						location.href = 'catmain';
-//					}
-//				}
-//			});
+			$.ajax({
+				url: 'diarywrite',
+				type: 'post',
+				data: formData,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
+				success: function(data){
+					switch(data.code){
+					case 0:
+						alert('작성 성공');
+						location.reload();
+						break;
+					case 1:
+						alert('파일 업로드 실패');
+						location.reload();
+						break;
+					case 2:
+						alert('작성 실패');
+						location.reload();
+						break;
+					default:
+						alert('로그인 후 사용하세요');
+						alert(data.code);
+						break;
+					}
+				}
+			});
 		});
 	});
 	
 	$('#edit').click(function(){
 		var content;
+		var uploadlist;
+		
 		if($('#content').text() == "내용이 없습니다"){
 			alert('입력된 내용이 없습니다');
 			return;
@@ -225,42 +230,146 @@ $(function(){
 			data: {wdate: selected},
 			async: false,
 			success: function(data){
-				if(data.code == 0){
+				switch(data.code){
+				case 0:
+					if(data.uploadlist != null) uploadlist = data.uploadlist;
 					content = data.dv.content;
-				}else if(data.code == 1){
+					break;
+				case 1:
 					alert('작성목록 불러오기 실패');
-				}else{
+					break;
+				default:
 					alert('로그인 후 사용하세요');
 					location.href = 'catmain';
+					break;
 				}
 			}
 		});
-		console.log(content);
 		$('#content').empty();
+		$('#content').append('<label id=diary_image for=diaryupload><input type="file" id=diaryupload multiple></label><br>');
+		
+		var i = 0;
+		if(uploadlist != null){
+			$('#content').append('<div id=filepreview></div>');
+			if(uploadlist.length > 1){
+				$('#filepreview').append('<button id=pre_button><</button>');
+				$('#filepreview').append('<button id=next_button>></button>');
+			}
+			for(i=0;i<uploadlist.length;i++){
+				if(i == 0) $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
+				else $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
+			}
+		}
 		$('#content').append('<textarea id=diary_text>'+content+'</textarea><br>');
 		$('#content').append('<button id=diaryupdate>수정</button>');
+		
+		i = 0;
+		
+		$('#pre_button').click(function(){
+			i--;
+			if(i < 0) i = uploadlist.length-1;
+			for(var j=0;j<uploadlist.length;j++){
+				$('#image'+j).css('display','none');
+			}
+			$('#image'+i).css('display','block');
+		});
+		
+		$('#next_button').click(function(){
+			i++;
+			if(i > uploadlist.length-1) i = 0;
+			for(var j=0;j<uploadlist.length;j++){
+				$('#image'+j).css('display','none');
+			}
+			$('#image'+i).css('display','block');
+		});
+		
+		$('#diaryupload').change(function(e){
+			$('#filepreview').empty();
+			var files = e.target.files;
+			var fileArr = Array.prototype.slice.call(files);
+			
+			if(fileArr.length > 1){
+				$('#filepreview').append('<button id=pre_button><</button>');
+				$('#filepreview').append('<button id=next_button>></button>');
+			}
+			
+			var i = 0;
+			fileArr.forEach(function(f){
+				if(!f.type.match("image.*")){
+					alert('이미지 확장자만 가능합니다');
+					return;
+				}
+				
+				var reader = new FileReader();
+				reader.onload = function(e){
+					if(i == 0){
+						$('#filepreview').append('<img id=image'+i+' src="'+e.target.result+'" width=100% height=100% style="display: block;">');
+					}else{
+						$('#filepreview').append('<img id=image'+i+' src="'+e.target.result+'" width=100% height=100% style="display: none;">');
+					}
+					
+					i++;
+				}
+				reader.readAsDataURL(f);
+			});
+			
+			i = 0;
+			
+			$('#pre_button').click(function(){
+				i--;
+				if(i < 0) i = fileArr.length-1;
+				for(var j=0;j<fileArr.length;j++){
+					$('#image'+j).css('display','none');
+				}
+				$('#image'+i).css('display','block');
+			});
+			
+			$('#next_button').click(function(){
+				i++;
+				if(i > fileArr.length-1) i = 0;
+				for(var j=0;j<fileArr.length;j++){
+					$('#image'+j).css('display','none');
+				}
+				$('#image'+i).css('display','block');
+			});
+		});
 		
 		$('#diaryupdate').click(function(){
 			if($('#diary_text').val() == ''){
 				alert('내용을 입력해주세요');
 				return;
 			}
-			var dv = {
-				wdate: selected,
-				content: $('#diary_text').val()
+			var formData = new FormData();
+			
+			formData.append('wdate',selected);
+			formData.append('content',$('#diary_text').val());
+			
+			for(var i=0;i<$('#diaryupload')[0].files.length;i++){
+				formData.append('files',$('#diaryupload')[0].files[i]);
 			}
+			
+			console.log($('#diaryupload')[0].files);
+			
 			$.ajax({
 				url: 'diaryupdate',
-				data: dv,
+				type: 'post',
+				data: formData,
+				enctype: 'multipart/form-data',
+				processData: false,
+				contentType: false,
 				success: function(data){
-					if(data.code == 0){
+					switch(data.code){
+					case 0:
 						alert('수정 성공');
 						location.reload();
-					}else if(data.code == 1){
+						break;
+					case 1:
 						alert('수정 실패');
-					}else{
+						break;
+					default:
 						alert('로그인 후 사용하세요');
 						location.href = 'catmain';
+						break;
 					}
 				}
 			});
@@ -273,14 +382,18 @@ $(function(){
 				url: 'diarydelete',
 				data: {wdate: selected},
 				success: function(data){
-					if(data.code == 0){
+					switch(data.code){
+					case 0:
 						alert('삭제가 완료되었습니다');
 						location.reload();
-					}else if(data.code == 1){
+						break;
+					case 1:
 						alert('삭제 실패');
-					}else{
+						break;
+					default:
 						alert('로그인 후 사용하세요');
 						location.href = 'catmain';
+						break;
 					}
 				}
 			});
@@ -289,7 +402,6 @@ $(function(){
 });
 
 function loadData(selected){
-	console.log(selected);
 	$('#content').empty();
 	$.ajax({
 		url: 'diary',
@@ -298,12 +410,41 @@ function loadData(selected){
 		success: function(data){
 			switch(data.code){
 			case 0:
-				if(data.uploadlist != null){
-					for(var i=0;i<data.uploadlist.length;i++){
-						$('#content').append('<img src="/ex01/resources/diaryupload/'+data.uploadlist[i].filename+'" width=100%>');
+				var i = 0;
+				if(data.uploadlist.length > 0){
+					$('#content').append('<div id=filepreview></div>');
+					if(data.uploadlist.length > 1){
+						$('#filepreview').append('<button id=pre_button><</button>');
+						$('#filepreview').append('<button id=next_button>></button>');
+					}
+					for(i=0;i<data.uploadlist.length;i++){
+						if(i == 0) $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+data.uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
+						else $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+data.uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
 					}
 				}
 				$('#content').append("<pre>"+data.dv.content+"</pre>");
+				
+				i = 0;
+				
+				$('#pre_button').click(function(){
+					i--;
+					if(i < 0) i = data.uploadlist.length-1;
+					for(var j=0;j<data.uploadlist.length;j++){
+						$('#image'+j).css('display','none');
+					}
+					$('#image'+i).css('display','block');
+					console.log('pre click '+i);
+				});
+				
+				$('#next_button').click(function(){
+					i++;
+					if(i > data.uploadlist.length-1) i = 0;
+					for(var j=0;j<data.uploadlist.length;j++){
+						$('#image'+j).css('display','none');
+					}
+					$('#image'+i).css('display','block');
+				});
+				
 				break;
 			case 1:
 				$('#content').append("<pre>내용이 없습니다</pre>");

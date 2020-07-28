@@ -1,5 +1,15 @@
 package com.project.ex01;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +19,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken.Payload;
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
 
 import service.ClientService;
 import vo.ClientVO;
@@ -21,6 +38,33 @@ public class ClientController {
 	
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@RequestMapping(value = "googleLogin", produces = "application/x-www-form-urlencoded")
+	public ModelAndView googleLogin(ModelAndView mv, String idtoken) throws GeneralSecurityException, IOException {
+		System.out.println(idtoken);
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+                ((HttpURLConnection) (new URL("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + idtoken.trim()))
+                .openConnection()).getInputStream(), Charset.forName("UTF-8")));
+		
+		StringBuffer b = new StringBuffer();
+		String inputLine;
+		while((inputLine = in.readLine()) != null) {
+			b.append(inputLine+"\n");
+		}
+		System.out.println(b.toString());
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		Map<String,String> tokenPayload = objectMapper.readValue(b.toString(), objectMapper.getTypeFactory().constructMapType(Map.class, String.class, String.class));
+		
+		if(tokenPayload.get("email_verified") != null && tokenPayload.get("email") != null) {
+			System.out.println(tokenPayload.get("name"));
+			System.out.println(tokenPayload.get("email"));
+		}
+
+		mv.setViewName("jsonView");
+		return mv;
+	}
 	
 	@RequestMapping(value = "termsuse")
 	public ModelAndView termsuse(ModelAndView mv) {
