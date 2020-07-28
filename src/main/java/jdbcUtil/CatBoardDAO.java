@@ -18,6 +18,11 @@ public class CatBoardDAO {
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
 	
+	public int updatecomments(int seq) {
+		return sqlsession.update(NameSpace+"updatecomments",seq);
+	}
+	
+	
 	public int searchRowCount(Search search) {
 		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
 	}

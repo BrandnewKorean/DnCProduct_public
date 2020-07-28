@@ -7,6 +7,8 @@ import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
+	int updatecomments(int seq);
+	
 	List<CatBoardVO> searchList(Search search);
 	
 	int searchRowCount(Search search);

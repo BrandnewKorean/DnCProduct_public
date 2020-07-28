@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="ex01.mappers.CatBoardMapper">
+
+	<update id="updatecomments">
+		update CatBoard set comments=comments+1, cnt=cnt-1 where seq=#{seq}
+	</update>
+	
 	<select id="searchRowCount" resultType="int">
 		<![CDATA[
 		select count(*) from catboard where (seq>0]]>

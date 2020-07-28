@@ -90,8 +90,8 @@
 			
 		</beans:property >
 		
-			<beans:property name="defaultErrorView"
-									value="exceptionpage/allException"></beans:property>
+<!-- 			<beans:property name="defaultErrorView" -->
+<!-- 									value="exceptionpage/allException"></beans:property> -->
 										 
 	</beans:bean>
 	

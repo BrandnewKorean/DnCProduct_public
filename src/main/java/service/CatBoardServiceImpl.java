@@ -17,6 +17,11 @@ public class CatBoardServiceImpl implements CatBoardService {
 	CatBoardDAO dao;
 	
 	@Override
+	public int updatecomments(int seq) {
+		return dao.updatecomments(seq);
+	}
+	
+	@Override
 	public int searchRowCount(Search search) {
 		return dao.searchRowCount(search);
 	}

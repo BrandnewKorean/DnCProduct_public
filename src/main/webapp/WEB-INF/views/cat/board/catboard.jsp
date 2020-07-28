@@ -172,7 +172,6 @@ $(function(){
 	
 	<br><br><br><br>
 	
-	
 		<div id="searchBar">
 		<select name="searchBar" id="searchType">
 			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
@@ -185,8 +184,6 @@ $(function(){
 		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
 		<button id="searchButton">검색</button>
 	</div>
-	
-
 	
 </body>
 </html>
