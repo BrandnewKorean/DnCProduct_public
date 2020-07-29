@@ -51,8 +51,8 @@ ${bv.content}
 </pre>
 
 <hr>
+<h2 style="color: blue">↓↓하단부터 댓글 입니다↓↓</h2>
 
-<h5>comments(${vo.comments})</h5>
 <span>
 	<c:if test="${comment == '[]'}">
 		<div>
@@ -64,8 +64,8 @@ ${bv.content}
 		<c:forEach var="c" items="${comment}" varStatus="vs">
 		<hr>
 			<div>
-				<div class=td1>${c.content}</div>
-				<div class=td2>${c.id}</div>
+				<div class=td2 style="font-size: small;">${c.id}</div>
+				<div class=td1 style="font-weight: bold;">${c.content}</div>
 			</div>
 			
 		</c:forEach>
