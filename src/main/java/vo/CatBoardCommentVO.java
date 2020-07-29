@@ -4,6 +4,7 @@ public class CatBoardCommentVO {
 	private int seq;
 	private String id;
 	private String content;
+	private int counter;
 	public int getSeq() {
 		return seq;
 	}
@@ -22,9 +23,16 @@ public class CatBoardCommentVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public int getCounter() {
+		return counter;
+	}
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 	@Override
 	public String toString() {
-		return "CatBoardCommentVO [seq=" + seq + ", id=" + id + ", content=" + content + "]";
+		return "CatBoardCommentVO [seq=" + seq + ", id=" + id + ", content=" + content + ", counter=" + counter + "]";
 	}
+	
 
 }//CatBoardCommentVO

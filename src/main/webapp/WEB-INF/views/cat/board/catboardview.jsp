@@ -70,6 +70,5 @@ ${bv.content}
 	<textarea id="content" name="content" rows="" cols=""></textarea>
 	<button class="submit" onclick="writeComment()">작성</button>	
 	
-	
 </body>
 </html>

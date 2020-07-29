@@ -1,19 +1,15 @@
 package com.project.ex01;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +21,6 @@ import service.CatBoardCommentService;
 import service.CatBoardService;
 import vo.CatBoardCommentVO;
 import vo.CatBoardVO;
-import vo.PageVO;
 
 @Controller
 public class BoardController {
@@ -34,6 +29,60 @@ public class BoardController {
 	
 	@Autowired
 	CatBoardCommentService cservice;
+	
+	@RequestMapping(value="commentdelete")
+	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null && session.getAttribute("logID") != null) {
+			if(cservice.delete(bcv)>0) {
+				mv.addObject("bcode",0);
+			}else{
+				mv.addObject("bcode",1);
+			}
+		}else {
+			mv.addObject("bcode",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+		
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value="commentupdate")
+	public ModelAndView commentupdate(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+		
+		//id 받아오기
+		String id = (String)session.getAttribute("logID");
+		
+		if(id!=null) {
+			if(cservice.update(bcv)>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}//commentupdate
+	
+	@RequestMapping(value="commentupdatef")
+	public ModelAndView commentupdatef (ModelAndView mv, CatBoardCommentVO bcv) {
+		bcv=cservice.selectOne(bcv);
+		
+		mv.addObject("dnc", bcv);
+		mv.setViewName("cat/board/commentupdatef");
+		
+		return mv;
+	}//catboardupdatef()
+	
+	
+	
+	
 	
 	@RequestMapping(value="writecomment", method= RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
@@ -171,7 +220,7 @@ public class BoardController {
 		bv=service.selectOne(bv);
 
 		//여기서부터
-		List<CatBoardCommentVO> comment = cservice.select(bv.getSeq());
+		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		mv.addObject("comment", comment);
 		//여기까지 추가
 		
