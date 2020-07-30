@@ -33,28 +33,8 @@
 		outline-color: red;
 		background-color: rgba(0,0,0,0.2);
 	}
-	#googlebtn{
-		width: 200px;
-		height: 50px;
-		background-image: url("/ex01/resources/image/btn_google_signin_light_normal_web.png");
-		background-repeat: no-repeat;
-		background-position: center center;
-		background-size: contain;
-	}
-	
-	html, div, body,h3{
-  	margin: 0;
-  	padding: 0;
-	}
-	
-	h3{
-		display: inline-block;
-		padding: 0.6em;
-	}
-</style>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+</style>
 </head>
 <body>
 <div class=container>
@@ -64,49 +44,14 @@
 	<input type="password" id=password placeholder="PW"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
-	<button id=googlebtn onclick="onSignIn"></button>
-	<button onclick="signOut()">sign out</button>
+	<div>
+		<h5>소셜 로그인</h5>
+		<a href="${google_url}"><img src="resources/image/btn_google_signin_light_normal_web.png" width=70%></a>
+		<a href="${naver_url}"><img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" width=70%></a>
+		<a href="${kakao_url}"><img src="resources/image/kakao_login_large_narrow.png" width=70%></a>
+	</div>
 </div>
-
-<br><br><br>
-
-
-
-
 <script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
-<script>
-$(function(){
-	
-});
-
-function onSignIn(googleUser) {
-	gapi.load('auth2', () => {
-		auth2 = gapi.auth2.getAuthInstance();
-		console.log('Api inited');
-		
-		auth2.signIn().then(function(){
-			console.log(auth2.currentUser.get().getId());
-		});
-	});
-	
-	var id_token = googleUser.getAuthResponse().id_token;
-	
-	$.ajax({
-		url: 'googleLogin',
-		type: 'post',
-		data: {idtoken: id_token},
-		success: function(data){
-			alert('success');
-		}
-	});
-}
-function signOut(){
-	var auth2 = gapi.auth2.getAuthInstance();
-	auth2.signOut().then(function(){
-		console.log('signed out');
-	});
-}
-</script>
 </body>
 </html>

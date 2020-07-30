@@ -76,4 +76,22 @@ $(function(){
 	$('#catboard').click(function(){
 		location.href="catboard";
 	});
+	
+	$('#delete').click(function(){
+		$.ajax({
+			url: 'delete',
+			success: function(data){
+				switch(data.code){
+				case 0:
+					alert('정상적으로 탈퇴 처리 되었습니다');
+					location.reload();
+					break;
+				case 1:
+					alert('탈퇴 처리에 실패했습니다');
+					location.reload();
+					break;
+				}
+			}
+		});
+	});
 });
