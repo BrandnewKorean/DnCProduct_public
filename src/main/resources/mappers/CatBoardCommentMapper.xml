@@ -6,24 +6,24 @@
  <mapper namespace="ex01.mappers.CatBoardCommentMapper">
  	
  	<select id="selectList" resultType="vo.CatBoardCommentVO">
- 		select * from catboardcomment 
+ 		select * from catboardcomment where seq=#{seq}
  	</select>
  	
  	
  	<select id="selectOne" resultType="vo.CatBoardCommentVO">
- 		select * from CatBoardComment where seq=#{seq}
+ 		select * from CatBoardComment where counter=#{counter}
  	</select>
  
  	<insert id="insert">
- 		insert into CatBoardComment values(#{seq},#{id},#{content},(select nvl(max(counter),0)+1 from catboardcomment))
+ 		insert into CatBoardComment(seq,id,content,counter) values(#{seq},#{id},#{content},(select nvl(max(counter),0)+1 from catboardcomment))
  	</insert>
  	
  	<update id="update">
- 		update catboardcomment set content=#{content} where 
+ 		update catboardcomment set content=#{content} where counter=#{counter}
  	</update>
  	
  	<delete id="delete">
- 		delete from catboardcomment where counter=
+ 		delete from catboardcomment where counter=#{counter}
  	</delete>
  	
  

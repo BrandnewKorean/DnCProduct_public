@@ -16,15 +16,9 @@ public class CatBoardCommentDAO {
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardCommentMapper.";
 	
-	
-	public int delete(CatBoardCommentVO bcv) {
-		return sqlsession.delete(NameSpace+"delete",bcv);
-	}
-	
 	public CatBoardCommentVO selectOne(CatBoardCommentVO bcv) {
 		return sqlsession.selectOne(NameSpace+"selectOne",bcv);
 	}
-	
 	
 	public List<CatBoardCommentVO> selectList(int seq){
 		return sqlsession.selectList(NameSpace+"selectList",seq);
@@ -36,6 +30,10 @@ public class CatBoardCommentDAO {
 	
 	public int update(CatBoardCommentVO bcv) {
 		return sqlsession.update(NameSpace+"update",bcv);
+	}
+	
+	public int delete(CatBoardCommentVO bcv) {
+		return sqlsession.delete(NameSpace+"delete",bcv);
 	}
 	
 }

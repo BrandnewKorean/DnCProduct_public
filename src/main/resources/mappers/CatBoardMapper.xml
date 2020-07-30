@@ -6,7 +6,7 @@
 <mapper namespace="ex01.mappers.CatBoardMapper">
 
 	<update id="updatecomments">
-		update CatBoard set comments=comments+1, cnt=cnt-1 where seq=#{seq}
+		update CatBoard set comments=(select count(*) from catboardcomment where seq=#{seq}), cnt=cnt-1 where seq=#{seq}
 	</update>
 	
 	<select id="searchRowCount" resultType="int">

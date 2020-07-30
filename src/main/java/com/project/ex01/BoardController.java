@@ -32,9 +32,12 @@ public class BoardController {
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		int counter=cservice.delete(bcv);
+		//System.out.println("this is counter ="+counter);
+		
 		HttpSession session = request.getSession(false);
 		if(session!=null && session.getAttribute("logID") != null) {
-			if(cservice.delete(bcv)>0) {
+			if(counter>0) {
 				mv.addObject("bcode",0);
 			}else{
 				mv.addObject("bcode",1);
@@ -44,21 +47,17 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-		
 	}
-	
-	
-	
-	
 	
 	@RequestMapping(value="commentupdate")
 	public ModelAndView commentupdate(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
-		
+		int counter = cservice.update(bcv);
+		System.out.println("this is counter = "+counter);		
 		//id 받아오기
 		String id = (String)session.getAttribute("logID");
 		
 		if(id!=null) {
-			if(cservice.update(bcv)>0) {
+			if(counter>0) {
 				mv.addObject("code",0);
 			}else{
 				mv.addObject("code",1);
@@ -70,19 +69,14 @@ public class BoardController {
 		return mv;
 	}//commentupdate
 	
-	@RequestMapping(value="commentupdatef")
-	public ModelAndView commentupdatef (ModelAndView mv, CatBoardCommentVO bcv) {
-		bcv=cservice.selectOne(bcv);
-		
-		mv.addObject("dnc", bcv);
-		mv.setViewName("cat/board/commentupdatef");
-		
-		return mv;
-	}//catboardupdatef()
-	
-	
-	
-	
+//	@RequestMapping(value="commentupdatef")
+//	public ModelAndView commentupdatef (ModelAndView mv, CatBoardCommentVO bcv) {
+//		bcv=cservice.selectOne(bcv);
+//		
+//		mv.addObject("dncupdate", bcv);
+//		mv.setViewName("cat/board/catboardview");
+//		return mv;
+//	}//catboardupdatef()
 	
 	@RequestMapping(value="writecomment", method= RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
@@ -90,10 +84,8 @@ public class BoardController {
 		
 		if(id != null) {
 			bcv.setId(id);
-			System.out.println(bcv);
 			int ccount = cservice.insert(bcv);
 			int count=service.updatecomments(bcv.getSeq());
-			
 			if(ccount>0 && count>0) {
 				mv.addObject("code", 0); // 정상 등록
 			}else if(ccount>0) {
@@ -130,10 +122,8 @@ public class BoardController {
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
-		System.out.println(code);
 		search.setSnoEno();
 		List<CatBoardVO> list = service.searchList(search);
-		System.out.println(list);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));

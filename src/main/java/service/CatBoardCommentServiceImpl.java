@@ -19,7 +19,6 @@
 			return dao.delete(bcv);
 		}
 		
-		
 		@Override
 		public CatBoardCommentVO selectOne(CatBoardCommentVO bcv) {
 			return dao.selectOne(bcv);
