@@ -23,7 +23,7 @@ public class CatBoardCommentDAO {
 	public List<CatBoardCommentVO> selectList(int seq){
 		return sqlsession.selectList(NameSpace+"selectList",seq);
 	}
-	
+	 
 	public int insert(CatBoardCommentVO bcv) {
 		return sqlsession.insert(NameSpace+"insert",bcv);
 	}
@@ -35,5 +35,4 @@ public class CatBoardCommentDAO {
 	public int delete(CatBoardCommentVO bcv) {
 		return sqlsession.delete(NameSpace+"delete",bcv);
 	}
-	
 }

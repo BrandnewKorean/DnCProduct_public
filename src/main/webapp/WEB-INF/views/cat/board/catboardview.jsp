@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BoardView</title>
-</head>
+</head> 
 <script type="text/javascript" src="resources/script/writecomment.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -77,7 +77,7 @@ function submitupdate(counter){
 	}
   });
 }
-
+ 
 function commentupdate(counter, content){
 	console.log(content);
 	$("#td1" +counter).empty();

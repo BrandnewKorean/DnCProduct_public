@@ -9,7 +9,7 @@
 <script src="resources/script/jquery-3.2.1.min.js"></script>
 <script src="resources/script/joincheck.js?ver=<%= System.currentTimeMillis() %>"></script>
 <script>
-
+  
 function goPopup(){
 	// 주소검색을 수행할 팝업 페이지를 호출합니다.
 	// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
@@ -30,7 +30,10 @@ function jusoCallBack(roadFullAddr){
 <img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png" style="text-align: center">
 
 <h1 style="text-align: center; color: blue;">D&C 회원가입</h1>
-
+	<input type="hidden" id=social_type value="${social_type}">
+	<input type="hidden" id=social_id value="${social_id}">
+	<input type="hidden" id=social_name value="${social_name}">
+	<input type="hidden" id=social_email value="${social_email}">
 	<br>
 	<div class="jointext">
 	<label for="joinid" class="label">아이디</label><br>
@@ -72,8 +75,7 @@ function jusoCallBack(roadFullAddr){
 	<div class="jointext" >	
 		<label for="joinemail">E-mail</label><br>
 		<input id="joinemail" name="email" type="email" placeholder="E-mail">
-		<br><button onclick="emailConfirmButton()">인증하기</button>
-
+		<br><button id=emailconfirmbutton onclick="emailConfirmButton()">인증하기</button>
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>

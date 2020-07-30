@@ -73,8 +73,6 @@
 	 <beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 	
 		<beans:property name="exceptionMappings">
-			
-			
 			<beans:props>
 				<beans:prop key="org.springframework.jdbc.UncategorizedSQLException">
 					exceptionpage/sqlExceptionMessage</beans:prop>
@@ -84,17 +82,25 @@
 					exceptionpage/sqlExceptionMessage</beans:prop>
 				<beans:prop key="java.lang.IllegalArgumentException">
 					exceptionpage/ilExceptionMessage</beans:prop>
-					
 			</beans:props>
-			
-			
 		</beans:property >
 		
-<!-- 			<beans:property name="defaultErrorView" -->
-<!-- 									value="exceptionpage/allException"></beans:property> -->
-										 
+<!-- 		<beans:property name="defaultErrorView" value="exceptionpage/allException"></beans:property>				  -->
 	</beans:bean>
 	
+	<!-- google social login -->
+	<beans:bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<beans:constructor-arg value="464025460206-5ffi7i9pibd984alsf29h6e565n0s4co.apps.googleusercontent.com" />
+		<beans:constructor-arg value="KHdB_Xn8KENGcqq-6Paxiwba" />
+	</beans:bean>
+	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
+	<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<beans:property name="scope" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" />
+		<beans:property name="redirectUri" value="http://localhost:8080/ex01/googlelogin" />
+	</beans:bean>
+	
+	<beans:bean id="naverLoginBO" class="naver.NaverLoginBO"/>
+	<beans:bean id="kakaoLoginBO" class="kakao.KakaoLoginBO"/>
 
 
 	

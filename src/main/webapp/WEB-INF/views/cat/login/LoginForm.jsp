@@ -6,10 +6,10 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <style type="text/css">
-	*{
+	*{ 
 		background-color: LavenderBlush;
 		margin: 0;
-	}
+	} 
 	.container{
 		margin: 0 auto;
 		text-align: center;
@@ -26,28 +26,6 @@
 		background-color: rgba(0,0,0,0.2);
 	}
 </style>
-<script>
-	function onSignIn(googleUser) {
-	  var profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-	}
-
-	  function signOut() {
-	    var auth2 = gapi.auth2.getAuthInstance();
-	    auth2.signOut().then(function () {
-	      console.log('User signed out.');
-	    });
-	  }
-	  
-
-</script>
-<script src="resources/script/jquery-3.2.1.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-<meta name="google-signin-client_id" content="799500449457-7dtqvt0900n7ocr4sttpofpcmjcuccli.apps.googleusercontent.com">
-
 </head>
 <body>
 <div class=container>
@@ -57,20 +35,14 @@
 	<input type="password" id=password placeholder="PW"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
+	<div>
+		<h5>소셜 로그인</h5>
+		<a href="${google_url}"><img src="resources/image/btn_google_signin_light_normal_web.png" width=70%></a>
+		<a href="${naver_url}"><img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" width=70%></a>
+		<a href="${kakao_url}"><img src="resources/image/kakao_login_large_narrow.png" width=70%></a>
+	</div>
 </div>
-<div id="kakao_id_login" style="text-align: center"> 
-	<a href="${kakao_url}"> 
-	<img width="223" src="resources/image/kakao.png" /></a> 
-</div>
-
-<div>
-	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	<a href="#" onclick="signOut();">Sign out</a>
-</div>
-
-
-
-<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

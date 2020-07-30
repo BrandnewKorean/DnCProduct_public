@@ -21,7 +21,7 @@
 		(select b.*,ROW_NUMBER() OVER(order by seq) rnum
 		from catboard b where seq>0 ]]>
   		<include refid="search"></include>
-  		where rnum between #{startno} and #{endno}
+  		where rnum between #{startno} and #{endno} order by seq desc
 	</select>
 	
 	<sql id="search">

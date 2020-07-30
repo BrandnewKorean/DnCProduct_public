@@ -22,4 +22,9 @@ public class DiaryUploadServiceImpl implements DiaryUploadService{
 	public int insert(DiaryUploadVO duv) {
 		return dao.insert(duv);
 	}
+
+	@Override
+	public int delete(DiaryUploadVO duv) {
+		return dao.delete(duv);
+	}
 }
