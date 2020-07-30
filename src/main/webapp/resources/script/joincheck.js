@@ -8,6 +8,37 @@ var acheck = false;
 var number = null;
 
 $(function(){
+	var socialType = $('#social_type').val();
+	var socialId = $('#social_id').val();
+	var socialName = $('#social_name').val();
+	var socialEmail = $('#social_email').val();
+	
+	console.log(socialType);
+	if(socialType != ''){
+		console.log(socialId);
+		console.log(socialName);
+		console.log(socialEmail);
+		
+		if(socialId != ''){
+			$('#joinid').val(socialId).attr('disabled','disabled');
+			$('#joinpw').val(socialId).attr('disabled','disabled');
+			icheck = true;
+			pcheck = true;
+		}
+		if(socialName != ''){
+			$('#joinname').val(socialName).attr('disabled','disabled');
+			ncheck = true;
+		}
+		if(socialEmail != ''){
+			$('#joinemail').val(socialEmail).attr('disabled','disabled');
+			$('#joinemailconfirm').attr('disabled','disabled');
+			$('#emailconfirmbutton').attr('disabled','disabled');
+			$('#emailmessage').css('color','blue').html('인증 완료 되었습니다.');
+			echeck = true;
+			eccheck = true;
+		}
+	}
+	
 	$('#joinid').focus();
 	$('#joinid').focusout(function() {
 		icheck=idCheck();
