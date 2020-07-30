@@ -30,7 +30,8 @@ function writeComment(){
 				break;
 			default:
 				alert('로그인 후 이용하세요');
-				location.href = 'catmain';
+				console.log(data.code);
+//				location.href = 'catmain';
 				break;
 			}
 		},

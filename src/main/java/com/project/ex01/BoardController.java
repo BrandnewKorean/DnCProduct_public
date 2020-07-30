@@ -35,6 +35,62 @@ public class BoardController {
 	CatBoardCommentService cservice;
 	
 	
+	
+	@RequestMapping(value="commentdelete")
+	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null && session.getAttribute("logID") != null) {
+			if(cservice.delete(bcv)>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="commentupdate")
+	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		
+		int counter = cservice.update(bcv);
+		
+		String id=(String)request.getSession().getAttribute("logID");
+		
+		
+		
+		if(id!=null) {
+			if(counter>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+//	@RequestMapping(value="commentupdatef")
+//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+//		
+//		
+//		bcv = cservice.selectOne(bcv);
+//		
+//		mv.addObject("dncupdate", bcv);
+//		mv.setViewName("cat/board/catboardview");
+//		
+//		return mv;
+//	}//commentupdatef()
+	
+	
 	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
 		String id = (String)session.getAttribute("logID");
@@ -165,7 +221,7 @@ public class BoardController {
 		bv=service.selectOne(bv);
 		
 		//여기서부터
-		List<CatBoardCommentVO> comment = cservice.select(bv.getSeq());
+		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		mv.addObject("comment", comment);
 		//여기까지 추가
 		
@@ -210,6 +266,8 @@ public class BoardController {
 	@RequestMapping(value="catboarddelete")
 	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
+		System.out.println(bv);
+		System.out.println(session.getAttribute("logID"));
 		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.addObject("bcode",0);

@@ -4,12 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="ex01.mappers.CatBoardCommentMapper">
  
- 	<select id="select" resultType="vo.CatBoardCommentVO">
+ 	<select id="selectList" resultType="vo.CatBoardCommentVO">
  		select * from catboardcomment where seq=#{seq}
+ 	</select>
+ 	
+ 	<select id="selectOne" resultType="vo.CatBoardCommentVO">
+ 		select * from catboardcomment where counter=#{counter}
  	</select>
  
  	<insert id="insert">
- 		insert into catboardcomment values(#{seq},#{id},#{content})
+ 		insert into CatBoardComment(seq,id,content,counter) values(#{seq},#{id},#{content},(select nvl(max(counter),0)+1 from catboardcomment))
  	</insert>
+ 	
+ 	<update id="update">
+ 		update catboardcomment set content=#{content} where counter=#{counter}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		delete from catboardcomment where counter=#{counter}
+ 	</delete>
  
  </mapper> 

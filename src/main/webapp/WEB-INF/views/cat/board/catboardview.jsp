@@ -10,6 +10,7 @@
 </head>
 <script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="resources/script/writecomment.js?ver=<%= System.currentTimeMillis()%>"></script>
+
 <script type="text/javascript">
 function catboarddelete(){
 	$.ajax({
@@ -25,14 +26,66 @@ function catboarddelete(){
 				alert('삭제 실패했습니다');
 			}else{
 				alert('로그인 후 이용해주세요');
-				location.href="catmain";
+				console.log(data.bcode);
+ 				location.href="catmain";
 			}
 		}
 	});
 }
 </script>
 
+
+<script type="text/javascript">
+function commentdelete(counter){
+	$.ajax({
+		url:'commentdelete',
+		data:{
+			counter:counter
+		},
+		success:function(data){
+			if(data.code==0){
+				alert('삭제 되었습니다.');
+				location.reload();
+			}else if(data.code==1){
+				alert('삭제 실패했습니다');
+			}else{
+				alert('로그인 후 이용해주세요');
+				console.log(data.code);
+ 				location.href="catmain";
+			}
+		}
+	});
+}
+</script>
+
+
+
+<script type="text/javascript">
+	function commentupdate(counter) {
+		$.ajax({
+			url:'commentupdate',
+			data:{
+				content:$('#content').val(),
+				counter:counter
+			},
+			success:function(data){
+				if(data.code==0){
+					alert('수정 성공했습니다.');
+					location.replace('catboardview');
+				}else if(data.code==1){
+					alert('수정실패');
+				}else{
+					alert('로그인 후 이용해주세요.');
+					location.href='catmain';
+				}
+			}
+		}); // ajax
+	}// function
+</script>
+
+
 <body>
+
 <c:choose>
 	<c:when test="${view}">
 		<button onclick="location.href = 'catboard?code=image'">이전으로</button>
@@ -50,8 +103,15 @@ function catboarddelete(){
 ${bv.content}
 </pre>
 
-<hr>
-<h2 style="color: blue">↓↓하단부터 댓글 입니다↓↓</h2>
+	<c:if test="${logID==bv.id}">
+		<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정하기</button>
+		<button onclick="catboarddelete()">삭제하기</button>
+	</c:if>
+
+
+
+<h5 style="color: blue">댓글(${bv.comments})</h5>
+
 
 <span>
 	<c:if test="${comment == '[]'}">
@@ -64,13 +124,19 @@ ${bv.content}
 		<c:forEach var="c" items="${comment}" varStatus="vs">
 		<hr>
 			<div>
-				<div class=td2 style="font-size: small;">${c.id}</div>
 				<div class=td1 style="font-weight: bold;">${c.content}</div>
+				<div class=td2 style="font-size: small;">${c.id}</div>
+				<c:if test="${logID==c.id}">
+					<button onclick="commentupdate(${c.counter})">댓글수정</button>
+					<button onclick="commentdelete(${c.counter})">댓글삭제</button>
+				</c:if>
 			</div>
 			
 		</c:forEach>
 	</c:if>
 </span>
+
+<br><br><br><br>
 
 <span>
 	<div>
@@ -80,9 +146,6 @@ ${bv.content}
 </span>
 
 
-	<c:if test="${logID==bv.id}">
-		<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">수정하기</button>
-		<button onclick="catboarddelete()">삭제하기</button>
-	</c:if>
+	
 </body>
 </html>
