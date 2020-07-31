@@ -10,11 +10,12 @@ import java.nio.charset.Charset;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -320,11 +322,7 @@ public class ClientController {
 		mv.setViewName("dog/login/LoginForm");
 		return mv;
 	}
-	@RequestMapping(value = "catloginf")
-	public ModelAndView catloginf(ModelAndView mv) {
-		mv.setViewName("cat/login/LoginForm");
-		return mv;
-	}
+	
 	@RequestMapping(value = "dogmain")
 	public ModelAndView dogmain(ModelAndView mv) {
 		mv.setViewName("dog/Dogmain");

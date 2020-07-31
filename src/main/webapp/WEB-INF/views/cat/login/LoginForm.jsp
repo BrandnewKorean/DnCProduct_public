@@ -44,11 +44,14 @@
 	<input type="password" id=password placeholder="PW"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
+	
+	<br><br><br>
+	
 	<div>
-		<h5>소셜 로그인</h5>
-		<a href="${google_url}"><img src="resources/image/btn_google_signin_light_normal_web.png" width=70%></a>
-		<a href="${naver_url}"><img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" width=70%></a>
-		<a href="${kakao_url}"><img src="resources/image/kakao_login_large_narrow.png" width=70%></a>
+		<h2>소셜 로그인</h2>
+		<a href="${google_url}"><img src="resources/image/구글.png" width=20%></a>
+		<a href="${naver_url}"><img src="resources/image/네이버.png" width=20%></a>
+		<a href="${kakao_url}"><img src="resources/image/카카오.png" width=20%></a>
 	</div>
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>

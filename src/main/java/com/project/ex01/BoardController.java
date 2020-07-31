@@ -40,6 +40,8 @@ public class BoardController {
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		HttpSession session = request.getSession(false);
 		if(session!=null && session.getAttribute("logID") != null) {
+	
+			
 			if(cservice.delete(bcv)>0) {
 				mv.addObject("code",0);
 			}else{
@@ -48,6 +50,9 @@ public class BoardController {
 		}else {
 			mv.addObject("code",2);
 		}
+		
+		service.updatecomments(bcv.getSeq());
+		
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -58,7 +63,6 @@ public class BoardController {
 	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		
 		int counter = cservice.update(bcv);
-		
 		String id=(String)request.getSession().getAttribute("logID");
 		
 		
