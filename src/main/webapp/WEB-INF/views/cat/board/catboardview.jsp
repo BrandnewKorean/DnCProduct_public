@@ -82,7 +82,7 @@ function commentupdate(counter, content){
 	console.log(content);
 	$("#td1" +counter).empty();
 	$("#td1" +counter).append("<textarea id='updatetext" +counter +"'>" +content +"</textarea>");
-	$("#ub" +counter).attr("onclick", "submitupdate(" +counter +")")
+	$("#ub" +counter).attr("onclick", "submitupdate(" +counter +")");
 }
 </script>
 <body>
@@ -96,7 +96,7 @@ function commentupdate(counter, content){
 </c:choose>
 
 <h2>View</h2>
-	<input type="hidden" id="seq" value="${bv.seq }">
+	<input type="hidden" id="seq" value="${bv.seq}">
 	<span>${bv.title}</span>
 	<hr>
 <pre>
@@ -128,7 +128,14 @@ ${bv.content}
 	<hr>
 	
 	<textarea id="content" name="content" rows="" cols=""></textarea>
-	<button class="submit" onclick="writeComment()">작성</button>	
-	
+	<button class="submit" id="submit" disabled="disabled" onclick="writeComment()">작성</button>	
+	<script>
+	$(function(){
+		$('#content').on("input",function(){
+			if($('#content').val() != '') $('#submit').attr('disabled',false);
+			else $('#submit').attr('disabled',true);
+		});
+	});
+	</script>	
 </body>
 </html>

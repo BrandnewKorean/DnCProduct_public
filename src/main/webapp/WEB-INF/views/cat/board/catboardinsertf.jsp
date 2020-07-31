@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
@@ -30,13 +30,28 @@
 			}
 		});
 	}//catboardinsert()
+
+$(function(){
+	$('#title').on("input", function(){
+		console.log('input');
+		if($('#content').val() != '' && $('#title').val() != '') $('#insertdisabled').attr('disabled', false).css('color', 'black');
+		else $('#insertdisabled').attr('disabled', true).css('color','white');
+	});
+	
+	$('#content').on("input", function(){
+		console.log('input');
+		if($('#content').val() != '' && $('#title').val() != '') $('#insertdisabled').attr('disabled', false).css('color', 'black');
+		else $('#insertdisabled').attr('disabled', true).css('color','white');
+	});
+});
+
 </script>
 </head>
 <body>
 	<div class=header>
 		<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
-		<div id=header_menu>
-			<input type="submit" onclick="catboardinsert()" value="발행">
+		<div id=header_menu>	
+			<input type="submit" onclick="catboardinsert()" value="발행" id="insertdisabled" disabled="disabled">
 		</div>
 	</div>
 	<div class=container>

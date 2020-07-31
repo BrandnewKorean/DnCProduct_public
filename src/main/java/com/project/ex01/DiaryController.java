@@ -61,7 +61,7 @@ public class DiaryController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "iswrited")
 	public ModelAndView iswrited(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -101,7 +101,7 @@ public class DiaryController {
 						duv.setWdate(dv.getWdate());
 						duv.setId(id);
 						duv.setFilename(filename);
-						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
+						String route = "C:\\Users\\yong\\git\\dnc1";
 						files.get(i).transferTo(new File(route+filename));
 						if(uservice.insert(duv) > 0) {
 							mv.addObject("code", 0);

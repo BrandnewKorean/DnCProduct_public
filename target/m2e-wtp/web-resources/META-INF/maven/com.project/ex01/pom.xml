@@ -198,7 +198,7 @@
 			<version>4.2.4.RELEASE</version>
 		</dependency>
 		
-		<!-- google -->`
+		<!-- google -->
 		<dependency>
 			<groupId>org.springframework.social</groupId>
 	    	<artifactId>spring-social-google</artifactId>

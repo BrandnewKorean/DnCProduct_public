@@ -45,6 +45,9 @@ public class BoardController {
 		}else {
 			mv.addObject("bcode",2);
 		}
+		
+		service.updatecomments(bcv.getSeq());
+		
 		mv.setViewName("jsonView");
 		return mv;
 	}
