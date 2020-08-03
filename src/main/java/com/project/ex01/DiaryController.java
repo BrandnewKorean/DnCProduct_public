@@ -160,7 +160,7 @@ public class DiaryController {
 					for(int i=0;i<files.size();i++) {
 						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
 						duv.setFilename(filename);
-						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
+						String route = "C:/Users/PC/Documents/eclips-workspace/ProjectEx01/src/main/webapp/resources/diaryupload/";
 						files.get(i).transferTo(new File(route+filename));
 						if(uservice.insert(duv) > 0) {
 							mv.addObject("code", 0);
