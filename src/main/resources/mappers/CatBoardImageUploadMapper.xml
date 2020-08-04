@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="ex01.mappers.CatBoardImageUploadMapper">
+  
+  <select id="selectList" resultType="vo.CatBoardImageUploadVO">
+  	select * from CatBoardImage where seq=#{seq} 
+  </select>
+  
+  <insert id="insert">
+  	insert into CatBoardImage(seq, uploadfile) values(#{seq},#{uploadfile})
+  </insert>
+  
+  <delete id="delete">
+  	delete from CatBoardImage where seq=#{seq}
+  </delete>
+  
+   </mapper> 
+

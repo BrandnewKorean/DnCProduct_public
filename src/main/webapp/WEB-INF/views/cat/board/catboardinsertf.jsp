@@ -10,22 +10,35 @@ pageEncoding="UTF-8"%>
 <title>새 글 등록</title>
 <script type="text/javascript">
 	function catboardinsert(){
+		var formData = new FormData();
+		
+		formData.append('title', $('#title').val());
+		formData.append('content', $('#content').val());
+		
+		for(var i=0;i<$('#files')[0].files.length;i++){
+			formData.append('files', $('#files')[0].files[i]);
+		}
+		
+		console.log($('#files')[0].files);
+		
 		$.ajax({
 			url: 'catboardinsert',
-			data:{
-				title: $('#title').val(),
-				content: $('#content').val()
-			},
+			type:'POST',
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			data: formData,
 			success: function(data){
 				if(data.bcode == 0){
 					alert('글이 등록되었습니다');
 					if(data.view) location.href = 'catboard?code=image';
-					else location.href = 'catboard?code=list';
+ 					else location.href = 'catboard?code=list';
 				}else if(data.bcode == 1){
-					alert('글 등록에 실패했습니다');
+					alert('파일 업로드 실패');
 				}else{
 					alert('로그인 후 사용하세요');
-					location.href = 'catmain';
+					alert(data.bcode);
+ 					location.href = 'catmain';
 				}
 			}
 		});
@@ -57,6 +70,7 @@ $(function(){
 	<div class=container>
 		<input id=title placeholder="제목" type="text">
 		<hr>
+		<label id=files_label for=files><input id=files type="file"></label>
 		<textarea id=content placeholder="내용"></textarea>
 	</div>
 </body>

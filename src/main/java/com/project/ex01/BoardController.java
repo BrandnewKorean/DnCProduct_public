@@ -1,5 +1,7 @@
 package com.project.ex01;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,13 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
+import service.CatBoardImageUploadService;
 import service.CatBoardService;
 import vo.CatBoardCommentVO;
+import vo.CatBoardImageUploadVO;
 import vo.CatBoardVO;
 
 @Controller
@@ -29,6 +34,9 @@ public class BoardController {
 	
 	@Autowired
 	CatBoardCommentService cservice;
+	
+	@Autowired
+	CatBoardImageUploadService uservice;
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
@@ -179,32 +187,57 @@ public class BoardController {
 		return mv;	
 	}
 	
-	@RequestMapping(value="catboardinsert")
-	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
+	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
+	public ModelAndView catboardinsert(HttpServletRequest request,@RequestParam("files") List<MultipartFile> files ,ModelAndView mv, MultipartFile file, CatBoardVO bv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
+		// list형태로 볼지, image형태로 볼지
+		
+		CatBoardImageUploadVO uvo = new CatBoardImageUploadVO();
+		// 자동주입하지 않는 이유는 image upload를 하지 않을 수도 있기 때문
+		
+		int count;
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//SimpleDateFormat 라는 클래스를 사용하여, string 타입으로 시간을 사용하기 위해서
 		
 		bv.setRegdate(fm.format(current));
+		// regdate에 현재 시간을 넣어줌
 		
 		if(id != null) {
 			bv.setId(id);
-			if(service.insert(bv) > 0) {
-				// 글 등록 성공 -> list 출력
-				mv.addObject("bcode", 0);
-			}else {
-				// 글 등록 실패 -> 다시 시도하기
-				mv.addObject("bcode", 1);
-			}
+			//session에서 받아온  id 넣어주기
+			count=service.insert(bv);
+			// 게시판에서 insert
+			if(count>0) {
+				if(!files.isEmpty()) {
+					String route = "C:\\Users\\yong\\git\\dnc1\\src\\main\\webapp\\resources\\catboardupload\\";
+					for(int i=0; i<files.size();i++) {
+						String filename=bv.getSeq()+"_"+files.get(i).getOriginalFilename();
+						uvo.setSeq(bv.getSeq());
+						uvo.setUploadfile(files.get(i).getOriginalFilename());
+						files.get(i).transferTo(new File(route+filename));
+						if(uservice.insert(uvo) > 0) {
+							mv.addObject("bcode",0);
+						}else {
+							mv.addObject("bcode",1);
+						}
+					}//for
+				}else{
+					mv.addObject("bcode",0);
+				}//if files.empty
+			}//if count
 		}else {
-			mv.addObject("bcode", 2);
+			mv.addObject("bcode",2);
+			//id 값이 없으면 
 		}
+		
 		mv.addObject("view", view);
 		mv.setViewName("jsonView");
 		return mv;
 	} // catboardinsert
+
 	
 	@RequestMapping(value="catboardview")
 	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {

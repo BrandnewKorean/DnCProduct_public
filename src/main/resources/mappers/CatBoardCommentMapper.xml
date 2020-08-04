@@ -25,6 +25,5 @@
  	<delete id="delete">
  		delete from catboardcomment where counter=#{counter}
  	</delete>
- 	
  
  </mapper> 
