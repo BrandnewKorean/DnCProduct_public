@@ -16,8 +16,8 @@ public class CatBoardImageUploadDAO {
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardImageUploadMapper.";
 	
-	public List<CatBoardImageUploadVO> selectList(CatBoardImageUploadVO uvo){
-		return sqlsession.selectList(NameSpace+"selectList", uvo);
+	public List<CatBoardImageUploadVO> selectList(int seq){
+		return sqlsession.selectList(NameSpace+"selectList", seq);
 	}
 	
 	public int insert(CatBoardImageUploadVO uvo) {

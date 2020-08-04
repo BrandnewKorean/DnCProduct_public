@@ -15,8 +15,8 @@ public class CatBoardImageUploadServiceImpl implements CatBoardImageUploadServic
 	CatBoardImageUploadDAO dao;
 
 	@Override
-	public List<CatBoardImageUploadVO> selectList(CatBoardImageUploadVO uvo) {
-		return dao.selectList(uvo);
+	public List<CatBoardImageUploadVO> selectList(int seq) {
+		return dao.selectList(seq);
 	}
 
 	@Override

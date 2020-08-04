@@ -212,6 +212,7 @@ public class BoardController {
 		String attach_path = "resources/catboardimageupload/";
 		
 		if(id != null) {
+			bv.setSeq(service.insertseq());
 			bv.setId(id);
 			count = service.insert(bv);
 			if(count > 0) {
@@ -251,7 +252,11 @@ public class BoardController {
 		
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
+		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
+		
+		System.out.println(upload);
 		mv.addObject("comment", comment);
+		mv.addObject("upload",upload);
 		//여기까지 추가
 		
 		mv.addObject("bv", bv);

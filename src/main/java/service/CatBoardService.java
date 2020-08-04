@@ -32,4 +32,6 @@ public interface CatBoardService {
 	
 	int updatecomments(int seq);
 	
+	int insertseq();
+	
 } // interface

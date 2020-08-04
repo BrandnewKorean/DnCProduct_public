@@ -6,7 +6,7 @@ import vo.CatBoardImageUploadVO;
 
 public interface CatBoardImageUploadService {
 	
-	List<CatBoardImageUploadVO> selectList(CatBoardImageUploadVO uvo);
+	List<CatBoardImageUploadVO> selectList(int seq);
 	int insert(CatBoardImageUploadVO uvo);
 
 }
