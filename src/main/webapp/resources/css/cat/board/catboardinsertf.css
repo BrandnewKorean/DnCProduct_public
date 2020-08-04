@@ -18,9 +18,9 @@ body{
 	right: 15%;
 	bottom: 0;
 }
-#header_menu > input{
+#header_menu > button{
 	background-color: Plum;
-	color: white;
+	color: Plum;
 	width: 100px;
 	height: 40px;
 	border-radius: 5px;

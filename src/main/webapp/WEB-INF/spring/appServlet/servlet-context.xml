@@ -44,7 +44,7 @@
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl"/>
 		<beans:property name="username" value="system"/>
-		<beans:property name="password" value="oracle"/>
+		<beans:property name="password" value="dhfkzmf"/>
 	</beans:bean>
 	
 	<!-- Mybatis 설정 -->
@@ -81,7 +81,9 @@
 				<beans:prop key="java.lang.IllegalArgumentException">
 					exceptionpage/ilExceptionMessage</beans:prop>
 			</beans:props>
+			
 		</beans:property >
+		<beans:property name="defaultErrorView"	value="exceptionpage/allException"/>
 <!-- 		<beans:property name="defaultErrorView" value="exceptionpage/allException"></beans:property>				  -->
 	</beans:bean>
 	

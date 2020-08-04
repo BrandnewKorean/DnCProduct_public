@@ -11,18 +11,116 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
+import service.CatBoardCommentService;
 import service.CatBoardService;
+import vo.CatBoardCommentVO;
 import vo.CatBoardVO;
 
 @Controller
 public class BoardController {
 	@Autowired
 	CatBoardService service;
+	
+	@Autowired
+	CatBoardCommentService cservice;
+	
+	
+	
+	@RequestMapping(value="commentdelete")
+	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null && session.getAttribute("logID") != null) {
+	
+			
+			if(cservice.delete(bcv)>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		
+		service.updatecomments(bcv.getSeq());
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="commentupdate")
+	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		
+		int counter = cservice.update(bcv);
+		String id=(String)request.getSession().getAttribute("logID");
+		
+		
+		
+		if(id!=null) {
+			if(counter>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+//	@RequestMapping(value="commentupdatef")
+//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+//		
+//		
+//		bcv = cservice.selectOne(bcv);
+//		
+//		mv.addObject("dncupdate", bcv);
+//		mv.setViewName("cat/board/catboardview");
+//		
+//		return mv;
+//	}//commentupdatef()
+	
+	
+	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
+	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
+		String id = (String)session.getAttribute("logID");
+		// getAttribute("id") 확인
+		bcv.setId(id);
+	
+		if(id != null) {
+			bcv.setId(id);
+			System.out.println(bcv);
+			int ccount = cservice.insert(bcv);
+			int count=service.updatecomments(bcv.getSeq());
+			
+			if(ccount>0 && count>0) {
+				mv.addObject("code", 0); // 정상 등록
+			}else if(ccount>0) {
+				mv.addObject("code", 1); // 댓글 등록 안됬을 경우
+			}else if(count>0){
+				mv.addObject("code", 2); // comments 숫자 올리기 실패
+			}else {
+				mv.addObject("code", 3); // 둘다 실패
+			}
+		}else {
+			mv.addObject("code", 4); // 로그인 안되있을 때
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	} // writecomment
+	
+	
+	
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
@@ -99,6 +197,8 @@ public class BoardController {
 		
 		bv.setRegdate(fm.format(current));
 		
+		MulitipartFile uploadfile;
+		
 		if(id != null) {
 			bv.setId(id);
 			if(service.insert(bv) > 0) {
@@ -121,6 +221,12 @@ public class BoardController {
 		//글번호로 글검색
 		service.countUp(bv);
 		bv=service.selectOne(bv);
+		
+		//여기서부터
+		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
+		mv.addObject("comment", comment);
+		//여기까지 추가
+		
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
@@ -162,6 +268,8 @@ public class BoardController {
 	@RequestMapping(value="catboarddelete")
 	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
+		System.out.println(bv);
+		System.out.println(session.getAttribute("logID"));
 		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.addObject("bcode",0);
