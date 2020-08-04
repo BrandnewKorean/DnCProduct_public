@@ -11,27 +11,36 @@
 <script type="text/javascript">
 	
 
-	function catboardinsert(){
-		$.ajax({
-			url: 'catboardinsert',
-			data:{
-				title: $('#title').val(),
-				content: $('#content').val(),
-			},
-			success: function(data){
-				if(data.bcode == 0){
-					alert('글이 등록되었습니다');
-					if(data.view) location.href = 'catboard?code=image';
+function catboardinsert(){
+	var formData = new FormData();
+	formData.append('title', $('#title').val());
+	formData.append('content', $('#content').val());
+	for(var i=0;i<$('#file')[0].files.length;i++){
+		formData.append('files', $('#file')[0].files[i]);
+	}
+	console.log($('#file')[0].files);
+	$.ajax({
+		url: 'catboardinsert',
+		type:'POST',
+		enctype: 'multipart/form-data',
+		processData: false,
+		contentType: false,
+		data: formData,
+		success: function(data){
+			if(data.bcode == 0){
+				alert('글이 등록되었습니다');
+				if(data.view) location.href = 'catboard?code=image';
 					else location.href = 'catboard?code=list';
-				}else if(data.bcode == 1){
-					alert('글 등록에 실패했습니다');
-				}else{
-					alert('로그인 후 사용하세요');
-					location.href = 'catmain';
-				}
+			}else if(data.bcode == 1){
+				alert('파일 업로드 실패');
+			}else{
+				alert('로그인 후 사용하세요');
+				alert(data.bcode);
+// 				location.href = 'catmain';
 			}
-		});
-	}//catboardinsert()
+		}
+	});
+}//catboardinsert()
 	
 	$(function() {
 		$('#title').on("input",function(){
@@ -65,8 +74,9 @@
 <body>
 	<div class=header>
 		<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
-		<div id=header_menu>
-			<button id=submit type="submit" onclick="catboardinsert()" onchange="insertdisabled()" disabled="disabled">발행</button>
+		<div 	id=header_menu>
+			<button id=submit onclick="catboardinsert()" onchange="insertdisabled()" disabled="disabled">발행</button>
+			<label for=file id=file_label><input type="file" id=file></label>
 		</div>
 	</div>
 	<div class=container>
