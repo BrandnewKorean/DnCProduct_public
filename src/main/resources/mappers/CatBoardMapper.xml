@@ -13,7 +13,7 @@
 	<select id="searchList" resultType="vo.CatBoardVO">
 		<![CDATA[
 		select seq,title,id,regdate,cnt,comments from 
-		(select b.*,ROW_NUMBER() OVER(order by seq) rnum
+		(select b.*,ROW_NUMBER() OVER(order by seq desc) rnum
 		from catboard b where seq>0 ]]>
   		<include refid="search"></include>
   		where rnum between #{startno} and #{endno} order by seq desc
