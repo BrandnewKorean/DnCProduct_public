@@ -131,6 +131,11 @@ $(function(){
 	<input type="hidden" id="seq" value="${bv.seq }">
 	<span id="viewtitle">${bv.title}</span>
 	<hr>
+	<c:if test="${upload != '[]'}">
+		<c:forEach var="u" items="${upload}" varStatus="vs">
+			<img src="resources/catboardimageupload/${u.seq}_${u.uploadfile}">
+		</c:forEach>
+	</c:if>
 
 	<div id="viewcontent">
 	${bv.content}

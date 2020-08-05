@@ -72,4 +72,9 @@ public class CatBoardServiceImpl implements CatBoardService {
 	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
 		return dao.pageList(pvo);
 	}
+
+	@Override
+	public int insertseq() {
+		return dao.insertseq();
+	}
 } // CatBoardServiceImpl

@@ -72,6 +72,8 @@ public class CatBoardDAO {
 		return sqlsession.update(NameSpace+"updatecomments",seq);
 	}
 	
-	
+	public int insertseq() {
+		return sqlsession.selectOne(NameSpace+"insertseq");
+	}
 
 } // boardDAO
