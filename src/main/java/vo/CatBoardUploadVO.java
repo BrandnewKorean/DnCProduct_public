@@ -1,6 +1,6 @@
 package vo;
 
-public class CatBoardImageUploadVO {
+public class CatBoardUploadVO {
 	private int seq;
 	private String uploadfile;
 	

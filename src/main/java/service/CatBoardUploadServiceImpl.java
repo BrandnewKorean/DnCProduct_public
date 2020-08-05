@@ -5,22 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jdbcUtil.CatBoardImageUploadDAO;
+import jdbcUtil.CatBoardUploadDAO;
 import jdbcUtil.DiaryDAO;
-import vo.CatBoardImageUploadVO;
+import vo.CatBoardUploadVO;
 
 @Service
-public class CatBoardImageUploadServiceImpl implements CatBoardImageUploadService{
+public class CatBoardUploadServiceImpl implements CatBoardUploadService{
 	@Autowired
-	CatBoardImageUploadDAO dao;
+	CatBoardUploadDAO dao;
 
 	@Override
-	public List<CatBoardImageUploadVO> selectList(int seq) {
+	public List<CatBoardUploadVO> selectList(int seq) {
 		return dao.selectList(seq);
 	}
 
 	@Override
-	public int insert(CatBoardImageUploadVO uvo) {
+	public int insert(CatBoardUploadVO uvo) {
 		return dao.insert(uvo);
 	}
 	

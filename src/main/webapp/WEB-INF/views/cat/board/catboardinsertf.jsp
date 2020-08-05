@@ -76,7 +76,7 @@ function catboardinsert(){
 		<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
 		<div 	id=header_menu>
 			<button id=submit onclick="catboardinsert()" onchange="insertdisabled()" disabled="disabled">발행</button>
-			<label for=file id=file_label><input type="file" id=file></label>
+			<label for=file id=file_label><input type="file" id=file multiple="multiple"></label>
 		</div>
 	</div>
 	<div class=container>

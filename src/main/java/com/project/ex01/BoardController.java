@@ -21,10 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
-import service.CatBoardImageUploadService;
 import service.CatBoardService;
+import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
-import vo.CatBoardImageUploadVO;
+import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
 
 @Controller
@@ -36,7 +36,7 @@ public class BoardController {
 	CatBoardCommentService cservice;
 	
 	@Autowired
-	CatBoardImageUploadService uservice;
+	CatBoardUploadService uservice;
 	
 	
 	@RequestMapping(value="commentdelete")
@@ -197,7 +197,7 @@ public class BoardController {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		
-		CatBoardImageUploadVO uvo = new CatBoardImageUploadVO();
+		CatBoardUploadVO uvo = new CatBoardUploadVO();
 		int count;
 		
 		Date current = new Date();
@@ -207,7 +207,7 @@ public class BoardController {
 		
 	//	System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		String root_path = request.getSession().getServletContext().getRealPath("/");
-		String attach_path = "resources/catboardimageupload/";
+		String attach_path = "resources/catboardupload/";
 		
 		if(id != null) {
 			bv.setSeq(service.insertseq());
@@ -250,18 +250,23 @@ public class BoardController {
 		
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
-		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
 		
-		System.out.println(upload);
 		mv.addObject("comment", comment);
-		mv.addObject("upload",upload);
-		//여기까지 추가
 		
+		//여기까지 추가
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
 		
 	}//catboardview
+	
+	@RequestMapping(value = "catboardmedia")
+	public ModelAndView catboardmedia(ModelAndView mv, int seq) {
+		List<CatBoardUploadVO> upload = uservice.selectList(seq);
+		mv.addObject("upload",upload);
+		mv.setViewName("jsonView");
+		return mv;
+	}
 	
 	@RequestMapping(value="catboardupdatef")
 	public ModelAndView catboardupdatef (ModelAndView mv, CatBoardVO bv) {

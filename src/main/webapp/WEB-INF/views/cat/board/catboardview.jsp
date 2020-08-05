@@ -89,6 +89,33 @@ function commentupdate(counter, content){
 }
 
 $(function(){
+	$.ajax({
+		url: 'catboardmedia',
+		data: {
+			seq: $('#seq').val()
+		},
+		success: function(data){
+			console.log(data.upload);
+			$('#viewupload').css({
+				for(var i=0;i<data.upload.length;i++){
+					backgroundImage: 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'")',
+					backgroundPosition: 700*i+"px center",
+				}
+				backgroundRepeat: "no-repeat"
+			});
+			if(data.upload.length > 1){
+				$('#viewupload').append('<button id=left_button><img src="resources/image/left.png" width=100%></button>');
+				$('#viewupload').append('<button id=right_button><img src="resources/image/right.png" width=100%></button>');
+			}
+			$('#left_button').click(function(){
+				console.log('left click');
+			});
+			$('#right_button').click(function(){
+				console.log('right click');
+			});
+		}
+	});
+	
 	$('#content').on("input",function(){
 		console.log($('#content').val().trim());
 		if($('#content').val() != ''){
@@ -131,11 +158,8 @@ $(function(){
 	<input type="hidden" id="seq" value="${bv.seq}">
 	<span id="viewtitle">${bv.title}</span>
 	<hr>
-	<c:if test="${upload != '[]'}">
-		<c:forEach var="u" items="${upload}" varStatus="vs">
-			<img src="resources/catboardimageupload/${u.seq}_${u.uploadfile}">
-		</c:forEach>
-	</c:if>
+	<div id="viewupload">
+	</div>
 
 	<div id="viewcontent">
 	${bv.content}
