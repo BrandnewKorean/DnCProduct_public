@@ -196,7 +196,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
-	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException {
+	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) 
+			throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		
@@ -207,7 +208,7 @@ public class BoardController {
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		bv.setRegdate(fm.format(current));
 		
-		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+	//	System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/catboardimageupload/";
 		

@@ -128,7 +128,7 @@ $(function(){
 <!-- <h2>View</h2> -->
 
 <div class="container">
-	<input type="hidden" id="seq" value="${bv.seq }">
+	<input type="hidden" id="seq" value="${bv.seq}">
 	<span id="viewtitle">${bv.title}</span>
 	<hr>
 	<c:if test="${upload != '[]'}">
