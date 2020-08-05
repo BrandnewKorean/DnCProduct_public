@@ -12,8 +12,12 @@
 		select * from catdiary where wdate=#{wdate} and id=#{id}
 	</select>
 	
+	<select id="insertseq" resultType="int">
+		select nvl(max(seq),0)+1 from catdiary
+	</select>
+	
 	<insert id="insert">
-		insert into catdiary(seq,wdate,id,content) values((select nvl(max(seq,0)+1) from catdiary),#{wdate},#{id},#{content})
+		insert into catdiary(seq,wdate,id,content) values(#{seq},#{wdate},#{id},#{content})
 	</insert>
 	
 	<delete id="delete">

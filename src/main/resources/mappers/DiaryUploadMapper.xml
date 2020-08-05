@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="insert">
-		insert into catdiary_upload values(#{wdate},#{id},#{filename})
+		insert into catdiary_upload(seq,wdate,id,filename) values(#{seq},#{wdate},#{id},#{filename})
 	</insert>
 	
 	<delete id="delete">

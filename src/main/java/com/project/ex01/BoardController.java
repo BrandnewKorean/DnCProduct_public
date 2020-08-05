@@ -204,7 +204,6 @@ public class BoardController {
 		
 		bv.setRegdate(fm.format(current));
 		
-		MultipartFile uploadfile;
 		System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/catboardimageupload/";

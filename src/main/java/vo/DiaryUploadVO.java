@@ -4,7 +4,14 @@ public class DiaryUploadVO {
 	private String wdate;
 	private String id;
 	private String filename;
+	private int seq;
 	
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
 	public String getWdate() {
 		return wdate;
 	}
