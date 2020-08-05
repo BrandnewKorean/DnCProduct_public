@@ -10,4 +10,5 @@ public interface DiaryService {
 	int insert(DiaryVO dv);
 	int delete(DiaryVO dv);
 	int update(DiaryVO dv);
+	int insertseq();
 }

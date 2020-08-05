@@ -13,7 +13,7 @@
 	<select id="searchList" resultType="vo.CatBoardVO">
 		<![CDATA[
 		select seq,title,id,regdate,cnt,comments from 
-		(select b.*,ROW_NUMBER() OVER(order by seq) rnum
+		(select b.*,ROW_NUMBER() OVER(order by seq desc) rnum
 		from catboard b where seq>0 ]]>
   		<include refid="search"></include>
   		where rnum between #{startno} and #{endno} order by seq desc
@@ -47,10 +47,14 @@
   		where seq=#{seq}
   	</select>
   	
+  	<select id="insertseq" resultType="int">
+  		select nvl(max(seq),0)+1 from catboard
+  	</select>
+  	
      <insert id="insert"> 
   		<!-- insert into catboard values ((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content},#{regdate},#{cnt},#{comments})  
   		values 다음에 공백 있으면 안된다!!!!!!!!! -->
-  		insert into catboard(seq,id,title,content,regdate) values((select nvl(max(seq),0)+1 from catboard),#{id},#{title},#{content},#{regdate})  
+  		insert into catboard(seq,id,title,content,regdate) values(#{seq},#{id},#{title},#{content},#{regdate})  
  	</insert>
  	
  	<update id="countUp">
@@ -73,5 +77,11 @@
 		select * from (select rownum rm, b.* from (select * from catboard order by seq desc) b) 
 		where rm between #{startno} and #{endno}
 	</select>
+	
+	<update id="updatecomments">
+		update catboard set comments=(select count(*) from catboardcomment where seq=#{seq}), cnt=cnt-1 where seq=#{seq}
+	</update>
+	
+	
 
   </mapper>

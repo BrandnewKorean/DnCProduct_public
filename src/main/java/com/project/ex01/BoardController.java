@@ -1,5 +1,7 @@
 package com.project.ex01;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,18 +13,118 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
+import service.CatBoardCommentService;
+import service.CatBoardImageUploadService;
 import service.CatBoardService;
+import vo.CatBoardCommentVO;
+import vo.CatBoardImageUploadVO;
 import vo.CatBoardVO;
 
 @Controller
 public class BoardController {
 	@Autowired
 	CatBoardService service;
+	
+	@Autowired
+	CatBoardCommentService cservice;
+	
+	@Autowired
+	CatBoardImageUploadService uservice;
+	
+	
+	@RequestMapping(value="commentdelete")
+	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		HttpSession session = request.getSession(false);
+		if(session!=null && session.getAttribute("logID") != null) {
+	
+			
+			if(cservice.delete(bcv)>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		
+		service.updatecomments(bcv.getSeq());
+		
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+	@RequestMapping(value="commentupdate")
+	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		
+		int counter = cservice.update(bcv);
+		String id=(String)request.getSession().getAttribute("logID");
+		
+		
+		
+		if(id!=null) {
+			if(counter>0) {
+				mv.addObject("code",0);
+			}else{
+				mv.addObject("code",1);
+			}
+		}else {
+			mv.addObject("code",2);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	
+	
+//	@RequestMapping(value="commentupdatef")
+//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+//		
+//		
+//		bcv = cservice.selectOne(bcv);
+//		
+//		mv.addObject("dncupdate", bcv);
+//		mv.setViewName("cat/board/catboardview");
+//		
+//		return mv;
+//	}//commentupdatef()
+	
+	
+	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
+	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
+		String id = (String)session.getAttribute("logID");
+		// getAttribute("id") 확인
+		bcv.setId(id);
+	
+		if(id != null) {
+			bcv.setId(id);
+			System.out.println(bcv);
+			int ccount = cservice.insert(bcv);
+			int count=service.updatecomments(bcv.getSeq());
+			
+			if(ccount>0 && count>0) {
+				mv.addObject("code", 0); // 정상 등록
+			}else if(ccount>0) {
+				mv.addObject("code", 1); // 댓글 등록 안됬을 경우
+			}else if(count>0){
+				mv.addObject("code", 2); // comments 숫자 올리기 실패
+			}else {
+				mv.addObject("code", 3); // 둘다 실패
+			}
+		}else {
+			mv.addObject("code", 4); // 로그인 안되있을 때
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	} // writecomment
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
@@ -89,20 +191,43 @@ public class BoardController {
 		return mv;	
 	}
 	
-	@RequestMapping(value="catboardinsert")
-	public ModelAndView catboardinsert(HttpServletRequest request, ModelAndView mv, CatBoardVO bv) {
+	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
+	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
+		
+		CatBoardImageUploadVO uvo = new CatBoardImageUploadVO();
+		int count;
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
 		bv.setRegdate(fm.format(current));
 		
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/catboardimageupload/";
+		
 		if(id != null) {
+			bv.setSeq(service.insertseq());
 			bv.setId(id);
-			if(service.insert(bv) > 0) {
-				// 글 등록 성공 -> list 출력
+			count = service.insert(bv);
+			if(count > 0) {
+				if(!files.isEmpty()) {
+					for(int i=0; i< files.size(); i++) {
+						String filename = bv.getSeq()+"_"+files.get(i).getOriginalFilename();
+						uvo.setSeq(bv.getSeq());
+						uvo.setUploadfile(files.get(i).getOriginalFilename());
+						files.get(i).transferTo(new File(root_path+attach_path+filename));
+						if(uservice.insert(uvo) > 0) {
+							System.out.println("insert success");
+							mv.addObject("bcode",0);
+						}else {
+							System.out.println("insert fail");
+							mv.addObject("bcode",1);
+						}
+					}//for
+				} // if
 				mv.addObject("bcode", 0);
 			}else {
 				// 글 등록 실패 -> 다시 시도하기
@@ -121,6 +246,16 @@ public class BoardController {
 		//글번호로 글검색
 		service.countUp(bv);
 		bv=service.selectOne(bv);
+		
+		//여기서부터
+		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
+		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
+		
+		System.out.println(upload);
+		mv.addObject("comment", comment);
+		mv.addObject("upload",upload);
+		//여기까지 추가
+		
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
@@ -162,6 +297,8 @@ public class BoardController {
 	@RequestMapping(value="catboarddelete")
 	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
+		System.out.println(bv);
+		System.out.println(session.getAttribute("logID"));
 		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.addObject("bcode",0);
