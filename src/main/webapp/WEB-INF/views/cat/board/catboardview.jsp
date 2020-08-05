@@ -100,6 +100,12 @@ function commentupdate(counter, content){
 	<span>${bv.title}</span>
 	<hr>
 <pre>
+<c:if test="${upload!='[]' }">
+	<c:forEach var="u" items="${upload}" varStatus="vs">
+		<img src="resources/catboardupload/${u.seq}_${u.uploadfile}">
+	</c:forEach>
+</c:if>
+
 ${bv.content}
 </pre>
 	<c:if test="${logID==bv.id}">

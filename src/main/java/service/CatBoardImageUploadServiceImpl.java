@@ -14,15 +14,13 @@ public class CatBoardImageUploadServiceImpl implements CatBoardImageUploadServic
 	@Autowired
 	CatBoardImageUploadDAO dao;
 	
-	public List<CatBoardImageUploadVO> selectList(){
-		return dao.selectList();
+	public List<CatBoardImageUploadVO> selectList(int seq){
+		return dao.selectList(seq);
 	}
 	
 	public int insert(CatBoardImageUploadVO uvo) {
 		return dao.insert(uvo);
 	}
 	
-	public int delete(CatBoardImageUploadVO uvo) {
-		return dao.delete(uvo);
-	}
+	
 }

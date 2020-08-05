@@ -16,17 +16,13 @@ public class CatBoardImageUploadDAO {
 	
 	private static final String NameSpace="ex01.mappers.CatBoardImageUploadMapper.";
 	
-	public List<CatBoardImageUploadVO> selectList(){
-		return sqlsession.selectList(NameSpace+"selectList");
+	public List<CatBoardImageUploadVO> selectList(int seq){
+		return sqlsession.selectList(NameSpace+"selectList",seq);
 	}
 	
 	public int insert(CatBoardImageUploadVO uvo) {
 		return sqlsession.insert(NameSpace+"insert",uvo);
 	}
 	
-	
-	public int delete(CatBoardImageUploadVO uvo) {
-		return sqlsession.delete(NameSpace+"delete",uvo);
-	}
 	
 }

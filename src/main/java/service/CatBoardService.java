@@ -30,4 +30,6 @@ public interface CatBoardService {
 	int delete(CatBoardVO bv); // delete
 	
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
+
+	int insertseq();
 } // interface

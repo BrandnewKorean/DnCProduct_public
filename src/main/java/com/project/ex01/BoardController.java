@@ -188,7 +188,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
-	public ModelAndView catboardinsert(HttpServletRequest request,@RequestParam("files") List<MultipartFile> files ,ModelAndView mv, MultipartFile file, CatBoardVO bv) throws IllegalStateException, IOException {
+	public ModelAndView catboardinsert(HttpServletRequest request,@RequestParam("files") List<MultipartFile> files ,ModelAndView mv, MultipartFile file, CatBoardVO bv) 
+			throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		// list형태로 볼지, image형태로 볼지
@@ -205,7 +206,11 @@ public class BoardController {
 		bv.setRegdate(fm.format(current));
 		// regdate에 현재 시간을 넣어줌
 		
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/catboardupload/";
+		
 		if(id != null) {
+			bv.setSeq(service.insertseq());
 			bv.setId(id);
 			//session에서 받아온  id 넣어주기
 			count=service.insert(bv);
@@ -217,7 +222,8 @@ public class BoardController {
 						String filename=bv.getSeq()+"_"+files.get(i).getOriginalFilename();
 						uvo.setSeq(bv.getSeq());
 						uvo.setUploadfile(files.get(i).getOriginalFilename());
-						files.get(i).transferTo(new File(route+filename));
+					    //files.get(i).transferTo(new File(route+filename));
+						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(uvo) > 0) {
 							mv.addObject("bcode",0);
 						}else {
@@ -247,7 +253,10 @@ public class BoardController {
 
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
+		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
+		
 		mv.addObject("comment", comment);
+		mv.addObject("upload",upload);
 		//여기까지 추가
 		
 		mv.addObject("bv", bv);
