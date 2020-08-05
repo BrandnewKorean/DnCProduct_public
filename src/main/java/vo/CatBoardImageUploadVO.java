@@ -21,5 +21,4 @@ public class CatBoardImageUploadVO {
 		return "CatBoardImageUploadVO [seq=" + seq + ", uploadfile=" + uploadfile + "]";
 	}
 	
-	
 }

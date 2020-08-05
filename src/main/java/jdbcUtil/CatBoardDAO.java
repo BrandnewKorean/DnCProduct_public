@@ -22,7 +22,6 @@ public class CatBoardDAO {
 		return sqlsession.update(NameSpace+"updatecomments",seq);
 	}
 	
-	
 	public int searchRowCount(Search search) {
 		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
 	}

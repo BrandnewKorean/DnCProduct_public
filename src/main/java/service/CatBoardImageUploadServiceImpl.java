@@ -22,5 +22,4 @@ public class CatBoardImageUploadServiceImpl implements CatBoardImageUploadServic
 		return dao.insert(uvo);
 	}
 	
-	
 }

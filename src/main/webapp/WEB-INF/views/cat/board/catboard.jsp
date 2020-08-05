@@ -63,9 +63,7 @@ $(function(){
 	});
 });
 </script>
-
 </head>
-
 <body>
 	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
 	<div id=catboard_menu>

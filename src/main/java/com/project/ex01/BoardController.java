@@ -40,11 +40,12 @@ public class BoardController {
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
-		int counter=cservice.delete(bcv);
-		//System.out.println("this is counter ="+counter);
 		
+		//System.out.println("this is counter ="+counter);
 		HttpSession session = request.getSession(false);
+		
 		if(session!=null && session.getAttribute("logID") != null) {
+			int counter=cservice.delete(bcv);
 			if(counter>0) {
 				mv.addObject("bcode",0);
 			}else{

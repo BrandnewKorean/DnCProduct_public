@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
+    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
+
 <meta charset="UTF-8">
+<meta name="google-signin-client_id" content="464025460206-5ffi7i9pibd984alsf29h6e565n0s4co.apps.googleusercontent.com">
 <title>Login</title>
 <style type="text/css">
 	*{ 
@@ -25,6 +33,7 @@
 		outline-color: red;
 		background-color: rgba(0,0,0,0.2);
 	}
+
 </style>
 </head>
 <body>
@@ -35,14 +44,17 @@
 	<input type="password" id=password placeholder="PW"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
+	
+	<br><br><br>
+	
 	<div>
-		<h5>소셜 로그인</h5>
-		<a href="${google_url}"><img src="resources/image/btn_google_signin_light_normal_web.png" width=70%></a>
-		<a href="${naver_url}"><img src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png" width=70%></a>
-		<a href="${kakao_url}"><img src="resources/image/kakao_login_large_narrow.png" width=70%></a>
+		<h2>소셜 로그인</h2>
+		<a href="${google_url}"><img src="resources/image/구글.png" width=20%></a>
+		<a href="${naver_url}"><img src="resources/image/네이버.png" width=20%></a>
+		<a href="${kakao_url}"><img src="resources/image/카카오.png" width=20%></a>
 	</div>
 </div>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

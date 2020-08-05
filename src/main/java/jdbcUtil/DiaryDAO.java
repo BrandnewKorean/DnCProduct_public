@@ -34,4 +34,8 @@ public class DiaryDAO {
 	public List<DiaryVO> selectList(DiaryVO dv){
 		return sqlsession.selectList(NameSpace+"selectList", dv);
 	}
+	
+	public int insertseq() {
+		return sqlsession.selectOne(NameSpace+"insertseq");
+	}
 }

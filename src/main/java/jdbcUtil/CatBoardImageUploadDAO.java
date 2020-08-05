@@ -24,5 +24,4 @@ public class CatBoardImageUploadDAO {
 		return sqlsession.insert(NameSpace+"insert",uvo);
 	}
 	
-	
 }

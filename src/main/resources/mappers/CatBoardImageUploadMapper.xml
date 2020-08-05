@@ -13,6 +13,5 @@
   	insert into CatBoardImage(seq, uploadfile) values(#{seq},#{uploadfile})
   </insert>
   
-  
    </mapper> 
 

@@ -18,9 +18,9 @@ body{
 	right: 15%;
 	bottom: 0;
 }
-#header_menu > input{
+#header_menu > button{
 	background-color: Plum;
-	color: white;
+	color: Plum;
 	width: 100px;
 	height: 40px;
 	border-radius: 5px;
@@ -59,4 +59,18 @@ textarea {
 	border: none;
 	outline: none;
 	background-color: rgba(255,255,255,0);
+}
+
+#file{
+	display: none;
+}
+#file_label{
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	background-color: plum;
+	background-image: url("../../../image/diary_upload_button.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	padding: 0;
 }

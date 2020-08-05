@@ -91,21 +91,28 @@ public class DiaryController {
 		
 		int count;
 		
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/diaryupload/";
+		
 		if(id != null) {
 			dv.setId(id);
+			dv.setSeq(service.insertseq());
 			count = service.insert(dv);
 			if(count > 0) {
 				if(!files.isEmpty()) {
 					for(int i=0;i<files.size();i++) {
 						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
+						duv.setSeq(dv.getSeq());
 						duv.setWdate(dv.getWdate());
-						duv.setId(id);
-						duv.setFilename(filename);
-						String route = "C:\\Users\\yong\\git\\dnc1";
-						files.get(i).transferTo(new File(route+filename));
+						duv.setFilename(files.get(i).getOriginalFilename());
+						System.out.println(duv);
+						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(duv) > 0) {
+							System.out.println("insert upload 0");
 							mv.addObject("code", 0);
 						}else {
+							System.out.println("insert upload 1");
 							mv.addObject("code", 1);
 						}
 					}
@@ -145,23 +152,28 @@ public class DiaryController {
 	}
 	
 	@RequestMapping(value = "diaryupdate")
-	public ModelAndView diaryupdate(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, DiaryVO dv, DiaryUploadVO duv) throws IllegalStateException, IOException {
+	public ModelAndView diaryupdate(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, DiaryVO dv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
+		DiaryUploadVO duv = new DiaryUploadVO();
 		int count;
+		
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		String attach_path = "resources/diaryupload/";
 		
 		if(id != null) {
 			dv.setId(id);
 			count = service.update(dv);
 			if(count > 0) {
 				if(!files.isEmpty()) {
+					duv.setSeq(dv.getSeq());
 					duv.setWdate(dv.getWdate());
 					duv.setId(id);
 					uservice.delete(duv);
 					for(int i=0;i<files.size();i++) {
 						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
-						duv.setFilename(filename);
-						String route = "C:/MTest/MyWork/ProjectEx01/src/main/webapp/resources/diaryupload/";
-						files.get(i).transferTo(new File(route+filename));
+						duv.setFilename(files.get(i).getOriginalFilename());
+						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(duv) > 0) {
 							mv.addObject("code", 0);
 						}else {
