@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import searchCriteria.PageMaker;
@@ -119,9 +120,6 @@ public class BoardController {
 		return mv;
 	} // writecomment
 	
-	
-	
-	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
 		System.out.println(code);
@@ -197,7 +195,7 @@ public class BoardController {
 		
 		bv.setRegdate(fm.format(current));
 		
-		MulitipartFile uploadfile;
+		MultipartFile uploadfile;
 		
 		if(id != null) {
 			bv.setId(id);

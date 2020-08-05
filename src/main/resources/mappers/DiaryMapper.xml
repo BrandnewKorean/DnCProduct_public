@@ -13,7 +13,7 @@
 	</select>
 	
 	<insert id="insert">
-		insert into catdiary(wdate,id,content) values(#{wdate},#{id},#{content})
+		insert into catdiary(seq,wdate,id,content) values((select nvl(max(seq,0)+1) from catdiary),#{wdate},#{id},#{content})
 	</insert>
 	
 	<delete id="delete">
