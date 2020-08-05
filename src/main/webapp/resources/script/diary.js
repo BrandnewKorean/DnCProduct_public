@@ -220,6 +220,7 @@ $(function(){
 	$('#edit').click(function(){
 		var content;
 		var uploadlist;
+		var seq;
 		
 		if($('#content').text() == "내용이 없습니다"){
 			alert('입력된 내용이 없습니다');
@@ -234,6 +235,7 @@ $(function(){
 				case 0:
 					if(data.uploadlist != null) uploadlist = data.uploadlist;
 					content = data.dv.content;
+					seq = data.dv.seq;
 					break;
 				case 1:
 					alert('작성목록 불러오기 실패');
@@ -256,8 +258,8 @@ $(function(){
 				$('#filepreview').append('<button id=next_button>></button>');
 			}
 			for(i=0;i<uploadlist.length;i++){
-				if(i == 0) $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
-				else $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
+				if(i == 0) $('#filepreview').append('<img id=image'+i+' src="resources/diaryupload/'+uploadlist[i].wdate+'_'+uploadlist[i].id+'_'+uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
+				else $('#filepreview').append('<img id=image'+i+' src="resources/diaryupload/'+uploadlist[i].wdate+'_'+uploadlist[i].id+'_'+uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
 			}
 		}
 		$('#content').append('<textarea id=diary_text>'+content+'</textarea><br>');
@@ -341,6 +343,7 @@ $(function(){
 			}
 			var formData = new FormData();
 			
+			formData.append('seq',seq);
 			formData.append('wdate',selected);
 			formData.append('content',$('#diary_text').val());
 			
@@ -418,8 +421,8 @@ function loadData(selected){
 						$('#filepreview').append('<button id=next_button>></button>');
 					}
 					for(i=0;i<data.uploadlist.length;i++){
-						if(i == 0) $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+data.uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
-						else $('#filepreview').append('<img id=image'+i+' src="/ex01/resources/diaryupload/'+data.uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
+						if(i == 0) $('#filepreview').append('<img id=image'+i+' src="resources/diaryupload/'+data.uploadlist[i].wdate+'_'+data.uploadlist[i].id+'_'+data.uploadlist[i].filename+'" width=100% height=100% style="display: block;">');
+						else $('#filepreview').append('<img id=image'+i+' src="resources/diaryupload/'+data.uploadlist[i].wdate+'_'+data.uploadlist[i].id+'_'+data.uploadlist[i].filename+'" width=100% height=100% style="display: none;">');
 					}
 				}
 				$('#content').append("<pre>"+data.dv.content+"</pre>");

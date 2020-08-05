@@ -114,7 +114,7 @@ public class ClientController {
 			mv.addObject("social_id", id);
 			mv.setViewName("cat/join/JoinForm");
 		}
-				
+		
 		return mv;
 	}
 	

@@ -39,7 +39,6 @@ public class BoardController {
 	CatBoardImageUploadService uservice;
 	
 	
-	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		HttpSession session = request.getSession(false);
@@ -127,9 +126,6 @@ public class BoardController {
 		return mv;
 	} // writecomment
 	
-	
-	
-	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
 		System.out.println(code);
@@ -206,6 +202,7 @@ public class BoardController {
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		bv.setRegdate(fm.format(current));
 		
 	//	System.out.println(request.getSession().getServletContext().getRealPath("/"));

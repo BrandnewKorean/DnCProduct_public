@@ -37,4 +37,9 @@ public class DiaryServiceImpl implements DiaryService{
 	public List<DiaryVO> selectList(DiaryVO dv) {
 		return dao.selectList(dv);
 	}
+
+	@Override
+	public int insertseq() {
+		return dao.insertseq();
+	}
 }
