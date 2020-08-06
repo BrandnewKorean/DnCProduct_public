@@ -278,7 +278,8 @@ public class BoardController {
 		String id=(String)request.getSession().getAttribute("logID");
 		
 		Date current = new Date();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat fm = new SimpleDateFormat("yyyyMMdd HH:mm:ss");
 		bv.setRegdate(fm.format(current));
 		
 		if(id!=null) {
