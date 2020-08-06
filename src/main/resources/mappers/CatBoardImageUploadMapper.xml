@@ -6,11 +6,11 @@
   <mapper namespace="ex01.mappers.CatBoardImageUploadMapper">
   
   <select id="selectList" resultType="vo.CatBoardImageUploadVO">
-  	select * from CatBoardImage where seq=#{seq} 
+  	select * from CatBoardupload where seq=#{seq} 
   </select>
   
   <insert id="insert">
-  	insert into CatBoardImage(seq, uploadfile) values(#{seq},#{uploadfile})
+  	insert into CatBoardupload(seq, uploadfile) values(#{seq},#{uploadfile})
   </insert>
   
    </mapper> 

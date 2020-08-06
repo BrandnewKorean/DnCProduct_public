@@ -40,19 +40,17 @@ public class BoardController {
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
-		
-		//System.out.println("this is counter ="+counter);
 		HttpSession session = request.getSession(false);
-		
 		if(session!=null && session.getAttribute("logID") != null) {
-			int counter=cservice.delete(bcv);
-			if(counter>0) {
-				mv.addObject("bcode",0);
+	
+			
+			if(cservice.delete(bcv)>0) {
+				mv.addObject("code",0);
 			}else{
-				mv.addObject("bcode",1);
+				mv.addObject("code",1);
 			}
 		}else {
-			mv.addObject("bcode",2);
+			mv.addObject("code",2);
 		}
 		
 		service.updatecomments(bcv.getSeq());
@@ -60,6 +58,40 @@ public class BoardController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+
+//	@RequestMapping(value="commentupdatef")
+//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+//		
+//		
+//		bcv = cservice.selectOne(bcv);
+//		
+//		mv.addObject("dncupdate", bcv);
+//		mv.setViewName("cat/board/catboardview");
+//		
+//		return mv;
+//	}//commentupdatef()
+
+	
+//	@RequestMapping(value="catboard")
+//	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
+//		System.out.println(code);
+//		
+//		HttpSession session = request.getSession(false);
+//		if(session!=null && session.getAttribute("logID") != null) {
+//			if(counter>0) {
+//				mv.addObject("bcode",0);
+//			}else{
+//				mv.addObject("bcode",1);
+//			}
+//		}else {
+//			mv.addObject("bcode",2);
+//		}
+//		
+//		service.updatecomments(bcv.getSeq());
+//		
+//		mv.setViewName("jsonView");
+//		return mv;
+//	}
 	
 	@RequestMapping(value="commentupdate")
 	public ModelAndView commentupdate(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
@@ -80,16 +112,7 @@ public class BoardController {
 		mv.setViewName("jsonView");
 		return mv;
 	}//commentupdate
-	
-//	@RequestMapping(value="commentupdatef")
-//	public ModelAndView commentupdatef (ModelAndView mv, CatBoardCommentVO bcv) {
-//		bcv=cservice.selectOne(bcv);
-//		
-//		mv.addObject("dncupdate", bcv);
-//		mv.setViewName("cat/board/catboardview");
-//		return mv;
-//	}//catboardupdatef()
-	
+		
 	@RequestMapping(value="writecomment", method= RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
 		String id=(String)session.getAttribute("logID");
@@ -149,6 +172,7 @@ public class BoardController {
 			long diffhour = (diff / (60 * 60 * 1000));
 			long diffday = (diff / (24*60*60*1000));
 			if(diffday <= 0) {
+				
 				if(diffhour <= 0) {
 					if(diffmin <= 0) {
 						if(diffsec < 30) {
@@ -210,31 +234,35 @@ public class BoardController {
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/catboardupload/";
 		
+		System.out.println(request.getSession().getServletContext().getRealPath("/"));
+		
+		
 		if(id != null) {
 			bv.setSeq(service.insertseq());
 			bv.setId(id);
-			//session에서 받아온  id 넣어주기
-			count=service.insert(bv);
-			// 게시판에서 insert
-			if(count>0) {
+
+			count = service.insert(bv);
+			if(count > 0) {
 				if(!files.isEmpty()) {
-					String route = "C:\\Users\\yong\\git\\dnc1\\src\\main\\webapp\\resources\\catboardupload\\";
-					for(int i=0; i<files.size();i++) {
-						String filename=bv.getSeq()+"_"+files.get(i).getOriginalFilename();
+					for(int i=0; i< files.size(); i++) {
+						String filename = bv.getSeq()+"_"+files.get(i).getOriginalFilename();
 						uvo.setSeq(bv.getSeq());
 						uvo.setUploadfile(files.get(i).getOriginalFilename());
-					    //files.get(i).transferTo(new File(route+filename));
 						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(uvo) > 0) {
+							System.out.println("insert success");
 							mv.addObject("bcode",0);
 						}else {
+							System.out.println("insert fail");
 							mv.addObject("bcode",1);
 						}
 					}//for
-				}else{
-					mv.addObject("bcode",0);
-				}//if files.empty
-			}//if count
+				} // if
+				mv.addObject("bcode", 0);
+			}else {
+				// 글 등록 실패 -> 다시 시도하기
+				mv.addObject("bcode", 1);
+			}
 		}else {
 			mv.addObject("bcode",2);
 			//id 값이 없으면 
@@ -251,10 +279,12 @@ public class BoardController {
 		//글번호로 글검색
 		service.countUp(bv);
 		bv=service.selectOne(bv);
-
+		
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
+		
+		System.out.println(upload);
 		
 		mv.addObject("comment", comment);
 		mv.addObject("upload",upload);
@@ -301,6 +331,8 @@ public class BoardController {
 	@RequestMapping(value="catboarddelete")
 	public ModelAndView catboarddelete(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		HttpSession session = request.getSession(false);
+		System.out.println(bv);
+		System.out.println(session.getAttribute("logID"));
 		if(session!=null && session.getAttribute("logID") != null) {
 			if(service.delete(bv)>0) {
 				mv.addObject("bcode",0);
