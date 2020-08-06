@@ -26,5 +26,5 @@ $(function(){
 	
 	$('#cancel').click(function(){
 		location.href = 'catmain';
-	})
+	});
 });

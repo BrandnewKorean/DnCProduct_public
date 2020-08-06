@@ -137,24 +137,7 @@ public class BoardController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-	
-	@RequestMapping(value="listcri")
-	public ModelAndView catboardsearch(ModelAndView mv, Search search) {
-		search.setSnoEno();
-		mv.addObject("dnc",service.searchList(search));
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setSearch(search);
-		
-		pageMaker.setTotalRow(service.searchRowCount(search));
-		
-		mv.addObject("pageMaker",pageMaker);
-		
-		mv.setViewName("cat/board/catboard");
-		return mv;
-	}
-	
-	
+
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
 		search.setSnoEno();

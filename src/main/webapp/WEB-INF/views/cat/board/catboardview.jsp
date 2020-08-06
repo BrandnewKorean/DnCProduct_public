@@ -83,6 +83,115 @@ function commentupdate(counter, content){
 	$("#ub" +counter).attr("onclick", "submitupdate(" +counter +")");
 }
 $(function(){
+	var backImg = '';
+	var backPos = '';
+	var backRe = '';
+	var backPosX = '';
+	var backSize = '';
+	
+	$.ajax({
+		url: 'catboardmedia',
+		data: {
+			seq: $('#seq').val()
+		},
+		success: function(data){
+			console.log(data.upload);
+			if(data.upload.length > 0){
+				$('#viewcontent').append('<div id="viewupload"></div>');
+				for(var i=0;i<data.upload.length;i++){
+					if(i == 0){
+						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
+						backSize += 'contain, ';
+						backPos += "center center, ";
+						backRe += "no-repeat, ";
+					}else if(i < data.upload.length-1){
+						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
+						backSize += 'contain, ';
+						backPos += 700*i+"px center, ";
+						backRe += "no-repeat, ";
+					}else{
+						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'")';
+						backSize += "contain";
+						backPos += 700*i+"px center";
+						backRe += "no-repeat";
+					}
+					
+				}
+				$('#viewupload').css({
+					backgroundImage: backImg,
+					backgroundSize: backSize,
+					backgroundPosition: backPos,
+					backgroundRepeat: backRe
+				});
+				if(data.upload.length > 1){
+					$('#viewupload').append('<button id=left_button><img src="resources/image/left.png" width=100%></button>');
+					$('#viewupload').append('<button id=right_button><img src="resources/image/right.png" width=100%></button>');
+				}
+			}
+			var move = 0;
+			$('#left_button').css('display','none');
+			
+			$('#left_button').click(function(){
+				backPosX = '';
+				move--;
+				if(move < 0) move = 0;
+				
+				if(move < data.upload.length-1) $('#right_button').css('display','block');
+				if(move == 0) $('#left_button').css('display','none');
+				
+				for(var i=0;i<data.upload.length;i++){
+					var tmp = (-700*move)+(700*i);
+					if(i < data.upload.length-1){
+						if(tmp == 0){
+							backPosX += "center, ";
+						}else{
+							backPosX += tmp+"px, ";
+						}
+					}else{
+						if(tmp == 0){
+							backPosX += "center";
+						}else{
+							backPosX += tmp+"px";
+						}
+					}
+				}
+				console.log(backPosX);
+				$('#viewupload').css({
+					backgroundPositionX: backPosX
+				}, 1000);
+			});
+			$('#right_button').click(function(){
+				backPosX = '';
+				move++;
+				if(move > data.upload.length-1)	move = data.upload.length-1;
+				
+				if(move > 0) $('#left_button').css('display','block');
+				if(move == data.upload.length-1) $('#right_button').css('display','none');
+				
+				for(var i=0;i<data.upload.length;i++){
+					var tmp = (-700*move)+(700*i);
+					if(i < data.upload.length-1){
+						if(tmp == 0){
+							backPosX += "center, ";
+						}else{
+							backPosX += tmp+"px, ";
+						}
+					}else{
+						if(tmp == 0){
+							backPosX += "center";
+						}else{
+							backPosX += tmp+"px";
+						}
+					}
+				}
+				console.log(backPosX);
+				$('#viewupload').css({
+					backgroundPositionX: backPosX
+				});
+			});
+		}
+	});
+	
 	$('#content').on("input",function(){
 		console.log($('#content').val().trim());
 		if($('#content').val() != ''){
@@ -120,11 +229,7 @@ $(function(){
 	<input type="hidden" id="seq" value="${bv.seq}">
 	<span id="viewtitle">${bv.title}</span>
 	<hr>
-	<c:if test="${upload != '[]'}">
-		<c:forEach var="u" items="${upload}" varStatus="vs">
-			<img src="resources/catboardupload/${u.seq}_${u.uploadfile}">
-		</c:forEach>
-	</c:if>
+	
 	<div id="viewcontent">
 	${bv.content}
 	</div>
