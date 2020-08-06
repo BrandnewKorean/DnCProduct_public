@@ -38,7 +38,6 @@ public class BoardController {
 	@Autowired
 	CatBoardUploadService uservice;
 	
-	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		HttpSession session = request.getSession(false);
@@ -60,8 +59,6 @@ public class BoardController {
 		return mv;
 	}
 	
-	
-	
 	@RequestMapping(value="commentupdate")
 	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		
@@ -81,22 +78,7 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}
-	
-	
-	
-//	@RequestMapping(value="commentupdatef")
-//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
-//		
-//		
-//		bcv = cservice.selectOne(bcv);
-//		
-//		mv.addObject("dncupdate", bcv);
-//		mv.setViewName("cat/board/catboardview");
-//		
-//		return mv;
-//	}//commentupdatef()
-	
+	}	
 	
 	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
@@ -192,20 +174,19 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
-	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) 
-			throws IllegalStateException, IOException {
+	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		
 		CatBoardUploadVO uvo = new CatBoardUploadVO();
 		int count;
+		int uploadcount = 0;
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
 		bv.setRegdate(fm.format(current));
 		
-	//	System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/catboardupload/";
 		
@@ -216,26 +197,28 @@ public class BoardController {
 			if(count > 0) {
 				if(!files.isEmpty()) {
 					for(int i=0; i< files.size(); i++) {
+						System.out.println(files.get(i).getOriginalFilename());
 						String filename = bv.getSeq()+"_"+files.get(i).getOriginalFilename();
 						uvo.setSeq(bv.getSeq());
 						uvo.setUploadfile(files.get(i).getOriginalFilename());
 						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(uvo) > 0) {
-							System.out.println("insert success");
-							mv.addObject("bcode",0);
-						}else {
-							System.out.println("insert fail");
-							mv.addObject("bcode",1);
+							uploadcount++;
 						}
 					}//for
-				} // if
-				mv.addObject("bcode", 0);
+					if(uploadcount == files.size()) {
+						mv.addObject("code", 0);
+					}else {
+						mv.addObject("code", 1);
+					}
+				}else {
+					mv.addObject("code", 0);// if
+				}
 			}else {
-				// 글 등록 실패 -> 다시 시도하기
-				mv.addObject("bcode", 1);
+				mv.addObject("code", 2);
 			}
 		}else {
-			mv.addObject("bcode", 2);
+			mv.addObject("code", 3);
 		}
 		mv.addObject("view", view);
 		mv.setViewName("jsonView");
