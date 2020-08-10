@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,10 +23,10 @@ import org.springframework.web.servlet.ModelAndView;
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
-import service.CatBoardImageUploadService;
 import service.CatBoardService;
+import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
-import vo.CatBoardImageUploadVO;
+import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
 
 @Controller
@@ -36,8 +38,7 @@ public class BoardController {
 	CatBoardCommentService cservice;
 	
 	@Autowired
-	CatBoardImageUploadService uservice;
-	
+	CatBoardUploadService uservice;
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
@@ -60,8 +61,6 @@ public class BoardController {
 		return mv;
 	}
 	
-	
-	
 	@RequestMapping(value="commentupdate")
 	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		
@@ -81,22 +80,7 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}
-	
-	
-	
-//	@RequestMapping(value="commentupdatef")
-//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
-//		
-//		
-//		bcv = cservice.selectOne(bcv);
-//		
-//		mv.addObject("dncupdate", bcv);
-//		mv.setViewName("cat/board/catboardview");
-//		
-//		return mv;
-//	}//commentupdatef()
-	
+	}	
 	
 	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
 	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
@@ -176,7 +160,15 @@ public class BoardController {
 			}
 		}
 		
-		if(code.equals("image")) request.getSession().setAttribute("view", true);
+		if(code.equals("image")) {
+			Map<Integer,List<CatBoardUploadVO>> uploadlistMap = new HashMap<>();
+			for(int i=0;i<list.size();i++) {
+				uploadlistMap.put(list.get(i).getSeq(), uservice.selectList(list.get(i).getSeq()));
+			}
+			System.out.println(uploadlistMap.get(15).get(0).getUploadfile());
+			mv.addObject("uploadlistMap",uploadlistMap);
+			request.getSession().setAttribute("view", true);
+		}
 		else request.getSession().setAttribute("view", false);
 		
 		mv.addObject("pageMaker",pageMaker);
@@ -196,17 +188,17 @@ public class BoardController {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		
-		CatBoardImageUploadVO uvo = new CatBoardImageUploadVO();
+		CatBoardUploadVO uvo = new CatBoardUploadVO();
 		int count;
+		int uploadcount = 0;
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		
 		bv.setRegdate(fm.format(current));
 		
-		System.out.println(request.getSession().getServletContext().getRealPath("/"));
 		String root_path = request.getSession().getServletContext().getRealPath("/");
-		String attach_path = "resources/catboardimageupload/";
+		String attach_path = "resources/catboardupload/";
 		
 		if(id != null) {
 			bv.setSeq(service.insertseq());
@@ -215,26 +207,28 @@ public class BoardController {
 			if(count > 0) {
 				if(!files.isEmpty()) {
 					for(int i=0; i< files.size(); i++) {
+						System.out.println(files.get(i).getOriginalFilename());
 						String filename = bv.getSeq()+"_"+files.get(i).getOriginalFilename();
 						uvo.setSeq(bv.getSeq());
 						uvo.setUploadfile(files.get(i).getOriginalFilename());
 						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(uvo) > 0) {
-							System.out.println("insert success");
-							mv.addObject("bcode",0);
-						}else {
-							System.out.println("insert fail");
-							mv.addObject("bcode",1);
+							uploadcount++;
 						}
 					}//for
-				} // if
-				mv.addObject("bcode", 0);
+					if(uploadcount == files.size()) {
+						mv.addObject("code", 0);
+					}else {
+						mv.addObject("code", 1);
+					}
+				}else {
+					mv.addObject("code", 0);// if
+				}
 			}else {
-				// 글 등록 실패 -> 다시 시도하기
-				mv.addObject("bcode", 1);
+				mv.addObject("code", 2);
 			}
 		}else {
-			mv.addObject("bcode", 2);
+			mv.addObject("code", 3);
 		}
 		mv.addObject("view", view);
 		mv.setViewName("jsonView");
@@ -249,18 +243,23 @@ public class BoardController {
 		
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
-		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
 		
-		System.out.println(upload);
 		mv.addObject("comment", comment);
-		mv.addObject("upload",upload);
-		//여기까지 추가
 		
+		//여기까지 추가
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
 		
 	}//catboardview
+	
+	@RequestMapping(value = "catboardmedia")
+	public ModelAndView catboardmedia(ModelAndView mv, int seq) {
+		List<CatBoardUploadVO> upload = uservice.selectList(seq);
+		mv.addObject("upload",upload);
+		mv.setViewName("jsonView");
+		return mv;
+	}
 	
 	@RequestMapping(value="catboardupdatef")
 	public ModelAndView catboardupdatef (ModelAndView mv, CatBoardVO bv) {

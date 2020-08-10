@@ -436,7 +436,6 @@ function loadData(selected){
 						$('#image'+j).css('display','none');
 					}
 					$('#image'+i).css('display','block');
-					console.log('pre click '+i);
 				});
 				
 				$('#next_button').click(function(){

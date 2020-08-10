@@ -6,21 +6,20 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import vo.CatBoardImageUploadVO;
-import vo.DiaryUploadVO;
+import vo.CatBoardUploadVO;
 
 @Repository
-public class CatBoardImageUploadDAO {
+public class CatBoardUploadDAO {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	private static final String NameSpace = "ex01.mappers.CatBoardImageUploadMapper.";
+	private static final String NameSpace = "ex01.mappers.CatBoardUploadMapper.";
 	
-	public List<CatBoardImageUploadVO> selectList(int seq){
+	public List<CatBoardUploadVO> selectList(int seq){
 		return sqlsession.selectList(NameSpace+"selectList", seq);
 	}
 	
-	public int insert(CatBoardImageUploadVO uvo) {
+	public int insert(CatBoardUploadVO uvo) {
 		return sqlsession.insert(NameSpace+"insert", uvo);
 	}
 	
