@@ -8,5 +8,5 @@ public interface CatBoardUploadService {
 	
 	List<CatBoardUploadVO> selectList(int seq);
 	int insert(CatBoardUploadVO uvo);
-
+	List<CatBoardUploadVO> selectAllList();
 }

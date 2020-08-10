@@ -21,10 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
-import service.CatBoardImageUploadService;
 import service.CatBoardService;
+import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
-import vo.CatBoardImageUploadVO;
+import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
 
 @Controller
@@ -36,7 +36,7 @@ public class BoardController {
 	CatBoardCommentService cservice;
 	
 	@Autowired
-	CatBoardImageUploadService uservice;
+	CatBoardUploadService uservice;
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
@@ -58,47 +58,14 @@ public class BoardController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-
-//	@RequestMapping(value="commentupdatef")
-//	public ModelAndView commentupdatef(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
-//		
-//		
-//		bcv = cservice.selectOne(bcv);
-//		
-//		mv.addObject("dncupdate", bcv);
-//		mv.setViewName("cat/board/catboardview");
-//		
-//		return mv;
-//	}//commentupdatef()
-
-	
-//	@RequestMapping(value="catboard")
-//	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
-//		System.out.println(code);
-//		
-//		HttpSession session = request.getSession(false);
-//		if(session!=null && session.getAttribute("logID") != null) {
-//			if(counter>0) {
-//				mv.addObject("bcode",0);
-//			}else{
-//				mv.addObject("bcode",1);
-//			}
-//		}else {
-//			mv.addObject("bcode",2);
-//		}
-//		
-//		service.updatecomments(bcv.getSeq());
-//		
-//		mv.setViewName("jsonView");
-//		return mv;
-//	}
 	
 	@RequestMapping(value="commentupdate")
-	public ModelAndView commentupdate(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
+	public ModelAndView commentupdate(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
+		
 		int counter = cservice.update(bcv);
-		System.out.println("this is counter = "+counter);		
-		//id 받아오기
-		String id = (String)session.getAttribute("logID");
+		String id=(String)request.getSession().getAttribute("logID");
+		
+		
 		
 		if(id!=null) {
 			if(counter>0) {
@@ -111,16 +78,20 @@ public class BoardController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}//commentupdate
-		
-	@RequestMapping(value="writecomment", method= RequestMethod.GET)
-	public ModelAndView writecomment(HttpSession session, ModelAndView mv, CatBoardCommentVO bcv) {
-		String id=(String)session.getAttribute("logID");
-		
+	}	
+	
+	@RequestMapping(value = "writecomment", method = RequestMethod.GET)
+	public ModelAndView writecomment(HttpSession session, CatBoardCommentVO bcv, ModelAndView mv) {
+		String id = (String)session.getAttribute("logID");
+		// getAttribute("id") 확인
+		bcv.setId(id);
+	
 		if(id != null) {
 			bcv.setId(id);
+			System.out.println(bcv);
 			int ccount = cservice.insert(bcv);
 			int count=service.updatecomments(bcv.getSeq());
+			
 			if(ccount>0 && count>0) {
 				mv.addObject("code", 0); // 정상 등록
 			}else if(ccount>0) {
@@ -133,20 +104,26 @@ public class BoardController {
 		}else {
 			mv.addObject("code", 4); // 로그인 안되있을 때
 		}
-		
 		mv.setViewName("jsonView");
 		return mv;
-	}
-
+	} // writecomment
+	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
+		System.out.println(code);
+		
 		search.setSnoEno();
+		
 		List<CatBoardVO> list = service.searchList(search);
+		System.out.println(list);
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
+		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		
 		for(int i=0;i<list.size();i++) {
 			Date reg = fm.parse(list.get(i).getRegdate());
 			long diff = current.getTime() - reg.getTime();
@@ -154,8 +131,8 @@ public class BoardController {
 			long diffmin = (diff / (60 * 1000) % 60);
 			long diffhour = (diff / (60 * 60 * 1000));
 			long diffday = (diff / (24*60*60*1000));
+			
 			if(diffday <= 0) {
-				
 				if(diffhour <= 0) {
 					if(diffmin <= 0) {
 						if(diffsec < 30) {
@@ -180,14 +157,15 @@ public class BoardController {
 				}
 			}
 		}
+		
 		if(code.equals("image")) request.getSession().setAttribute("view", true);
 		else request.getSession().setAttribute("view", false);
-		mv.addObject("pageMaker",pageMaker);
+		
+		mv.addObject("pageMaker",pageMaker	);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
 		return mv;
 	}// catboardpage
-	
 	
 	@RequestMapping(value = "catboardinsertf")
 	public ModelAndView catboardinsertf(ModelAndView mv) {
@@ -196,66 +174,56 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
-	public ModelAndView catboardinsert(HttpServletRequest request,@RequestParam("files") List<MultipartFile> files ,ModelAndView mv, MultipartFile file, CatBoardVO bv) 
-			throws IllegalStateException, IOException {
+	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
-		// list형태로 볼지, image형태로 볼지
 		
-		CatBoardImageUploadVO uvo = new CatBoardImageUploadVO();
-		// 자동주입하지 않는 이유는 image upload를 하지 않을 수도 있기 때문
-		
+		CatBoardUploadVO uvo = new CatBoardUploadVO();
 		int count;
+		int uploadcount = 0;
 		
 		Date current = new Date();
 		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		//SimpleDateFormat 라는 클래스를 사용하여, string 타입으로 시간을 사용하기 위해서
 		
 		bv.setRegdate(fm.format(current));
-		// regdate에 현재 시간을 넣어줌
 		
 		String root_path = request.getSession().getServletContext().getRealPath("/");
 		String attach_path = "resources/catboardupload/";
 		
-		System.out.println(request.getSession().getServletContext().getRealPath("/"));
-		
-		
 		if(id != null) {
 			bv.setSeq(service.insertseq());
 			bv.setId(id);
-
 			count = service.insert(bv);
 			if(count > 0) {
 				if(!files.isEmpty()) {
 					for(int i=0; i< files.size(); i++) {
+						System.out.println(files.get(i).getOriginalFilename());
 						String filename = bv.getSeq()+"_"+files.get(i).getOriginalFilename();
 						uvo.setSeq(bv.getSeq());
 						uvo.setUploadfile(files.get(i).getOriginalFilename());
 						files.get(i).transferTo(new File(root_path+attach_path+filename));
 						if(uservice.insert(uvo) > 0) {
-							System.out.println("insert success");
-							mv.addObject("bcode",0);
-						}else {
-							System.out.println("insert fail");
-							mv.addObject("bcode",1);
+							uploadcount++;
 						}
 					}//for
-				} // if
-				mv.addObject("bcode", 0);
+					if(uploadcount == files.size()) {
+						mv.addObject("code", 0);
+					}else {
+						mv.addObject("code", 1);
+					}
+				}else {
+					mv.addObject("code", 0);// if
+				}
 			}else {
-				// 글 등록 실패 -> 다시 시도하기
-				mv.addObject("bcode", 1);
+				mv.addObject("code", 2);
 			}
 		}else {
-			mv.addObject("bcode",2);
-			//id 값이 없으면 
+			mv.addObject("code", 3);
 		}
-		
 		mv.addObject("view", view);
 		mv.setViewName("jsonView");
 		return mv;
 	} // catboardinsert
-
 	
 	@RequestMapping(value="catboardview")
 	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
@@ -265,19 +233,23 @@ public class BoardController {
 		
 		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
-		List<CatBoardImageUploadVO> upload = uservice.selectList(bv.getSeq());
-		
-		System.out.println(upload);
 		
 		mv.addObject("comment", comment);
-		mv.addObject("upload",upload);
-		//여기까지 추가
 		
+		//여기까지 추가
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
 		
 	}//catboardview
+	
+	@RequestMapping(value = "catboardmedia")
+	public ModelAndView catboardmedia(ModelAndView mv, int seq) {
+		List<CatBoardUploadVO> upload = uservice.selectList(seq);
+		mv.addObject("upload",upload);
+		mv.setViewName("jsonView");
+		return mv;
+	}
 	
 	@RequestMapping(value="catboardupdatef")
 	public ModelAndView catboardupdatef (ModelAndView mv, CatBoardVO bv) {

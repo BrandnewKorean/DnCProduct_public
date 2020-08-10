@@ -105,8 +105,8 @@ $(function(){
 		<c:if test="${list != '[]'}">
 			<div>
 				<c:if test="${pageMaker.prev}">
-					<a href="catboard${pageMaker.makeSearch(1)}&code=list">《</a>
-					<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=list">&nbsp;</a>
+					<a href="catboard${pageMaker.makeSearch(1)}&code=list">First</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=list">Prev&nbsp;</a>
 				</c:if>
 				
 				<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
@@ -122,8 +122,8 @@ $(function(){
 				</c:forEach>
 				
 				<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-					<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=list">&nbsp;&nbsp;</a>
-					<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=list">》&nbsp;&nbsp;</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=list">Next&nbsp;&nbsp;</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=list">End&nbsp;&nbsp;</a>
 				</c:if>
 			</div>
 		</c:if>
@@ -140,8 +140,8 @@ $(function(){
 		</div>
 		<div>
 			<c:if test="${pageMaker.prev}">
-				<a href="catboard${pageMaker.makeSearch(1)}&code=image">《</a>
-				<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">&nbsp;</a>
+				<a href="catboard${pageMaker.makeSearch(1)}&code=image">First</a>
+				<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">Prev&nbsp;</a>
 			</c:if>
 			
 			<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
@@ -157,8 +157,8 @@ $(function(){
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-				<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">&nbsp;&nbsp;</a>
-				<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">》&nbsp;&nbsp;</a>
+				<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">Next&nbsp;&nbsp;</a>
+				<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">End&nbsp;&nbsp;</a>
 			</c:if>
 		</div>
 	</c:if>
