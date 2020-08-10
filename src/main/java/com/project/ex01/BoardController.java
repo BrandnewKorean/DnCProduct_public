@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -158,7 +160,15 @@ public class BoardController {
 			}
 		}
 		
-		if(code.equals("image")) request.getSession().setAttribute("view", true);
+		if(code.equals("image")) {
+			Map<Integer,List<CatBoardUploadVO>> uploadlistMap = new HashMap<>();
+			for(int i=0;i<list.size();i++) {
+				uploadlistMap.put(list.get(i).getSeq(), uservice.selectList(list.get(i).getSeq()));
+			}
+			System.out.println(uploadlistMap.get(15).get(0).getUploadfile());
+			mv.addObject("uploadlistMap",uploadlistMap);
+			request.getSession().setAttribute("view", true);
+		}
 		else request.getSession().setAttribute("view", false);
 		
 		mv.addObject("pageMaker",pageMaker);
