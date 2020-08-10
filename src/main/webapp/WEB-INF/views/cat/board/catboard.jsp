@@ -132,7 +132,13 @@ $(function(){
 		<div class=container>
 			<c:forEach var="bb" items="${list}">
 				<div class=block>
-					<a href="catboardview?seq=${bb.seq}"><div class=image></div></a>
+					<div class=image>
+						<a href="catboardview?seq=${bb.seq}">
+							<c:if test="${uploadlistMap.get(bb.seq).size() > 0}">
+								<img src="resources/catboardupload/${bb.seq}_${uploadlistMap.get(bb.seq).get(0).getUploadfile()}" width="100%" height="100%">
+							</c:if>
+						</a>
+					</div>
 					<a href="catboardview?seq=${bb.seq}" style="text-decoration: none;">${bb.title}</a><br>
 					조회수 : ${bb.cnt}&nbsp;댓글 : ${bb.comments}
 				</div>

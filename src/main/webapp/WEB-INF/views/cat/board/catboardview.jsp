@@ -98,35 +98,40 @@ $(function(){
 			console.log(data.upload);
 			if(data.upload.length > 0){
 				$('#viewcontent').append('<div id="viewupload"></div>');
-				for(var i=0;i<data.upload.length;i++){
-					if(i == 0){
-						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
-						backSize += 'contain, ';
-						backPos += "center center, ";
-						backRe += "no-repeat, ";
-					}else if(i < data.upload.length-1){
-						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
-						backSize += 'contain, ';
-						backPos += 700*i+"px center, ";
-						backRe += "no-repeat, ";
-					}else{
-						backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'")';
-						backSize += "contain";
-						backPos += 700*i+"px center";
-						backRe += "no-repeat";
+				if(data.upload.length > 1){
+					$('#viewupload').append('<button id=left_button><img src="resources/image/left.png" width=100%></button>');
+					$('#viewupload').append('<button id=right_button><img src="resources/image/right.png" width=100%></button>');
+					for(var i=0;i<data.upload.length;i++){
+						if(i == 0){
+							backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
+							backSize += 'contain, ';
+							backPos += "center center, ";
+							backRe += "no-repeat, ";
+						}else if(i < data.upload.length-1){
+							backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'"), ';
+							backSize += 'contain, ';
+							backPos += 700*i+"px center, ";
+							backRe += "no-repeat, ";
+						}else{
+							backImg += 'url("resources/catboardupload/'+data.upload[i].seq+'_'+data.upload[i].uploadfile+'")';
+							backSize += "contain";
+							backPos += 700*i+"px center";
+							backRe += "no-repeat";
+						}
 					}
-					
+				}else{
+					backImg += 'url("resources/catboardupload/'+data.upload[0].seq+'_'+data.upload[0].uploadfile+'")';
+					backSize += 'contain';
+					backPos += "center center";
+					backRe += "no-repeat";
 				}
+				
 				$('#viewupload').css({
 					backgroundImage: backImg,
 					backgroundSize: backSize,
 					backgroundPosition: backPos,
 					backgroundRepeat: backRe
 				});
-				if(data.upload.length > 1){
-					$('#viewupload').append('<button id=left_button><img src="resources/image/left.png" width=100%></button>');
-					$('#viewupload').append('<button id=right_button><img src="resources/image/right.png" width=100%></button>');
-				}
 			}
 			var move = 0;
 			$('#left_button').css('display','none');
