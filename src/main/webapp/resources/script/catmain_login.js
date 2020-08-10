@@ -77,6 +77,10 @@ $(function(){
 		location.href="catboard";
 	});
 	
+	$('#hospital').click(function(){
+		location.href = "hospital";
+	});
+	
 	$('#delete').click(function(){
 		$.ajax({
 			url: 'delete',

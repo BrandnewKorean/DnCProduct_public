@@ -85,7 +85,7 @@
 			<li id=diaryf><a>Diary</a></li>
 			<li><a href="store">Store</a></li>
 			<li id=catboard><a>Board</a></li>
-			<li><a href="hospital">Location Service</a></li>
+			<li id=hospital><a>Location Service</a></li>
 		</ul>
 		<script type="text/javascript" src="resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
 	</c:if>
