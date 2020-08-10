@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+*{
+	text-align: center;
+}
+
+#map{
+	text-align: center;
+	background-color: snow;
+}

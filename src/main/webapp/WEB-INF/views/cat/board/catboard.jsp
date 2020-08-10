@@ -31,7 +31,6 @@
 	}
 </style>
 <link rel="stylesheet" type="text/css" href="resources/css/cat/board/Catboard.css?ver=<%=System.currentTimeMillis()%>">
-<script src="resources/script/jquery-3.2.1.min.js"></script>
 <meta charset="UTF-8">
 <title>고양이 게시판</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
