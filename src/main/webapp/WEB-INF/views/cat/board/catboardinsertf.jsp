@@ -18,7 +18,6 @@ function catboardinsert(){
 	for(var i=0;i<$('#file')[0].files.length;i++){
 		formData.append('files', $('#file')[0].files[i]);
 	}
-	console.log($('#file')[0].files);
 	$.ajax({
 		url: 'catboardinsert',
 		type:'POST',
@@ -27,16 +26,26 @@ function catboardinsert(){
 		contentType: false,
 		data: formData,
 		success: function(data){
-			if(data.bcode == 0){
+			switch(data.code){
+			case 0:
 				alert('글이 등록되었습니다');
 				if(data.view) location.href = 'catboard?code=image';
-					else location.href = 'catboard?code=list';
-			}else if(data.bcode == 1){
-				alert('파일 업로드 실패');
-			}else{
+				else location.href = 'catboard?code=list';
+				break;
+			case 1:
+				alert('파일을 업로드 하는 도중 문제가 발생했습니다');
+				break;
+			case 2:
+				alert('글 등록에 실패했습니다');
+				break;
+			case 3:
 				alert('로그인 후 사용하세요');
-				alert(data.bcode);
-// 				location.href = 'catmain';
+				location.href = "catmain";
+				break;
+			default:
+				alert('내부적인 오류 발생');
+				alert(data.code);
+				break;
 			}
 		}
 	});

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatBoardUploadDAO;
-import jdbcUtil.DiaryDAO;
 import vo.CatBoardUploadVO;
 
 @Service
@@ -23,7 +22,4 @@ public class CatBoardUploadServiceImpl implements CatBoardUploadService{
 	public int insert(CatBoardUploadVO uvo) {
 		return dao.insert(uvo);
 	}
-	
-	
-
 } 

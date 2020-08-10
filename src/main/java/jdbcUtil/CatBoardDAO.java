@@ -40,7 +40,6 @@ public class CatBoardDAO {
 	
 	
 	public int insert(CatBoardVO bv) {
-		System.out.println(bv);
 		return sqlsession.insert(NameSpace+"insert",bv);
 	} // insert
 	
