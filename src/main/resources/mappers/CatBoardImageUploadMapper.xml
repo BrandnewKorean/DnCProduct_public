@@ -5,11 +5,12 @@
 
 <mapper namespace="ex01.mappers.CatBoardImageUploadMapper">
 	<select id="selectList" resultType="vo.CatBoardImageUploadVO">
+
 		select * from catboardupload where seq=#{seq}
 	</select>
 
 	<insert id="insert">
-		insert into catboardupload values(#{seq},#{uploadfile})
+		insert into catboarupload values(#{seq},#{uploadfile})
 	</insert>
 	
 </mapper>
