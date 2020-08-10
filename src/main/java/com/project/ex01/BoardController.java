@@ -117,7 +117,6 @@ public class BoardController {
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
-		System.out.println(list);
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
