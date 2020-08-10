@@ -164,7 +164,6 @@ public class BoardController {
 			for(int i=0;i<list.size();i++) {
 				uploadlistMap.put(list.get(i).getSeq(), uservice.selectList(list.get(i).getSeq()));
 			}
-			System.out.println(uploadlistMap.get(15).get(0).getUploadfile());
 			mv.addObject("uploadlistMap",uploadlistMap);
 			request.getSession().setAttribute("view", true);
 		}

@@ -33,8 +33,8 @@
 // 이 스크립트는 BODY 영역에 작성 한다. 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level:13 // 지도의 확대 레벨
+        center: new kakao.maps.LatLng(37.350010, 127.108941), // 지도의 중심좌표
+        level:5 // 지도의 확대 레벨
     };  
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
