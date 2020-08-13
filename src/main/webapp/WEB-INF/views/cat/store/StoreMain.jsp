@@ -17,36 +17,36 @@
 			<ul class=storemainmenu>
 				<li>식료품
 					<ul class=storesubmenu>
-						<li>사료</li>
-						<li>간식</li>
-						<li>영양제</li>
+						<li><a href="catstoreview?group1=식료품&group2=사료">사료</a></li>
+						<li><a href="catstoreview?group1=식료품&group2=간식">간식</a></li>
+						<li><a href="catstoreview?group1=식료품&group2=영양제">영양제</a></li>
 					</ul>
 				</li>
 				<li>배변/위생용품
 					<ul class=storesubmenu>
-						<li>모래</li>
-						<li>화장실</li>
-						<li>배변용품기타</li>
+						<li><a href="catstoreview?group1=배변/위생용품&group2=모래">모래</a></li>
+						<li><a href="catstoreview?group1=배변/위생용품&group2=화장실">화장실</a></li>
+						<li><a href="catstoreview?group1=배변/위생용품&group2=배변용품기타">배변용품기타</a></li>
 					</ul>
 				</li>
 				<li>미용용품
 					<ul class=storesubmenu>
-						<li>브러쉬/빗</li>
-						<li>샴푸</li>
-						<li>린스</li>
+						<li><a href="catstoreview?group1=미용용품&group2=브러쉬/빗">브러쉬/빗</a></li>
+						<li><a href="catstoreview?group1=미용용품&group2=샴푸">샴푸</a></li>
+						<li><a href="catstoreview?group1=미용용품&group2=린스">린스</a></li>
 					</ul>
 				</li>
 				<li>생활용품
 					<ul class=storesubmenu>
-						<li>장난감</li>
-						<li>스크래처</li>
-						<li>캣 타워</li>
-						<li>하우스/집</li>
-						<li>캐리어</li>
-						<li>식기</li>
-						<li>줄</li>
-						<li>터널</li>
-						<li>이동장</li>
+						<li><a href="catstoreview?group1=생활용품&group2=장난감">장난감</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=스크래처">스크래처</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=캣타워">캣 타워</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=하우스/집">하우스/집</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=캐리어">캐리어</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=식기">식기</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=줄">줄</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=터널">터널</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=이동장">이동장</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -67,13 +67,24 @@
 			</c:if>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
-	
+	<div id=ad_banner>이벤트&주력상품 광고 영역</div>
 	<div class="container">
-		container 영역<br>
-		식료품  Top 5<br>
-		배변/위생용품  Top 5<br>
-		미용용품  Top 5<br>
-		생활용품  Top 5<br>
+		식료품  Top 5
+		<div class=top5>
+			식료품 Top5 이미지 영역
+		</div>
+		배변/위생용품  Top 5
+		<div class=top5>
+			배변/위생용품 Top5 이미지 영역
+		</div>
+		미용용품  Top 5
+		<div class=top5>
+			미용용품 Top5 이미지 영역
+		</div>
+		생활용품  Top 5
+		<div class=top5>
+			생활용품 Top5 이미지 영역
+		</div>
 	</div>
 </body>
 </html>
