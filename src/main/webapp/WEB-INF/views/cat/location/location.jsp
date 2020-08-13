@@ -48,6 +48,9 @@
 	#pagination a {display:inline-block;margin-right:10px;}
 	#pagination .on {font-weight: bold; cursor: default;color:#777;}
 	*{text-align: center;}
+	#kf{position: relative; bottom: 40px;}
+	#collabo{position: relative; bottom: 60px;}
+	.blink{text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 30px #fff, 0 0 4px #ff00de, 0 0 7px #ff00de, 0 0 8px #ff00de, 0 0 10px #ff00de, 0 0 150px #ff00de;}
 </style>
 
 
@@ -56,6 +59,9 @@
 
 
 <img src="resources/image/logoe.png" onclick="location.href='catmain'" width=10%>
+<img src="resources/image/x.png" width=2% id="collabo">&nbsp;&nbsp;
+<img src="resources/image/kf.png" onclick="location.href='https://www.kakao.com'" width=10% id="kf">
+
 
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -340,6 +346,16 @@ function removeAllChildNods(el) {
 }
 </script>
 
+<!--  
+<script>
+	setInterval(function(){
+		  $(".blink").toggle();
+		}, 750);
+</script>
+-->
+<span class="blink">
 <h2 style="color: #ffe812;">From DnC with Kakao</h2>
+</span>
+
 </body>
 </html>
