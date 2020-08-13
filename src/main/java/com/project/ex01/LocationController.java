@@ -9,7 +9,7 @@ public class LocationController {
 	
 	@RequestMapping(value = "/hospital")
 	public ModelAndView hospital(ModelAndView mv) {
-		mv.setViewName("cat/location/hospital");
+		mv.setViewName("cat/location/hospitalmap");
 		return mv;
 	}// hospital
 	
