@@ -158,7 +158,8 @@ public class BoardController {
 				}
 			}
 		}
-		
+		// Map은 interface , HashMap은 class이다
+		// key =seq , value = seq에 해당하는 uploadlist
 		if(code.equals("image")) {
 			Map<Integer,List<CatBoardUploadVO>> uploadlistMap = new HashMap<>();
 			for(int i=0;i<list.size();i++) {
