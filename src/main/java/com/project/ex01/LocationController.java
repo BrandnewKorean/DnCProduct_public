@@ -7,12 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LocationController {
 	
-	@RequestMapping(value = "/hospital")
-	public ModelAndView hospital(ModelAndView mv) {
-		mv.setViewName("cat/location/hospitalmap");
+	@RequestMapping(value = "/location")
+	public ModelAndView location(ModelAndView mv) {
+		mv.setViewName("cat/location/location");
 		return mv;
-	}// hospital
+	}// location
 	
-	
-
 } // class

@@ -77,8 +77,8 @@ $(function(){
 		location.href="catboard";
 	});
 	
-	$('#hospital').click(function(){
-		location.href = "hospital";
+	$('#location').click(function(){
+		location.href = "location";
 	});
 	
 	$('#storemain').click(function(){
