@@ -1,0 +1,54 @@
+@charset "UTF-8";
+body{
+	margin: 0;
+}
+.header{
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+	margin: 0;
+	width: 100%;
+	z-index: 100;
+	background-color: Lavender;
+}
+#catmainlogo{
+	position: relative;
+	left: 0;
+}
+.tmenu{
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	display: inline-block;
+	background-color: rgba(255,255,255,0);
+}
+.tmenu > span{
+	font-family: "NanumPen";
+	font-size: 18pt;
+	background-color: rgba(255,255,255,0);
+}
+#profile_image{
+	position: absolute;
+	display: inline-block;
+	right: 0;
+	width: 7%;
+	height: 100%;
+	border: 1px solid;
+	border-radius: 50%;
+}
+#client_info{
+	position: absolute;
+	right: 0;
+	width: 30%;
+	height: 300px;
+	background-color: white;
+	display: none;
+	text-align: center;
+}
+.tmenu_result{
+	position: absolute;
+	right:20px;
+	top: 110%;
+	width: 150px;
+	border-radius: 10px;
+}
