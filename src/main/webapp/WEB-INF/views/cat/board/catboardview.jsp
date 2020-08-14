@@ -238,6 +238,9 @@ $(function(){
 	<div id="viewcontent">
 	${bv.content}
 	</div>
+	
+	
+	
 	<h2 style="color: blue">댓글(${bv.comments})</h2>
 	<span class=table>
 		<c:if test="${comment == '[]'}">
@@ -249,7 +252,6 @@ $(function(){
 					<span>${c.id} : </span><pre>${c.content}</pre>
 				</div>
 				<br>
-<%-- 				<div class="td2"><pre>${c.id}</pre></div> --%>
 				<c:if test="${logID==c.id}">   
 					<button id="ub${c.counter}" onclick="commentupdate(${c.counter}, '${c.content}')">댓글수정하기</button>
 					<button onclick="commentdelete(${c.counter})">댓글삭제하기</button><br>

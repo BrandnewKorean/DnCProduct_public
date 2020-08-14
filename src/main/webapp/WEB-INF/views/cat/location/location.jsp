@@ -46,6 +46,41 @@
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 
+.MapControlView .accessLocation {
+    display: block;
+    position: relative;
+    width: 32px;
+    height: 32px;
+    padding: 1px 3px 5px;
+    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) no-repeat -150px -450px;
+}
+a:link, a:active, a:visited {
+    color: #333;
+    text-decoration: none;
+}
+<style>
+a {
+    color: #333;
+    text-decoration: none;
+}
+user agent stylesheet
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline;
+}
+<style>
+body, th, td, input, select, textarea, button {
+    font-size: 12px;
+    line-height: 1.5;
+    font-family: AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;
+    color: #222;
+}
+body {
+    font: 12px/1.5 'Malgun Gothic','돋움',dotum,sans-serif;
+    background: #fff;
+    color: #333;
+    letter-spacing: -1px;}
 </style>
 </head>
 <body>
@@ -64,6 +99,10 @@
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
+        <a href="#none" class="accessLocation">
+		<span class="screen_out">현위치</span>
+		<span class="coach_accessLocation"></span>
+	</a>
     </div>
 </div>
 
@@ -80,6 +119,8 @@ if (navigator.geolocation) {
         var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
             message = '<div style="padding:5px;">고객님의 현재 위치입니다</div>'; // 인포윈도우에 표시될 내용입니다
         // 마커와 인포윈도우를 표시합니다
+        console.log	(lat);
+        console.log(lon);
         displayMarker(locPosition, message);
       });
 } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다

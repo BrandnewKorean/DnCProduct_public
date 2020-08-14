@@ -11,6 +11,6 @@ public class LocationController {
 	public ModelAndView location(ModelAndView mv) {
 		mv.setViewName("cat/location/location");
 		return mv;
-	} // hospital
+	} // location
 	
 }//controller
