@@ -2,88 +2,67 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %> 
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Hospital Map</title>
+<title>Location</title>
 <script src="resources/script/jquery-3.2.1.min.js"></script>
-<style>
-.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:100%;height:500px;}
-#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-.bg_white {background:#fff;}
-#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-#menu_wrap .option{text-align: center;}
-#menu_wrap .option p {margin:10px 0;}  
-#menu_wrap .option button {margin-left:5px;}
-#placesList li {list-style: none;}
-#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-#placesList .item span {display: block;margin-top:4px;}
-#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-#placesList .item .info{padding:10px 0 10px 55px;}
-#placesList .info .gray {color:#8a8a8a;}
-#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-#placesList .info .tel {color:#009900;}
-#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-#placesList .item .marker_1 {background-position: 0 -10px;}
-#placesList .item .marker_2 {background-position: 0 -56px;}
-#placesList .item .marker_3 {background-position: 0 -102px}
-#placesList .item .marker_4 {background-position: 0 -148px;}
-#placesList .item .marker_5 {background-position: 0 -194px;}
-#placesList .item .marker_6 {background-position: 0 -240px;}
-#placesList .item .marker_7 {background-position: 0 -286px;}
-#placesList .item .marker_8 {background-position: 0 -332px;}
-#placesList .item .marker_9 {background-position: 0 -378px;}
-#placesList .item .marker_10 {background-position: 0 -423px;}
-#placesList .item .marker_11 {background-position: 0 -470px;}
-#placesList .item .marker_12 {background-position: 0 -516px;}
-#placesList .item .marker_13 {background-position: 0 -562px;}
-#placesList .item .marker_14 {background-position: 0 -608px;}
-#placesList .item .marker_15 {background-position: 0 -654px;}
-#pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
 
-.MapControlView .accessLocation {
-    display: block;
-    position: relative;
-    width: 32px;
-    height: 32px;
-    padding: 1px 3px 5px;
-    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) no-repeat -150px -450px;
-}
-a:link, a:active, a:visited {
-    color: #333;
-    text-decoration: none;
-}
 <style>
-a {
-    color: #333;
-    text-decoration: none;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-<style>
-body, th, td, input, select, textarea, button {
-    font-size: 12px;
-    line-height: 1.5;
-    font-family: AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;
-    color: #222;
-}
-body {
-    font: 12px/1.5 'Malgun Gothic','돋움',dotum,sans-serif;
-    background: #fff;
-    color: #333;
-    letter-spacing: -1px;}
+	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px; text-align: center;}
+	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+	.map_wrap {position:relative;width:100%%;height:500px;}
+	#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+	.bg_white {background:#fff;}
+	#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+	#menu_wrap .option{text-align: center;}
+	#menu_wrap .option p {margin:10px 0;}  
+	#menu_wrap .option button {margin-left:5px;}
+	#placesList li {list-style: none;}
+	#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+	#placesList .item span {display: block;margin-top:4px;}
+	#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+	#placesList .item .info{padding:10px 0 10px 55px;}
+	#placesList .info .gray {color:#8a8a8a;}
+	#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+	#placesList .info .tel {color:#009900;}
+	#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+	#placesList .item .marker_1 {background-position: 0 -10px;}
+	#placesList .item .marker_2 {background-position: 0 -56px;}
+	#placesList .item .marker_3 {background-position: 0 -102px}
+	#placesList .item .marker_4 {background-position: 0 -148px;}
+	#placesList .item .marker_5 {background-position: 0 -194px;}
+	#placesList .item .marker_6 {background-position: 0 -240px;}
+	#placesList .item .marker_7 {background-position: 0 -286px;}
+	#placesList .item .marker_8 {background-position: 0 -332px;}
+	#placesList .item .marker_9 {background-position: 0 -378px;}
+	#placesList .item .marker_10 {background-position: 0 -423px;}
+	#placesList .item .marker_11 {background-position: 0 -470px;}
+	#placesList .item .marker_12 {background-position: 0 -516px;}
+	#placesList .item .marker_13 {background-position: 0 -562px;}
+	#placesList .item .marker_14 {background-position: 0 -608px;}
+	#placesList .item .marker_15 {background-position: 0 -654px;}
+	#pagination {margin:10px auto;text-align: center;}
+	#pagination a {display:inline-block;margin-right:10px;}
+	#pagination .on {font-weight: bold; cursor: default;color:#777;}
+	*{text-align: center;}
+	#kf{position: relative; bottom: 40px;}
+	#collabo{position: relative; bottom: 60px;}
+	.blink{text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 30px #fff, 0 0 4px #ff00de, 0 0 7px #ff00de, 0 0 8px #ff00de, 0 0 10px #ff00de, 0 0 150px #ff00de;}
 </style>
+
+
 </head>
 <body>
+
+
+<img src="resources/image/logoe.png" onclick="location.href='catmain'" width=10%>
+<img src="resources/image/x.png" width=2% id="collabo">&nbsp;&nbsp;
+<img src="resources/image/kf.png" onclick="location.href='https://www.kakao.com'" width=10% id="kf">
+
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
@@ -91,75 +70,74 @@ body {
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="동물병원" id="keyword" size="5"> 
-                    <button type="submit">검색하기</button> 
+                    키워드 : <input type="text" value="동물병원" id="keyword" size="15"> 
+                    <button type="submit">검색</button> 
                 </form>
             </div>
         </div>
         <hr>
         <ul id="placesList"></ul>
         <div id="pagination"></div>
-        <a href="#none" class="accessLocation">
-		<span class="screen_out">현위치</span>
-		<span class="coach_accessLocation"></span>
-	</a>
     </div>
 </div>
 
-<div id='map' style= "width:90%; height:300px;"></div>
-<script type="text/javascript" 
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5aa24558714e59eec84f58205d2a4fbf&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5aa24558714e59eec84f58205d2a4fbf&libraries=services"></script>
 <script>
-
-if (navigator.geolocation) {
-    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var lat = position.coords.latitude, // 위도
-            lon = position.coords.longitude; // 경도
-        var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            message = '<div style="padding:5px;">고객님의 현재 위치입니다</div>'; // 인포윈도우에 표시될 내용입니다
-        // 마커와 인포윈도우를 표시합니다
-        console.log	(lat);
-        console.log(lon);
-        displayMarker(locPosition, message);
-      });
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),    
-        message = 'geolocation을 사용할수 없어요..'
-    displayMarker(locPosition, message);
-}
-
-function displayMarker(locPosition, message) {
-    // 마커를 생성합니다
-    var marker = new kakao.maps.Marker({  
-        map: map, 
-        position: locPosition
-    }); 
-    var iwContent = message, // 인포윈도우에 표시할 내용
-        iwRemoveable = true;
-    // 인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-        content : iwContent,
-        removable : iwRemoveable
-    });
-    // 인포윈도우를 마커위에 표시합니다 
-    infowindow.open(map, marker);
-    // 지도 중심좌표를 접속위치로 변경합니다
-    map.setCenter(locPosition);      
-}    
-
-//마커를 담을 배열입니다
+// 마커를 담을 배열입니다
 var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 5 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 
+// HTML5의 geolocation 사용여부 확인
+if(navigator.geolocation){
+	// Geolocation을 이용햇 접속 위치 얻어오기
+	navigator.geolocation.getCurrentPosition(function(position){
+		
+		var lat = position.coords.latitude,
+		lon = position.coords.longitude;
+		
+		var locPosition = new kakao.maps.LatLng(lat, lon),
+		message = '<div style="padding:5px;">고객님의 위치입니다.</div>';
+		
+		displayMarker(locPosition, message);
+	});
+}else{
+	var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+	message = '현 위치를 알 수 없습니다.';
+	displayMarker(locPosition, message);
+}
+
+//지도에 마커와 인포윈도우를 표시하는 함수입니다
+function displayMarker(locPosition, message) {
+
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({  
+        map: map, 
+        position: locPosition
+    }); 
+    
+    var iwContent = message, // 인포윈도우에 표시할 내용
+        iwRemoveable = true;
+
+    // 인포윈도우를 생성합니다
+    var infowindow = new kakao.maps.InfoWindow({
+        content : iwContent,
+        removable : iwRemoveable
+    });
+    
+    // 인포윈도우를 마커위에 표시합니다 
+    infowindow.open(map, marker);
+    
+    // 지도 중심좌표를 접속위치로 변경합니다
+    map.setCenter(locPosition);      
+}    
 
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
@@ -168,6 +146,7 @@ var ps = new kakao.maps.services.Places();
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
 // 키워드로 장소를 검색합니다
+//searchPlaces();
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
@@ -262,7 +241,8 @@ function displayPlaces(places) {
     menuEl.scrollTop = 0;
 
     // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-    map.setBounds(bounds);
+  	 map.setBounds(bounds);
+  
 }
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
@@ -365,5 +345,17 @@ function removeAllChildNods(el) {
     }
 }
 </script>
+
+<!--  
+<script>
+	setInterval(function(){
+		  $(".blink").toggle();
+		}, 750);
+</script>
+-->
+<span class="blink">
+<h2 style="color: #ffe812;">From DnC with Kakao</h2>
+</span>
+
 </body>
 </html>
