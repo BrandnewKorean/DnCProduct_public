@@ -133,9 +133,14 @@ $(function(){
 				<div class=block>
 					<div class=image>
 						<a href="catboardview?seq=${bb.seq}">
-							<c:if test="${uploadlistMap.get(bb.seq).size() > 0}">
-								<img src="resources/catboardupload/${bb.seq}_${uploadlistMap.get(bb.seq).get(0).getUploadfile()}" width="100%" height="100%">
-							</c:if>
+							<c:choose>
+								<c:when test="${uploadlistMap.get(bb.seq).size() > 0}">
+									<img src="resources/catboardupload/${bb.seq}_${uploadlistMap.get(bb.seq).get(0).getUploadfile()}" width="100%" height="100%">
+								</c:when>
+								<c:otherwise>
+									<img src="resources/catboardupload/noimage.png" width="100%" height="100%">
+								</c:otherwise>
+							</c:choose>
 						</a>
 					</div>
 					<a href="catboardview?seq=${bb.seq}" style="text-decoration: none;">${bb.title}</a><br>
