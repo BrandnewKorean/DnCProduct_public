@@ -19,4 +19,8 @@ public class ProductDAO {
 	public List<ProductVO> selectList(ProductVO pv){
 		return sqlsession.selectList(NameSpace+"selectList", pv);
 	}
+	
+	public ProductVO selectOne(ProductVO pv) {
+		return sqlsession.selectOne(NameSpace+"selectOne", pv);
+	}
 }

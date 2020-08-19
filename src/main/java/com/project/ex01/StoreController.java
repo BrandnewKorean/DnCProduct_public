@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import searchCriteria.StorePageMaker;
+import searchCriteria.StoreSearch;
 import service.CatStoreService;
 import service.ProductImageService;
 import service.ProductService;
@@ -35,23 +37,32 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "catstoreview")
-	public ModelAndView catstoreview(ModelAndView mv, CatStoreVO cs) {
-		System.out.println(cs);
+	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv, CatStoreVO cs) {
+		System.out.println(search);
+		if(search.getKeyword() == null) search.setKeyword("");
+		search.setPerPage(11);
+		search.setSnoEno();
 		
-		List<CatStoreVO> list = service.selectList(cs);
+		List<CatStoreVO> list = service.searchList(search);
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
-		Map<Integer,String> productnameMap = new HashMap<>();
+		Map<Integer,ProductVO> productMap = new HashMap<>();
+		
+		StorePageMaker pageMaker = new StorePageMaker();
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
 		
 		for(int i=0;i<list.size();i++) {
 			ProductVO pv = new ProductVO();
 			ProductImageVO piv = new ProductImageVO();
-			
-			
-			
+			pv.setProductcode(list.get(i).getProductcode());
 			piv.setProductcode(list.get(i).getProductcode());
 			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
 		}
 		
+		mv.addObject("cs", cs);
+		mv.addObject("pageMaker", pageMaker);
+		mv.addObject("productMap", productMap);
 		mv.addObject("productimageMap",productimageMap);
 		mv.addObject("list", list);
 		mv.setViewName("cat/store/CatStoreView");

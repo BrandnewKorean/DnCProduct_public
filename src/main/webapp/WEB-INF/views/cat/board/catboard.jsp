@@ -181,7 +181,7 @@ $(function(){
 	<br><br><br><br>
 	
 	
-		<div id="searchBar">
+	<div id="searchBar">
 		<select name="searchBar" id="searchType">
 			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
 			<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>

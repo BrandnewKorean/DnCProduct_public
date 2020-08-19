@@ -15,6 +15,28 @@ body{
 	position: relative;
 	left: 0;
 }
+#search_label{
+	display: inline-block;
+	width: 550px;
+	height: 30px;
+	padding: 5px 0;
+	background-color: LightSteelBlue;
+	border: none;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+#keyword{
+	float: left;
+	width: 500px;
+	height: 25px;
+	background-color: rgba(255,255,255,0);
+	border: none;
+	border-radius: 5px;
+}
+#searchButton{
+	background-color: rgba(255,255,255,0);
+	border: none;
+}
 .tmenu{
 	position: absolute;
 	right: 10px;
@@ -51,4 +73,75 @@ body{
 	top: 110%;
 	width: 150px;
 	border-radius: 10px;
+}
+#storemenu{
+	position: absolute;
+	display: inline-block;
+	left: 30%;
+	bottom: 0;
+}
+.storemainmenu{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.storemainmenu > li{
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+	margin: 0;
+	padding: 5px 0 5px 0;
+	border-radius: 5px;
+}
+.storemainmenu > li:hover{
+	background-color: orange;
+	font-weight: bold;
+}
+.storemainmenu > li:hover .storesubmenu > li{
+	display: block;
+	font-weight: normal;
+}
+.storesubmenu{
+	position: absolute;
+	list-style: none;
+	padding: 0;
+	margin: 5px 0 0 0;
+	background-color: snow;
+	border-radius: 5px;
+}
+.storesubmenu > li{
+	display: none;
+	width: 150px;
+	text-align: center;
+	padding: 5px 0 5px 0;
+}
+.storesubmenu > li > a{
+	display: block;
+	text-decoration: none;
+	color: black;
+}
+.storesubmenu > li > a:hover{
+	color: orange;
+	font-weight: bold;
+	background-color: MistyRose;
+}
+.container{
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+	background-color: snow;
+	text-align: center;
+}
+.products{
+	display: inline-block;
+	width: 200px;
+	height: 300px;
+	padding: 0 50px;
+	margin: 10px;
+	text-align: center;
+	border: 1px solid;
+	overflow: hidden;
+}
+.blocks{
+	text-align: center;
 }

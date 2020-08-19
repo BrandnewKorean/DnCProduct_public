@@ -71,7 +71,8 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="동물병원" id="keyword" size="15"> 
-                    <button type="submit">검색</button> 
+                    <button type="submit">검색</button>
+                        <button onclick="mylocation()">현위치</button> 
                 </form>
             </div>
         </div>
@@ -97,7 +98,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // HTML5의 geolocation 사용여부 확인
 if(navigator.geolocation){
-	// Geolocation을 이용햇 접속 위치 얻어오기
+	// Geolocation을 이용해서 접속 위치 얻어오기
 	navigator.geolocation.getCurrentPosition(function(position){
 		
 		var lat = position.coords.latitude,
@@ -113,6 +114,31 @@ if(navigator.geolocation){
 	message = '현 위치를 알 수 없습니다.';
 	displayMarker(locPosition, message);
 }
+
+
+// 내 위치로 돌아가기
+function mylocation() {
+	
+	if(navigator.geolocation){
+		// Geolocation을 이용해서 접속 위치 얻어오기
+		navigator.geolocation.getCurrentPosition(function(position){
+			
+			var lat = position.coords.latitude,
+			lon = position.coords.longitude;
+			
+			var locPosition = new kakao.maps.LatLng(lat, lon),
+			message = '<div style="padding:5px;">고객님의 위치입니다.</div>';
+			
+			displayMarker(locPosition, message);
+		});
+	}else{
+		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+		message = '현 위치를 알 수 없습니다.';
+		displayMarker(locPosition, message);
+	}
+}
+
+
 
 //지도에 마커와 인포윈도우를 표시하는 함수입니다
 function displayMarker(locPosition, message) {
