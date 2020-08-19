@@ -1,9 +1,13 @@
 package jdbcUtil;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.social.connect.Connection;
 import org.springframework.stereotype.Repository;
 
 import searchCriteria.Search;
@@ -74,5 +78,9 @@ public class CatBoardDAO {
 	public int insertseq() {
 		return sqlsession.selectOne(NameSpace+"insertseq");
 	}
+	
+	
+	
+	
 
 } // boardDAO
