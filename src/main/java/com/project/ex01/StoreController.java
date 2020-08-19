@@ -40,18 +40,18 @@ public class StoreController {
 		
 		List<CatStoreVO> list = service.selectList(cs);
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
-		Map<Integer,String> productnameMap = new HashMap<>();
+		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
 		for(int i=0;i<list.size();i++) {
 			ProductVO pv = new ProductVO();
 			ProductImageVO piv = new ProductImageVO();
-			
-			
-			
+			pv.setProductcode(list.get(i).getProductcode());
 			piv.setProductcode(list.get(i).getProductcode());
 			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
 		}
 		
+		mv.addObject("productMap", productMap);
 		mv.addObject("productimageMap",productimageMap);
 		mv.addObject("list", list);
 		mv.setViewName("cat/store/CatStoreView");

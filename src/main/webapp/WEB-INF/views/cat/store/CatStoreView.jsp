@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Cat Store</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/store/StoreMain.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="resources/css/cat/store/CatStoreView.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="resources/script/catstoreview.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
@@ -68,10 +68,15 @@
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 	스토어 보기<br>
-	${list}<br>
-	${productimageMap}
-	<c:forEach var="pl" items="${list}">
-		${pl.productcode}
-	</c:forEach>
+	${productimageMap}<br>
+	${productMap}<br>
+	<div class=container>
+		<c:forEach var="pl" items="${list}">
+			<div class=products>
+				<img src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=100% height=100%>
+				${productMap.get(pl.seq).name}
+			</div>
+		</c:forEach>
+	</div>
 </body>
 </html>
