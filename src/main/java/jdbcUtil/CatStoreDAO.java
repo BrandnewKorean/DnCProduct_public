@@ -28,4 +28,8 @@ public class CatStoreDAO {
 	public List<CatStoreVO> searchList(StoreSearch search){
 		return sqlsession.selectList(NameSpace+"searchList", search);
 	}
+	
+	public CatStoreVO selectOne(CatStoreVO cs) {
+		return sqlsession.selectOne(NameSpace+"selectOne", cs);
+	}
 }

@@ -5,15 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cat Store</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/store/StoreMain.css?ver=<%= System.currentTimeMillis()%>">
+<title>${pv.name}</title>
+<link rel="stylesheet" type="text/css" href="resources/css/cat/store/Products.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="resources/script/storemain.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="resources/script/DecimalFormat.js"></script>
+<script type="text/javascript" src="resources/script/products.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div class="header">
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
 		<div id="storemenu">
+			<label id=search_label for="keyword">
+				<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+				<button id="searchButton"><img src="resources/image/search_button.png" width=27px height=27px></button>
+			</label>
+			<br>
 			<ul class=storemainmenu>
 				<li>식료품
 					<ul class=storesubmenu>
@@ -55,34 +61,35 @@
 				<span class=text id=home>Home</span>&nbsp;|&nbsp;<span class=text id=join>Join</span>&nbsp;|&nbsp;<span class=text id=login>Login</span>
 			</div>
 		</c:if>
-			<c:if test="${logID != null}">
-				<div id=profile_image></div>
-				<div id=client_info>
-					<div id=client_result></div>
-					<button id=logout>logout</button>
-					<button id=updatef>update</button>
-					<button id=delete>회원탈퇴</button>
-				</div>
-			</c:if>
+		<c:if test="${logID != null}">
+			<div id=profile_image></div>
+			<div id=client_info>
+				<div id=client_result></div>
+				<button id=logout>logout</button>
+				<button id=updatef>update</button>
+				<button id=delete>회원탈퇴</button>
+			</div>
+		</c:if>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
-	<div id=ad_banner>이벤트&주력상품 광고 영역</div>
-	<div class="container">
-		식료품  Top 5
-		<div class=top5>
-			식료품 Top5 이미지 영역
+	<div class=container>
+		<input type="hidden" id=productcode value="${pv.productcode}">
+		<div id=product_image>
+			<img id=image_view src="resources/productimage/${imagelist.get(0).filename}" width=100% height=100%>
+			<div id=product_image_button></div>
 		</div>
-		배변/위생용품  Top 5
-		<div class=top5>
-			배변/위생용품 Top5 이미지 영역
-		</div>
-		미용용품  Top 5
-		<div class=top5>
-			미용용품 Top5 이미지 영역
-		</div>
-		생활용품  Top 5
-		<div class=top5>
-			생활용품 Top5 이미지 영역
+		<div id=product_info>
+			<a id=product_name>${pv.name}</a><br>
+			<a id=product_price>${price}</a>원<br>
+			<hr>
+			<div id=product_detail>
+				상품 상세정보
+			</div>
+			<div id=buy_buttons>
+				<button class=number_buttons id=number_minus>-</button><input id=number_input type="text"><button class=number_buttons id=number_plus>+</button><br>
+				총 <a id=number></a> 개 <a id=total_price></a>원<br>
+				<button>장바구니</button> <button>구매하기</button>
+			</div>
 		</div>
 	</div>
 </body>
