@@ -37,7 +37,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "catstoreview")
-	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv, CatStoreVO cs) {
+	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		System.out.println(search);
 		if(search.getKeyword() == null) search.setKeyword("");
 		search.setPerPage(11);
@@ -60,7 +60,7 @@ public class StoreController {
 			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
 		}
 		
-		mv.addObject("cs", cs);
+		mv.addObject("search", search);
 		mv.addObject("pageMaker", pageMaker);
 		mv.addObject("productMap", productMap);
 		mv.addObject("productimageMap",productimageMap);

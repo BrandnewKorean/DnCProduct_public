@@ -14,8 +14,8 @@ $(function(){
 	$('#searchButton').on("click",function(){
 		self.location='catstoreview'
 		+"${pageMaker.makeQuery(1)}"
-		+"&group1=${cs.group1}"
-		+"&group2=${cs.group2}"
+		+"&group1=${search.group1}"
+		+"&group2=${search.group2}"
 		+"&keyword="
 		+$("#keyword").val()
 	});
@@ -101,8 +101,8 @@ $(function(){
 	</div>
 	<div class=blocks>
 		<c:if test="${pageMaker.prev}">
-			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${cs.group1}&group2=${cs.group2}">First</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${cs.group1}&group2=${cs.group2}">Prev&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}">First</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}">Prev&nbsp;</a>
 		</c:if>
 		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 			<c:choose>
@@ -110,13 +110,13 @@ $(function(){
 					<font size="5" color="orange">${i}</font>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${cs.group1}&group2=${cs.group2}">${i}</a>&nbsp;
+					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}">${i}</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${cs.group1}&group2=${cs.group2}">Next&nbsp;&nbsp;</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${cs.group1}&group2=${cs.group2}">End&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}">Next&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
 	<br><br><br>
