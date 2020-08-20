@@ -9,4 +9,5 @@ public interface CatStoreService {
 	List<CatStoreVO> selectList(CatStoreVO cs);
 	int searchRowCount(StoreSearch search);
 	List<CatStoreVO> searchList(StoreSearch search);
+	CatStoreVO selectOne(CatStoreVO cs);
 }
