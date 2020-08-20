@@ -21,6 +21,6 @@ public class ProductDAO {
 	}
 	
 	public ProductVO selectOne(ProductVO pv) {
-		return sqlsession.selectOne(NameSpace+"selectOne",pv);
+		return sqlsession.selectOne(NameSpace+"selectOne", pv);
 	}
 }

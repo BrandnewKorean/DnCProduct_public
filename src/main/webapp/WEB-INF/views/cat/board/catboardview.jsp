@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,7 @@
 </head>
 <script type="text/javascript" src="resources/script/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="resources/script/writecomment.js?ver=<%= System.currentTimeMillis()%>"></script>
+
 <script type="text/javascript">
 function catboarddelete(){
 	$.ajax({
@@ -31,6 +33,7 @@ function catboarddelete(){
 		}
 	});
 }
+
 function commentdelete(counter){
 	$.ajax({
 		url:'commentdelete',
@@ -52,6 +55,7 @@ function commentdelete(counter){
 		}
 	});
 }
+
 function submitupdate(counter){
     console.log('update counter ='+counter);
 	$.ajax({
@@ -76,12 +80,14 @@ function submitupdate(counter){
 	}
   });
 }
+
 function commentupdate(counter, content){
 	console.log(content);
 	$("#td1" +counter).empty();
 	$("#td1" +counter).append("<textarea id='updatetext" +counter +"'>" +content +"</textarea>");
 	$("#ub" +counter).attr("onclick", "submitupdate(" +counter +")");
 }
+
 $(function(){
 	var backImg = '';
 	var backPos = '';
@@ -125,7 +131,7 @@ $(function(){
 					backPos += "center center";
 					backRe += "no-repeat";
 				}
-				
+				console.log(backImg);
 				$('#viewupload').css({
 					backgroundImage: backImg,
 					backgroundSize: backSize,
@@ -209,10 +215,33 @@ $(function(){
 		else $('#submit').attr('disabled', true);
 	});
 });
+
+function like() {
+	$.ajax({
+		url:"BoardServlet",
+		type:"POST",
+		cache:false,
+		dataType:"json",
+		data:$('#like_form').serialize(),
+		success:
+			function(data) {
+				alert('좋아요가 반영되었습니다.');
+				$("#like_result").html(data.like);
+			},
+			error:
+				function(request,status,error) {
+					alert('ajax 실패');
+				}
+	});
+}
+
 </script>
+
+
 <body>
 <div class=header>
 	<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
+	
 	<div id="header_menu">
 		<c:if test="${logID==bv.id}">
 			<button onclick="location.href='catboardupdatef?seq=${bv.seq}'">글 수정</button>
@@ -220,6 +249,8 @@ $(function(){
 	</c:if>
 	</div>
 </div>
+
+
 <%-- <c:choose>
 	<c:when test="${view}">
 		<button onclick="location.href = 'catboard?code=image'">이전으로</button>
@@ -229,19 +260,21 @@ $(function(){
 	</c:otherwise>
 </c:choose>
  --%>
+ 
 <!-- <h2>View</h2> -->
+
 <div class="container">
 	<input type="hidden" id="seq" value="${bv.seq}">
 	<span id="viewtitle">${bv.title}</span>
 	<hr>
-	
+
 	<div id="viewcontent">
 	${bv.content}
 	</div>
 	
-	
-	
 	<h2 style="color: blue">댓글(${bv.comments})</h2>
+
+
 	<span class=table>
 		<c:if test="${comment == '[]'}">
 			<div>등록된 댓글이 없습니다</div>
@@ -252,6 +285,7 @@ $(function(){
 					<span>${c.id} : </span><pre>${c.content}</pre>
 				</div>
 				<br>
+<%-- 				<div class="td2"><pre>${c.id}</pre></div> --%>
 				<c:if test="${logID==c.id}">   
 					<button id="ub${c.counter}" onclick="commentupdate(${c.counter}, '${c.content}')">댓글수정하기</button>
 					<button onclick="commentdelete(${c.counter})">댓글삭제하기</button><br>

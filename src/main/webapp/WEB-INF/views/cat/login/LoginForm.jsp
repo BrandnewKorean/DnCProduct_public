@@ -14,10 +14,10 @@
 <meta name="google-signin-client_id" content="464025460206-5ffi7i9pibd984alsf29h6e565n0s4co.apps.googleusercontent.com">
 <title>Login</title>
 <style type="text/css">
-	*{ 
+	*{
 		background-color: LavenderBlush;
 		margin: 0;
-	} 
+	}
 	.container{
 		margin: 0 auto;
 		text-align: center;
@@ -35,16 +35,13 @@
 	}
 
 </style>
-
 <script>
-	function login_cursur(){
+	function idfocus() {
 		document.getElementById("id").focus();
-	}// function
-
+	}
 </script>
-
 </head>
-<body onload="login_cursur()">
+<body onload="idfocus()">
 <div class=container>
 	<img src="/ex01/resources/image/logob.png" width="100%" onclick="location.href = 'catmain'">
 	<h2>Login</h2><br>

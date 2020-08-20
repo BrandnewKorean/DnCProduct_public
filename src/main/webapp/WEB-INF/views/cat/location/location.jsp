@@ -51,40 +51,6 @@
 	#kf{position: relative; bottom: 40px;}
 	#collabo{position: relative; bottom: 60px;}
 	.blink{text-shadow: 0 0 1px #fff, 0 0 2px #fff, 0 0 30px #fff, 0 0 4px #ff00de, 0 0 7px #ff00de, 0 0 8px #ff00de, 0 0 10px #ff00de, 0 0 150px #ff00de;}
-	.MapControlView .accessLocation {
-    display: block;
-    position: relative;
-    width: 32px;
-    height: 32px;
-    padding: 1px 3px 5px;
-    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/img_search.png) no-repeat -150px -450px;
-}
-a:link, a:active, a:visited {
-    color: #333;
-    text-decoration: none;
-}
-a {
-    color: #333;
-    text-decoration: none;
-}
-user agent stylesheet
-a:-webkit-any-link {
-    color: -webkit-link;
-    cursor: pointer;
-    text-decoration: underline;
-}
-body, th, td, input, select, textarea, button {
-    font-size: 12px;
-    line-height: 1.5;
-    font-family: AppleSDGothicNeo-Regular,'Malgun Gothic','맑은 고딕',dotum,'돋움',sans-serif;
-    color: #222;
-}
-body {
-    font: 12px/1.5 'Malgun Gothic','돋움',dotum,sans-serif;
-    background: #fff;
-    color: #333;
-    letter-spacing: -1px;}
-
 </style>
 
 
@@ -98,19 +64,16 @@ body {
 
 
 <div class="map_wrap">
-    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;">
-    
-    </div>
+    <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
-    
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="동물병원" id="keyword" size="15"> 
-                    <input type="submit" value="검색">
+                    <button type="submit">검색</button>
+                        <button onclick="mylocation()">현위치</button> 
                 </form>
-                <button onclick="presentlocation()">현위치</button>
             </div>
         </div>
         <hr>
@@ -135,7 +98,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // HTML5의 geolocation 사용여부 확인
 if(navigator.geolocation){
-	// Geolocation을 이용햇 접속 위치 얻어오기
+	// Geolocation을 이용해서 접속 위치 얻어오기
 	navigator.geolocation.getCurrentPosition(function(position){
 		
 		var lat = position.coords.latitude,
@@ -152,10 +115,12 @@ if(navigator.geolocation){
 	displayMarker(locPosition, message);
 }
 
-function presentlocation(){
+
+// 내 위치로 돌아가기
+function mylocation() {
 	
 	if(navigator.geolocation){
-		// Geolocation을 이용햇 접속 위치 얻어오기
+		// Geolocation을 이용해서 접속 위치 얻어오기
 		navigator.geolocation.getCurrentPosition(function(position){
 			
 			var lat = position.coords.latitude,
@@ -164,15 +129,15 @@ function presentlocation(){
 			var locPosition = new kakao.maps.LatLng(lat, lon),
 			message = '<div style="padding:5px;">고객님의 위치입니다.</div>';
 			
-			map.setCenter(locPosition);
+			displayMarker(locPosition, message);
 		});
 	}else{
 		var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
 		message = '현 위치를 알 수 없습니다.';
 		displayMarker(locPosition, message);
 	}
-	
 }
+
 
 
 //지도에 마커와 인포윈도우를 표시하는 함수입니다
@@ -209,7 +174,6 @@ var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 // 키워드로 장소를 검색합니다
 //searchPlaces();
 
-
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 
@@ -223,7 +187,6 @@ function searchPlaces() {
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
 }
-
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
@@ -248,8 +211,6 @@ function placesSearchCB(data, status, pagination) {
 
     }
 }
-
-
 
 // 검색 결과 목록과 마커를 표출하는 함수입니다
 function displayPlaces(places) {
@@ -290,11 +251,11 @@ function displayPlaces(places) {
             });
 
             itemEl.onmouseover =  function () {
-//                 displayInfowindow(marker, title);
+                displayInfowindow(marker, title);
             };
 
             itemEl.onmouseout =  function () {
-//                 infowindow.close();
+                infowindow.close();
             };
         })(marker, places[i].place_name);
 
@@ -309,8 +270,6 @@ function displayPlaces(places) {
   	 map.setBounds(bounds);
   
 }
-
-
 
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
@@ -336,8 +295,6 @@ function getListItem(index, places) {
     return el;
 }
 
-
-
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
 function addMarker(position, idx, title) {
     var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
@@ -358,7 +315,6 @@ function addMarker(position, idx, title) {
 
     return marker;
 }
-
 
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
@@ -398,7 +354,6 @@ function displayPagination(pagination) {
     }
     paginationEl.appendChild(fragment);
 }
-
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다

@@ -9,6 +9,21 @@
 	</select>
 	
 	<select id="searchRowCount" resultType="int">
-		select count(*) from catstore where productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%'))
+		<![CDATA[
+		select count(*) from catstore where (seq>0]]>
+		<include refid="search"></include>
 	</select>
+	
+	<select id="searchList" resultType="vo.CatStoreVO">
+		<![CDATA[
+		select * from 
+		(select s.*,ROW_NUMBER() OVER(order by seq desc) rnum
+		from catstore s where seq>0]]>
+		<include refid="search"></include>
+		where rnum between #{startno} and #{endno} order by seq desc
+	</select>
+	
+	<sql id="search">
+		and group1=#{group1} and group2=#{group2} and productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%')))
+	</sql>
 </mapper>

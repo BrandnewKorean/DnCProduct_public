@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import searchCriteria.Search;
+import searchCriteria.StoreSearch;
 import vo.CatStoreVO;
 
 @Repository
@@ -21,8 +21,12 @@ public class CatStoreDAO {
 		return sqlsession.selectList(NameSpace+"selectList", cs);
 	}
 	
-	public int searchRowCount(Search search) {
+	public int searchRowCount(StoreSearch search) {
 		return sqlsession.selectOne(NameSpace+"searchRowCount", search);
+	}
+	
+	public List<CatStoreVO> searchList(StoreSearch search){
+		return sqlsession.selectList(NameSpace+"searchList", search);
 	}
 	
 }

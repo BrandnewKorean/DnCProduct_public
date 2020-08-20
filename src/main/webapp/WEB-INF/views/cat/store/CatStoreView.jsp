@@ -26,6 +26,11 @@ $(function(){
 	<div class="header">
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
 		<div id="storemenu">
+			<label id=search_label for="keyword">
+				<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+				<button id="searchButton"><img src="resources/image/search_button.png" width=27px height=27px></button>
+			</label>
+			<br>
 			<ul class=storemainmenu>
 				<li>식료품
 					<ul class=storesubmenu>
@@ -79,41 +84,41 @@ $(function(){
 			</c:if>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
-	${cs}
 	<div class=container>
-		<c:forEach var="pl" items="${list}">
-			<div class=products>
-				<img src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=100% height=100%>
-				${productMap.get(pl.seq).name}
-			</div>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${list.size() > 0}">
+				<c:forEach var="pl" items="${list}">
+					<div class=products>
+						<img src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=200px height=200px>
+						${productMap.get(pl.seq).name}
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				등록된 상품이 없습니다
+			</c:otherwise>
+		</c:choose>
 	</div>
-	<div>
+	<div class=blocks>
 		<c:if test="${pageMaker.prev}">
-			<a href="catboard${pageMaker.makeSearch(1)}&code=image">First</a>
-			<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">Prev&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${cs.group1}&group2=${cs.group2}">First</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${cs.group1}&group2=${cs.group2}">Prev&nbsp;</a>
 		</c:if>
-		
 		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 			<c:choose>
 				<c:when test="${pageMaker.search.currentPage==i}">
 					<font size="5" color="orange">${i}</font>&nbsp;
 				</c:when>
-				
 				<c:otherwise>
-					<a href="catboard${pageMaker.makeSearch(i)}&code=image">${i}</a>&nbsp;
+					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${cs.group1}&group2=${cs.group2}">${i}</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-		
 		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-			<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">Next&nbsp;&nbsp;</a>
-			<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">End&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${cs.group1}&group2=${cs.group2}">Next&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${cs.group1}&group2=${cs.group2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
-	<div>
-		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
-		<button id="searchButton">검색</button>
-	</div>
+	<br><br><br>
 </body>
 </html>
