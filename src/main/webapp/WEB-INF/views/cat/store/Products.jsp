@@ -10,6 +10,8 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="resources/script/DecimalFormat.js"></script>
 <script type="text/javascript" src="resources/script/products.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="resources/script/payment.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div class="header">
@@ -88,7 +90,7 @@
 			<div id=buy_buttons>
 				<button class=number_buttons id=number_minus>-</button><input id=number_input type="text"><button class=number_buttons id=number_plus>+</button><br>
 				총 <a id=number></a> 개 <a id=total_price></a>원<br>
-				<button>장바구니</button> <button>구매하기</button>
+				<button>장바구니</button> <button id=payment>구매하기</button>
 			</div>
 		</div>
 	</div>
