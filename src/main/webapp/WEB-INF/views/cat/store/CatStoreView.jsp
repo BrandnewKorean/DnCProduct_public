@@ -6,9 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Cat Store</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/store/StoreMain.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="resources/css/cat/store/CatStoreView.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="resources/script/catstoreview.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script>
+$(function(){
+	$('#searchButton').on("click",function(){
+		self.location='catstoreview'
+		+"${pageMaker.makeQuery(1)}"
+		+"&group1=${cs.group1}"
+		+"&group2=${cs.group2}"
+		+"&keyword="
+		+$("#keyword").val()
+	});
+});
+</script>
 </head>
 <body>
 	<div class="header">
@@ -67,11 +79,41 @@
 			</c:if>
 		<div class=tmenu_result id=tmenu_result></div>
 	</div>
-	스토어 보기<br>
-	${list}<br>
-	${productimageMap}
-	<c:forEach var="pl" items="${list}">
-		${pl.productcode}
-	</c:forEach>
+	${cs}
+	<div class=container>
+		<c:forEach var="pl" items="${list}">
+			<div class=products>
+				<img src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=100% height=100%>
+				${productMap.get(pl.seq).name}
+			</div>
+		</c:forEach>
+	</div>
+	<div>
+		<c:if test="${pageMaker.prev}">
+			<a href="catboard${pageMaker.makeSearch(1)}&code=image">First</a>
+			<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">Prev&nbsp;</a>
+		</c:if>
+		
+		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
+			<c:choose>
+				<c:when test="${pageMaker.search.currentPage==i}">
+					<font size="5" color="orange">${i}</font>&nbsp;
+				</c:when>
+				
+				<c:otherwise>
+					<a href="catboard${pageMaker.makeSearch(i)}&code=image">${i}</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
+			<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">Next&nbsp;&nbsp;</a>
+			<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">End&nbsp;&nbsp;</a>
+		</c:if>
+	</div>
+	<div>
+		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+		<button id="searchButton">검색</button>
+	</div>
 </body>
 </html>

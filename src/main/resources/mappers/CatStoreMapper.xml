@@ -7,4 +7,8 @@
 	<select id="selectList" resultType="vo.CatStoreVO">
 		select * from catstore where group1=#{group1} and group2=#{group2}
 	</select>
+	
+	<select id="searchRowCount" resultType="int">
+		select count(*) from catstore where productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%'))
+	</select>
 </mapper>
