@@ -215,7 +215,29 @@ $(function(){
 		else $('#submit').attr('disabled', true);
 	});
 });
+
+function like() {
+	$.ajax({
+		url:"BoardServlet",
+		type:"POST",
+		cache:false,
+		dataType:"json",
+		data:$('#like_form').serialize(),
+		success:
+			function(data) {
+				alert('좋아요가 반영되었습니다.');
+				$("#like_result").html(data.like);
+			},
+			error:
+				function(request,status,error) {
+					alert('ajax 실패');
+				}
+	});
+}
+
 </script>
+
+
 <body>
 <div class=header>
 	<img src="resources/image/logod.png" width=7% onclick="location.href='catboard'">
@@ -249,6 +271,7 @@ $(function(){
 	<div id="viewcontent">
 	${bv.content}
 	</div>
+	
 	<h2 style="color: blue">댓글(${bv.comments})</h2>
 
 

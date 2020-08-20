@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatStoreDAO;
+import searchCriteria.StoreSearch;
 import vo.CatStoreVO;
 
 @Service
@@ -17,6 +18,16 @@ public class CatStoreServiceImpl implements CatStoreService{
 	@Override
 	public List<CatStoreVO> selectList(CatStoreVO cs) {
 		return dao.selectList(cs);
+	}
+
+	@Override
+	public int searchRowCount(StoreSearch search) {
+		return dao.searchRowCount(search);
+	}
+
+	@Override
+	public List<CatStoreVO> searchList(StoreSearch search) {
+		return dao.searchList(search);
 	}
 
 }
