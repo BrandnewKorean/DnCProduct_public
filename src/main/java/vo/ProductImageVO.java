@@ -4,6 +4,13 @@ public class ProductImageVO {
 	private String productcode;
 	private String filename;
 	private boolean ismain;
+	
+	public boolean getIsmain() {
+		return ismain;
+	}
+	public void setIsmain(boolean ismain) {
+		this.ismain = ismain;
+	}
 	public String getProductcode() {
 		return productcode;
 	}
@@ -16,16 +23,8 @@ public class ProductImageVO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
-	public boolean isIsmain() {
-		return ismain;
-	}
-	public void setIsmain(boolean ismain) {
-		this.ismain = ismain;
-	}
 	@Override
 	public String toString() {
 		return "ProductImageVO [productcode=" + productcode + ", filename=" + filename + ", ismain=" + ismain + "]";
 	}
-	
-	
 }

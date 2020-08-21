@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cat Store</title>
+<title>${search.group2} - CatStore</title>
 <link rel="stylesheet" type="text/css" href="resources/css/cat/store/CatStoreView.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="resources/script/catstoreview.js?ver=<%= System.currentTimeMillis()%>"></script>
@@ -14,10 +14,14 @@ $(function(){
 	$('#searchButton').on("click",function(){
 		self.location='catstoreview'
 		+"${pageMaker.makeQuery(1)}"
-		+"&group1=${cs.group1}"
-		+"&group2=${cs.group2}"
+		+"&group1=${search.group1}"
+		+"&group2=${search.group2}"
 		+"&keyword="
 		+$("#keyword").val()
+	});
+	
+	$('.products').click(function(){
+		location.href = "products?productcode="+$(this).attr('id').substr(0,$(this).attr('id').indexOf('_'))+"&seq="+$(this).attr('id').substr($(this).attr('id').indexOf('_')+1);
 	});
 });
 </script>
@@ -59,11 +63,10 @@ $(function(){
 						<li><a href="catstoreview?group1=생활용품&group2=스크래처">스크래처</a></li>
 						<li><a href="catstoreview?group1=생활용품&group2=캣타워">캣 타워</a></li>
 						<li><a href="catstoreview?group1=생활용품&group2=하우스/집">하우스/집</a></li>
-						<li><a href="catstoreview?group1=생활용품&group2=캐리어">캐리어</a></li>
+						<li><a href="catstoreview?group1=생활용품&group2=캐리어/이동장">캐리어/이동장</a></li>
 						<li><a href="catstoreview?group1=생활용품&group2=식기">식기</a></li>
 						<li><a href="catstoreview?group1=생활용품&group2=줄">줄</a></li>
 						<li><a href="catstoreview?group1=생활용품&group2=터널">터널</a></li>
-						<li><a href="catstoreview?group1=생활용품&group2=이동장">이동장</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -88,9 +91,13 @@ $(function(){
 		<c:choose>
 			<c:when test="${list.size() > 0}">
 				<c:forEach var="pl" items="${list}">
-					<div class=products>
-						<img src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=200px height=200px>
-						${productMap.get(pl.seq).name}
+					<div class=products id="${pl.productcode}_${pl.seq}">
+						<div class=product_innerimg>
+							<img class=product_image src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=200px height=200px>
+						</div>
+						${productMap.get(pl.seq).name}<br>
+						<a class=brand>『${productMap.get(pl.seq).brand}』</a><br>
+						<a class=price>${priceMap.get(pl.seq).toString()}</a>원
 					</div>
 				</c:forEach>
 			</c:when>
@@ -101,8 +108,8 @@ $(function(){
 	</div>
 	<div class=blocks>
 		<c:if test="${pageMaker.prev}">
-			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${cs.group1}&group2=${cs.group2}">First</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${cs.group1}&group2=${cs.group2}">Prev&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}">First</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}">Prev&nbsp;</a>
 		</c:if>
 		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 			<c:choose>
@@ -110,13 +117,13 @@ $(function(){
 					<font size="5" color="orange">${i}</font>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${cs.group1}&group2=${cs.group2}">${i}</a>&nbsp;
+					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}">${i}</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${cs.group1}&group2=${cs.group2}">Next&nbsp;&nbsp;</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${cs.group1}&group2=${cs.group2}">End&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}">Next&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
 	<br><br><br>
