@@ -173,6 +173,7 @@ body{
 .number_buttons{
 	width: 30px;
 	height: 30px;
+	font-size: 13pt;
 }
 #number_input{
 	width: 30px;
