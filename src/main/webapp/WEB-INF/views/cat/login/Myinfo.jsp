@@ -12,18 +12,28 @@
 		height: 100px;
 		border-radius: 50%;
 	}
+	.myinfo_col{
+		background-color: yellow;
+	}
+	.myinfo_val{
+		background-color: red;
+		margin-bottom: 10px;
+	}
 </style>
 </head>
 <body>
 	<div id=profile>
 		<input type="hidden" id=image value="${client.profile}">
 	</div>
-	ID : ${cv.id}<br>
-	Name : ${cv.name}<br>
-	Birthday : ${cv.birthday}<br>
-	E-mail : ${cv.email}<br>
-	Address : ${cv.address}<br>
-	<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
-	<script type="text/javascript" src="resources/script/myinfo.js?ver=<%= System.currentTimeMillis()%>"></script>
+	<div class=myinfo_col>ID</div><div class=myinfo_val id=myinfo_id>${cv.id}</div>
+	<div class=myinfo_col>Name</div><div class=myinfo_val id=myinfo_name>${cv.name}</div>
+	<div class=myinfo_col>Birthday</div><div class=myinfo_val id=myinfo_birthday>${cv.birthday}</div>
+	<div class=myinfo_col>E-mail</div><div class=myinfo_val id=myinfo_email>${cv.email}</div>
+	<div class=myinfo_col>Address</div><div class=myinfo_val id=myinfo_address>${cv.address}</div>
+	<button id=logout>logout</button>
+	<button id=updatef>update</button>
+	<button id=delete>회원탈퇴</button>
+<script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="resources/script/myinfo.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

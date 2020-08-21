@@ -9,11 +9,11 @@ $(function(){
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : $('#product_name').text(),
-		    amount : parseInt($('#product_price').text().replace(',','')),
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
+		    amount : parseInt($('#total_price').text().replace(',','')),
+		    buyer_email : $('#myinfo_email').text(),
+		    buyer_name : $('#myinfo_name').text(),
 		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_addr : $('#myinfo_address').text(),
 		    buyer_postcode : '123-456',
 		    m_redirect_url : window.location.href
 		}, function(rsp) {
@@ -29,5 +29,9 @@ $(function(){
 		    }
 		    alert(msg);
 		});
+	});
+	
+	$('#shopping_basket').click(function(){
+		console.log($('#myinfo_name').text());
 	});
 });

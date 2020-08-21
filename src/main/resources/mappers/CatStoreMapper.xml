@@ -28,6 +28,16 @@
 	</select>
 	
 	<sql id="search">
-		and group1=#{group1} and group2=#{group2} and productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%')))
+		<choose>
+			<when test="(group1 != null) and (group2 != null)">
+				and group1=#{group1} and group2=#{group2} and productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%')))
+			</when>
+			<when test="group1 != null">
+				and group1=#{group1} and productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%')))
+			</when>
+			<otherwise>
+				and productcode in (select productcode from product where name like CONCAT(CONCAT('%',#{keyword}),'%')))
+			</otherwise>
+		</choose>
 	</sql>
 </mapper>
