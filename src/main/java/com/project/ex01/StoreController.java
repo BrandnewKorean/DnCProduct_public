@@ -132,4 +132,23 @@ public class StoreController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	@RequestMapping(value = "searchresult")
+	public ModelAndView searchresult(StoreSearch search, ModelAndView mv) {
+		String[] group1 = {"식료품","배변/위생용품","미용용품","생활용품"};
+		if(search.getKeyword() == null) search.setKeyword("");
+		
+		search.setSnoEno();
+		
+		Map<Integer,List<CatStoreVO>> resultMap = new HashMap<>();
+		for(int i=0;i<group1.length;i++) {
+			search.setGroup1(group1[i]);
+			resultMap.put(i,service.searchList(search));
+		}
+		System.out.println(resultMap.get(0).size());
+		mv.addObject("resultMap", resultMap);
+		mv.addObject("search", search);
+		mv.setViewName("cat/store/SearchResult");
+		return mv;
+	}
 }
