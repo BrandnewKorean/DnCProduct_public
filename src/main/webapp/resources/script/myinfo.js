@@ -1,7 +1,6 @@
 $(function(){
 	var profile = $('#image').val();
 	
-	console.log(profile);
 	if(profile == ''){
 		$('#profile').css({
 			backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
@@ -32,6 +31,47 @@ $(function(){
 					alert('수정 성공 했습니다');
 				}else if(data.code == 1){
 					alert('수정 실패 했습니다');
+				}
+			}
+		});
+	});
+	
+	$('#logout').click(function(){
+		$.ajax({
+			url: 'logout',
+			success: function(data){
+				if(data.result == true){
+					alert('로그아웃 되었습니다');
+					location.href = "catmain";
+				}else{
+					alert('로그인 후 사용하세요');
+				}
+			}
+		});
+	});
+	
+	$('#updatef').click(function(){
+		$.ajax({
+			url: 'updatef',
+			success: function(result){
+				$('#client_result').html(result);
+			}
+		});
+	});
+	
+	$('#delete').click(function(){
+		$.ajax({
+			url: 'delete',
+			success: function(data){
+				switch(data.code){
+				case 0:
+					alert('정상적으로 탈퇴 처리 되었습니다');
+					location.reload();
+					break;
+				case 1:
+					alert('탈퇴 처리에 실패했습니다');
+					location.reload();
+					break;
 				}
 			}
 		});
