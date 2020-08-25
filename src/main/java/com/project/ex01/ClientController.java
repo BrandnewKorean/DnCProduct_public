@@ -61,8 +61,8 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	@RequestMapping(value = "catloginf")
-	public ModelAndView catloginf(ModelAndView mv, HttpSession session) {
+	@RequestMapping(value = "loginf")
+	public ModelAndView loginf(ModelAndView mv, HttpSession session) {
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String googleurl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 		String naverurl = naverLoginBO.getAuthorizationUrl(session);
@@ -71,9 +71,10 @@ public class ClientController {
 		mv.addObject("google_url", googleurl);
 		mv.addObject("naver_url", naverurl);
 		mv.addObject("kakao_url", kakaourl);
-		mv.setViewName("cat/login/LoginForm");
+		mv.setViewName("login/LoginForm");
 		return mv;
 	}
+	
 	
 	@RequestMapping(value = "kakaologin", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
 	public ModelAndView kakaologin(ModelAndView mv, @RequestParam String code, HttpSession session) throws ClientProtocolException, IOException {
@@ -106,13 +107,13 @@ public class ClientController {
 
 		if(cv != null) {
 			session.setAttribute("logID", id);
-			mv.setViewName("redirect: catmain");
+			mv.setViewName("redirect: home");
 		}else {
 			mv.addObject("social_type", "kakao");
 			mv.addObject("social_name", name);
 			mv.addObject("social_email", email);
 			mv.addObject("social_id", id);
-			mv.setViewName("cat/join/JoinForm");
+			mv.setViewName("join/JoinForm");
 		}
 		
 		return mv;
@@ -147,13 +148,13 @@ public class ClientController {
 
 			if(cv != null) {
 				session.setAttribute("logID", id);
-				mv.setViewName("redirect: catmain");
+				mv.setViewName("redirect: home");
 			}else {
 				mv.addObject("social_type", "naver");
 				mv.addObject("social_name", name);
 				mv.addObject("social_email", email);
 				mv.addObject("social_id", id);
-				mv.setViewName("cat/join/JoinForm");
+				mv.setViewName("join/JoinForm");
 			}
 		}else {
 			String reprompt = naverLoginBO.getAuthorizationUrl(session)+"&auth_type=reprompt";
@@ -213,7 +214,7 @@ public class ClientController {
 			mv.addObject("social_name", name);
 			mv.addObject("social_email", email);
 			mv.addObject("social_id", sub);
-			mv.setViewName("cat/join/JoinForm");
+			mv.setViewName("join/JoinForm");
 		}
 		
 		return mv;
@@ -221,19 +222,28 @@ public class ClientController {
 			
 	@RequestMapping(value = "termsuse")
 	public ModelAndView termsuse(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofUse");
+		mv.setViewName("join/TermsofUse");
 		return mv;
-	}
+	} // cat
+	
+
+	
 	@RequestMapping(value = "termsprivacy")
 	public ModelAndView termsprivacy(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofPrivacy");
+		mv.setViewName("join/TermsofPrivacy");
 		return mv;
-	}
+	} // cat
+
+	
 	@RequestMapping(value = "termslocation")
 	public ModelAndView termslocation(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofLocationInformation");
+		mv.setViewName("join/TermsofLocationInformation");
 		return mv;
-	}
+	} // cat
+	
+	
+	
+	
 	@RequestMapping(value = "logout")
 	public ModelAndView logout(HttpServletRequest request, ModelAndView mv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -246,6 +256,8 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value = "clientInfo")
 	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code, ClientVO cv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -255,10 +267,14 @@ public class ClientController {
 		if(code.equals("json")) {
 			mv.setViewName("jsonView");
 		}else {
-			mv.setViewName("cat/login/Myinfo");
+			mv.setViewName("login/Myinfo");
 		}
 		return mv;
 	}
+	
+	
+
+	
 	@RequestMapping(value="delete")
 	public ModelAndView delete(ModelAndView mv, HttpServletRequest request, ClientVO cv) {
 		String id = "";
@@ -275,6 +291,8 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	} // delete
+	
+	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
 		ClientVO cv = new ClientVO();
@@ -282,9 +300,11 @@ public class ClientController {
 		cv.setId(id);
 		cv = service.selectOne(cv);
 		mv.addObject("cv", cv);
-		mv.setViewName("cat/login/MyinfoUpdate");
+		mv.setViewName("login/MyinfoUpdate");
 		return mv;
 	}
+	
+
 	@RequestMapping(value = "update")
 	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
 		if(service.update(cv) > 0) {
@@ -295,6 +315,8 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
 		String password = cv.getPassword();
@@ -312,17 +334,13 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
 	@RequestMapping(value = {"/","/home"})
 	public ModelAndView home(ModelAndView mv) {
 		mv.setViewName("Homepage");
 		return mv;
 	}
-	@RequestMapping(value = "dogloginf")
-	public ModelAndView dogloginf(ModelAndView mv) {
-		mv.setViewName("dog/login/LoginForm");
-		return mv;
-	}
-	
+
 	@RequestMapping(value = "dogmain")
 	public ModelAndView dogmain(ModelAndView mv) {
 		mv.setViewName("dog/Dogmain");
@@ -333,16 +351,21 @@ public class ClientController {
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
+	
 	@RequestMapping(value="JoinTerms")
 	public ModelAndView JoinTerms(ModelAndView mv) {
-		mv.setViewName("cat/join/JoinTerms");
+		mv.setViewName("join/JoinTerms");
 		return mv;
-	}
+	} // cat
+	
+
 	@RequestMapping(value="JoinForm")
 	public ModelAndView JoinForm(ModelAndView mv) {
-		mv.setViewName("cat/join/JoinForm");
+		mv.setViewName("join/JoinForm");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value="join")
 	public ModelAndView join(ModelAndView mv, ClientVO cv) {
 		cv.setPassword(passwordEncoder.encode(cv.getPassword()));
