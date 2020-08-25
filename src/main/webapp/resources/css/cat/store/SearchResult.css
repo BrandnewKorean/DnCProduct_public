@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.container{
+	position: relative;
+	width: 90%;
+	margin: 0 auto;
+}
+.group1_title{
+	font-weight: bold;
+	font-size: 15pt;
+}
+.result{
+	background-color: LightSteelBlue;
+	height: 100px;
+}

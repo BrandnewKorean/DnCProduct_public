@@ -61,7 +61,7 @@ public class DiaryController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "iswrited")
 	public ModelAndView iswrited(HttpServletRequest request, ModelAndView mv, DiaryVO dv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -105,7 +105,6 @@ public class DiaryController {
 						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
 						duv.setSeq(dv.getSeq());
 						duv.setWdate(dv.getWdate());
-						duv.setId(id);
 						duv.setFilename(files.get(i).getOriginalFilename());
 						System.out.println(duv);
 						files.get(i).transferTo(new File(root_path+attach_path+filename));

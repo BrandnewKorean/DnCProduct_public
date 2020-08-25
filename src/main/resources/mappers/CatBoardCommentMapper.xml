@@ -2,14 +2,16 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
  <mapper namespace="ex01.mappers.CatBoardCommentMapper">
- 
+ 	
  	<select id="selectList" resultType="vo.CatBoardCommentVO">
  		select * from catboardcomment where seq=#{seq}
  	</select>
  	
+ 	
  	<select id="selectOne" resultType="vo.CatBoardCommentVO">
- 		select * from catboardcomment where counter=#{counter}
+ 		select * from CatBoardComment where counter=#{counter}
  	</select>
  
  	<insert id="insert">

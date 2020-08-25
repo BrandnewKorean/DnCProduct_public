@@ -30,4 +30,9 @@ public class CatStoreServiceImpl implements CatStoreService{
 		return dao.searchList(search);
 	}
 
+	@Override
+	public CatStoreVO selectOne(CatStoreVO cs) {
+		return dao.selectOne(cs);
+	}
+
 }

@@ -6,7 +6,7 @@ $(function(){
 	var year = date.getFullYear();
 	var month = date.getMonth()+1;
 	var day = date.getDate();
-	var today;
+	var today; 
 	if(month < 10){
 		if(day < 10) today = year+'-0'+month+'-0'+day;
 		else today = year+'-0'+month+'-'+day;

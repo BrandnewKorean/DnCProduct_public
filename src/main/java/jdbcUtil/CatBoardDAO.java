@@ -22,6 +22,10 @@ public class CatBoardDAO {
 	
 	private static final String NameSpace = "ex01.mappers.CatBoardMapper.";
 	
+	public int updatecomments(int seq) {
+		return sqlsession.update(NameSpace+"updatecomments",seq);
+	}
+	
 	public int searchRowCount(Search search) {
 		return sqlsession.selectOne(NameSpace+"searchRowCount",search);
 	}
@@ -68,11 +72,6 @@ public class CatBoardDAO {
 		pvo.setTotalCount(totalRowCount());
 		pvo.setList(sqlsession.selectList(NameSpace+"pageList",pvo));
 		return pvo;
-	}
-	
-	
-	public int updatecomments(int seq) {
-		return sqlsession.update(NameSpace+"updatecomments",seq);
 	}
 	
 	public int insertseq() {

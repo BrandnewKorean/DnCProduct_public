@@ -68,8 +68,10 @@
 	<beans:property name="order" value="1"></beans:property>
 	</beans:bean>
 	
+	
     <!-- Exception 설정 -->
 	 <beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	
 		<beans:property name="exceptionMappings">
 			<beans:props>
 				<beans:prop key="org.springframework.jdbc.UncategorizedSQLException">
@@ -100,4 +102,7 @@
 	
 	<beans:bean id="naverLoginBO" class="naver.NaverLoginBO"/>
 	<beans:bean id="kakaoLoginBO" class="kakao.KakaoLoginBO"/>
+
+
+	
 </beans:beans>

@@ -192,9 +192,7 @@ $(function(){
 		
 		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
 		<button id="searchButton">검색</button>
-	</div>
-	
-
+	</div>	
 	
 </body>
 </html>

@@ -7,266 +7,217 @@
 	font-family: "NanumPen";
 	src: url("/ex01/resources/font/NanumPen.ttf");
 }
-	*{
-		background-color: LavenderBlush;
-	}
-	body{
-		margin: 0;
-		cursor: url("/ex01/resources/cursor/cat_default.cur"), auto;
-	}
-	.header{
-		position: -webkit-sticky;
-		position: sticky;
-		top: 0;
-		margin: 0;
-		width: 100%;
-		z-index: 100;
-		background-color: Lavender;
-	}
-	.tmenu{
-		position: absolute;
-		right: 10px;
-		bottom: 10px;
-		display: inline-block;
-		background-color: rgba(255,255,255,0);
-	}
-	.tmenu > span{
-		font-family: "NanumPen";
-		font-size: 18pt;
-		background-color: rgba(255,255,255,0);
-	}
-	#profile_image{
-		position: absolute;
-		display: inline-block;
-		right: 0;
-		width: 7%;
-		height: 100%;
-		border: 1px solid;
-		border-radius: 50%;
-	}
-	#client_info{
-		position: absolute;
-		right: 0;
-		width: 30%;
-		height: 300px;
-		background-color: white;
-		display: none;
-		text-align: center;
-	}
-	.tmenu_result{
-		position: absolute;
-		right:20px;
-		top: 110%;
-		width: 150px;
-		border-radius: 10px;
-		box-shadow: 5px 5px 10px;
-	}
-	.intro{
-		position: relative;
-		background-image: url("/ex01/resources/image/catmain.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-		width: 100%;
-		opacity: 0.8;
-		padding: 0;
-		overflow-x: hidden;
-	}
-	.intro > #w_canvas{
-		background-color: rgba(255,255,255,0);
-		margin: 0;
-	}
-	.head_message{
-		position: absolute;
-		left: 10%;
-		top: 15%;
-		width: 500px;
-		font-size: 50pt;
-		font-family: "NanumPen";
-		text-align: center;
-		opacity: 0;
-		background-color: rgba(255, 255, 255, 0);
-		color: RebeccaPurple;
-	}
-	.head_message > a{
-		font-size: 20pt;
-		background-color: rgba(255, 255, 255, 0);
-		color: red;
-	}
-	.container{
-		width: 95%;
-		margin: 0 auto;
-		text-align: center;
-		margin-top: 80px;
-	}
-	.cmenu{
-		display: inline-block;
-		position: relative;
-		width: 50%;
-		background-color: rgba(255,255,255,0);
-		margin: 0;
-	}
-	.cmenu > a{
-		font-size: 20pt;
-		background-color: rgba(255,255,255,0);
-	}
-	#diary{
-		float: left;
-		background-image: url("/ex01/resources/image/diary.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-	}
-	#diary_message{
-		background-color: rgba(255,255,255,0);
-		font-size: 50pt;
-		font-family: "NanumPen";
-		text-align: center;
-	}
-	#cat_footprint{
-		position: absolute;
-		background-image: url("/ex01/resources/image/cat_footprint.png");
-		background-color: rgba(255,255,255,0);
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 100%;
-		height: 100%;
-		right: 10px;
-		bottom: 10px;
-		display: none;
-	}
-	#store{
-		float: right;
-		background-image: url("/ex01/resources/image/store.png");
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: center right;
-		background-color: rgba(255,255,255,0);
-		overflow: hidden;
-	}
-	#store_message{
-		background-color: rgba(255,255,255,0);
-		font-size: 50pt;
-		font-family: "NanumPen";
-		text-align: center center;
-	}
-	#truck{
-		position: absolute;
-		background-image: url("/ex01/resources/image/truck.png");
-		background-color: rgba(255,255,255,0);
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 30%;
-		height: 30%;
-		right: -30%;
-		bottom: 5%;
-	}
-	#board{
-		float: left;
-	}
-	#board_message{
-		font-size: 50pt;
-		font-family: "NanumPen";
-		text-align: center;
-	}
-	#gps{
-		float: right;
-		background-image: url("/ex01/resources/image/map.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-		overflow: hidden;
-	}
-	.location{
-		position: absolute;
-		background-image: url("/ex01/resources/image/location.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-color: rgba(255,255,255,0);
-		width: 5%;
-		height: 11%;
-		transform: rotate(310deg);
-		display: none;
-	}
-	#location1{
-		left: 54%;
-		top: 63%;
-	}
-	#location2{
-		left: 60%;
-		top: 65%;
-	}
-	#location3{
-		left: 54%;
-		top: 79%;
-	}
-	#location4{
-		left: 52%;
-		top: 70%;
-	}
-	#location5{
-		left: 59%;
-		top: 72%;
-	}
-	#gps_message{
-		font-size: 50pt;
-		font-family: "NanumPen";
-		text-align: center;
-	}
-	.main_menu{
-		display: table;
-		width: 100%;
-		table-layout: fixed;
-		background-color: Linen;
-		list-style-type: none;
-		text-align: center;
-		text-decoration: none;
-		margin: 0;
-		padding: 0;
-	}
-	.main_menu > li{
-		display: table-cell;
-		margin: 2px;
-		padding: 2px;
-		height: 300px;
-		background-color: NavajoWhite;
-		border-radius: 50%;
-		vertical-align: middle;
-	}
-	.main_menu > li:hover{
-		background-color: MistyRose;
-		color: white;
-		cursor: url("/ex01/resources/cursor/cat_hover.cur");
-	}
-	.main_menu > li > a{
-		width: 100%;
-		background-color: rgba(255,255,255,0);
-		text-decoration: none;
-		color: black;
-		font-family: "NanumPen";
-		font-size: 25pt;
-	}
-	.main_menu > li:hover > a{
-		color: white;
-		cursor: url("/ex01/resources/cursor/cat_hover.cur");
-	}
-	.footer{
-		position: relative;
-		width: 100%;
-		text-align: center;
-		background-color: Lavender;
-		color: SlateGrey;
-	}
-	.logo{
-		position: absolute;
-		left: 30px;
-		top: 30px;
-		display: inline-block;
-		background-image: url("/ex01/resources/image/logof.png");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-color: white;
-		border-radius: 50%;
-		width: 100px;
-		height: 100px;
-	}
-	#catmainlogo{
-		background-color: Lavender;
-	}
+body{
+	margin: 0;
+	cursor: url("/ex01/resources/cursor/cat_default.cur"), auto;
+	background-color: LavenderBlush;
+}
+.intro{
+	position: relative;
+	background-image: url("/ex01/resources/image/catmain.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	opacity: 0.8;
+	padding: 0;
+	overflow-x: hidden;
+}
+.intro > #w_canvas{
+	background-color: rgba(255,255,255,0);
+	margin: 0;
+}
+.head_message{
+	position: absolute;
+	left: 10%;
+	top: 15%;
+	width: 500px;
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+	opacity: 0;
+	background-color: rgba(255, 255, 255, 0);
+	color: RebeccaPurple;
+}
+.head_message > a{
+	font-size: 20pt;
+	background-color: rgba(255, 255, 255, 0);
+	color: red;
+}
+.container{
+	width: 95%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 80px;
+}
+.cmenu{
+	display: inline-block;
+	position: relative;
+	width: 50%;
+	background-color: rgba(255,255,255,0);
+	margin: 0;
+}
+.cmenu > a{
+	font-size: 20pt;
+	background-color: rgba(255,255,255,0);
+}
+#diary{
+	float: left;
+	background-image: url("/ex01/resources/image/diary.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#diary_message{
+	background-color: rgba(255,255,255,0);
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}
+#cat_footprint{
+	position: absolute;
+	background-image: url("/ex01/resources/image/cat_footprint.png");
+	background-color: rgba(255,255,255,0);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	right: 10px;
+	bottom: 10px;
+	display: none;
+}
+#store{
+	float: right;
+	background-image: url("/ex01/resources/image/store.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center right;
+	background-color: rgba(255,255,255,0);
+	overflow: hidden;
+}
+#store_message{
+	background-color: rgba(255,255,255,0);
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center center;
+}
+#truck{
+	position: absolute;
+	background-image: url("/ex01/resources/image/truck.png");
+	background-color: rgba(255,255,255,0);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 30%;
+	height: 30%;
+	right: -30%;
+	bottom: 5%;
+}
+#board{
+	float: left;
+}
+#board_message{
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}
+#gps{
+	float: right;
+	background-image: url("/ex01/resources/image/map.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+.location{
+	position: absolute;
+	background-image: url("/ex01/resources/image/location.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: rgba(255,255,255,0);
+	width: 5%;
+	height: 11%;
+	transform: rotate(310deg);
+	display: none;
+}
+#location1{
+	left: 54%;
+	top: 63%;
+}
+#location2{
+	left: 60%;
+	top: 65%;
+}
+#location3{
+	left: 54%;
+	top: 79%;
+}
+#location4{
+	left: 52%;
+	top: 70%;
+}
+#location5{
+	left: 59%;
+	top: 72%;
+}
+#gps_message{
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}
+.main_menu{
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	background-color: Linen;
+	list-style-type: none;
+	text-align: center;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+.main_menu > li{
+	display: table-cell;
+	margin: 2px;
+	padding: 2px;
+	height: 300px;
+	background-color: NavajoWhite;
+	border-radius: 50%;
+	vertical-align: middle;
+}
+.main_menu > li:hover{
+	background-color: MistyRose;
+	color: white;
+	cursor: url("/ex01/resources/cursor/cat_hover.cur");
+}
+.main_menu > li > a{
+	width: 100%;
+	background-color: rgba(255,255,255,0);
+	text-decoration: none;
+	color: black;
+	font-family: "NanumPen";
+	font-size: 25pt;
+}
+.main_menu > li:hover > a{
+	color: white;
+	cursor: url("/ex01/resources/cursor/cat_hover.cur");
+}
+.footer{
+	position: relative;
+	width: 100%;
+	text-align: center;
+	background-color: Lavender;
+	color: SlateGrey;
+}
+.logo{
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	display: inline-block;
+	background-image: url("/ex01/resources/image/logof.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: white;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}
+#catmainlogo{
+	background-color: Lavender;
+}
