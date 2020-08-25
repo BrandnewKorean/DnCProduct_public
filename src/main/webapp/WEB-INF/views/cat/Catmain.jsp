@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title>CatMain</title>
 <link rel="icon" type="image/png" href="resources/image/logof.png">
 <link rel="stylesheet" type="text/css" href="resources/css/cat/Catmain.css?ver=<%= System.currentTimeMillis()%>">
@@ -14,7 +13,7 @@
 <script type="text/javascript" src="resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="../Header.jsp"></jsp:include>
 	<div class="intro">
 		<canvas id=w_canvas></canvas>
 		<div class="head_message">
@@ -63,6 +62,8 @@
 			<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 		</div>
 	</c:if>
+	
+	
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
 			<li id=diaryf><a>Diary</a></li>

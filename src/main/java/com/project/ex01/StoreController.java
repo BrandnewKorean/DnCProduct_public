@@ -44,6 +44,8 @@ public class StoreController {
 		search.setPerPage(11);
 		search.setSnoEno();
 		
+		System.out.println(search);
+		
 		List<CatStoreVO> list = service.searchList(search);
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
