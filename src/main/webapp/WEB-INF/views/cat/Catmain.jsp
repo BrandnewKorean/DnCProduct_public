@@ -14,7 +14,7 @@
 <script type="text/javascript" src="resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
-	<jsp:include page="Header.jsp"></jsp:include>
+	<jsp:include page="../Header.jsp"></jsp:include>
 	<div class="intro">
 		<canvas id=w_canvas></canvas>
 		<div class="head_message">
@@ -22,6 +22,7 @@
 		<a>Show off your pet and get useful information</a>
 		</div>
 	</div>
+	
 	<c:if test="${logID == null}">
 		<div class="container">
 			<div class=cmenu id=diary>

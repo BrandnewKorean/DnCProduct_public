@@ -255,7 +255,7 @@ public class ClientController {
 		if(code.equals("json")) {
 			mv.setViewName("jsonView");
 		}else {
-			mv.setViewName("login/MyInfo");
+			mv.setViewName("login/Myinfo");
 		}
 		return mv;
 	}

@@ -4,4 +4,4 @@ $('#submit').click(function(){
 	}, 500);
 	
 	$('.tmenu_result').html('');
-});
+});	
