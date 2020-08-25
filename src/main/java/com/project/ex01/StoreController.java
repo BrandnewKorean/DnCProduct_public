@@ -73,7 +73,6 @@ public class StoreController {
 			}
 			
 			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
-			
 			productimageMap.put(list.get(i).getSeq(), imagelist);
 			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
 		}
@@ -133,20 +132,51 @@ public class StoreController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "searchresult1")
+	public ModelAndView searchresult1(StoreSearch search, ModelAndView mv) {
+		search.setSnoEno();
+		search.setGroup1("식료품");
+		
+		List<CatStoreVO> list = service.searchList(search);
+		Map<Integer,ProductVO> productMap = new HashMap<>();
+		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
+		
+		StorePageMaker pageMaker = new StorePageMaker();
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int k=0;k<imagelist.size();k++) {
+				if(imagelist.get(k).getIsmain() && k != 0) {
+					ProductImageVO temp1 = imagelist.get(k);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(k, temp2);
+				}
+			}
+			
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+		}
+		
+		mv.addObject("list", list);
+		mv.addObject("productMap", productMap);
+		mv.addObject("productimageMap", productimageMap);
+		mv.addObject("pageMaker", pageMaker);
+		mv.addObject("search", search);
+		mv.setViewName("cat/store/SearchResult1");
+		return mv;
+	}
+	
 	@RequestMapping(value = "searchresult")
 	public ModelAndView searchresult(StoreSearch search, ModelAndView mv) {
-		String[] group1 = {"식료품","배변/위생용품","미용용품","생활용품"};
-		if(search.getKeyword() == null) search.setKeyword("");
-		
-		search.setSnoEno();
-		
-		Map<Integer,List<CatStoreVO>> resultMap = new HashMap<>();
-		for(int i=0;i<group1.length;i++) {
-			search.setGroup1(group1[i]);
-			resultMap.put(i,service.searchList(search));
-		}
-		System.out.println(resultMap.get(0).size());
-		mv.addObject("resultMap", resultMap);
 		mv.addObject("search", search);
 		mv.setViewName("cat/store/SearchResult");
 		return mv;

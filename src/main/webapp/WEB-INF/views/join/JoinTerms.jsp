@@ -12,7 +12,7 @@
 <body>
 <div class=container>
 	<div class=title>
-		<img id="termsimg" src="resources/image/logoe.png" onclick="location.href='catmain'">
+		<img id="termsimg" src="resources/image/logoe.png" onclick="location.href='home'">
 		<h1>D&C 회원가입 동의 약관</h1>
 	</div>
 	<form name="term" action="JoinForm" method="post" id='termsform'>
@@ -25,7 +25,7 @@
 		<label for=agree4><input type="checkbox" class=agree id=agree4> 광고 수신 여부 동의(선택)</label><br><br>
 		<div class=buttons>
 			<button id="termssubmit">확인</button> 
-			<button onclick="location.href='catmain'">취소</button>
+			<button onclick="location.href='home'">취소</button>
 		</div>
 	
 	<br><br><br><br>

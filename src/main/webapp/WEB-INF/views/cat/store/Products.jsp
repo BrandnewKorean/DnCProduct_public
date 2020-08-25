@@ -13,8 +13,10 @@
 	<div class=container>
 		<input type="hidden" id=productcode value="${pv.productcode}">
 		<div id=product_image>
-			<img id=image_view src="resources/productimage/${imagelist.get(0).filename}" width=100% height=100%>
-			<div id=product_image_button></div>
+			<c:if test="${imagelist.size() > 0}">
+				<img id=image_view src="resources/productimage/${imagelist.get(0).filename}" width=100% height=100%>
+				<div id=product_image_button></div>
+			</c:if>
 		</div>
 		<div id=product_info>
 			<a id=product_name>${pv.name}</a><br>
