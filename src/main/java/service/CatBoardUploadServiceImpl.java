@@ -22,4 +22,9 @@ public class CatBoardUploadServiceImpl implements CatBoardUploadService{
 	public int insert(CatBoardUploadVO uvo) {
 		return dao.insert(uvo);
 	}
+
+	@Override
+	public List<CatBoardUploadVO> selectAllList() {
+		return dao.selectAllList();
+	}
 } 

@@ -61,8 +61,8 @@ public class ClientController {
 		this.naverLoginBO = naverLoginBO;
 	}
 	
-	@RequestMapping(value = "catloginf")
-	public ModelAndView catloginf(ModelAndView mv, HttpSession session) {
+	@RequestMapping(value = "loginf")
+	public ModelAndView loginf(ModelAndView mv, HttpSession session) {
 		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
 		String googleurl = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE, googleOAuth2Parameters);
 		String naverurl = naverLoginBO.getAuthorizationUrl(session);
@@ -71,7 +71,7 @@ public class ClientController {
 		mv.addObject("google_url", googleurl);
 		mv.addObject("naver_url", naverurl);
 		mv.addObject("kakao_url", kakaourl);
-		mv.setViewName("cat/login/LoginForm");
+		mv.setViewName("login/LoginForm");
 		return mv;
 	}
 	
@@ -106,13 +106,13 @@ public class ClientController {
 
 		if(cv != null) {
 			session.setAttribute("logID", id);
-			mv.setViewName("redirect: catmain");
+			mv.setViewName("redirect: home");
 		}else {
 			mv.addObject("social_type", "kakao");
 			mv.addObject("social_name", name);
 			mv.addObject("social_email", email);
 			mv.addObject("social_id", id);
-			mv.setViewName("cat/join/JoinForm");
+			mv.setViewName("join/JoinForm");
 		}
 		
 		return mv;
@@ -147,13 +147,13 @@ public class ClientController {
 
 			if(cv != null) {
 				session.setAttribute("logID", id);
-				mv.setViewName("redirect: catmain");
+				mv.setViewName("redirect: home");
 			}else {
 				mv.addObject("social_type", "naver");
 				mv.addObject("social_name", name);
 				mv.addObject("social_email", email);
 				mv.addObject("social_id", id);
-				mv.setViewName("cat/join/JoinForm");
+				mv.setViewName("join/JoinForm");
 			}
 		}else {
 			String reprompt = naverLoginBO.getAuthorizationUrl(session)+"&auth_type=reprompt";
@@ -213,7 +213,7 @@ public class ClientController {
 			mv.addObject("social_name", name);
 			mv.addObject("social_email", email);
 			mv.addObject("social_id", sub);
-			mv.setViewName("cat/join/JoinForm");
+			mv.setViewName("join/JoinForm");
 		}
 		
 		return mv;
@@ -221,17 +221,17 @@ public class ClientController {
 			
 	@RequestMapping(value = "termsuse")
 	public ModelAndView termsuse(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofUse");
+		mv.setViewName("join/TermsofUse");
 		return mv;
 	}
 	@RequestMapping(value = "termsprivacy")
 	public ModelAndView termsprivacy(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofPrivacy");
+		mv.setViewName("join/TermsofPrivacy");
 		return mv;
 	}
 	@RequestMapping(value = "termslocation")
 	public ModelAndView termslocation(ModelAndView mv) {
-		mv.setViewName("cat/join/TermsofLocationInformation");
+		mv.setViewName("join/TermsofLocationInformation");
 		return mv;
 	}
 	@RequestMapping(value = "logout")
@@ -255,7 +255,7 @@ public class ClientController {
 		if(code.equals("json")) {
 			mv.setViewName("jsonView");
 		}else {
-			mv.setViewName("cat/login/Myinfo");
+			mv.setViewName("login/MyInfo");
 		}
 		return mv;
 	}
@@ -282,7 +282,7 @@ public class ClientController {
 		cv.setId(id);
 		cv = service.selectOne(cv);
 		mv.addObject("cv", cv);
-		mv.setViewName("cat/login/MyinfoUpdate");
+		mv.setViewName("login/MyinfoUpdate");
 		return mv;
 	}
 	@RequestMapping(value = "update")
@@ -319,7 +319,7 @@ public class ClientController {
 	}
 	@RequestMapping(value = "dogloginf")
 	public ModelAndView dogloginf(ModelAndView mv) {
-		mv.setViewName("dog/login/LoginForm");
+		mv.setViewName("login/LoginForm");
 		return mv;
 	}
 	
@@ -335,12 +335,12 @@ public class ClientController {
 	}
 	@RequestMapping(value="JoinTerms")
 	public ModelAndView JoinTerms(ModelAndView mv) {
-		mv.setViewName("cat/join/JoinTerms");
+		mv.setViewName("join/JoinTerms");
 		return mv;
 	}
 	@RequestMapping(value="JoinForm")
 	public ModelAndView JoinForm(ModelAndView mv) {
-		mv.setViewName("cat/join/JoinForm");
+		mv.setViewName("join/JoinForm");
 		return mv;
 	}
 	@RequestMapping(value="join")
@@ -370,4 +370,6 @@ public class ClientController {
 		mv.setViewName("popup/jusoPopup");
 		return mv;
 	}
+	
+	
 } // class

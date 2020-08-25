@@ -1,11 +1,15 @@
 package service;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import jdbcUtil.CatBoardDAO;
 import searchCriteria.Search;
 import vo.CatBoardVO;
 import vo.PageVO;
+
 @Service
 public class CatBoardServiceImpl implements CatBoardService {
 	
@@ -72,9 +76,10 @@ public class CatBoardServiceImpl implements CatBoardService {
 	public PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo) {
 		return dao.pageList(pvo);
 	}
-
+	
 	@Override
 	public int insertseq() {
 		return dao.insertseq();
 	}
+	
 } // CatBoardServiceImpl

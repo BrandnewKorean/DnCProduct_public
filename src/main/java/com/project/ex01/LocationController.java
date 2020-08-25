@@ -6,11 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LocationController {
-	
+
 	@RequestMapping(value="location")
-	public ModelAndView animalhospital(ModelAndView mv) {
+	public ModelAndView location(ModelAndView mv) {
 		mv.setViewName("cat/location/location");
 		return mv;
 	} // location
-
-} // class
+	
+}//controller
