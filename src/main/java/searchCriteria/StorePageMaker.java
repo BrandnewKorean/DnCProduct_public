@@ -82,7 +82,6 @@ public class StorePageMaker {
 				UriComponentsBuilder.newInstance()
 				.queryParam("currentPage",currentPage)
 				.queryParam("perPage",search.getPerPage())
-				.queryParam("searchType",search.getSearchType())
 				.queryParam("keyword", search.getKeyword())
 				.build();
 		return uriComponents.toUriString();

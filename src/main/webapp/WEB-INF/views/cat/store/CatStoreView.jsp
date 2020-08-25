@@ -33,7 +33,9 @@ $(function(){
 				<c:forEach var="pl" items="${list}">
 					<div class=products id="${pl.productcode}_${pl.seq}">
 						<div class=product_innerimg>
-							<img class=product_image src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=200px height=200px>
+							<c:if test="${productimageMap.get(pl.seq).size() > 0}">
+								<img class=product_image src="resources/productimage/${productimageMap.get(pl.seq).get(0).filename}" width=200px height=200px>
+							</c:if>
 						</div>
 						${productMap.get(pl.seq).name}<br>
 						<a class=brand>『${productMap.get(pl.seq).brand}』</a><br>

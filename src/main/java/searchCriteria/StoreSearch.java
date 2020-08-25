@@ -1,7 +1,6 @@
 package searchCriteria;
 
 public class StoreSearch extends Criteria{
-	private String searchType;
 	private String keyword;
 	private String group1;
 	private String group2;
@@ -22,14 +21,6 @@ public class StoreSearch extends Criteria{
 		this.group2 = group2;
 	}
 
-	public String getSearchType() {
-		return searchType;
-	}
-	
-	public void setSearchType(String searchType) {
-		this.searchType=searchType;
-	}
-	
 	public String getKeyword() {
 		return keyword;
 	}
@@ -40,7 +31,6 @@ public class StoreSearch extends Criteria{
 	
 	@Override
 	public String toString() {
-		return "StoreSearch [searchType=" + searchType + ", keyword=" + keyword + ", group1=" + group1 + ", group2="
-				+ group2 + "]";
+		return "StoreSearch [keyword=" + keyword + ", group1=" + group1 + ", group2=" + group2 + "]";
 	}
 }
