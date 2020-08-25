@@ -5,6 +5,7 @@ function writeComment(){
 		"seq":seq,
 		"content":content,
 	}
+	
 	$.ajax({
 		url :"writecomment",
 		type:"get",
@@ -30,8 +31,7 @@ function writeComment(){
 				break;
 			default:
 				alert('로그인 후 이용하세요');
-				console.log(data.code);
-//				location.href = 'catmain';
+				location.href = 'catmain';
 				break;
 			}
 		},

@@ -115,8 +115,6 @@ public class BoardController {
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
-		System.out.println(code);
-		
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
@@ -173,7 +171,7 @@ public class BoardController {
 		}
 		else request.getSession().setAttribute("view", false);
 		
-		mv.addObject("pageMaker",pageMaker);
+		mv.addObject("pageMaker",pageMaker	);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
 		return mv;

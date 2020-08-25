@@ -8,12 +8,12 @@ $(function(){
 	$('*').mousedown(function(e){
 		e.stopImmediatePropagation();
 		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_click.cur"), auto');
-	});
-	
+	}); 
+	 
 	$.ajax({
 		url: 'clientInfo',
 		data: {code: "json"},
-		success: function(data){
+		success: function(data){ 
 			if(data.cv.profile == ""){
 				$('#profile_image').css({
 					backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
@@ -68,7 +68,7 @@ $(function(){
 			}
 		});
 	});
-	
+		
 	$('#diaryf').click(function(){
 		location.href="diaryf";
 	});

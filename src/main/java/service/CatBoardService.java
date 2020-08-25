@@ -7,6 +7,7 @@ import vo.CatBoardVO;
 import vo.PageVO;
 
 public interface CatBoardService {
+	int updatecomments(int seq);
 	
 	List<CatBoardVO> searchList(Search search);
 	
@@ -29,9 +30,6 @@ public interface CatBoardService {
 	int delete(CatBoardVO bv); // delete
 	
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
-	
-	int updatecomments(int seq);
-	
+
 	int insertseq();
-	
 } // interface

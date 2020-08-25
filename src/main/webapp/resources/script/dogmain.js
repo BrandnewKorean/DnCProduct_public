@@ -101,7 +101,7 @@ $(function(){
 	
 	$('#catmainlogo').click(function(e){
 		e.stopImmediatePropagation();
-		location.href="home";
+		location.href="dogmain";
 	});
 	
 	$('.text').hover(function(){

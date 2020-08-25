@@ -3,18 +3,19 @@ package service;
 import java.util.List;
 
 import vo.CatBoardCommentVO;
-import vo.CatBoardVO;
 
 public interface CatBoardCommentService {
+
+	
+	
+	CatBoardCommentVO selectOne(CatBoardCommentVO bcv);
 	
 	List<CatBoardCommentVO> selectList(int seq);
 	
-	CatBoardCommentVO selectOne(CatBoardCommentVO bcv); // selectOne
+	int insert(CatBoardCommentVO bcv);
 	
-	int insert(CatBoardCommentVO bcv); // insert
+	int update(CatBoardCommentVO bcv);
 	
-	int update(CatBoardCommentVO bcv); // update
+	int delete(CatBoardCommentVO bcv);
 	
-	int delete(CatBoardCommentVO bcv); // delete
-
-} // class
+}//interface

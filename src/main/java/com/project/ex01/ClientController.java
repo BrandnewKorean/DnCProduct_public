@@ -75,7 +75,6 @@ public class ClientController {
 		return mv;
 	}
 	
-	
 	@RequestMapping(value = "kakaologin", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
 	public ModelAndView kakaologin(ModelAndView mv, @RequestParam String code, HttpSession session) throws ClientProtocolException, IOException {
 		String email = null;
@@ -340,7 +339,13 @@ public class ClientController {
 		mv.setViewName("Homepage");
 		return mv;
 	}
-
+	
+	@RequestMapping(value = "dogloginf")
+	public ModelAndView dogloginf(ModelAndView mv) {
+		mv.setViewName("login/LoginForm");
+		return mv;
+	}
+	
 	@RequestMapping(value = "dogmain")
 	public ModelAndView dogmain(ModelAndView mv) {
 		mv.setViewName("dog/Dogmain");

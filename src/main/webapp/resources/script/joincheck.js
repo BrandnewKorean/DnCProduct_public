@@ -6,7 +6,7 @@ var echeck = false;
 var eccheck = false;
 var acheck = false;
 var number = null;
-
+ 
 $(function(){
 	var socialType = $('#social_type').val();
 	var socialId = $('#social_id').val();

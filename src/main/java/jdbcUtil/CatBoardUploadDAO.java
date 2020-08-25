@@ -23,4 +23,7 @@ public class CatBoardUploadDAO {
 		return sqlsession.insert(NameSpace+"insert", uvo);
 	}
 	
+	public List<CatBoardUploadVO> selectAllList(){
+		return sqlsession.selectList(NameSpace+"selectAllList");
+	}
 }
