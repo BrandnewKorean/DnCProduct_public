@@ -27,7 +27,7 @@ function jusoCallBack(roadFullAddr){
 </script>
 </head>
 <body>
-<img id="joinformimg" onclick="location.href='catmain'" src="resources/image/logoe.png" style="text-align: center">
+<img id="joinformimg" onclick="location.href='home'" src="resources/image/logoe.png" style="text-align: center">
 
 <h1 style="text-align: center; color: blue;">D&C 회원가입</h1>
 	<input type="hidden" id=social_type value="${social_type}">
@@ -100,7 +100,7 @@ function jusoCallBack(roadFullAddr){
 	<br><br>
 <button type="submit" onclick="return allCheck()">확인</button>
 <!-- <button onclick="location.href='catmain'">취소</button> -->
-<input type="button" onclick="location.href='catmain'" readonly value="취소">
+<input type="button" onclick="location.href='home'" readonly value="취소">
 <br><br><br>
 </body>
 </html>

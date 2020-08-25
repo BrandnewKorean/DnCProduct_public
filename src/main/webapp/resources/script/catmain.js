@@ -119,7 +119,7 @@ $(function(){
 	);
 	
 	$('#login').click(function(){
-		location.href = 'catloginf';
+		location.href = 'loginf';
 	});
 	
 	$('#home').click(function(e){
