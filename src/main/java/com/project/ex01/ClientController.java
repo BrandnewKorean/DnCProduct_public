@@ -252,10 +252,10 @@ public class ClientController {
 		cv.setId(id);
 		cv = service.selectOne(cv);
 		mv.addObject("cv", cv);
-		if(code.equals("json")) {
+		if("json".equals(code)) {
 			mv.setViewName("jsonView");
 		}else {
-			mv.setViewName("login/MyInfo");
+			mv.setViewName("login/Myinfo");
 		}
 		return mv;
 	}

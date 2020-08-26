@@ -45,7 +45,7 @@
 			<div class=cmenu id=board_message>
 				다양한 사람들과<br>
 				소통해 보세요<br>
-				<a>wow</a>
+				<a>게시판 형태의 커뮤니티를 제공합니다</a>
 			</div>
 			<div class=cmenu id=gps>
 				<div class=location id=location1></div>
@@ -58,7 +58,7 @@
 				주변의<br>
 				고양이 관련 시설을<br>
 				쉽게 찾이보세요<br>
-				<a>wowowow</a>
+				<a>카카오맵 기반 위치서비스를 제공합니다</a>
 			</div>
 			<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 		</div>
