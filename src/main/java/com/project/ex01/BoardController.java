@@ -40,9 +40,6 @@ public class BoardController {
 	@Autowired
 	CatBoardUploadService uservice;
 	
-
-	
-	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		HttpSession session = request.getSession(false);

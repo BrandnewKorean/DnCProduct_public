@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Header</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/Header.css?ver=<%= System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="resources/css/Header.css?ver=<%= System.currentTimeMillis()%>">
 </head>
 <body>
 	<div class="header">

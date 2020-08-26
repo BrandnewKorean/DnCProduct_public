@@ -4,7 +4,6 @@ $(function(){
 			id: $('#id').val(),
 			password: $('#password').val()
 		}
-		
 		$.ajax({
 			url: 'login',
 			Type: 'get',
@@ -12,7 +11,11 @@ $(function(){
 			success: function(data){
 				if(data.code == 0){
 					alert('로그인 완료되었습니다');
-					location.href = 'catmain';
+					if(data.loc == 'cat'){
+						location.href = 'catmain';
+					}else{
+						location.href = 'dogmain';
+					}
 				}else if(data.code == 1){
 					alert('비밀번호가 일치하지 않습니다');
 				}else if(data.code == 2){
@@ -23,8 +26,7 @@ $(function(){
 			}
 		});
 	});
-	
 	$('#cancel').click(function(){
-		location.href = 'catmain';
+		location.href = 'home';
 	});
 });

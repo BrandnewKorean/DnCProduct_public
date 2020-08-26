@@ -19,7 +19,7 @@ $(function(){
 	});
 	
 	$('#search_in_resultButton').click(function(){
-		console.log('click');
+		console.log('click'); 
 	});
 });
 </script>
