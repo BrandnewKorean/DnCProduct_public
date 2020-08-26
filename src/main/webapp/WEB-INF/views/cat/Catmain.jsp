@@ -6,7 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <title>CatMain</title>
 <link rel="icon" type="image/png" href="resources/image/logof.png">
 <link rel="stylesheet" type="text/css" href="resources/css/cat/Catmain.css?ver=<%= System.currentTimeMillis()%>">
@@ -46,7 +45,7 @@
 			<div class=cmenu id=board_message>
 				다양한 사람들과<br>
 				소통해 보세요<br>
-				<a>wow</a>
+				<a>게시판 형태의 커뮤니티를 제공합니다</a>
 			</div>
 			<div class=cmenu id=gps>
 				<div class=location id=location1></div>
@@ -59,11 +58,13 @@
 				주변의<br>
 				고양이 관련 시설을<br>
 				쉽게 찾이보세요<br>
-				<a>wowowow</a>
+				<a>카카오맵 기반 위치서비스를 제공합니다</a>
 			</div>
 			<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 		</div>
 	</c:if>
+	
+	
 	<c:if test="${logID != null}">
 		<ul class=main_menu>
 			<li id=diaryf><a>Diary</a></li>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,69 +11,27 @@
 </head>
 <body>
 	<jsp:include page="../Header.jsp"></jsp:include>
-	<div class="intro">
-		<div class="head_image"></div>
-		<div class="head_message">
-		All information about Dog<br>
-		<a>Show off your pet and get useful information</a>
-		</div>
-	</div>
-	
 	<c:if test="${logID == null}">
-		<div class="container">
-			<div class=cmenu id=diary>
-				<div id=cat_footprint></div>
+			<div class="intro">
+				<div class="head_image"></div>
+				<div class="head_message">
+				All information about Dog<br>
+				<a>Show off your pet and get useful information</a>
+				</div>
 			</div>
-			<div class=cmenu id=diary_message>
-				반려묘와의<br>
-				추억을 기록해보세요<br>
-				<a>당신의 추억을 위한 개인 공간을 제공해드립니다</a>
+			<div class="container">
+				container 영역
 			</div>
-			<div class=cmenu id=store>
-				<div id=truck></div>
-			</div>
-			<div class=cmenu id=store_message>
-				반려묘를 위한 물품을<br>
-				쉽게 구입해보세요<br>
-				<a>다양한 물품들이 구비되어 있습니다</a>
-			</div>
-			<div class=cmenu id=board>
-			</div>
-			<div class=cmenu id=board_message>
-				다양한 사람들과<br>
-				소통해 보세요<br>
-				<a>wow</a>
-			</div>
-			<div class=cmenu id=gps>
-				<div class=location id=location1></div>
-				<div class=location id=location2></div>
-				<div class=location id=location3></div>
-				<div class=location id=location4></div>
-				<div class=location id=location5></div>
-			</div>
-			<div class=cmenu id=gps_message>
-				주변의<br>
-				고양이 관련 시설을<br>
-				쉽게 찾이보세요<br>
-				<a>wowowow</a>
-			</div>
-			<script type="text/javascript" src="resources/script/catmain.js?ver=<%= System.currentTimeMillis()%>"></script>
-		</div>
 	</c:if>
 	<c:if test="${logID != null}">
-		<ul class=main_menu>
-			<li id=diaryf><a>Diary</a></li>
-			<li id=storemain><a>Store</a></li>
-			<li id=catboard><a>Board</a></li>
-			<li><a href="location">Location Service</a></li>
+		<ul>
+			<li>diary</li>
+			<li>Store</li>
+			<li>Board</li>
+			<li>Location Service</li>
 		</ul>
-		<script type="text/javascript" src="resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
+		<script type="text/javascript" src="resources/script/dogmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
 	</c:if>
-	
-	
-	<div class="container">
-		container 영역
-	</div>
 	<div class="footer">
 		<div class=logo></div>
 		Produce by D&C<br>
@@ -85,8 +43,7 @@
 		<br>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="resources/script/dogmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
-	
+	<script type="text/javascript" src="resources/script/dogmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

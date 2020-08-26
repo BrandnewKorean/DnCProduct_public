@@ -44,6 +44,8 @@ public class StoreController {
 		search.setPerPage(11);
 		search.setSnoEno();
 		
+		System.out.println(search);
+		
 		List<CatStoreVO> list = service.searchList(search);
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
@@ -141,6 +143,9 @@ public class StoreController {
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
 		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
 		StorePageMaker pageMaker = new StorePageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
@@ -162,16 +167,162 @@ public class StoreController {
 				}
 			}
 			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
 			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
 			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
 		}
 		
-		mv.addObject("list", list);
-		mv.addObject("productMap", productMap);
-		mv.addObject("productimageMap", productimageMap);
-		mv.addObject("pageMaker", pageMaker);
-		mv.addObject("search", search);
+		mv.addObject("priceMap1",priceMap);
+		mv.addObject("list1", list);
+		mv.addObject("productMap1", productMap);
+		mv.addObject("productimageMap1", productimageMap);
+		mv.addObject("pageMaker1", pageMaker);
+		mv.addObject("search1", search);
 		mv.setViewName("cat/store/SearchResult1");
+		return mv;
+	}
+	
+	@RequestMapping(value = "searchresult2")
+	public ModelAndView searchresult2(StoreSearch search, ModelAndView mv) {
+		search.setSnoEno();
+		search.setGroup1("배변/위생용품");
+		
+		List<CatStoreVO> list = service.searchList(search);
+		Map<Integer,ProductVO> productMap = new HashMap<>();
+		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
+		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
+		StorePageMaker pageMaker = new StorePageMaker();
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int k=0;k<imagelist.size();k++) {
+				if(imagelist.get(k).getIsmain() && k != 0) {
+					ProductImageVO temp1 = imagelist.get(k);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(k, temp2);
+				}
+			}
+			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+		}
+		
+		mv.addObject("priceMap2",priceMap);
+		mv.addObject("list2", list);
+		mv.addObject("productMap2", productMap);
+		mv.addObject("productimageMap2", productimageMap);
+		mv.addObject("pageMaker2", pageMaker);
+		mv.addObject("search2", search);
+		mv.setViewName("cat/store/SearchResult2");
+		return mv;
+	}
+	
+	@RequestMapping(value = "searchresult3")
+	public ModelAndView searchresult3(StoreSearch search, ModelAndView mv) {
+		search.setSnoEno();
+		search.setGroup1("미용용품");
+		
+		List<CatStoreVO> list = service.searchList(search);
+		Map<Integer,ProductVO> productMap = new HashMap<>();
+		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
+		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
+		StorePageMaker pageMaker = new StorePageMaker();
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int k=0;k<imagelist.size();k++) {
+				if(imagelist.get(k).getIsmain() && k != 0) {
+					ProductImageVO temp1 = imagelist.get(k);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(k, temp2);
+				}
+			}
+			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+		}
+		
+		mv.addObject("priceMap3",priceMap);
+		mv.addObject("list3", list);
+		mv.addObject("productMap3", productMap);
+		mv.addObject("productimageMap3", productimageMap);
+		mv.addObject("pageMaker3", pageMaker);
+		mv.addObject("search3", search);
+		mv.setViewName("cat/store/SearchResult3");
+		return mv;
+	}
+	
+	@RequestMapping(value = "searchresult4")
+	public ModelAndView searchresult4(StoreSearch search, ModelAndView mv) {
+		search.setSnoEno();
+		search.setGroup1("생활용품");
+		
+		List<CatStoreVO> list = service.searchList(search);
+		Map<Integer,ProductVO> productMap = new HashMap<>();
+		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
+		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
+		StorePageMaker pageMaker = new StorePageMaker();
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int k=0;k<imagelist.size();k++) {
+				if(imagelist.get(k).getIsmain() && k != 0) {
+					ProductImageVO temp1 = imagelist.get(k);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(k, temp2);
+				}
+			}
+			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+			productimageMap.put(list.get(i).getSeq(), piservice.selectList(piv));
+		}
+		
+		mv.addObject("priceMap4",priceMap);
+		mv.addObject("list4", list);
+		mv.addObject("productMap4", productMap);
+		mv.addObject("productimageMap4", productimageMap);
+		mv.addObject("pageMaker4", pageMaker);
+		mv.addObject("search4", search);
+		mv.setViewName("cat/store/SearchResult4");
 		return mv;
 	}
 	

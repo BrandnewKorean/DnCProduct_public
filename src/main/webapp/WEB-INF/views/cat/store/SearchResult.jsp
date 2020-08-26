@@ -18,7 +18,7 @@ $(function(){
 			keyword: keyword
 		},
 		beforeSend: function(){
-			$('#result1').append('<img src="resources/image/catloading.gif" style="position:relative; top:25%; height:50%;">')
+			$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 		},
 		success: function(result){
 			$('#result1').html(result);
@@ -27,6 +27,55 @@ $(function(){
 			alert('error');
 		}
 	});
+	
+	$.ajax({
+		url: "searchresult2",
+		data: {
+			keyword: keyword
+		},
+		beforeSend: function(){
+			$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+		},
+		success: function(result){
+			$('#result2').html(result);
+		},
+		error: function(){
+			alert('error');
+		}
+	});
+	
+	$.ajax({
+		url: "searchresult3",
+		data: {
+			keyword: keyword
+		},
+		beforeSend: function(){
+			$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+		},
+		success: function(result){
+			$('#result3').html(result);
+		},
+		error: function(){
+			alert('error');
+		}
+	});
+	
+	$.ajax({
+		url: "searchresult4",
+		data: {
+			keyword: keyword
+		},
+		beforeSend: function(){
+			$('#result4').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+		},
+		success: function(result){
+			$('#result4').html(result);
+		},
+		error: function(){
+			alert('error');
+		}
+	});
+	
 });
 </script>
 </head>
@@ -40,7 +89,7 @@ $(function(){
 		<a class=group1_title>[미용용품] 검색결과</a><br>
 		<div class=result id=result3></div>
 		<a class=group1_title>[생활용품] 검색결과</a><br>
-		<div class=result id=reuslt4></div>
+		<div class=result id=result4></div>
 	</div>
 </body>
 </html>
