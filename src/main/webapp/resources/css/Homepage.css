@@ -1,123 +1,154 @@
 @charset "UTF-8";
-@font-face{
-	font-family: "footprint";
-	src: url("/ex01/resources/font/footprint.ttf");
+body{
+	margin: 0;
+	cursor: url("/resources/cursor/cat_default.cur"), auto;
 }
-	body{
-		margin:0;
-	}
-	.container{
-		position: absolute;
-		background-image: url("/ex01/resources/image/main.jpg");
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: center center;
-		margin: 0 auto;
-		width: 100%;
-		height: 100%;
-		text-align: center;
-		font-family: "footprint";
-		font-size: 50pt;
-		min-height: 100%;
-		min-width: 100%;
-	}
-	.message{
-		position: relative;
-		width: 50%;
-		margin: 0 auto;
-		top: 5%;
-	}
-	.logo{
-		position: absolute;
-		background-image: url("/ex01/resources/image/logob.png");
-		background-repeat: no-repeat;
-		background-size: contain;
-		background-position: top center;
-		width: 15%;
-		height: 30%;
-		left: 43%;
-		top: 10%;
-		opacity: 0;
-	}
-	.blue{
-		position: absolute;
-		width: 42%;
-		height: 47%;
-		left: 20%;
-		top: 0%;
-	}
-	.red{
-		position: absolute;
-		width: 45%;
-		height: 20%;
-		left: 41%;
-		top: 17%;
-	}
-	.bluepointer{
-		position: absolute;
-		background-image: url("/ex01/resources/image/pinbb.png");
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 50px;
-		height: 50px;
-		background-color: rgba(255,255,255,0);
-		min-width: 10%;
-		min-height: 15%;
-		display: none;
-	}
-	.redpointer{
-		position: absolute;
-		background-image: url("/ex01/resources/image/pinrb.png");
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 50px;
-		height: 50px;
-		background-color: rgba(255,255,255,0);
-		min-width: 10%;
-		min-height: 15%;
-		display: none;
-	}
-	#blue1{
-		left: 0;
-		top: 0;
-	}
-	#blue2{
-		right: 0;
-		bottom: 0;
-	}
-	#red1{
-		left: 0;
-		bottom: 0;
-	}
-	#red2{
-		right: 0;
-		top: 0;
-	}
-	#dog1{
-		position: absolute;
-		width: 30%;
-		height: 92%;
-		left: 5%;
-		bottom: 0;
-	}
-	#dog2{
-		position: absolute;
-		width: 20%;
-		height: 52%;
-		left: 50%;
-		bottom: 0;
-	}
-	#cat1{
-		position: absolute;
-		width: 15%;
-		height: 65%;
-		left: 35%;
-		bottom: 0;
-	}
-	#cat2{
-		position: absolute;
-		width: 23%;
-		height: 75%;
-		left: 70%;
-		bottom: 0;
-	}
+.intro{
+	position: relative;
+	background-image: url("/resources/image/catmain.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	opacity: 0.8;
+	padding: 0;
+	overflow-x: hidden;
+}
+.intro > #w_canvas{
+	background-color: rgba(255,255,255,0);
+	margin: 0;
+}
+.head_message{
+	position: absolute;
+	left: 10%;
+	top: 15%;
+	width: 500px;
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+	opacity: 0;
+	background-color: rgba(255, 255, 255, 0);
+	color: RebeccaPurple;
+}
+.head_message > a{
+	font-size: 20pt;
+	background-color: rgba(255, 255, 255, 0);
+	color: red;
+}
+.container{
+	width: 95%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 80px;
+}
+.cmenu{
+	display: inline-block;
+	position: relative;
+	width: 50%;
+	background-color: rgba(255,255,255,0);
+	margin: 0;
+}
+.cmenu > a{
+	font-size: 20pt;
+	background-color: rgba(255,255,255,0);
+}
+#diary{
+	float: left;
+	background-image: url("/resources/image/diary.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#diary_message{
+	background-color: rgba(255,255,255,0);
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}
+#cat_footprint{
+	position: absolute;
+	background-image: url("/resources/image/cat_footprint.png");
+	background-color: rgba(255,255,255,0);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+	right: 10px;
+	bottom: 10px;
+	display: none;
+}
+#store{
+	float: right;
+	background-image: url("/resources/image/store.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center right;
+	background-color: rgba(255,255,255,0);
+	overflow: hidden;
+}
+#store_message{
+	background-color: rgba(255,255,255,0);
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center center;
+}
+#truck{
+	position: absolute;
+	background-image: url("/resources/image/truck.png");
+	background-color: rgba(255,255,255,0);
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 30%;
+	height: 30%;
+	right: -30%;
+	bottom: 5%;
+}
+#board{
+	float: left;
+}
+#board_message{
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}
+#gps{
+	float: right;
+	background-image: url("/resources/image/map.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: hidden;
+}
+.location{
+	position: absolute;
+	background-image: url("/resources/image/location.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: rgba(255,255,255,0);
+	width: 5%;
+	height: 11%;
+	transform: rotate(310deg);
+	display: none;
+}
+#location1{
+	left: 54%;
+	top: 63%;
+}
+#location2{
+	left: 60%;
+	top: 65%;
+}
+#location3{
+	left: 54%;
+	top: 79%;
+}
+#location4{
+	left: 52%;
+	top: 70%;
+}
+#location5{
+	left: 59%;
+	top: 72%;
+}
+#gps_message{
+	font-size: 50pt;
+	font-family: "NanumPen";
+	text-align: center;
+}

@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" type="text/css" href="resources/css/Header.css?ver=<%= System.currentTimeMillis()%>">
+<script type="text/javascript" src="/resources/script/header.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<div class="header">
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
+		<input type="hidden" id=islogin value="${logID}">
 		<c:choose>
 			<c:when test="${logID == null }">
 				<div class=tmenu>

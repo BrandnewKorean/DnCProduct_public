@@ -75,6 +75,12 @@ public class ClientController {
 		return mv;
 	}
 	
+	@RequestMapping(value = "loginsuccess")
+	public ModelAndView loginsuccess(ModelAndView mv) {
+		mv.setViewName("login/LoginSuccess");
+		return mv;
+	}
+	
 	@RequestMapping(value = "kakaologin", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/json")
 	public ModelAndView kakaologin(ModelAndView mv, @RequestParam String code, HttpSession session) throws ClientProtocolException, IOException {
 		String email = null;
@@ -90,15 +96,10 @@ public class ClientController {
 		JsonNode properties = userInfo.path("properties");
 		JsonNode kakao_account = userInfo.path("kakao_account");
 		
-		System.out.println(properties);
-		System.out.println(kakao_account);
 		
 		id = "kakao"+userInfo.path("id").asText();
 		email = kakao_account.path("email").asText();
 		name = properties.path("nickname").asText();
-		System.out.println("id = "+id);
-		System.out.println("email = "+email);
-		System.out.println("name = "+name);
 		
 		ClientVO cv = new ClientVO();
 		cv.setId(id);
@@ -106,7 +107,7 @@ public class ClientController {
 
 		if(cv != null) {
 			session.setAttribute("logID", id);
-			mv.setViewName("redirect: home");
+			mv.setViewName("redirect: loginsuccess");
 		}else {
 			mv.addObject("social_type", "kakao");
 			mv.addObject("social_name", name);
@@ -147,7 +148,7 @@ public class ClientController {
 
 			if(cv != null) {
 				session.setAttribute("logID", id);
-				mv.setViewName("redirect: home");
+				mv.setViewName("redirect: loginsuccess");
 			}else {
 				mv.addObject("social_type", "naver");
 				mv.addObject("social_name", name);
@@ -207,7 +208,7 @@ public class ClientController {
 
 		if(cv != null) {
 			request.getSession().setAttribute("logID", sub);
-			mv.setViewName("redirect: catmain");
+			mv.setViewName("redirect: loginsuccess");
 		}else {
 			mv.addObject("social_type", "google");
 			mv.addObject("social_name", name);
@@ -271,9 +272,6 @@ public class ClientController {
 		return mv;
 	}
 	
-	
-
-	
 	@RequestMapping(value="delete")
 	public ModelAndView delete(ModelAndView mv, HttpServletRequest request, ClientVO cv) {
 		String id = "";
@@ -291,7 +289,6 @@ public class ClientController {
 		return mv;
 	} // delete
 	
-	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
 		ClientVO cv = new ClientVO();
@@ -302,7 +299,6 @@ public class ClientController {
 		mv.setViewName("login/MyinfoUpdate");
 		return mv;
 	}
-	
 
 	@RequestMapping(value = "update")
 	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
@@ -314,7 +310,6 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
-	
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
@@ -374,7 +369,6 @@ public class ClientController {
 		return mv;
 	}
 	
-	
 	@RequestMapping(value="join")
 	public ModelAndView join(ModelAndView mv, ClientVO cv) {
 		cv.setPassword(passwordEncoder.encode(cv.getPassword()));
@@ -386,6 +380,7 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
 	@RequestMapping(value="selectOne",method=RequestMethod.POST)
 	public ModelAndView selectOne(ModelAndView mv, ClientVO cv) {
 		cv = service.selectOne(cv);
@@ -397,6 +392,7 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
 	@RequestMapping(value = "juso")
 	public ModelAndView juso(ModelAndView mv) {
 		mv.setViewName("popup/jusoPopup");

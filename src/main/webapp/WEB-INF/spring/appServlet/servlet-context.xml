@@ -44,7 +44,7 @@
 		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<beans:property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl"/>
 		<beans:property name="username" value="system"/>
-		<beans:property name="password" value="dhfkzmf"/>
+		<beans:property name="password" value="oracle"/>
 	</beans:bean>
 	
 	<!-- Mybatis 설정 -->
@@ -97,7 +97,7 @@
 	<!-- 승인된 자바스크립트 원본과 승인된 리디렉션 URI -->
 	<beans:bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
 		<beans:property name="scope" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" />
-		<beans:property name="redirectUri" value="http://localhost:8080/ex01/googlelogin" />
+		<beans:property name="redirectUri" value="http://localhost:8080/googlelogin" />
 	</beans:bean>
 	
 	<beans:bean id="naverLoginBO" class="naver.NaverLoginBO"/>
