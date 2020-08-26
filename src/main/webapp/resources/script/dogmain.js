@@ -61,8 +61,8 @@ $(function(){
 		var scrollBottom = scrollTop + window.innerHeight;
 		
 		if(scrollBottom >= $('#diary').offset().top + (cmenuWidth * 0.6)){
-			$('#dog_footprint').css('display','block');
-			$('#dog_footprint').animate({
+			$('#cat_footprint').css('display','block');
+			$('#cat_footprint').animate({
 				width: '25%',
 				height: '40%'
 			}, 500);
@@ -129,11 +129,11 @@ $(function(){
 	
 	$('img').hover(function(){
 		$(this).css({
-			cursor:'url("/ex01/resources/cursor/dog_hover.cur"), auto'
+			cursor:'url("/ex01/resources/cursor/cat_hover.cur"), auto'
 		});
 	},function(){
 		$(this).css({
-			cursor:'url("/ex01/resources/cursor/dog_default.cur"), auto'
+			cursor:'url("/ex01/resources/cursor/cat_default.cur"), auto'
 		});
 	});
 });

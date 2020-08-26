@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,23 +10,28 @@
 <link rel="stylesheet" type="text/css" href="resources/css/dog/Dogmain.css?ver=<%= System.currentTimeMillis()%>">
 </head>
 <body>
-	<div class="header">
-		<a href="dogmain"><img src="resources/image/logof.png" width=7%></a>D&C Project
-		<div class=tmenu>
-			<span class=text id=home>Home</span>|<span class=text id=join>Join</span>|<span class=text id=login>Login</span>
-		</div>
-		<div class=tmenu_result id=tmenu_result></div>
-	</div>
-	<div class="intro">
-		<div class="head_image"></div>
-		<div class="head_message">
-		All information about Dog<br>
-		<a>Show off your pet and get useful information</a>
-		</div>
-	</div>
-	<div class="container">
-		container 영역
-	</div>
+	<jsp:include page="../Header.jsp"></jsp:include>
+	<c:if test="${logID == null}">
+			<div class="intro">
+				<div class="head_image"></div>
+				<div class="head_message">
+				All information about Dog<br>
+				<a>Show off your pet and get useful information</a>
+				</div>
+			</div>
+			<div class="container">
+				container 영역
+			</div>
+	</c:if>
+	<c:if test="${logID != null}">
+		<ul>
+			<li>diary</li>
+			<li>Store</li>
+			<li>Board</li>
+			<li>Location Service</li>
+		</ul>
+		<script type="text/javascript" src="resources/script/dogmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
+	</c:if>
 	<div class="footer">
 		<div class=logo></div>
 		Produce by D&C<br>
@@ -37,6 +43,7 @@
 		<br>
 	</div>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="resources/script/dogmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>

@@ -223,17 +223,26 @@ public class ClientController {
 	public ModelAndView termsuse(ModelAndView mv) {
 		mv.setViewName("join/TermsofUse");
 		return mv;
-	}
+	} // cat
+	
+
+	
 	@RequestMapping(value = "termsprivacy")
 	public ModelAndView termsprivacy(ModelAndView mv) {
 		mv.setViewName("join/TermsofPrivacy");
 		return mv;
-	}
+	} // cat
+
+	
 	@RequestMapping(value = "termslocation")
 	public ModelAndView termslocation(ModelAndView mv) {
 		mv.setViewName("join/TermsofLocationInformation");
 		return mv;
-	}
+	} // cat
+	
+	
+	
+	
 	@RequestMapping(value = "logout")
 	public ModelAndView logout(HttpServletRequest request, ModelAndView mv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -246,6 +255,8 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value = "clientInfo")
 	public ModelAndView clientInfo(HttpServletRequest request, ModelAndView mv, String code, ClientVO cv) {
 		String id = (String)request.getSession().getAttribute("logID");
@@ -259,6 +270,10 @@ public class ClientController {
 		}
 		return mv;
 	}
+	
+	
+
+	
 	@RequestMapping(value="delete")
 	public ModelAndView delete(ModelAndView mv, HttpServletRequest request, ClientVO cv) {
 		String id = "";
@@ -275,6 +290,8 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	} // delete
+	
+	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
 		ClientVO cv = new ClientVO();
@@ -285,6 +302,8 @@ public class ClientController {
 		mv.setViewName("login/MyinfoUpdate");
 		return mv;
 	}
+	
+
 	@RequestMapping(value = "update")
 	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
 		if(service.update(cv) > 0) {
@@ -295,8 +314,11 @@ public class ClientController {
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
+		String location = (String)request.getSession().getAttribute("loc");
 		String password = cv.getPassword();
 		cv = service.selectOne(cv);
 		if(cv != null) {
@@ -309,14 +331,17 @@ public class ClientController {
 		}else {
 			mv.addObject("code", 2);
 		}
+		mv.addObject("loc", location);
 		mv.setViewName("jsonView");
 		return mv;
 	}
+	
 	@RequestMapping(value = {"/","/home"})
 	public ModelAndView home(ModelAndView mv) {
 		mv.setViewName("Homepage");
 		return mv;
 	}
+	
 	@RequestMapping(value = "dogloginf")
 	public ModelAndView dogloginf(ModelAndView mv) {
 		mv.setViewName("login/LoginForm");
@@ -324,25 +349,32 @@ public class ClientController {
 	}
 	
 	@RequestMapping(value = "dogmain")
-	public ModelAndView dogmain(ModelAndView mv) {
+	public ModelAndView dogmain(HttpServletRequest request, ModelAndView mv) {
+		request.getSession().setAttribute("loc", "dog");
 		mv.setViewName("dog/Dogmain");
 		return mv;
 	}
 	@RequestMapping(value = "catmain")
-	public ModelAndView catmain(ModelAndView mv) {
+	public ModelAndView catmain(HttpServletRequest request, ModelAndView mv) {
+		request.getSession().setAttribute("loc", "cat");
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
+	
 	@RequestMapping(value="JoinTerms")
 	public ModelAndView JoinTerms(ModelAndView mv) {
 		mv.setViewName("join/JoinTerms");
 		return mv;
-	}
+	} // cat
+	
+
 	@RequestMapping(value="JoinForm")
 	public ModelAndView JoinForm(ModelAndView mv) {
 		mv.setViewName("join/JoinForm");
 		return mv;
 	}
+	
+	
 	@RequestMapping(value="join")
 	public ModelAndView join(ModelAndView mv, ClientVO cv) {
 		cv.setPassword(passwordEncoder.encode(cv.getPassword()));
@@ -370,6 +402,4 @@ public class ClientController {
 		mv.setViewName("popup/jusoPopup");
 		return mv;
 	}
-	
-	
 } // class
