@@ -9,14 +9,18 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.Validate;
 import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -55,6 +59,9 @@ public class ClientController {
 	
 	@Autowired
 	OAuth2Parameters googleOAuth2Parameters;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -402,4 +409,49 @@ public class ClientController {
 		mv.setViewName("popup/jusoPopup");
 		return mv;
 	}
+	@RequestMapping(value = "FindId")
+	public ModelAndView findId(ModelAndView mv,ClientVO cv) {
+		cv = service.sendFindId(cv);
+		System.out.println(cv);
+		if(cv != null) {
+			mv.addObject("email",cv.getEmail());
+			mv.addObject("result",true);
+			
+			String setfrom = "DnCProductSystem@gmail.com";
+			String tomail = cv.getEmail();
+			String title = "문의하신 계정 정보입니다.";
+			String content = 
+					"<h1>DnCProduct</h1>"
+					+ "<h3>요청하신 계정은</h3>"
+					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ cv.getId()+ "</p>"
+					+ "<hr>"
+					+ "입니다.";
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+				
+				messageHelper.setFrom(setfrom);
+				messageHelper.setTo(tomail);
+				messageHelper.setSubject(title);
+				messageHelper.setText(content,true);
+				
+				mailSender.send(message);
+				
+			} catch (Exception e) {
+				System.out.println("mailSending Exception => "+e.toString());
+			}
+
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	@RequestMapping(value = "FindIdForm")
+	public ModelAndView findIdForm(ModelAndView mv) {
+		mv.setViewName("login/FindIdForm");
+		return mv;
+	}
+	
+//	@RequestMapping(value = "/find")
 } // class
