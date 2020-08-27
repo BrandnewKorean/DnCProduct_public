@@ -37,6 +37,7 @@ $(function(){
 </script>
 </head>
 <body>
+	${PageMaker.getTotalRow()}개중 ${list1.size()}개를 검색했습니다.
 	<c:choose>
 		<c:when test='${list1.size() > 0}'>
 			<c:forEach var="pl1" items='${list1}'>

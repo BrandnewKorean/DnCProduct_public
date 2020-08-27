@@ -2,12 +2,12 @@ $(function(){
 	
 	$('*').mouseup(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_default.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/cat_default.cur"), auto');
 	})
 	
 	$('*').mousedown(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_click.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/cat_click.cur"), auto');
 	}); 
 	 
 	$.ajax({
@@ -16,13 +16,13 @@ $(function(){
 		success: function(data){ 
 			if(data.cv.profile == ""){
 				$('#profile_image').css({
-					backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
+					backgroundImage: 'url("/resources/profile/default_client.png")',
 					backgroundRepeat: "no-repeat",
 					backgroundSize: "cover" 
 				});
 			}else{
 				$('#profile_image').css({
-					backgroundImage: 'url("/ex01/resources/profile/'+data.cv.profile+'")',
+					backgroundImage: 'url("/resources/profile/'+data.cv.profile+'")',
 					backgroundRepeat: "no-repeat",
 					backgroundSize: "cover" 
 				});

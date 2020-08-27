@@ -2,12 +2,12 @@ $(function(){
 	
 	$('*').mouseup(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_default.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/cat_default.cur"), auto');
 	})
 	
 	$('*').mousedown(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_click.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/cat_click.cur"), auto');
 	}); 
 		
 	$('#diaryf').click(function(){

@@ -51,8 +51,8 @@ public class StoreController {
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
 		StorePageMaker pageMaker = new StorePageMaker();
-		
-		
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
 		
 		DecimalFormat fm = new DecimalFormat("###,###");
 		Map<Integer,String> priceMap = new HashMap<>();

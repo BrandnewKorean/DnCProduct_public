@@ -48,12 +48,12 @@ $(function(){
 	
 	$('*').mouseup(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/dog_default.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/dog_default.cur"), auto');
 	})
 	
 	$('*').mousedown(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/dog_click.cur"), auto');
+		$('*').css('cursor', 'url("/resources/cursor/dog_click.cur"), auto');
 	});
 	
 	$(window).scroll(function(){
@@ -107,13 +107,13 @@ $(function(){
 	$('.text').hover(function(){
 		$(this).css({
 				color:'red',
-				cursor:'url("/ex01/resources/cursor/dog_hover.cur"), auto'
+				cursor:'url("/resources/cursor/dog_hover.cur"), auto'
 			});
 		},
 		function(){
 			$(this).css({
 				color:'black',
-				cursor:'url("/ex01/resources/cursor/dog_default.cur"), auto'
+				cursor:'url("/resources/cursor/dog_default.cur"), auto'
 			});
 		}
 	);
@@ -129,11 +129,11 @@ $(function(){
 	
 	$('img').hover(function(){
 		$(this).css({
-			cursor:'url("/ex01/resources/cursor/cat_hover.cur"), auto'
+			cursor:'url("/resources/cursor/cat_hover.cur"), auto'
 		});
 	},function(){
 		$(this).css({
-			cursor:'url("/ex01/resources/cursor/cat_default.cur"), auto'
+			cursor:'url("/resources/cursor/cat_default.cur"), auto'
 		});
 	});
 });

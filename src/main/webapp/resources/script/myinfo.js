@@ -3,13 +3,13 @@ $(function(){
 	
 	if(profile == ''){
 		$('#profile').css({
-			backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
+			backgroundImage: 'url("/resources/profile/default_client.png")',
 			backgroundRepeat: "no-repeat",
 			backgroundSize: "cover"
 		});
 	}else{
 		$('#profile').css({
-			backgroundImage: 'url("/ex01/resources/profile/'+profile+'")',
+			backgroundImage: 'url("/resources/profile/'+profile+'")',
 			backgroundRepeat: "no-repeat",
 			backgroundSize: "cover"
 		});
