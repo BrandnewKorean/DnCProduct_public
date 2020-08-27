@@ -450,13 +450,22 @@ public class ClientController {
 	@RequestMapping(value = "FindPw")
 	public ModelAndView findPw(ModelAndView mv, ClientVO cv) {
 		Random r = new Random();
-		String dice = Integer.toString(r.nextInt(8990) + 1001)+("!"); // 이메일로 받는 인증코드 부분 (난수)
+		String password = "";
+	    char[] charArr = new char[] { 
+	    		'0','1','2','3','4','5','6','7','8','9', 
+	    		'A','B','C','D','E','F','G','H','I','J','K','L','M', 
+	    		'N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
+	    
+	    for(int i=0; i<10; i++) {
+	    	password += charArr[r.nextInt(33)];
+	    }
+	    
 		cv = service.sendFindPw(cv);
 		if(cv != null) {
 			mv.addObject("result", true);
-			String encodedPassword = passwordEncoder.encode(dice);
-			if(passwordEncoder.matches(dice, encodedPassword)) {
-				cv.setPassword(passwordEncoder.encode(dice));
+			String encodedPassword = passwordEncoder.encode(password);
+			if(passwordEncoder.matches(password, encodedPassword)) {
+				cv.setPassword(passwordEncoder.encode(password));
 			}
 			String setfrom = "DnCProductSystem@gmail.com";
 			String tomail = cv.getEmail();
@@ -464,7 +473,7 @@ public class ClientController {
 			String content = 
 					"<h1>DnCProduct</h1>"
 					+ "<h3>요청하신 임시 비밀번호는</h3>"
-					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ dice + "</p>"
+					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ password + "!"+ "</p>"
 					+ "입니다.";
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -476,7 +485,7 @@ public class ClientController {
 				messageHelper.setText(content,true);
 				
 				mailSender.send(message);
-				service.passwordChange(cv);
+				service.passwordChange(cv); // 임시 비밀번호로 업데이트
 				
 			} catch (Exception e) {
 				System.out.println("mailSending Exception => "+e.toString());
@@ -484,6 +493,7 @@ public class ClientController {
 		}else {
 			mv.addObject("result", false);
 		}
+		mv.addObject("email", cv.getEmail());
 		mv.setViewName("jsonView");
 		return mv;
 	}
