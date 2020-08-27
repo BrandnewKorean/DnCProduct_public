@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -453,5 +454,50 @@ public class ClientController {
 		return mv;
 	}
 	
-//	@RequestMapping(value = "/find")
+	@RequestMapping(value = "FindPw")
+	public ModelAndView findPw(ModelAndView mv, ClientVO cv) {
+		Random r = new Random();
+		String dice = Integer.toString(r.nextInt(8990) + 1001)+("!"); // 이메일로 받는 인증코드 부분 (난수)
+		cv = service.sendFindPw(cv);
+		if(cv != null) {
+			mv.addObject("result", true);
+			String encodedPassword = passwordEncoder.encode(dice);
+			if(passwordEncoder.matches(dice, encodedPassword)) {
+				cv.setPassword(passwordEncoder.encode(dice));
+			}
+			String setfrom = "DnCProductSystem@gmail.com";
+			String tomail = cv.getEmail();
+			String title = "문의하신 계정 정보입니다.";
+			String content = 
+					"<h1>DnCProduct</h1>"
+					+ "<h3>요청하신 임시 비밀번호는</h3>"
+					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ dice + "</p>"
+					+ "<hr>"
+					+ "입니다.";
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+				
+				messageHelper.setFrom(setfrom);
+				messageHelper.setTo(tomail);
+				messageHelper.setSubject(title);
+				messageHelper.setText(content,true);
+				
+				mailSender.send(message);
+				
+			} catch (Exception e) {
+				System.out.println("mailSending Exception => "+e.toString());
+			}
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "FindPwForm")
+	public ModelAndView findPwForm(ModelAndView mv) {
+		mv.setViewName("login/FindPwForm");
+		return mv;
+	}
 } // class
