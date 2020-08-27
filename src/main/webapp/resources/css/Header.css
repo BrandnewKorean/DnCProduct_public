@@ -12,8 +12,8 @@ body{
 	top: 0;
 	margin: 0;
 	width: 100%;
-	z-index: 100;
 	background-color: Lavender;
+	z-index: 1000;
 }
 #catmainlogo{
 	position: relative;
@@ -47,23 +47,6 @@ body{
 	background-color: white;
 	display: none;
 	text-align: center;
-}
-.header_navigation_btn_loc{
-	position: absolute;
-	top: 30%;
-	left:50%;
-}
-#header_navigation_btn{
-	position: relative;
-	left: -50%;
-	width: 100px;
-	height: 100px;
-	background-color: DarkSlateBlue;
-	text-align: center;
-	border-radius: 50%;
-	transform-origin: 50% 50%;
-	transition: all ease 1s;
-	color: white;
 }
 .header_navigation{
 	display: none;
@@ -102,4 +85,44 @@ body{
 .header_navi_sub > li > a{
 	text-decoration: none;
 	color: black;
+}
+.header_navigation_btn_loc{
+	position: absolute;
+	width: 7%;
+	height: 100%;
+	left:50%;
+	top: 0;
+}
+#header_navigation_btn{
+	position: relative;
+	left: -50%;
+	top: 50%;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background-color: DarkSlateBlue;
+	text-align: center;
+	border-radius: 50%;
+	transform-origin: 50% 50%;
+	transition: all ease 1s;
+	color: white;
+}
+#navi_up{
+	position: absolute;
+	left: 50%;
+	top: 0;
+}
+#navi_down{
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+}
+#header_navigation_btn_hidden{
+	position: absolute;
+	left: -50%;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: Lavender;
 }

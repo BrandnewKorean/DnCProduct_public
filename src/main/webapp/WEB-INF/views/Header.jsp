@@ -46,8 +46,10 @@
 				</div>
 				<div class=header_navigation_btn_loc>
 					<div id=header_navigation_btn>
-						∧<br><br><br><br>∨
+						<a id=navi_up>∨</a>
+						<a id=navi_down>∨</a>
 					</div>
+					<div id=header_navigation_btn_hidden></div>
 				</div>
 			</c:otherwise>
 		</c:choose>
