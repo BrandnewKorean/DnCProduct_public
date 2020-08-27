@@ -48,4 +48,9 @@ public class ClientServiceImpl implements ClientService{
 	public ClientVO sendFindPw(ClientVO cv) {
 		return dao.sendFindPw(cv);
 	}
+	
+	@Override
+	public int passwordChange(ClientVO cv) {
+		return dao.update(cv);
+	}
 } // class

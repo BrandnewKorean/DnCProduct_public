@@ -22,6 +22,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -475,6 +476,7 @@ public class ClientController {
 				messageHelper.setText(content,true);
 				
 				mailSender.send(message);
+				service.passwordChange(cv);
 				
 			} catch (Exception e) {
 				System.out.println("mailSending Exception => "+e.toString());

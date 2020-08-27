@@ -31,4 +31,8 @@
 	<select id="sendFindPw" resultType="vo.ClientVO">
 		select * from client where email=#{email} and id=#{id}
 	</select>
+	
+	<update id="passwordChange">
+		update client set password=#{password} where id=#{id}
+	</update>
 </mapper>
