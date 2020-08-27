@@ -40,16 +40,7 @@ public class StoreController {
 	@RequestMapping(value = "catstoreview")
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		if(search.getKeyword() == null) search.setKeyword("");
-		
-		//totalRowCount
-		//list.size()
-		//jsp pageMaker.getTotalRow 하면 나옴
-		//java에서 만들기
-		
-		
-		
-		
-		
+				
 		search.setPerPage(12);
 		search.setSnoEno();
 		
@@ -63,8 +54,6 @@ public class StoreController {
 		StorePageMaker pageMaker = new StorePageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
-		
-		
 		
 		
 		
