@@ -40,11 +40,7 @@ public class StoreController {
 	@RequestMapping(value = "catstoreview")
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		if(search.getKeyword() == null) search.setKeyword("");
-<<<<<<< HEAD
-				
-=======
 		
->>>>>>> refs/remotes/origin/master
 		search.setPerPage(12);
 		search.setSnoEno();
 		System.out.println(search);
