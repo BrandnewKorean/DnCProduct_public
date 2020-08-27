@@ -38,4 +38,9 @@ public class ClientServiceImpl implements ClientService{
 	public int delete(ClientVO cv) {
 		return dao.delete(cv);
 	}
+	
+	@Override
+	public ClientVO sendFindId(ClientVO cv) {
+		return dao.sendFindId(cv);
+	}
 } // class

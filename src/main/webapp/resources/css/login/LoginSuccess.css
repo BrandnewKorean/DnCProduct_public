@@ -1,0 +1,123 @@
+@charset "UTF-8";
+@font-face{
+	font-family: "footprint";
+	src: url("/resources/font/footprint.ttf");
+}
+body{
+	margin:0;
+}
+.container{
+	position: absolute;
+	background-image: url("/resources/image/main.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-family: "footprint";
+	font-size: 50pt;
+	min-height: 100%;
+	min-width: 100%;
+}
+.message{
+	position: relative;
+	width: 50%;
+	margin: 0 auto;
+	top: 5%;
+}
+.logo{
+	position: absolute;
+	background-image: url("/resources/image/logob.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top center;
+	width: 15%;
+	height: 30%;
+	left: 43%;
+	top: 10%;
+	opacity: 0;
+}
+.blue{
+	position: absolute;
+	width: 42%;
+	height: 47%;
+	left: 20%;
+	top: 0%;
+}
+.red{
+	position: absolute;
+	width: 45%;
+	height: 20%;
+	left: 41%;
+	top: 17%;
+}
+.bluepointer{
+	position: absolute;
+	background-image: url("/resources/image/pinbb.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255,255,255,0);
+	min-width: 10%;
+	min-height: 15%;
+	display: none;
+}
+.redpointer{
+	position: absolute;
+	background-image: url("/resources/image/pinrb.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255,255,255,0);
+	min-width: 10%;
+	min-height: 15%;
+	display: none;
+}
+#blue1{
+	left: 0;
+	top: 0;
+}
+#blue2{
+	right: 0;
+	bottom: 0;
+}
+#red1{
+	left: 0;
+	bottom: 0;
+}
+#red2{
+	right: 0;
+	top: 0;
+}
+#dog1{
+	position: absolute;
+	width: 30%;
+	height: 92%;
+	left: 5%;
+	bottom: 0;
+}
+#dog2{
+	position: absolute;
+	width: 20%;
+	height: 52%;
+	left: 50%;
+	bottom: 0;
+}
+#cat1{
+	position: absolute;
+	width: 15%;
+	height: 65%;
+	left: 35%;
+	bottom: 0;
+}
+#cat2{
+	position: absolute;
+	width: 23%;
+	height: 75%;
+	left: 70%;
+	bottom: 0;
+}

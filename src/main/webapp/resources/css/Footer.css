@@ -1,0 +1,21 @@
+@charset "UTF-8";
+.footer{
+	position: relative;
+	width: 100%;
+	text-align: center;
+	background-color: Lavender;
+	color: SlateGrey;
+}
+.footer_logo{
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	display: inline-block;
+	background-image: url("/resources/image/logof.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-color: white;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+}

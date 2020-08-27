@@ -42,7 +42,7 @@ $(function(){
 			success: function(data){
 				if(data.result == true){
 					alert('로그아웃 되었습니다');
-					location.href = "catmain";
+					location.href = "home";
 				}else{
 					alert('로그인 후 사용하세요');
 				}
@@ -66,7 +66,7 @@ $(function(){
 				switch(data.code){
 				case 0:
 					alert('정상적으로 탈퇴 처리 되었습니다');
-					location.reload();
+					location.href = "home";
 					break;
 				case 1:
 					alert('탈퇴 처리에 실패했습니다');
