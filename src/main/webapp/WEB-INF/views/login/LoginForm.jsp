@@ -49,7 +49,14 @@
 	<input type="password" id=password placeholder="PW"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
-	
+	<br><br>
+	<div class="signup-block">
+		<a href="FindIdForm">계정 찾기</a> 
+		<span class="inline-saperator">/</span>
+		<a href="FindPwForm">Password 찾기</a> 
+		<span class="inline-saperator">/</span> 
+		<a href="JoinForm">회원가입</a>
+	</div>
 	<br><br><br>
 	
 	<div>

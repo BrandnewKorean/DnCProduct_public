@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import vo.ClientVO;
 
@@ -39,4 +40,10 @@ public class ClientDAO {
 	public int delete(ClientVO cv) {
 		return sqlsession.delete(NameSpace+"delete",cv);
 	}
+	
+	public ClientVO sendFindId(ClientVO cv) {
+		return sqlsession.selectOne(NameSpace+"sendFindId",cv);
+	}
+	
+
 } // class

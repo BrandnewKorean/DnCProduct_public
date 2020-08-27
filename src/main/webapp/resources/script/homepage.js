@@ -1,96 +1,81 @@
 $(function(){
-	var blue;
-	var red;
-	var blueTop = parseInt($('.blue').css('top'));
-	var redTop = parseInt($('.red').css('top'));
-	console.log(redTop);
+	var containerWidth = parseInt($('.container').css('width'));
 	
-	$('*').css('cursor','url("/ex01/resources/cursor/footprint_default.cur"), auto');
-	$('*').mouseup(function(){
-		$(this).css('cursor','url("/ex01/resources/cursor/footprint_default.cur"), auto');
-	});
+	if(containerWidth < 800){
+		$('.cmenu').css('width','100%');
+	}else{
+		$('.cmenu').css('width','50%');
+	}
 	
-	$('*').mousedown(function(){
-		$(this).css('cursor','url("/ex01/resources/cursor/footprint_click.cur"), auto');
-	});
+	var cmenuWidth = parseInt($('.cmenu').css('width'));
+	$('.cmenu').css('height', (cmenuWidth*0.6)+'px');
 	
-	$('.dog').hover(function(){
-		$(this).css('cursor','url("/ex01/resources/cursor/footprint_hover.cur"), auto');
-		$('.bluepointer').css('display','block');
+	$(window).resize(function(){
+		containerWidth = parseInt($('.container').css('width'));
+		cmenuWidth = parseInt($('.cmenu').css('width'));
 		
-		blue = setInterval(function(){
-			$('.blue').css('top',(blueTop-5)+'px');
-			$('.blue').animate({
-				top: blueTop+'px'
-			},500);
-		},600);
-	},function(){
-		$('.bluepointer').css('display','none');
-		clearInterval(blue);
-		$('.blue').css('top',blueTop+'px');
+		if(containerWidth < 800){
+			$('.cmenu').css('width','100%');
+		}else{
+			$('.cmenu').css('width','50%');
+		}
+		$('.cmenu').css('height', (cmenuWidth * 0.6)+'px');
 	});
 	
-	$('.cat').hover(function(){
-		$(this).css('cursor','url("/ex01/resources/cursor/footprint_hover.cur"), auto');
-		$('.redpointer').css('display','block');
+	$('.head_message').animate({
+		'opacity': 1
+	}, 2000);
+	
+	$('*').mouseup(function(e){
+		e.stopImmediatePropagation();
+		$('*').css('cursor', 'url("/resources/cursor/cat_default.cur"), auto');
+	})
+	
+	$('*').mousedown(function(e){
+		e.stopImmediatePropagation();
+		$('*').css('cursor', 'url("/resources/cursor/cat_click.cur"), auto');
+	});
+	
+	$(window).scroll(function(){
+		var scrollTop = $(window).scrollTop();
+		var scrollBottom = scrollTop + window.innerHeight;
 		
-		red = setInterval(function(){
-			$('.red').css('top',(redTop-5)+'px');
-			$('.red').animate({
-				top: redTop+'px'
-			},500);
-		},600);
-	},function(){
-		$('.redpointer').css('display','none');
-		clearInterval(red);
-		$('.red').css('top',redTop+'px');
-	});
-	
-	$('.dog').click(function(){
-		$('.message').animate({
-			width: 0,
-			fontSize: "0"
-		}, 500);
-		$('.logo').animate({
-			opacity: "1"
-		}, 1000);
-		$('.logo').animate({
-			top: 0,
-			left: 0
-		},1000);
-		$('.logo').animate({
-			width: 7+"%",
-			height: 14+"%"
-		},1000);
-		setTimeout(function() {
-			$('.container').animate({
-				opacity: "0"
-			},1000);
-			location.href = "dogmain";
-		}, 3500);
-	});
-	
-	$('.cat').click(function(){
-		$('.message').animate({
-			width: 0,
-			fontSize: "0"
-		}, 500);
-		$('.logo').animate({
-			opacity: "1"
-		}, 1000);
-		$('.logo').animate({
-			top: 0,
-			left: 0
-		},1000);
-		$('.logo').animate({
-			width: 7+"%",
-			height: 14+"%"
-		},1000);
-		setTimeout(function() {
-			$('.container').animate({
-				opacity: "0"
-			},1000);
-			location.href = "catmain";
-		}, 3500);
+		if(scrollBottom >= $('#diary').offset().top + (cmenuWidth * 0.6)){
+			$('#cat_footprint').css('display','block');
+			$('#cat_footprint').animate({
+				width: '25%',
+				height: '40%'
+			}, 500);
+		}
+		
+		if(scrollBottom >= $('#store').offset().top + (cmenuWidth * 0.6)){
+			$('#truck').animate({
+				right: '60%'
+			}, 1000);
+		}
+		
+		if(scrollBottom >= $('#gps').offset().top + (cmenuWidth * 0.6)){
+			$('.location').css('display','block');
+			$('#location1').animate({
+				left: '64%',
+				top: '73%'
+			}, 300);
+			$('#location2').animate({
+				left: '70%',
+				top: '75%'
+			});
+			$('#location3').animate({
+				left: '64%',
+				top: '89%'
+			});
+			$('#location4').animate({
+				left: '62%',
+				top: '80%'
+			});
+			$('#location5').animate({
+				left: '69%',
+				top: '82%'
+			});
+		}
 	});
 });
