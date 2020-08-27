@@ -45,13 +45,28 @@ public class StoreController {
 		search.setSnoEno();
 		System.out.println(search);
 		
+		// 전체 list 불러오기
+		
+		//42 개 중에 10개를 검색했습니다
+		
+		//1. 42개
+			//searchrowcount
+			
+		
+		//2. 10개 
+			//searchList
+		
+		
 		List<CatStoreVO> list = service.searchList(search);
+		
+		System.out.println("this is list = "+list);
 		
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
 		StorePageMaker pageMaker = new StorePageMaker();
-		
+		pageMaker.setSearch(search);
+		pageMaker.setTotalRow(service.searchRowCount(search));
 		
 		
 		DecimalFormat fm = new DecimalFormat("###,###");
@@ -332,4 +347,5 @@ public class StoreController {
 		mv.setViewName("cat/store/SearchResult");
 		return mv;
 	}
+	
 }
