@@ -11,4 +11,6 @@ public interface ClientService {
 	int insert(ClientVO cv);
 	int update(ClientVO cv);
 	int delete(ClientVO cv);
+	ClientVO sendFindId(ClientVO cv);
+//	int sendFindPw(ClientVO cv);
 } // interface

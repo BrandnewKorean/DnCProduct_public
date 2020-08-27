@@ -40,10 +40,13 @@ public class StoreController {
 	@RequestMapping(value = "catstoreview")
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		if(search.getKeyword() == null) search.setKeyword("");
+<<<<<<< HEAD
 				
+=======
+		
+>>>>>>> refs/remotes/origin/master
 		search.setPerPage(12);
 		search.setSnoEno();
-		
 		System.out.println(search);
 		
 		List<CatStoreVO> list = service.searchList(search);
@@ -52,8 +55,6 @@ public class StoreController {
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
 		StorePageMaker pageMaker = new StorePageMaker();
-		pageMaker.setSearch(search);
-		pageMaker.setTotalRow(service.searchRowCount(search));
 		
 		
 		

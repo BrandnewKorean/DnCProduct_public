@@ -1,4 +1,8 @@
 @charset "UTF-8";
+@font-face{
+	font-family: "NanumPen";
+	src: url("/resources/font/NanumPen.ttf");
+}
 body{
 	margin: 0;
 }
