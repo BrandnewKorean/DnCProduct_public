@@ -16,7 +16,7 @@
 	<div class="intro">
 		<canvas id=w_canvas></canvas>
 		<div class="head_message">
-		All information about Pat<br>
+		All information about Pet<br>
 		<a>Show off your pet and get useful information</a>
 		</div>
 	</div>

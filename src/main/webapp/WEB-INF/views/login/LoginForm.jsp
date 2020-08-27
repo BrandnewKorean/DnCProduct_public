@@ -45,8 +45,8 @@
 <div class=container>
 	<img src="/ex01/resources/image/logob.png" width="100%" onclick="location.href = 'home'">
 	<h2>Login</h2><br>
-	<input type="text" id="id" placeholder="ID"><br>
-	<input type="password" id=password placeholder="PW"><br><br>
+	<input type="text" id="id" value="apple"><br>
+	<input type="password" id=password value="test!"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
 	<br><br>

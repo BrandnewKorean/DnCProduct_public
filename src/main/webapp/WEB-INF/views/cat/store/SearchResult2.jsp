@@ -37,6 +37,10 @@ $(function(){
 </script>
 </head>
 <body>
+	<span style="color: red;">
+		총 ${pageMaker2.getTotalRow()}개의 상품 중 ${list2.size()}개의 상품이 검색되었습니다.
+	</span>	
+	<br>
 	<c:choose>
 		<c:when test='${list2.size() > 0}'>
 			<c:forEach var="pl2" items='${list2}'>

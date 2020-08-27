@@ -444,5 +444,11 @@ public class ClientController {
 		return mv;
 	}
 	
+	@RequestMapping(value="FindPwForm")
+	public ModelAndView FindPwForm(ModelAndView mv) {
+		mv.setViewName("login/FindPwForm");
+		return mv;
+	}
+	
 //	@RequestMapping(value = "/find")
 } // class
