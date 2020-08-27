@@ -41,18 +41,18 @@ public class StoreController {
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		if(search.getKeyword() == null) search.setKeyword("");
 		
-		search.setPerPage(11);
+		search.setPerPage(12);
 		search.setSnoEno();
-		
 		System.out.println(search);
 		
 		List<CatStoreVO> list = service.searchList(search);
+		
 		Map<Integer,List<ProductImageVO>> productimageMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
 		StorePageMaker pageMaker = new StorePageMaker();
-		pageMaker.setSearch(search);
-		pageMaker.setTotalRow(service.searchRowCount(search));
+		
+		
 		
 		DecimalFormat fm = new DecimalFormat("###,###");
 		Map<Integer,String> priceMap = new HashMap<>();
