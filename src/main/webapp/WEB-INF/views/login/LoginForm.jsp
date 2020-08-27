@@ -43,7 +43,7 @@
 </head>
 <body onload="idfocus()">
 <div class=container>
-	<img src="/ex01/resources/image/logob.png" width="100%" onclick="location.href = 'home'">
+	<img src="/resources/image/logob.png" width="100%" onclick="location.href = 'home'">
 	<h2>Login</h2><br>
 	<input type="text" id="id"><br>
 	<input type="password" id=password><br><br>
