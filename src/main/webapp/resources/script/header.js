@@ -35,7 +35,7 @@ $(function(){
 		});
 		
 		$('#catmainlogo').click(function(){
-			location.href = "home";
+			location.href = "catmain";
 		});
 	}else{
 		$('.text').hover(function(){

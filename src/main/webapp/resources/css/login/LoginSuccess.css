@@ -121,3 +121,7 @@ body{
 	left: 70%;
 	bottom: 0;
 }
+#select{
+	font-family: monospace;
+	font-size: 10px;
+}
