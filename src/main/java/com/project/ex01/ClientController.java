@@ -13,7 +13,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.Validate;
 import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -320,7 +319,6 @@ public class ClientController {
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
-		String location = (String)request.getSession().getAttribute("loc");
 		String password = cv.getPassword();
 		cv = service.selectOne(cv);
 		if(cv != null) {
@@ -333,7 +331,6 @@ public class ClientController {
 		}else {
 			mv.addObject("code", 2);
 		}
-		mv.addObject("loc", location);
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -352,13 +349,11 @@ public class ClientController {
 	
 	@RequestMapping(value = "dogmain")
 	public ModelAndView dogmain(HttpServletRequest request, ModelAndView mv) {
-		request.getSession().setAttribute("loc", "dog");
 		mv.setViewName("dog/Dogmain");
 		return mv;
 	}
 	@RequestMapping(value = "catmain")
 	public ModelAndView catmain(HttpServletRequest request, ModelAndView mv) {
-		request.getSession().setAttribute("loc", "cat");
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}

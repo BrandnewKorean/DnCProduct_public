@@ -10,9 +10,7 @@
 <title>Diary</title>
 </head>
 <body>
-	<div class="header">
-		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
-	</div>
+	<jsp:include page="../../Header.jsp"></jsp:include>
 	<div class=intro>
 	</div>
 	<div class=container>
@@ -36,5 +34,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../../Footer.jsp"></jsp:include>
 </body>
 </html>

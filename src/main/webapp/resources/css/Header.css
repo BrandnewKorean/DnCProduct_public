@@ -48,3 +48,58 @@ body{
 	display: none;
 	text-align: center;
 }
+.header_navigation_btn_loc{
+	position: absolute;
+	top: 30%;
+	left:50%;
+}
+#header_navigation_btn{
+	position: relative;
+	left: -50%;
+	width: 100px;
+	height: 100px;
+	background-color: DarkSlateBlue;
+	text-align: center;
+	border-radius: 50%;
+	transform-origin: 50% 50%;
+	transition: all ease 1s;
+	color: white;
+}
+.header_navigation{
+	display: none;
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	background-color: white;
+	padding-top: 50px;
+}
+.header_navi_main{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-bottom: 10px;
+}
+.header_navi_main > li{
+	display: inline-block;
+	position: relative;
+	width: 200px;
+	font-family: "NanumPen";
+	font-size: 20pt;
+}
+.header_navi_main > li > a{
+	text-decoration: none;
+	color: black;
+}
+.header_navi_sub{
+	list-style: none;
+	padding: 0;
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+.header_navi_sub > li{
+	font-size: 17pt;
+}
+.header_navi_sub > li > a{
+	text-decoration: none;
+	color: black;
+}
