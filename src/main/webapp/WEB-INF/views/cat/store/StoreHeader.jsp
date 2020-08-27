@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>StoreHeader</title>
-<link rel="stylesheet" type="text/css" href="resources/css/cat/Header.css">
+<link rel="stylesheet" type="text/css" href="resources/css/Header.css">
 <link rel="stylesheet" type="text/css" href="resources/css/cat/store/StoreHeader.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="resources/script/header.js"></script>
@@ -80,6 +80,5 @@ $(function(){
 				<div id=client_result></div>
 			</div>
 		</c:if>
-		<div class=tmenu_result id=tmenu_result></div>
 	</div>
 </html>

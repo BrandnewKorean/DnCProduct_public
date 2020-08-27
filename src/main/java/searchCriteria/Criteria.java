@@ -24,7 +24,7 @@ public class Criteria {
 	public void setSnoEno() {
 		if(startno<1)startno=1;
 		startno=(currentPage-1)*perPage+1;
-		endno=(startno+perPage);
+		endno=(startno+perPage)-1;
 	}
 	public int getCurrentPage() {
 		return currentPage;

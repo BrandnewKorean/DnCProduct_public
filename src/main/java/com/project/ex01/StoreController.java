@@ -41,7 +41,7 @@ public class StoreController {
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
 		if(search.getKeyword() == null) search.setKeyword("");
 		
-		search.setPerPage(11);
+		search.setPerPage(12);
 		search.setSnoEno();
 		
 		System.out.println(search);
