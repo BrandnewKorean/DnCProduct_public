@@ -29,6 +29,7 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -321,7 +322,6 @@ public class ClientController {
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
-		String location = (String)request.getSession().getAttribute("loc");
 		String password = cv.getPassword();
 		cv = service.selectOne(cv);
 		if(cv != null) {
@@ -334,7 +334,6 @@ public class ClientController {
 		}else {
 			mv.addObject("code", 2);
 		}
-		mv.addObject("loc", location);
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -353,13 +352,11 @@ public class ClientController {
 	
 	@RequestMapping(value = "dogmain")
 	public ModelAndView dogmain(HttpServletRequest request, ModelAndView mv) {
-		request.getSession().setAttribute("loc", "dog");
 		mv.setViewName("dog/Dogmain");
 		return mv;
 	}
 	@RequestMapping(value = "catmain")
 	public ModelAndView catmain(HttpServletRequest request, ModelAndView mv) {
-		request.getSession().setAttribute("loc", "cat");
 		mv.setViewName("cat/Catmain");
 		return mv;
 	}
@@ -421,7 +418,6 @@ public class ClientController {
 					"<h1>DnCProduct</h1>"
 					+ "<h3>요청하신 계정은</h3>"
 					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ cv.getId()+ "</p>"
-					+ "<hr>"
 					+ "입니다.";
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -468,7 +464,6 @@ public class ClientController {
 					"<h1>DnCProduct</h1>"
 					+ "<h3>요청하신 임시 비밀번호는</h3>"
 					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ dice + "</p>"
-					+ "<hr>"
 					+ "입니다.";
 			try {
 				MimeMessage message = mailSender.createMimeMessage();

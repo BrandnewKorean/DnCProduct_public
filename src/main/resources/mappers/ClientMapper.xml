@@ -29,6 +29,6 @@
 	</select>
 	
 	<select id="sendFindPw" resultType="vo.ClientVO">
-		select * from client where email = #{email} and id = #{id}
+		select * from client where email=#{email} and id=#{id}
 	</select>
 </mapper>
