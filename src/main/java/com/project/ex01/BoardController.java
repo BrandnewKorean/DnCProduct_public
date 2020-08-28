@@ -112,6 +112,12 @@ public class BoardController {
 	
 	@RequestMapping(value="catboard")
 	public ModelAndView catboard(Search search, HttpServletRequest request, ModelAndView mv, @RequestParam(defaultValue = "list") String code) throws ParseException {
+		if(code.equals("image")) {
+			search.setPerPage(16);
+		}else {
+			search.setPerPage(15);
+		}
+		
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);

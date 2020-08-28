@@ -1,14 +1,8 @@
 @charset "UTF-8";
-
-*{
-	background-color: snow;
-}
-
 body{
 	margin: 0;
 	text-align: center;
 }
-
 #catboard_menu{
 	margin:0 auto;
 	width: 80%;
@@ -59,8 +53,8 @@ body{
 .container{
 	position: relative;
 	margin: 0 auto;
-	width: 80%;
-	background-color: green;
+	width: 100%;
+	background-color: snow;
 }
 
 .block{

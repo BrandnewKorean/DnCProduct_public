@@ -69,22 +69,39 @@ body{
 	font-family: "NanumPen";
 	font-size: 20pt;
 }
+.header_navi_main > li:hover{
+	color: red;
+}
 .header_navi_main > li > a{
 	text-decoration: none;
 	color: black;
 }
+.header_navi_main > li > a:hover{
+	font-weight: bold;
+	color: red;
+}
+.header_navi_main > li:hover .header_navi_sub > li{
+	border-left: 2px solid;
+	border-right: 2px solid;
+}
 .header_navi_sub{
 	list-style: none;
 	padding: 0;
-	border-left: 1px solid;
-	border-right: 1px solid;
 }
 .header_navi_sub > li{
 	font-size: 17pt;
+	border-left: 1px solid;
+	border-right: 1px solid;
 }
 .header_navi_sub > li > a{
+	display: block;
 	text-decoration: none;
 	color: black;
+}
+.header_navi_sub > li > a:hover{
+	background-color: red;
+	font-weight: bold;
+	color: white;
 }
 .header_navigation_btn_loc{
 	position: absolute;

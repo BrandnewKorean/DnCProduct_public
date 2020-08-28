@@ -64,71 +64,71 @@ $(function(){
 </script>
 </head>
 <body>
-	<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
-	<div id=catboard_menu>
-		<label id=viewtoggle>
-			<c:if test="${!view}">
-				<input id=view type="checkbox">
-			</c:if>
-			<c:if test="${view}">
-				<input id=view type="checkbox" checked="checked">
-			</c:if>
-			<span></span>
-		</label>
-		<button onclick="location.href='catboardinsertf'">글쓰기</button>
-	</div>
-	<c:if test="${!view}">
-		<div id="table">
-			<div class="row" id="rowtitle">
-				<span class="cell col1">번호</span>
-				<span class="cell col2">작성자</span>
-				<span class="cell col3">제목</span>
-				<span class="cell col4">작성일</span>
-				<span class="cell col5">조회</span>
-				<span class="cell col6">댓글</span>
-			</div>
-			<c:if test="${list != '[]'}">
-				<c:forEach var="bb" items="${list}">
-					<div class="row">
-						<span class="cell col1">${bb.seq}</span>
-						<span class="cell col2">${bb.id}</span>
-						<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
-						<span class="cell col4">${bb.regdate}</span>
-						<span class="cell col5">${bb.cnt}</span>
-						<span class="cell col6">${bb.comments}</span>
-					</div>
-				</c:forEach>
-			</c:if>
+	<div class=container>
+		<img id="boardimg" onclick="location.href='catmain'" src="resources/image/logoe.png" width=15%>
+		<div id=catboard_menu>
+			<label id=viewtoggle>
+				<c:if test="${!view}">
+					<input id=view type="checkbox">
+				</c:if>
+				<c:if test="${view}">
+					<input id=view type="checkbox" checked="checked">
+				</c:if>
+				<span></span>
+			</label>
+			<button onclick="location.href='catboardinsertf'">글쓰기</button>
 		</div>
-		
-		<c:if test="${list != '[]'}">
-			<div>
-				<c:if test="${pageMaker.prev}">
-					<a href="catboard${pageMaker.makeSearch(1)}&code=list">《</a>
-					<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=list">&nbsp;</a>
-				</c:if>
-				
-				<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
-					<c:choose>
-						<c:when test="${pageMaker.search.currentPage==i}">
-							<font size="5" color="orange">${i}</font>&nbsp;
-						</c:when>
-						
-						<c:otherwise>
-							<a href="catboard${pageMaker.makeSearch(i)}&code=list">${i}</a>&nbsp;
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				
-				<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-					<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=list">&nbsp;&nbsp;</a>
-					<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=list">》&nbsp;&nbsp;</a>
+		<c:if test="${!view}">
+			<div id="table">
+				<div class="row" id="rowtitle">
+					<span class="cell col1">번호</span>
+					<span class="cell col2">작성자</span>
+					<span class="cell col3">제목</span>
+					<span class="cell col4">작성일</span>
+					<span class="cell col5">조회</span>
+					<span class="cell col6">댓글</span>
+				</div>
+				<c:if test="${list != '[]'}">
+					<c:forEach var="bb" items="${list}">
+						<div class="row">
+							<span class="cell col1">${bb.seq}</span>
+							<span class="cell col2">${bb.id}</span>
+							<span class="cell col3"><a href="catboardview?seq=${bb.seq}">${bb.title}</a></span>
+							<span class="cell col4">${bb.regdate}</span>
+							<span class="cell col5">${bb.cnt}</span>
+							<span class="cell col6">${bb.comments}</span>
+						</div>
+					</c:forEach>
 				</c:if>
 			</div>
+		
+			<c:if test="${list != '[]'}">
+				<div>
+					<c:if test="${pageMaker.prev}">
+						<a href="catboard${pageMaker.makeSearch(1)}&code=list">《</a>
+						<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=list">&nbsp;</a>
+					</c:if>
+					
+					<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
+						<c:choose>
+							<c:when test="${pageMaker.search.currentPage==i}">
+								<font size="5" color="orange">${i}</font>&nbsp;
+							</c:when>
+							
+							<c:otherwise>
+								<a href="catboard${pageMaker.makeSearch(i)}&code=list">${i}</a>&nbsp;
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
+					<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
+						<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=list">&nbsp;&nbsp;</a>
+						<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=list">》&nbsp;&nbsp;</a>
+					</c:if>
+				</div>
+			</c:if>
 		</c:if>
-	</c:if>
-	<c:if test="${view}">
-		<div class=container>
+		<c:if test="${view}">
 			<c:forEach var="bb" items="${list}">
 				<div class=block>
 					<div class=image>
@@ -147,40 +147,36 @@ $(function(){
 					조회수 : ${bb.cnt}&nbsp;댓글 : ${bb.comments}
 				</div>
 			</c:forEach>
-		</div>
-		<div>
-			<c:if test="${pageMaker.prev}">
-				<a href="catboard${pageMaker.makeSearch(1)}&code=image">《</a>
-				<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">&nbsp;</a>
-			</c:if>
-			
-			<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
-				<c:choose>
-					<c:when test="${pageMaker.search.currentPage==i}">
-						<font size="5" color="orange">${i}</font>&nbsp;
-					</c:when>
-					
-					<c:otherwise>
-						<a href="catboard${pageMaker.makeSearch(i)}&code=image">${i}</a>&nbsp;
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-				<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">&nbsp;&nbsp;</a>
-				<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">》&nbsp;&nbsp;</a>
-			</c:if>
-		</div>
-	</c:if>
+			<div>
+				<c:if test="${pageMaker.prev}">
+					<a href="catboard${pageMaker.makeSearch(1)}&code=image">《</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.startPageNo-1)}&code=image">&nbsp;</a>
+				</c:if>
+				
+				<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
+					<c:choose>
+						<c:when test="${pageMaker.search.currentPage==i}">
+							<font size="5" color="orange">${i}</font>&nbsp;
+						</c:when>
+						
+						<c:otherwise>
+							<a href="catboard${pageMaker.makeSearch(i)}&code=image">${i}</a>&nbsp;
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
+					<a href="catboard${pageMaker.makeSearch(pageMaker.endPageNo+1)}&code=image">&nbsp;&nbsp;</a>
+					<a href="catboard${pageMaker.makeSearch(pageMaker.lastPageNo)}&code=image">》&nbsp;&nbsp;</a>
+				</c:if>
+			</div>
+		</c:if>
 	<c:if test="${list == '[]'}">
 		<div>
 			<span>등록된 글이 없습니다</span>
 		</div>
 	</c:if>
-	
-	<br><br><br><br>
-	
-	
+	<br>
 	<div id="searchBar">
 		<select name="searchBar" id="searchType">
 			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
@@ -192,7 +188,8 @@ $(function(){
 		
 		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
 		<button id="searchButton">검색</button>
-	</div>	
-	
+	</div>
+	<br>
+	<jsp:include page="../../Footer.jsp"></jsp:include>
 </body>
 </html>
