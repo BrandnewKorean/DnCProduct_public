@@ -37,8 +37,10 @@ $(function(){
 </script>
 </head>
 <body>
-	${pageMaker4.getTotalRow()}개 중 ${list4.size()} 를 검색했습니다.
-<br>
+	<span style="color: red;">
+		총 ${pageMaker4.getTotalRow()} 중 ${list4.size()}개의 상품이 검색되었습니다.
+	</span>
+	<br>
 	<c:choose>
 		<c:when test='${list4.size() > 0}'>
 			<c:forEach var="pl4" items='${list4}'>

@@ -24,6 +24,33 @@
 				<div id=client_info>
 					<div id=client_result></div>
 				</div>
+				<div class=header_navigation>
+					<ul class=header_navi_main>
+						<li><a href="catmain">catmain</a>
+							<ul class=header_navi_sub>
+								<li><a href="diaryf">Diary</a></li>
+								<li><a href="storemain">Store</a></li>
+								<li><a href="catboard">Board</a></li>
+								<li><a href="location">Location</a></li>
+							</ul>
+						</li>
+						<li><a href="dogmain">dogmain</a>
+							<ul class=header_navi_sub>
+								<li><a href="#">Diary</a></li>
+								<li><a href="#">Store</a></li>
+								<li><a href="#">Board</a></li>
+								<li><a href="#">Location</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class=header_navigation_btn_loc>
+					<div id=header_navigation_btn>
+						<a id=navi_up>∨</a>
+						<a id=navi_down>∨</a>
+					</div>
+					<div id=header_navigation_btn_hidden></div>
+				</div>
 			</c:otherwise>
 		</c:choose>
 	</div>

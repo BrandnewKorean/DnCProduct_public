@@ -34,6 +34,9 @@
 			<a style="color:GreenYellow">r</a>
 			<a style="color:PaleGreen">l</a>
 			<a style="color:LightPink">d</a>
+			<br>
+			<a id="select">${logID}님 환영합니다~
+					강아지나 고양이를 선택 해 주세요.</a>
 		</div>
 	</div>
 	<div class=logo></div>

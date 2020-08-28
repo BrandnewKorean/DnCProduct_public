@@ -37,7 +37,9 @@ $(function(){
 </script>
 </head>
 <body>
-	${pageMaker1.getTotalRow()}개 중 ${list1.size()} 를 검색했습니다.
+	<span style="color: red;">
+		총 ${pageMaker1.getTotalRow()} 개의 상품 중 ${list1.size()}개의 상품이 검색되었습니다.
+	</span>	
 	<br>
 	<c:choose>
 		<c:when test='${list1.size() > 0}'>

@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Map;
+import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.oauth2.AccessGrant;
@@ -27,6 +29,7 @@ import org.springframework.social.oauth2.GrantType;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -331,7 +334,6 @@ public class ClientController {
 		}else {
 			mv.addObject("code", 2);
 		}
-		
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -416,7 +418,6 @@ public class ClientController {
 					"<h1>DnCProduct</h1>"
 					+ "<h3>요청하신 계정은</h3>"
 					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ cv.getId()+ "</p>"
-					+ "<hr>"
 					+ "입니다.";
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -445,5 +446,60 @@ public class ClientController {
 		return mv;
 	}
 	
-//	@RequestMapping(value = "/find")
+	@RequestMapping(value = "FindPw")
+	public ModelAndView findPw(ModelAndView mv, ClientVO cv) {
+		Random r = new Random();
+		String password = "";
+	    char[] charArr = new char[] { 
+	    		'0','1','2','3','4','5','6','7','8','9', 
+	    		'A','B','C','D','E','F','G','H','I','J','K','L','M', 
+	    		'N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
+	    
+	    for(int i=0; i<10; i++) {
+	    	password += charArr[r.nextInt(33)];
+	    }
+	    
+		cv = service.sendFindPw(cv);
+		if(cv != null) {
+			mv.addObject("result", true);
+			String encodedPassword = passwordEncoder.encode(password);
+			if(passwordEncoder.matches(password, encodedPassword)) {
+				cv.setPassword(passwordEncoder.encode(password));
+			}
+			String setfrom = "DnCProductSystem@gmail.com";
+			String tomail = cv.getEmail();
+			String title = "문의하신 계정 정보입니다.";
+			String content = 
+					"<h1>DnCProduct</h1>"
+					+ "<h3>요청하신 임시 비밀번호는</h3>"
+					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ password + "!"+ "</p>"
+					+ "입니다.";
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+				
+				messageHelper.setFrom(setfrom);
+				messageHelper.setTo(tomail);
+				messageHelper.setSubject(title);
+				messageHelper.setText(content,true);
+				
+				mailSender.send(message);
+				service.passwordChange(cv); // 임시 비밀번호로 업데이트
+				
+			} catch (Exception e) {
+				System.out.println("mailSending Exception => "+e.toString());
+			}
+		}else {
+			mv.addObject("result", false);
+		}
+		mv.addObject("email", cv.getEmail());
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
+	@RequestMapping(value = "FindPwForm")
+	public ModelAndView findPwForm(ModelAndView mv) {
+		mv.setViewName("login/FindPwForm");
+		return mv;
+	}
 } // class
