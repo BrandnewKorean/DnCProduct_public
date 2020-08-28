@@ -20,6 +20,7 @@ $(function(){
 		var keyword = $('#keyword_in_result').val();
 		var group1 = "${search.group1}";
 		var group2 = "${search.group2}";
+
 		self.location = "catstoreview?"
 				+"keyword="+keyword
 				+"&group1="+group1

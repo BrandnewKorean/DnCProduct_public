@@ -26,6 +26,7 @@ public class Criteria {
 		startno=(currentPage-1)*perPage+1;
 		endno=(startno+perPage)-1;
 	}
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}

@@ -54,7 +54,7 @@
 		<div class=cmenu id=gps_message>
 			주변의<br>
 			반려동물 관련 시설을<br>
-			쉽게 찾이보세요<br>
+			쉽게 찾아보세요<br>
 			<a>카카오맵 기반 위치서비스를 제공합니다</a>
 		</div>
 	</div>

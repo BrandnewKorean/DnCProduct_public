@@ -37,6 +37,14 @@ $(function(){
 		$('#catmainlogo').click(function(){
 			location.href = "catmain";
 		});
+		
+		var angle = 0;
+		$('#header_navigation_btn').click(function(){
+			angle += 180;
+			console.log(angle);
+			$('#header_navigation_btn').css('transform','rotate('+angle+'deg)');
+			$('.header_navigation').slideToggle('slow');
+		});
 	}else{
 		$('.text').hover(function(){
 			$(this).css({

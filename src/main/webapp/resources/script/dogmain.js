@@ -124,7 +124,7 @@ $(function(){
 	
 	$('#home').click(function(e){
 		e.stopImmediatePropagation();
-		location.href = "home";
+		location.href = "dogmain";
 	});
 	
 	$('img').hover(function(){

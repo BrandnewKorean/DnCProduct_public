@@ -21,7 +21,7 @@ $(function(){
 	});
 	
 	$('.intro').css({
-		backgroundImage: 'url("/ex01/resources/interval/diary/interval'+1+'.jpg")',
+		backgroundImage: 'url("/resources/interval/diary/interval'+1+'.jpg")',
 	});
 	
 	$('.intro').animate({
@@ -35,7 +35,7 @@ $(function(){
 	
 	setInterval(function() {
 		$('.intro').css({
-			backgroundImage: 'url("/ex01/resources/interval/diary/interval'+image+'.jpg")',
+			backgroundImage: 'url("/resources/interval/diary/interval'+image+'.jpg")',
 		});
 		$('.intro').animate({
 			opacity: "0.8"
