@@ -1,6 +1,7 @@
 var mailCheck = 0;
 var clickOne = 1;
 
+
 var findid = function() {
 	if(clickOne == 0){
 		return false;

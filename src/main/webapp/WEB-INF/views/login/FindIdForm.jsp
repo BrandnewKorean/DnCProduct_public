@@ -14,7 +14,6 @@
 * {
 	background-color: LavenderBlush;
 	margin: 0;
->>>>>>> refs/remotes/origin/kim
 }
 
 .container {

@@ -433,7 +433,7 @@ public class ClientController {
 			} catch (Exception e) {
 				System.out.println("mailSending Exception => "+e.toString());
 			}
-
+				
 		}else {
 			mv.addObject("result", false);
 		}
