@@ -1,15 +1,21 @@
 @charset "UTF-8";
 @font-face{
 	font-family: "BrushScriptBT";
-	src: url("/ex01/resources/font/BrushScriptBT.ttf");
+	src: url("/resources/font/BrushScriptBT.ttf");
 }
 @font-face{
 	font-family: "NanumPen";
-	src: url("/ex01/resources/font/NanumPen.ttf");
+	src: url("/resources/font/NanumPen.ttf");
 }
 body{
 	margin: 0;
-	cursor: url("/ex01/resources/cursor/dog_default.cur"), auto;
+	cursor: url("/resources/cursor/dog_default.cur"), auto;
+}
+#test_image{
+	display: none;
+}
+#test_canvas{
+	text-align: center;
 }
 .header{
 	position: relative;
@@ -53,7 +59,7 @@ body{
 .head_image{
 	position: relative;
 	float: right;
-	background-image: url("/ex01/resources/image/Siberian_husky.jpg");
+	background-image: url("/resources/image/Siberian_husky.jpg");
 	background-color: yellow;
 	opacity: 0.5;
 	border-radius: 20px 0px 0px 20px;
@@ -89,10 +95,18 @@ body{
 	left: 30px;
 	top: 30px;
 	display: inline-block;
-	background-image: url("/ex01/resources/image/logof.png");
+	background-image: url("/resources/image/logof.png");
 	background-repeat: no-repeat;
 	background-size: cover;
 	border-radius: 50%;
 	width: 100px;
 	height: 100px;
+}
+.mainimg{
+	width: 23%;
+	height: 23%;
+}
+#mainimg_diary{
+	width: 25%;
+	height: 25%;
 }
