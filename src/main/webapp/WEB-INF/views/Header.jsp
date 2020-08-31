@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Header</title>
 <link rel="stylesheet" type="text/css" href="resources/css/Header.css?ver=<%= System.currentTimeMillis()%>">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="/resources/script/header.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>

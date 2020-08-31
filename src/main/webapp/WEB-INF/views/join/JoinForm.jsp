@@ -80,6 +80,7 @@ function jusoCallBack(roadFullAddr){
 		<span style="color: red" id="emailmessage"></span>
 	</div>
 	<br>
+	
 	<div class="jointext" >
 	<label for="joinemail">E-mail 인증</label>
 	<br> 
@@ -87,6 +88,8 @@ function jusoCallBack(roadFullAddr){
 		<br>
 		<span style="color: red" id="emailmessage"></span>
 	</div>
+	
+	
 	<br>
 	<div class="jointext">
 	<label for="userAddr">주소</label><br>

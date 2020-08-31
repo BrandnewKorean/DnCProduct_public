@@ -14,7 +14,6 @@
 * {
 	background-color: LavenderBlush;
 	margin: 0;
->>>>>>> refs/remotes/origin/kim
 }
 
 .container {
@@ -93,8 +92,6 @@ button {
 					</p><br><br>
 					<a href="loginf"><button>로그인</button></a>
 				</div>
-				<button onclick="findid()">계정 찾기</button>
-				<a href="home">취소</a>
 			</div>
 		</div>
 		<br> <br> <br>

@@ -70,7 +70,7 @@ $(function(){
 				p.y += Math.cos(angle+p.d) + 1 + p.r/2;
 				p.x += Math.sin(angle) * 2;
 			}else{
-				p.y += 10;
+				p.y += 15;
 			}
 			
 			if(p.x > width+5 || p.x < -5 || p.y > height)
