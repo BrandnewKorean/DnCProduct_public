@@ -85,7 +85,7 @@ $(function(){
 		build(year, month-1, day);
 	});
 	
-	$('#writef').click(function(){
+	$('#diarywritef').click(function(){
 		var result = 1;
 		
 		if($('#content').text() == "내용이 없습니다"){
@@ -217,7 +217,7 @@ $(function(){
 		});
 	});
 	
-	$('#edit').click(function(){
+	$('#diaryedit').click(function(){
 		var content;
 		var uploadlist;
 		var seq;
@@ -379,7 +379,7 @@ $(function(){
 		});
 	});
 	
-	$('#delete').click(function(){
+	$('#diarydelete').click(function(){
 		if(confirm('정말로 삭제하시겠습니까?')){
 			$.ajax({
 				url: 'diarydelete',

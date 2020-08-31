@@ -30,5 +30,6 @@
 			생활용품 Top5 이미지 영역
 		</div>
 	</div>
+	<jsp:include page="StoreFooter.jsp"></jsp:include>
 </body>
 </html>

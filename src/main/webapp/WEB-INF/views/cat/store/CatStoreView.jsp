@@ -73,6 +73,6 @@ $(function(){
 			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
-	<br><br><br>
+	<jsp:include page="StoreFooter.jsp"></jsp:include>
 </body>
 </html>

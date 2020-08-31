@@ -32,6 +32,7 @@
 			</div>
 		</div>
 	</div>
+<%-- 	<jsp:include page="StoreFooter.jsp"></jsp:include> --%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="resources/script/DecimalFormat.js"></script>
 <script type="text/javascript" src="resources/script/products.js?ver=<%= System.currentTimeMillis()%>"></script>

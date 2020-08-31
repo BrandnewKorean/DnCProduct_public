@@ -33,6 +33,6 @@ public class DiaryUploadVO {
 	
 	@Override
 	public String toString() {
-		return "DiaryUploadVO [wdate=" + wdate + ", id=" + id + ", filename=" + filename + "]";
+		return "DiaryUploadVO [wdate=" + wdate + ", id=" + id + ", filename=" + filename + ", seq=" + seq + "]";
 	}
 }
