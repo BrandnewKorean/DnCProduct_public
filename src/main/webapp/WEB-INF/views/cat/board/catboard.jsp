@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,6 +127,18 @@ $(function(){
 					<span class="cell col6">댓글</span>
 					<span class="cell col7">좋아요</span>
 				</div>
+				<c:if test="${noticelist.size() > 0 }">
+					<c:forEach var="notice" items="${noticelist}">
+						<div class="row">
+							<span class="cell col1">공지</span>
+							<span class="cell col2">${notice.id}</span>
+							<span class="cell col3"><a href="catboardnoticeview?seq=${notice.seq}">${notice.title}</a></span>
+							<span class="cell col4">${notice.regdate}</span>
+							<span class="cell col5">${notice.cnt}</span>
+							<span class="cell col6"> </span>
+						</div>
+					</c:forEach>
+				</c:if>
 				<c:if test="${list != '[]'}">
 					<c:forEach var="bb" items="${list}">
 						<div class="row">

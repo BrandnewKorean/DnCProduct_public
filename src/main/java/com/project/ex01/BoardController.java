@@ -23,10 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
+import service.CatBoardNoticeService;
 import service.CatBoardHeartService;
 import service.CatBoardService;
 import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
+import vo.CatBoardNoticeVO;
 import vo.CatBoardHeartVO;
 import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
@@ -41,6 +43,9 @@ public class BoardController {
 	
 	@Autowired
 	CatBoardUploadService uservice;
+	
+	@Autowired
+	CatBoardNoticeService nservice;
 	
 	@Autowired
 	CatBoardHeartService hservice;
@@ -171,14 +176,16 @@ public class BoardController {
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
+<<<<<<< HEAD
 		System.out.println("this is list =>" +list);
+=======
+		List<CatBoardNoticeVO> noticelist = nservice.selectList();
+		
+>>>>>>> refs/remotes/origin/master
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
 		
-		
-		// Map은 interface , HashMap은 class이다
-		// key =seq , value = seq에 해당하는 uploadlist
 		if(code.equals("image")) {
 			Map<Integer,List<CatBoardUploadVO>> uploadlistMap = new HashMap<>();
 			for(int i=0;i<list.size();i++) {
@@ -187,7 +194,10 @@ public class BoardController {
 			mv.addObject("uploadlistMap",uploadlistMap);
 			request.getSession().setAttribute("view", true);
 		}
-		else request.getSession().setAttribute("view", false);
+		else {
+			request.getSession().setAttribute("view", false);
+		}
+		
 		
 		//id값 가져오기
 		//list에서 seq값을 가져와서 boardheartvo 에 넣기
@@ -217,8 +227,8 @@ public class BoardController {
 			}
 		}
 		
+		mv.addObject("noticelist",noticelist);
 		mv.addObject("likeMap", likeMap);
-		mv.addObject("pageMaker",pageMaker);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
 		return mv;
@@ -310,20 +320,31 @@ public class BoardController {
 		service.countUp(bv);
 		bv=service.selectOne(bv);
 		
+<<<<<<< HEAD
 		System.out.println("this is bv => " + bv);
 		
 		//여기서부터
+=======
+>>>>>>> refs/remotes/origin/master
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
 		mv.addObject("comment", comment);
-		
-		//여기까지 추가
 		mv.addObject("islike", islike);
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
-		
 	}//catboardview
+	
+	@RequestMapping(value = "catboardnoticeview")
+	public ModelAndView catboardnoticeview(ModelAndView mv, CatBoardNoticeVO bnv) {
+		nservice.countUp(bnv);
+		bnv = nservice.selectOne(bnv);
+		
+		mv.addObject("isnotice", true);
+		mv.addObject("bv", bnv);
+		mv.setViewName("cat/board/catboardview");
+		return mv;
+	}
 	
 	@RequestMapping(value = "catboardmedia")
 	public ModelAndView catboardmedia(ModelAndView mv, int seq) {

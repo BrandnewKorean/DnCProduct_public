@@ -4,22 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CatBoardVO {
+public class CatBoardNoticeVO {
 	private int seq;
 	private String id;
 	private String title;
 	private String content;
 	private String regdate;
 	private int cnt;
-	private int comments;
-	private int heart;
 	
-	public int getHeart() {
-		return heart;
-	}
-	public void setHeart(int heart) {
-		this.heart = heart;
-	}
 	public int getSeq() {
 		return seq;
 	}
@@ -45,6 +37,7 @@ public class CatBoardVO {
 		this.content = content;
 	}
 	public String getRegdate() {
+		
 		return regdate;
 	}
 	public void setRegdate(String regdate) throws ParseException {
@@ -91,16 +84,11 @@ public class CatBoardVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public int getComments() {
-		return comments;
-	}
-	public void setComments(int comments) {
-		this.comments = comments;
-	}
-	
+
 	@Override
 	public String toString() {
-		return "CatBoardVO [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", regdate="
-				+ regdate + ", cnt=" + cnt + ", comments=" + comments + ", heart=" + heart + "]";
+		return "CatBoardNoticeVO [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content
+				+ ", regdate=" + regdate + ", cnt=" + cnt + "]";
 	}
-} // CatBoardVO
+	
+}
