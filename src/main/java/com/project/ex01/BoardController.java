@@ -277,6 +277,7 @@ public class BoardController {
 		
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
+		mv.addObject("isnotice", false);
 		mv.addObject("comment", comment);
 		mv.addObject("islike", islike);
 		mv.addObject("bv", bv);
@@ -287,9 +288,9 @@ public class BoardController {
 	@RequestMapping(value = "catboardnoticeview")
 	public ModelAndView catboardnoticeview(ModelAndView mv, CatBoardNoticeVO bnv) {
 		nservice.countUp(bnv);
-		System.out.println(bnv);
 		bnv = nservice.selectOne(bnv);
 		
+		mv.addObject("isnotice", true);
 		mv.addObject("bv", bnv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
