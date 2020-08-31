@@ -298,12 +298,6 @@ public class ClientController {
 		return mv;
 	} // delete
 	
-//	@RequestMapping(value="MyInfoGo")
-//	public ModelAndView MyInfoGo(ModelAndView mv) {
-//		mv.setViewName("login/Myinfo");
-//		return mv;
-//	}
-//	
 	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
