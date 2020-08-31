@@ -8,13 +8,13 @@ $(function(){
 			success: function(data){
 				if(data.cv.profile == ""){
 					$('#profile_image').css({
-						backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
+						backgroundImage: 'url("/resources/profile/default_client.png")',
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover" 
 					});
 				}else{
 					$('#profile_image').css({
-						backgroundImage: 'url("/ex01/resources/profile/'+data.cv.profile+'")',
+						backgroundImage: 'url("/resources/profile/'+data.cv.profile+'")',
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover" 
 					});
