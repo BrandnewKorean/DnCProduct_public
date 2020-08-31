@@ -60,6 +60,44 @@ $(function(){
 		+"&code="
 		+code;
 	});
+	
+	$('.heart').click(function(){
+		var seq = parseInt($(this).attr('id').substr($(this).attr('id').indexOf('_')+1));
+		console.log(seq);
+		
+		$.ajax({
+			url: 'likeCheck',
+			data: {seq: seq},
+			success: function(data){
+				switch(data.code){
+				case 0:
+					alert('좋아요 취소');
+					location.reload();
+					break;
+				case 1:
+					alert('좋아요 취소 실패');
+					location.reload();
+					break;
+				case 2:
+					alert('좋아요 추가');
+					location.reload();
+					break;
+				case 3:
+					alert('좋아요 추가 실패');
+					location.reload();
+					break;
+				case 4:
+					alert('로그인 후 이용하세요');
+					location.reload();
+					break;
+				default:
+					alert('error');
+					location.reload();
+					break;
+				}
+			}
+		});
+	});
 });
 </script>
 </head>
@@ -87,6 +125,7 @@ $(function(){
 					<span class="cell col4">작성일</span>
 					<span class="cell col5">조회</span>
 					<span class="cell col6">댓글</span>
+					<span class="cell col7">좋아요</span>
 				</div>
 				<c:if test="${list != '[]'}">
 					<c:forEach var="bb" items="${list}">
@@ -97,6 +136,15 @@ $(function(){
 							<span class="cell col4">${bb.regdate}</span>
 							<span class="cell col5">${bb.cnt}</span>
 							<span class="cell col6">${bb.comments}</span>
+							<c:choose>
+								<c:when test="${likeMap.get(bb.seq)}">
+									<button class=heart id="heart_${bb.seq}" style="background-color: snow; outline:none; border: none;"><img src="/resources/image/heart1.png" width=50px height=50px></button>
+								</c:when>
+								<c:otherwise>
+									<button class=heart id="heart_${bb.seq}" style="background-color: snow; outline:none; border: none;"><img src="/resources/image/heart_empty.png" width=50px height=50px></button>
+								</c:otherwise>
+							</c:choose>
+							${bb.heart}
 						</div>
 					</c:forEach>
 				</c:if>
@@ -171,25 +219,26 @@ $(function(){
 				</c:if>
 			</div>
 		</c:if>
-	<c:if test="${list == '[]'}">
-		<div>
-			<span>등록된 글이 없습니다</span>
+		<c:if test="${list == '[]'}">
+			<div>
+				<span>등록된 글이 없습니다</span>
+			</div>
+		</c:if>
+		<br>
+		<div id="searchBar">
+			<select name="searchBar" id="searchType">
+				<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
+				<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+				<option value="content" <c:out value="${pageMaker.search.searchType eq 'content' ? 'selected':''}" />>내용</option>
+				<option value="id" <c:out value="${pageMaker.search.searchType eq 'id' ? 'selected':''}" />>작성자</option>
+				<option value="titlecontent" <c:out value="${pageMaker.search.searchType eq 'titlecontent' ? 'selected':''}" />>제목+내용</option>
+			</select>
+			
+			<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+			<button id="searchButton">검색</button>
 		</div>
-	</c:if>
-	<br>
-	<div id="searchBar">
-		<select name="searchBar" id="searchType">
-			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
-			<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>
-			<option value="content" <c:out value="${pageMaker.search.searchType eq 'content' ? 'selected':''}" />>내용</option>
-			<option value="id" <c:out value="${pageMaker.search.searchType eq 'id' ? 'selected':''}" />>작성자</option>
-			<option value="titlecontent" <c:out value="${pageMaker.search.searchType eq 'titlecontent' ? 'selected':''}" />>제목+내용</option>
-		</select>
-		
-		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
-		<button id="searchButton">검색</button>
+		<br>
 	</div>
-	<br>
 	<jsp:include page="../../Footer.jsp"></jsp:include>
 </body>
 </html>

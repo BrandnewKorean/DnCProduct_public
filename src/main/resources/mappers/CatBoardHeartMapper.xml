@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="ex01.mappers.CatBoardHeartMapper">
+
+	<insert id="likeinsert">
+		insert into catboard_heart values(#{seq},#{id})
+	</insert>
+
+	<update id="likeCheck">
+		update catboard set heart=(select count(*) from catboard_heart where seq=#{seq}) where seq=#{seq}
+	</update>
+	
+	<delete id="likedelete">
+		delete from catboard_heart where seq=#{seq} and id=#{id}
+	</delete>
+	
+	<select id="selectlike" resultType="vo.CatBoardHeartVO">
+		select * from catboard_heart where seq=#{seq} and id=#{id}
+	</select>
+
+  </mapper>
