@@ -23,9 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
+import service.CatBoardNoticeService;
 import service.CatBoardService;
 import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
+import vo.CatBoardNoticeVO;
 import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
 
@@ -39,6 +41,9 @@ public class BoardController {
 	
 	@Autowired
 	CatBoardUploadService uservice;
+	
+	@Autowired
+	CatBoardNoticeService nservice;
 	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
@@ -121,49 +126,12 @@ public class BoardController {
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
+		List<CatBoardNoticeVO> noticelist = nservice.selectList();
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
 		
-		Date current = new Date();
-		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		
-		for(int i=0;i<list.size();i++) {
-			Date reg = fm.parse(list.get(i).getRegdate());
-			long diff = current.getTime() - reg.getTime();
-			long diffsec = (diff / 1000 % 60);
-			long diffmin = (diff / (60 * 1000) % 60);
-			long diffhour = (diff / (60 * 60 * 1000));
-			long diffday = (diff / (24*60*60*1000));
-			
-			if(diffday <= 0) {
-				if(diffhour <= 0) {
-					if(diffmin <= 0) {
-						if(diffsec < 30) {
-							list.get(i).setRegdate("방금");
-						}else {
-							list.get(i).setRegdate(diffsec+"초 전");
-						}
-					}else {
-						list.get(i).setRegdate(diffmin+"분 전");
-					}
-				}else {
-					list.get(i).setRegdate(diffhour+"시간 전");
-				}
-			}else {
-				if(diffday > 0 && diffday < 7) {
-					list.get(i).setRegdate(diffday+"일 전");
-				}else {
-					SimpleDateFormat fm2 = new SimpleDateFormat("yyyy/MM/dd");
-					Date r = fm2.parse(list.get(i).getRegdate());
-					String regdate = fm2.format(r);
-					list.get(i).setRegdate(regdate);
-				}
-			}
-		}
-		// Map은 interface , HashMap은 class이다
-		// key =seq , value = seq에 해당하는 uploadlist
 		if(code.equals("image")) {
 			Map<Integer,List<CatBoardUploadVO>> uploadlistMap = new HashMap<>();
 			for(int i=0;i<list.size();i++) {
@@ -172,9 +140,12 @@ public class BoardController {
 			mv.addObject("uploadlistMap",uploadlistMap);
 			request.getSession().setAttribute("view", true);
 		}
-		else request.getSession().setAttribute("view", false);
+		else {
+			request.getSession().setAttribute("view", false);
+		}
 		
-		mv.addObject("pageMaker",pageMaker	);
+		mv.addObject("noticelist",noticelist);
+		mv.addObject("pageMaker",pageMaker);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
 		return mv;
@@ -187,7 +158,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="catboardinsert", method=RequestMethod.POST)
-	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException {
+	public ModelAndView catboardinsert(HttpServletRequest request, @RequestParam("files") List<MultipartFile> files, ModelAndView mv, CatBoardVO bv) throws IllegalStateException, IOException, ParseException {
 		String id = (String)request.getSession().getAttribute("logID");
 		boolean view = (boolean)request.getSession().getAttribute("view");
 		
@@ -244,17 +215,24 @@ public class BoardController {
 		service.countUp(bv);
 		bv=service.selectOne(bv);
 		
-		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
 		mv.addObject("comment", comment);
-		
-		//여기까지 추가
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
-		
 	}//catboardview
+	
+	@RequestMapping(value = "catboardnoticeview")
+	public ModelAndView catboardnoticeview(ModelAndView mv, CatBoardNoticeVO bnv) {
+		nservice.countUp(bnv);
+		System.out.println(bnv);
+		bnv = nservice.selectOne(bnv);
+		
+		mv.addObject("bv", bnv);
+		mv.setViewName("cat/board/catboardview");
+		return mv;
+	}
 	
 	@RequestMapping(value = "catboardmedia")
 	public ModelAndView catboardmedia(ModelAndView mv, int seq) {
@@ -276,7 +254,7 @@ public class BoardController {
 	
 	
 	@RequestMapping(value="catboardupdate")
-	public ModelAndView catboardupdate(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
+	public ModelAndView catboardupdate(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) throws ParseException {
 		String id=(String)request.getSession().getAttribute("logID");
 		
 		Date current = new Date();

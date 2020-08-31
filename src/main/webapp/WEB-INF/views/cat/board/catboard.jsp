@@ -88,6 +88,18 @@ $(function(){
 					<span class="cell col5">조회</span>
 					<span class="cell col6">댓글</span>
 				</div>
+				<c:if test="${noticelist.size() > 0 }">
+					<c:forEach var="notice" items="${noticelist}">
+						<div class="row">
+							<span class="cell col1">공지</span>
+							<span class="cell col2">${notice.id}</span>
+							<span class="cell col3"><a href="catboardnoticeview?seq=${notice.seq}">${notice.title}</a></span>
+							<span class="cell col4">${notice.regdate}</span>
+							<span class="cell col5">${notice.cnt}</span>
+							<span class="cell col6"> </span>
+						</div>
+					</c:forEach>
+				</c:if>
 				<c:if test="${list != '[]'}">
 					<c:forEach var="bb" items="${list}">
 						<div class="row">
@@ -171,25 +183,26 @@ $(function(){
 				</c:if>
 			</div>
 		</c:if>
-	<c:if test="${list == '[]'}">
-		<div>
-			<span>등록된 글이 없습니다</span>
+		<c:if test="${list == '[]'}">
+			<div>
+				<span>등록된 글이 없습니다</span>
+			</div>
+		</c:if>
+		<br>
+		<div id="searchBar">
+			<select name="searchBar" id="searchType">
+				<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
+				<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>
+				<option value="content" <c:out value="${pageMaker.search.searchType eq 'content' ? 'selected':''}" />>내용</option>
+				<option value="id" <c:out value="${pageMaker.search.searchType eq 'id' ? 'selected':''}" />>작성자</option>
+				<option value="titlecontent" <c:out value="${pageMaker.search.searchType eq 'titlecontent' ? 'selected':''}" />>제목+내용</option>
+			</select>
+			
+			<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
+			<button id="searchButton">검색</button>
 		</div>
-	</c:if>
-	<br>
-	<div id="searchBar">
-		<select name="searchBar" id="searchType">
-			<option value="null" <c:out value="${pageMaker.search.searchType==null ? 'selected':''}" />>-----</option>
-			<option value="title" <c:out value="${pageMaker.search.searchType eq 'title' ? 'selected':'' }" />>제목</option>
-			<option value="content" <c:out value="${pageMaker.search.searchType eq 'content' ? 'selected':''}" />>내용</option>
-			<option value="id" <c:out value="${pageMaker.search.searchType eq 'id' ? 'selected':''}" />>작성자</option>
-			<option value="titlecontent" <c:out value="${pageMaker.search.searchType eq 'titlecontent' ? 'selected':''}" />>제목+내용</option>
-		</select>
-		
-		<input type="text" name="keyword" id="keyword" value="${pageMaker.search.keyword}">
-		<button id="searchButton">검색</button>
+		<br>
 	</div>
-	<br>
 	<jsp:include page="../../Footer.jsp"></jsp:include>
 </body>
 </html>
