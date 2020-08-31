@@ -12,6 +12,14 @@ public class CatBoardVO {
 	private String regdate;
 	private int cnt;
 	private int comments;
+	private int heart;
+	
+	public int getHeart() {
+		return heart;
+	}
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
 	public int getSeq() {
 		return seq;
 	}
@@ -93,9 +101,6 @@ public class CatBoardVO {
 	@Override
 	public String toString() {
 		return "CatBoardVO [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", regdate="
-				+ regdate + ", cnt=" + cnt + ", comments=" + comments + "]";
+				+ regdate + ", cnt=" + cnt + ", comments=" + comments + ", heart=" + heart + "]";
 	}
-	
-	
-	
 } // CatBoardVO

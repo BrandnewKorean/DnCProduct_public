@@ -235,6 +235,51 @@ function like() {
 	});
 }
 
+$(function(){
+
+	$('.heart').click(function(){
+		var seq = parseInt($(this).attr('id').substr($(this).attr('id').indexOf('_')+1));
+		console.log(seq);
+		
+		$.ajax({
+			url: 'likeCheck',
+			data: {seq: seq},
+			success: function(data){
+				switch(data.code){
+				case 0:
+					alert('좋아요 취소');
+					location.reload();
+					break;
+				case 1:
+					alert('좋아요 취소 실패');
+					location.reload();
+					break;
+				case 2:
+					alert('좋아요 추가');
+					location.reload();
+					break;
+				case 3:
+					alert('좋아요 추가 실패');
+					location.reload();
+					break;
+				case 4:
+					alert('로그인 후 이용하세요');
+					location.reload();
+					break;
+				default:
+					alert('error');
+					location.reload();
+					break;
+				}
+			}
+		});
+	});
+	
+	
+});
+
+
+
 </script>
 
 
@@ -273,8 +318,18 @@ function like() {
 	</div>
 	
 	<h2 style="color: blue">댓글(${bv.comments})</h2>
-
-
+	<div>
+	<h4>좋아요</h4> 
+	<c:choose>
+			<c:when test="${islike}">
+				<button class=heart id="heart_${bv.seq}" style="background-color: snow; outline:none; border: none;"><img src="/resources/image/heart1.png" width=50px height=50px></button>
+			</c:when>
+			<c:otherwise>
+				<button class=heart id="heart_${bv.seq}" style="background-color: snow; outline:none; border: none;"><img src="/resources/image/heart_empty.png" width=50px height=50px></button>
+			</c:otherwise>
+		</c:choose>
+		${bv.heart}
+	</div>	
 	<span class=table>
 		<c:if test="${comment == '[]'}">
 			<div>등록된 댓글이 없습니다</div>
@@ -284,11 +339,10 @@ function like() {
 				<div class="td1" id="td1${c.counter}">
 					<span>${c.id} : </span><pre>${c.content}</pre>
 				</div>
-				<br>
 <%-- 				<div class="td2"><pre>${c.id}</pre></div> --%>
 				<c:if test="${logID==c.id}">   
-					<button id="ub${c.counter}" onclick="commentupdate(${c.counter}, '${c.content}')">댓글수정하기</button>
-					<button onclick="commentdelete(${c.counter})">댓글삭제하기</button><br>
+					<button id="ub${c.counter}" onclick="commentupdate(${c.counter}, '${c.content}')">수정</button>
+					<button onclick="commentdelete(${c.counter})">삭제</button><br>
 				</c:if>
 			</c:forEach>
 		</c:if>

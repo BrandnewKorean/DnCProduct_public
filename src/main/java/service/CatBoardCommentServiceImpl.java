@@ -14,10 +14,6 @@ public class CatBoardCommentServiceImpl implements CatBoardCommentService {
 	@Autowired
 	CatBoardCommentDAO dao;
 	
-	@Override
-	public int delete(CatBoardCommentVO bcv) {
-		return dao.delete(bcv);
-	}
 	
 	@Override
 	public CatBoardCommentVO selectOne(CatBoardCommentVO bcv) {
@@ -38,5 +34,11 @@ public class CatBoardCommentServiceImpl implements CatBoardCommentService {
 	public int update(CatBoardCommentVO bcv) {
 		return dao.update(bcv);
 	}
+	
+	@Override
+	public int delete(CatBoardCommentVO bcv) {
+		return dao.delete(bcv);
+	}
+	
 	
 }//CatBoardCommentServiceImpl

@@ -24,10 +24,12 @@ import searchCriteria.PageMaker;
 import searchCriteria.Search;
 import service.CatBoardCommentService;
 import service.CatBoardNoticeService;
+import service.CatBoardHeartService;
 import service.CatBoardService;
 import service.CatBoardUploadService;
 import vo.CatBoardCommentVO;
 import vo.CatBoardNoticeVO;
+import vo.CatBoardHeartVO;
 import vo.CatBoardUploadVO;
 import vo.CatBoardVO;
 
@@ -45,11 +47,39 @@ public class BoardController {
 	@Autowired
 	CatBoardNoticeService nservice;
 	
+	@Autowired
+	CatBoardHeartService hservice;
+	
+	@RequestMapping(value="likeCheck")
+	public ModelAndView likeCheck(HttpServletRequest request,ModelAndView mv,CatBoardHeartVO bhv) {
+		HttpSession session = request.getSession(false);
+		if(session !=null && session.getAttribute("logID")!=null) {
+			bhv.setId((String) session.getAttribute("logID"));
+			if(hservice.selectlike(bhv) != null) {
+				if(hservice.likedelete(bhv)>0) {
+					mv.addObject("code", 0);
+				}else {
+					mv.addObject("code", 1);
+				}
+			}else {
+				if(hservice.likeinsert(bhv)>0) {
+					mv.addObject("code", 2);
+				}else {
+					mv.addObject("code", 3);
+				}
+			}
+		}else {
+			mv.addObject("code",4);
+		}
+		hservice.likeCheck(bhv);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	@RequestMapping(value="commentdelete")
 	public ModelAndView commentdelete(HttpServletRequest request,ModelAndView mv, CatBoardCommentVO bcv) {
 		HttpSession session = request.getSession(false);
 		if(session!=null && session.getAttribute("logID") != null) {
-	
 			
 			if(cservice.delete(bcv)>0) {
 				mv.addObject("code",0);
@@ -122,7 +152,6 @@ public class BoardController {
 		}else {
 			search.setPerPage(15);
 		}
-		
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
@@ -144,7 +173,23 @@ public class BoardController {
 			request.getSession().setAttribute("view", false);
 		}
 		
+		
+		String id = (String)request.getSession().getAttribute("logID");
+		Map<Integer,Boolean> likeMap = new HashMap<>();
+		for(int i=0;i<list.size();i++) {
+			CatBoardHeartVO bhv = new CatBoardHeartVO();
+			bhv.setSeq(list.get(i).getSeq());
+			bhv.setId(id);
+			bhv = hservice.selectlike(bhv);
+			if(bhv != null) {
+				likeMap.put(list.get(i).getSeq(),true);
+			}else {
+				likeMap.put(list.get(i).getSeq(),false);
+			}
+		}
+		
 		mv.addObject("noticelist",noticelist);
+		mv.addObject("likeMap", likeMap);
 		mv.addObject("pageMaker",pageMaker);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
@@ -212,12 +257,28 @@ public class BoardController {
 	@RequestMapping(value="catboardview")
 	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		//글번호로 글검색
+		
+		String id = (String)request.getSession().getAttribute("logID");
+		
+		Boolean islike;
+		
+		CatBoardHeartVO bhv = new CatBoardHeartVO();
+		bhv.setSeq(bv.getSeq());
+		bhv.setId(id);
+		bhv = hservice.selectlike(bhv);
+		if(bhv != null) {
+			islike = true;
+		}else {
+			islike = false;
+		}
+		
 		service.countUp(bv);
 		bv=service.selectOne(bv);
 		
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
 		mv.addObject("comment", comment);
+		mv.addObject("islike", islike);
 		mv.addObject("bv", bv);
 		mv.setViewName("cat/board/catboardview");
 		return mv;
