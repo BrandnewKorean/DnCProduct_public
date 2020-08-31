@@ -51,7 +51,7 @@ button {
 </style>
 </head>
 <body>
-	<div class="container">
+		<div class="container">
 		<img src="resources/image/logob.png" width="50%"
 			onclick="location.href = 'home'"> <br>
 		<br>
@@ -67,33 +67,22 @@ button {
 					</p>
 					<br>
 					<div>
-						<input type="email" name="email" id="email" placeholder="이메일 주소"
-							value="" />
+						<input type="text" name="email" id="email" placeholder="이메일 주소" />
 					</div>
-					<div style="font-size: 10pt;">
-						<ul style="list-style: none; padding: 0;">
-							<li style="display: none;" id="mailCheck1">[이메일] : 이메일 형식이
-								아닙니다.</li>
-							<li style="display: none;" id="mailCheck2">[이메일] : 해당 이메일
-								주소를 찾을 수 없습니다.</li>
-							<li style="display: none;" id="mailCheck3">[이메일] : 필수 입력입니다.</li>
-						</ul>
-					</div>
+					
 					<br>
 					<button class="btn btn-primary btn-block" onclick="findid()">계정찾기</button>
 					<a href="loginf"><button>취소</button></a>
 				</div>
 
 				<div style="display: none" id="sendsuccess">
-					<span id="getemail"></span><p class="lead">로 요청하신 계정정보를 보냈습니다.</p>
+					<span id="getemail" style="color: blue; font-weight: bold;"> 로 요청하신 계정정보를 보냈습니다.</span>
 					<p style="font-size: 15px;">
-						해당 이메일을 확인 하시고, 비밀번호 변경이 필요하신 경우 해당 이메일을 통해 변경 가능합니다.<br> 
+						해당 이메일을 확인 하시고, 비밀번호 변경이 필요하신 경우 해당 이메일을 통해 변경 가능합니다. 
 					<p style="color: red; font-size: 10px;">※서비스에 따라 스팸으로 분류 되있을 수도 있습니다. 스팸함도 꼭 확인해 주시기 바랍니다.
 					</p><br><br>
 					<a href="loginf"><button>로그인</button></a>
 				</div>
-				<button onclick="findid()">계정 찾기</button>
-				<a href="home">취소</a>
 			</div>
 		</div>
 		<br> <br> <br>
