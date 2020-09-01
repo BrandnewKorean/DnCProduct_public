@@ -82,4 +82,9 @@ public class CatBoardServiceImpl implements CatBoardService {
 		return dao.insertseq();
 	}
 	
+	@Override
+	public int likeCheck(CatBoardHeartVO bhv) {
+		return dao.likeCheck(bhv);
+	}
+	
 } // CatBoardServiceImpl

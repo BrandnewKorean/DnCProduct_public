@@ -32,4 +32,6 @@ public interface CatBoardService {
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
 
 	int insertseq();
+	
+	int likeCheck(CatBoardHeartVO bhv);
 } // interface

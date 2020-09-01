@@ -87,6 +87,7 @@ $(function(){
 					<span class="cell col4">작성일</span>
 					<span class="cell col5">조회</span>
 					<span class="cell col6">댓글</span>
+					<span class="cell col7">좋아요</span>
 				</div>
 				<c:if test="${list != '[]'}">
 					<c:forEach var="bb" items="${list}">
