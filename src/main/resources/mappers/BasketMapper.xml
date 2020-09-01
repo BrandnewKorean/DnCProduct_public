@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="ex01.mappers.BasketMapper">
+ 	
+ 	<select id="selectList" resultType="vo.BasketVO">
+ 		select * from catbasket where id=#{id}
+ 	</select>
+ 	
+ 	<select id="selectOne" resultType="vo.BasketVO">
+ 		select * from catbasket where seq=#{seq} and id=#{id}
+ 	</select>
+ 	
+ 	<insert id="insert">
+ 		insert into catbasket(seq,id) values(#{seq},#{id})
+ 	</insert>
+ 
+ 	<delete id="delete">
+ 		delete from catbasket where seq=#{seq} and id=#{id}
+ 	</delete>
+ 
+ </mapper> 

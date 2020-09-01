@@ -176,12 +176,9 @@ public class BoardController {
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
-<<<<<<< HEAD
 		System.out.println("this is list =>" +list);
-=======
 		List<CatBoardNoticeVO> noticelist = nservice.selectList();
 		
->>>>>>> refs/remotes/origin/master
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setSearch(search);
 		pageMaker.setTotalRow(service.searchRowCount(search));
@@ -320,12 +317,9 @@ public class BoardController {
 		service.countUp(bv);
 		bv=service.selectOne(bv);
 		
-<<<<<<< HEAD
 		System.out.println("this is bv => " + bv);
 		
 		//여기서부터
-=======
->>>>>>> refs/remotes/origin/master
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
 		mv.addObject("comment", comment);
@@ -337,6 +331,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "catboardnoticeview")
 	public ModelAndView catboardnoticeview(ModelAndView mv, CatBoardNoticeVO bnv) {
+		
 		nservice.countUp(bnv);
 		bnv = nservice.selectOne(bnv);
 		

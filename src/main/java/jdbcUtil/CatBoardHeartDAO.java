@@ -30,6 +30,4 @@ public class CatBoardHeartDAO {
 		return sqlsession.selectOne(NameSpace+"selectlike",bhv);
 	}
 	
-	
-	
 }
