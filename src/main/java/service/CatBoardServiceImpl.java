@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatBoardDAO;
 import searchCriteria.Search;
+import vo.CatBoardHeartVO;
 import vo.CatBoardVO;
 import vo.PageVO;
 
@@ -80,11 +81,6 @@ public class CatBoardServiceImpl implements CatBoardService {
 	@Override
 	public int insertseq() {
 		return dao.insertseq();
-	}
-	
-	@Override
-	public int likeCheck(CatBoardHeartVO bhv) {
-		return dao.likeCheck(bhv);
 	}
 	
 } // CatBoardServiceImpl

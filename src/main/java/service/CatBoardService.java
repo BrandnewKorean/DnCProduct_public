@@ -33,5 +33,4 @@ public interface CatBoardService {
 
 	int insertseq();
 	
-	int likeCheck(CatBoardHeartVO bhv);
 } // interface

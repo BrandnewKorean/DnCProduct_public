@@ -19,6 +19,4 @@ public class CatBoardHeartVO {
 	public String toString() {
 		return "CatBoardHeartVO [seq=" + seq + ", id=" + id + "]";
 	}
-
-
 }

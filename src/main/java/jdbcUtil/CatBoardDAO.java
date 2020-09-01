@@ -78,7 +78,16 @@ public class CatBoardDAO {
 		return sqlsession.update(NameSpace+"likeCheck",bhv);
 	}
 	
+	public int likeinsert(CatBoardHeartVO bhv) {
+		return sqlsession.insert(NameSpace+"likeinsert",bhv);
+	}
 	
+	public CatBoardHeartVO selectlike(CatBoardHeartVO bhv) {
+		return sqlsession.selectOne(NameSpace+"selectlike", bhv);
+	}
 	
+	public int likedelete(CatBoardHeartVO bhv) {
+		return sqlsession.delete(NameSpace+"likedelete", bhv);
+	}
 
 } // boardDAO
