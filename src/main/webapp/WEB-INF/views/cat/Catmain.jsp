@@ -10,7 +10,7 @@
 <link rel="icon" type="image/png" href="resources/image/logof.png">
 <link rel="stylesheet" type="text/css" href="resources/css/cat/Catmain.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
+<script type="text/javascript" src="/resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
 </head>
 <body>
 	<jsp:include page="../Header.jsp"></jsp:include>
@@ -29,7 +29,7 @@
 		<li><a href="location">Location Service</a></li>
 	</ul>
 	<jsp:include page="../Footer.jsp"></jsp:include>
-	<script type="text/javascript" src="resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
+	<script type="text/javascript" src="/resources/script/catmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>
 </html>
 	

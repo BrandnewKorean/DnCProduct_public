@@ -13,16 +13,18 @@
 <body>
 	<jsp:include page="StoreHeader.jsp"></jsp:include>
 	<div class=intro>
-		<button id=banner_left>&#60;</button>
 		<div id=ad_banner>
 			<ul class=slide_wrap>
-				<li class=slide_item>1</li>
-				<li class=slide_item>2</li>
-				<li class=slide_item>3</li>
-				<li class=slide_item>4</li>
+				<li class=slide_item><img class=item src="/resources/image/choose-cat-brush.jpg"></li>
+				<li class=slide_item><img class=item src="/resources/image/142617898-cute-persian-kitten-playing-on-cat-tower.jpg"></li>
+				<li class=slide_item><img class=item src="/resources/image/84808a6f400907b372d958de64ea15c4.jpg"></li>
+				<li class=slide_item><img class=item src="/resources/image/btn_google_signin_light_normal_web.png"></li>
 			</ul>
 		</div>
-		<button id=banner_right>&#62;</button>
+		<div id=ad_banner_remote>
+			<button class=banner_btn id=banner_left>&#60;</button>
+			<button class=banner_btn id=banner_right>&#62;</button>
+		</div>
 	</div>
 	<div class="container">
 		식료품  Top 5

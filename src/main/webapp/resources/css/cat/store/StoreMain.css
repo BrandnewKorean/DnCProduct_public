@@ -5,38 +5,47 @@ body{
 .intro{
 	position: relative;
 	width: 100%;
-	background-color: black;
+	background-color: green;
 	text-align: center;
 }
 #ad_banner{
+	position: relative;
 	display: inline-block;
 	width: 90%;
-	height: 300px;
+	height: 400px;
 	margin: 0 auto;
-	transition: 1s;
+	overflow: hidden;
 }
 .slide_wrap{
 	width: 400%;
 	margin: 0;
 	padding: 0;
+	text-align: center;
+	transition: 1s;
 }
 .slide_item{
+	float:left;
 	display: inline-block;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
-.slide_wrap:nth-child(1){
-	background-color: aqua;
+#ad_banner_remote{
+	position: absolute;
+	right: 5%;
+	bottom: 1%;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: rgba(0,0,0,0.5);
 }
-.slide_wrap:nth-child(2){
-	background-color: blue;
-}
-.slide_wrap:nth-child(3){
-	background-color: fuchsia;
-}
-.slide_wrap:nth-child(4){
-	background-color: gray;
+.banner_btn{
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255,255,255,0.5);
+	border-radius: 50%;
+	outline: none;
+	border: none;
+	font-size: 20pt;
 }
 .container{
 	position: relative;
