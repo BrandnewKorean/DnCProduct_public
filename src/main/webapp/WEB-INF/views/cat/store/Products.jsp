@@ -11,6 +11,7 @@
 <body>
 	<jsp:include page="StoreHeader.jsp"/>
 	<div class=container>
+		<input type="hidden" id=seq value="${cs.seq}">
 		<input type="hidden" id=productcode value="${pv.productcode}">
 		<div id=product_image>
 			<c:if test="${imagelist.size() > 0}">
@@ -32,6 +33,7 @@
 			</div>
 		</div>
 	</div>
+<%-- 	<jsp:include page="StoreFooter.jsp"></jsp:include> --%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="resources/script/DecimalFormat.js"></script>
 <script type="text/javascript" src="resources/script/products.js?ver=<%= System.currentTimeMillis()%>"></script>

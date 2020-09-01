@@ -51,6 +51,10 @@ $(function(){
 			width: 0,
 			fontSize: "0"
 		}, 500);
+		$('#select').animate({
+			width: 0,
+			fontSize: "0"
+		}, 500);
 		$('.logo').animate({
 			opacity: "1"
 		}, 1000);
@@ -72,6 +76,10 @@ $(function(){
 	
 	$('.cat').click(function(){
 		$('.message').animate({
+			width: 0,
+			fontSize: "0"
+		}, 500);
+		$('#select').animate({
 			width: 0,
 			fontSize: "0"
 		}, 500);

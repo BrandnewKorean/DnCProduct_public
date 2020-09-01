@@ -11,38 +11,19 @@
 </head>
 <body>
 	<jsp:include page="../Header.jsp"></jsp:include>
-	<c:if test="${logID == null}">
-			<div class="intro">
-				<div class="head_image"></div>
-				<div class="head_message">
-				All information about Dog<br>
-				<a>Show off your pet and get useful information</a>
-				</div>
-			</div>
-			<div class="container">
-				container 영역
-			</div>
-	</c:if>
-	<c:if test="${logID != null}">
-		<ul>
-			<li>diary</li>
-			<li>Store</li>
-			<li>Board</li>
-			<li>Location Service</li>
-		</ul>
-		<script type="text/javascript" src="resources/script/dogmain_login.js?ver=<%= System.currentTimeMillis()%>"></script>
-	</c:if>
-	<div class="footer">
-		<div class=logo></div>
-		Produce by D&C<br>
-		© Copyright 2020 Y2K Technologies, Inc. All rights reserved.<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
+	<img id=test_image src="/resources/image/raindog.jpg">
+	<canvas id="test_canvas"></canvas>
+
+	<div class="main_menu">
+			&nbsp;&nbsp;
+			<span class=text id="mainimg_diary"><img class="mainimg_diary" src="../resources/image/dogdiary.jpg"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span><img class="mainimg" src="../resources/image/dogshop.jpg"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span><img class="mainimg" src="../resources/image/dogboard.jpg"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span><img class="mainimg" src="../resources/image/doglocation.jpg"></span>
 	</div>
+	<jsp:include page="../Footer.jsp"></jsp:include>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="/resources/script/rainyday.js"></script>
 	<script type="text/javascript" src="resources/script/catlogin.js?ver=<%= System.currentTimeMillis()%>"></script>
 	<script type="text/javascript" src="resources/script/dogmain.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>

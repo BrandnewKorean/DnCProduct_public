@@ -1,22 +1,29 @@
 $(function(){
+	var background = document.getElementById('background');
 	var wCanvas = document.getElementById('w_canvas');
 	var ctx = wCanvas.getContext('2d');
+		
+	background.width = window.innerWidth;
+	background.height = window.innerHeight * 0.7;
 	
-	wCanvas.width = window.innerWidth;
-	wCanvas.height = window.innerHeight * 0.7;
+	wCanvas.width = background.width;
+	wCanvas.height = background.height;
 	
 	var width = wCanvas.width;
 	var height = wCanvas.height;
 	
 	$(window).resize(function() {
-		wCanvas.width = window.innerWidth;
-		wCanvas.height = window.innerHeight * 0.7;
+		background.width = window.innerWidth;
+		background.height = window.innerHeight * 0.7;
+		
+		wCanvas.width = background.width;
+		wCanvas.height = background.height;
 	
 		width = wCanvas.width;
 		height = wCanvas.height;
 	});
 //	var select = prompt("선택 : 1.눈 2.비");
-	var select = 1;
+	var select = 2;
 	var maxparts = 100;
 	var parts = [];
 	var angle = 0;
@@ -70,7 +77,7 @@ $(function(){
 				p.y += Math.cos(angle+p.d) + 1 + p.r/2;
 				p.x += Math.sin(angle) * 2;
 			}else{
-				p.y += 10;
+				p.y += 15;
 			}
 			
 			if(p.x > width+5 || p.x < -5 || p.y > height)

@@ -15,8 +15,6 @@ $(function(){
 	
 	$('.result3_page').click(function(){
 		var i = parseInt($(this).text());
-		var str = "${pageMaker3.makeSearch(1)}";
-		console.log(str);
 		
 		$.ajax({
 			url: "searchresult3",
@@ -26,19 +24,89 @@ $(function(){
 				keyword: "${search3.keyword}"
 			},
 			beforeSend: function(){
-				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 			},
 			success: function(result){
 				$('#result3').html(result);
 			},
 		});
 	});
+	
+	$('#result3_first_page').click(function(){
+		$.ajax({
+			url: "searchresult3",
+			data:{
+				currentPage: 1,
+				perPage: 10,
+				keyword: "${search3.keyword}"
+			},
+			beforeSend: function(){
+				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result3').html(result);
+			}
+		});
+	});
+	
+	$('#result3_prev_page').click(function(){
+		$.ajax({
+			url: "searchresult3",
+			data:{
+				currentPage: "${pageMaker3.startPageNo-1}",
+				perPage: 10,
+				keyword: "${search3.keyword}"
+			},
+			beforeSend: function(){
+				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result3').html(result);
+			}
+		});
+	});
+	
+	$('#result3_next_page').click(function(){
+		$.ajax({
+			url: "searchresult3",
+			data:{
+				currentPage: "${pageMaker3.endPageNo+1}",
+				perPage: 10,
+				keyword: "${search3.keyword}"
+			},
+			beforeSend: function(){
+				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result3').html(result);
+			}
+		});
+	});
+	
+	$('#result3_end_page').click(function(){
+		$.ajax({
+			url: "searchresult3",
+			data:{
+				currentPage: "${pageMaker3.lastPageNo}",
+				perPage: 10,
+				keyword: "${search3.keyword}"
+			},
+			beforeSend: function(){
+				$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result3').html(result);
+			}
+		});
+	});
 });
 </script>
 </head>
 <body>
-	${pageMaker3.getTotalRow()}개 중 ${list3.size()} 를 검색했습니다.
-<br>
+	<span style="color: red;">
+		총 ${pageMaker3.getTotalRow()}개 중 ${list3.size()}개의 상품이 검색되었습니다.
+	</span>
+	<br>
 	<c:choose>
 		<c:when test='${list3.size() > 0}'>
 			<c:forEach var="pl3" items='${list3}'>
@@ -57,8 +125,8 @@ $(function(){
 	</c:choose>
 	<div class=blocks>
 		<c:if test='${pageMaker3.prev}'>
-			<a href='catstoreview${pageMaker3.makeSearch(1)}&group1=${search3.group1}'>First</a>
-			<a href='catstoreview${pageMaker3.makeSearch(pageMaker3.startPageNo-1)}&group1=${search3.group1}&group2=${search3.group2}'>Prev&nbsp;</a>
+			<button id=result3_next_page>Next</button>
+			<button id=result3_end_page>End</button>
 		</c:if>
 		<c:forEach begin='${pageMaker3.startPageNo}' end='${pageMaker3.endPageNo}' var="i">
 			<c:choose>
@@ -67,13 +135,12 @@ $(function(){
 				</c:when>
 				<c:otherwise>
 					<button class=result3_page>${i}</button>
-<%-- 					<a href='searchresult${pageMaker3.makeSearch(i)}'>${i}</a>&nbsp; --%>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test='${pageMaker3.next && pageMaker3.endPageNo > 0}'>
-			<a href='catstoreview${pageMaker3.makeSearch(pageMaker3.endPageNo+1)}&group1=${search3.group1}&group2=${search3.group2}'>Next&nbsp;&nbsp;</a>
-			<a href='catstoreview${pageMaker3.makeSearch(pageMaker3.lastPageNo)}&group1=${search3.group1}&group2=${search3.group2}'>End&nbsp;&nbsp;</a>
+			<button id=result3_next_page>Next</button>
+			<button id=result3_end_page>End</button>
 		</c:if>
 	</div>
 </body>

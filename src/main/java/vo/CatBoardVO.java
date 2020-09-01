@@ -1,4 +1,9 @@
 package vo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CatBoardVO {
 	private int seq;
 	private String id;
@@ -6,7 +11,15 @@ public class CatBoardVO {
 	private String content;
 	private String regdate;
 	private int cnt;
-	private String comments;
+	private int comments;
+	private int heart;
+	
+	public int getHeart() {
+		return heart;
+	}
+	public void setHeart(int heart) {
+		this.heart = heart;
+	}
 	public int getSeq() {
 		return seq;
 	}
@@ -34,7 +47,42 @@ public class CatBoardVO {
 	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(String regdate) {
+	public void setRegdate(String regdate) throws ParseException {
+		Date current = new Date();
+		SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date reg = fm.parse(regdate);
+		
+		long diff = current.getTime() - reg.getTime();
+		long diffsec = (diff / 1000 % 60);
+		long diffmin = (diff / (60 * 1000) % 60);
+		long diffhour = (diff / (60 * 60 * 1000));
+		long diffday = (diff / (24*60*60*1000));
+		
+		if(diffday <= 0) {
+			if(diffhour <= 0) {
+				if(diffmin <= 0) {
+					if(diffsec < 30) {
+						regdate = "방금";
+					}else {
+						regdate = diffsec+"초 전";
+					}
+				}else {
+					regdate = diffmin+"분 전";
+				}
+			}else {
+				regdate = diffhour+"시간 전";
+			}
+		}else {
+			if(diffday > 0 && diffday < 7) {
+				regdate = diffday+"일 전";
+			}else {
+				SimpleDateFormat fm2 = new SimpleDateFormat("yyyy/MM/dd");
+				Date r = fm2.parse(regdate);
+				String regd = fm2.format(r);
+				regdate = regd;
+			}
+		}
+		
 		this.regdate = regdate;
 	}
 	public int getCnt() {
@@ -43,21 +91,16 @@ public class CatBoardVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	public String getComments() {
+	public int getComments() {
 		return comments;
 	}
-	public void setComments(String comments) {
+	public void setComments(int comments) {
 		this.comments = comments;
 	}
-	
-	
 	
 	@Override
 	public String toString() {
 		return "CatBoardVO [seq=" + seq + ", id=" + id + ", title=" + title + ", content=" + content + ", regdate="
-				+ regdate + ", cnt=" + cnt + ", comments=" + comments + "]";
+				+ regdate + ", cnt=" + cnt + ", comments=" + comments + ", heart=" + heart + "]";
 	}
-	
-	
-	
 } // CatBoardVO

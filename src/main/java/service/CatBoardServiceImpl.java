@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import jdbcUtil.CatBoardDAO;
 import searchCriteria.Search;
+import vo.CatBoardHeartVO;
 import vo.CatBoardVO;
 import vo.PageVO;
 

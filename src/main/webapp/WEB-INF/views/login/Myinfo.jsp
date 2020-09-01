@@ -13,10 +13,9 @@
 		border-radius: 50%;
 	}
 	.myinfo_col{
-		background-color: yellow;
+	
 	}
 	.myinfo_val{
-		background-color: red;
 		margin-bottom: 10px;
 	}
 </style>

@@ -44,6 +44,10 @@ public class ClientDAO {
 	public ClientVO sendFindId(ClientVO cv) {
 		return sqlsession.selectOne(NameSpace+"sendFindId",cv);
 	}
+
+	public ClientVO sendFindPw(ClientVO cv) {
+		return sqlsession.selectOne(NameSpace+"sendFindPw",cv);
+	}
 	
 
 } // class

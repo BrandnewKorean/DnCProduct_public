@@ -15,8 +15,6 @@ $(function(){
 	
 	$('.result2_page').click(function(){
 		var i = parseInt($(this).text());
-		var str = "${pageMaker2.makeSearch(1)}";
-		console.log(str);
 		
 		$.ajax({
 			url: "searchresult2",
@@ -26,19 +24,89 @@ $(function(){
 				keyword: "${search2.keyword}"
 			},
 			beforeSend: function(){
-				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 			},
 			success: function(result){
 				$('#result2').html(result);
 			},
 		});
 	});
+	
+	$('#result2_first_page').click(function(){
+		$.ajax({
+			url: "searchresult2",
+			data:{
+				currentPage: 1,
+				perPage: 10,
+				keyword: "${search2.keyword}"
+			},
+			beforeSend: function(){
+				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result2').html(result);
+			}
+		});
+	});
+	
+	$('#result2_prev_page').click(function(){
+		$.ajax({
+			url: "searchresult2",
+			data:{
+				currentPage: "${pageMaker2.startPageNo-1}",
+				perPage: 10,
+				keyword: "${search2.keyword}"
+			},
+			beforeSend: function(){
+				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result2').html(result);
+			}
+		});
+	});
+	
+	$('#result2_next_page').click(function(){
+		$.ajax({
+			url: "searchresult2",
+			data:{
+				currentPage: "${pageMaker2.endPageNo+1}",
+				perPage: 10,
+				keyword: "${search2.keyword}"
+			},
+			beforeSend: function(){
+				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result2').html(result);
+			}
+		});
+	});
+	
+	$('#result2_end_page').click(function(){
+		$.ajax({
+			url: "searchresult2",
+			data:{
+				currentPage: "${pageMaker2.lastPageNo}",
+				perPage: 10,
+				keyword: "${search2.keyword}"
+			},
+			beforeSend: function(){
+				$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result2').html(result);
+			}
+		});
+	});
 });
 </script>
 </head>
 <body>
-	${pageMaker2.getTotalRow()}개 중 ${list2.size()} 를 검색했습니다.
-<br>
+	<span style="color: red;">
+		총 ${pageMaker2.getTotalRow()}개의 상품 중 ${list2.size()}개의 상품이 검색되었습니다.
+	</span>	
+	<br>
 	<c:choose>
 		<c:when test='${list2.size() > 0}'>
 			<c:forEach var="pl2" items='${list2}'>
@@ -57,8 +125,8 @@ $(function(){
 	</c:choose>
 	<div class=blocks>
 		<c:if test='${pageMaker2.prev}'>
-			<a href='catstoreview${pageMaker2.makeSearch(1)}&group1=${search2.group1}'>First</a>
-			<a href='catstoreview${pageMaker2.makeSearch(pageMaker2.startPageNo-1)}&group1=${search2.group1}&group2=${search2.group2}'>Prev&nbsp;</a>
+			<button id=result2_next_page>Next</button>
+			<button id=result2_end_page>End</button>
 		</c:if>
 		<c:forEach begin='${pageMaker2.startPageNo}' end='${pageMaker2.endPageNo}' var="i">
 			<c:choose>
@@ -72,8 +140,8 @@ $(function(){
 			</c:choose>
 		</c:forEach>
 		<c:if test='${pageMaker2.next && pageMaker2.endPageNo > 0}'>
-			<a href='catstoreview${pageMaker2.makeSearch(pageMaker2.endPageNo+1)}&group1=${search2.group1}&group2=${search2.group2}'>Next&nbsp;&nbsp;</a>
-			<a href='catstoreview${pageMaker2.makeSearch(pageMaker2.lastPageNo)}&group1=${search2.group1}&group2=${search2.group2}'>End&nbsp;&nbsp;</a>
+			<button id=result2_next_page>Next</button>
+			<button id=result2_end_page>End</button>
 		</c:if>
 	</div>
 </body>

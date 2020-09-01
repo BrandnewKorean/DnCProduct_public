@@ -13,22 +13,22 @@ $(function(){
 	$('.products').click(function(){
 		location.href = "products?productcode="+$(this).attr('id').substr(0,$(this).attr('id').indexOf('_'))+"&seq="+$(this).attr('id').substr($(this).attr('id').indexOf('_')+1);
 	});
-	
 	$('#keyword_in_result').keypress(function(e){
 		if(e.keyCode == 13) $('#search_in_resultButton').click();
 	});
-	
 	$('#search_in_resultButton').click(function(){
 		var keyword = $('#keyword_in_result').val();
 		var group1 = "${search.group1}";
 		var group2 = "${search.group2}";
-		
+
 		self.location = "catstoreview?"
 				+"keyword="+keyword
 				+"&group1="+group1
 				+"&group2="+group2;
 	});
 });
+
+
 </script>
 </head>
 <body>
@@ -75,6 +75,6 @@ $(function(){
 			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
-	<br><br><br>
+	<jsp:include page="StoreFooter.jsp"></jsp:include>
 </body>
 </html>

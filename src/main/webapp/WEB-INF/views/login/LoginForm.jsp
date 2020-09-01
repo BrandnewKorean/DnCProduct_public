@@ -45,8 +45,8 @@
 <div class=container>
 	<img src="/resources/image/logob.png" width="100%" onclick="location.href = 'home'">
 	<h2>Login</h2><br>
-	<input type="text" id="id" value="banana"><br>
-	<input type="password" id=password value="12345!"><br><br>
+	<input type="text" id="id" value="banana" placeholder="ID"><br>
+	<input type="password" id=password value="12345!" placeholder="Password"><br><br>
 	<button id=submit>확인</button>
 	<button id=cancel>취소</button>
 	<br><br>

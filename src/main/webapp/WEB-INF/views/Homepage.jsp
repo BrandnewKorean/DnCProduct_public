@@ -8,15 +8,16 @@
 <link rel="icon" type="image/png" href="resources/image/logof.png">
 <link rel="stylesheet" type="text/css" href="resources/css/Homepage.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="/resources/script/weather.js"></script>
+<script type="text/javascript" src="/resources/script/weather.js?ver=<%= System.currentTimeMillis()%>"></script>
 <script type="text/javascript" src="/resources/script/homepage.js"></script>
 </head>
 <body>
 	<jsp:include page="Header.jsp"></jsp:include>
 	<div class="intro">
+		<img id=background src="/resources/image/catmain.png">
 		<canvas id=w_canvas></canvas>
 		<div class="head_message">
-		All information about Pat<br>
+		All information about Pet<br>
 		<a>Show off your pet and get useful information</a>
 		</div>
 	</div>
@@ -54,7 +55,7 @@
 		<div class=cmenu id=gps_message>
 			주변의<br>
 			반려동물 관련 시설을<br>
-			쉽게 찾이보세요<br>
+			쉽게 찾아보세요<br>
 			<a>카카오맵 기반 위치서비스를 제공합니다</a>
 		</div>
 	</div>

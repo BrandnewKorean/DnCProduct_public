@@ -10,9 +10,7 @@
 <title>Diary</title>
 </head>
 <body>
-	<div class="header">
-		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
-	</div>
+	<jsp:include page="../../Header.jsp"></jsp:include>
 	<div class=intro>
 	</div>
 	<div class=container>
@@ -25,9 +23,9 @@
 				</div>
 				<div id=write_wrap>
 					<div id=diary_menu>
-						<label for=writef class=button_label id=writef_label><button id=writef title="글쓰기">글쓰기</button></label>
-						<label for=edit class=button_label id=edit_label><button id=edit title="수정하기">수정하기</button></label>
-						<label for=delete class=button_label id=delete_label><button id=delete title="삭제">삭제하기</button></label>
+						<label for=diarywritef class=button_label id=writef_label><button id=diarywritef title="글쓰기">글쓰기</button></label>
+						<label for=diaryedit class=button_label id=edit_label><button id=diaryedit title="수정하기">수정하기</button></label>
+						<label for=diarydelete class=button_label id=delete_label><button id=diarydelete title="삭제">삭제하기</button></label>
 					</div>
 					<a id=selected_year></a>년<a id=selected_month></a>월<a id=selected_day></a>일<br>
 					<div id=content>
@@ -36,5 +34,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../../Footer.jsp"></jsp:include>
 </body>
 </html>

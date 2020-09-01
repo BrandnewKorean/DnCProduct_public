@@ -18,7 +18,7 @@ $(function(){
 			keyword: keyword
 		},
 		beforeSend: function(){
-			$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 		},
 		success: function(result){
 			$('#result1').html(result);
@@ -34,7 +34,7 @@ $(function(){
 			keyword: keyword
 		},
 		beforeSend: function(){
-			$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			$('#result2').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 		},
 		success: function(result){
 			$('#result2').html(result);
@@ -50,7 +50,7 @@ $(function(){
 			keyword: keyword
 		},
 		beforeSend: function(){
-			$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			$('#result3').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 		},
 		success: function(result){
 			$('#result3').html(result);
@@ -66,7 +66,7 @@ $(function(){
 			keyword: keyword
 		},
 		beforeSend: function(){
-			$('#result4').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			$('#result4').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 		},
 		success: function(result){
 			$('#result4').html(result);

@@ -1,14 +1,8 @@
 @charset "UTF-8";
-
-*{
-	background-color: snow;
-}
-
 body{
 	margin: 0;
 	text-align: center;
 }
-
 #catboard_menu{
 	margin:0 auto;
 	width: 80%;
@@ -48,19 +42,19 @@ body{
 	font-weight: bold;
 }
 
-
-
 .col4 {width: 10%;}
 
 .col5 {width: 10%;}
 
 .col6 {width: 10%;}
 
+.col7{width: 30%;}
+
 .container{
 	position: relative;
 	margin: 0 auto;
-	width: 80%;
-	background-color: green;
+	width: 100%;
+	background-color: snow;
 }
 
 .block{
@@ -68,7 +62,7 @@ body{
 	position: relative;
 	margin: 2px;
 	width: 23%;
-	background-color: yellow;
+	background-color: Lavender;
 }
 
 .image{
@@ -76,5 +70,5 @@ body{
 	margin: 0 auto;
 	width: 90%;
 	height: 200px;
-	background-color: red;
+	background-color: white;
 }
