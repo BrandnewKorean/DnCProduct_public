@@ -8,10 +8,22 @@
 <title>Cat Store</title>
 <link rel="stylesheet" type="text/css" href="resources/css/cat/store/StoreMain.css?ver=<%= System.currentTimeMillis()%>">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/resources/script/storemain.js?ver=<%= System.currentTimeMillis() %>>"></script>
 </head>
 <body>
 	<jsp:include page="StoreHeader.jsp"></jsp:include>
-	<div id=ad_banner>이벤트&주력상품 광고 영역</div>
+	<div class=intro>
+		<button id=banner_left>&#60;</button>
+		<div id=ad_banner>
+			<ul class=slide_wrap>
+				<li class=slide_item>1</li>
+				<li class=slide_item>2</li>
+				<li class=slide_item>3</li>
+				<li class=slide_item>4</li>
+			</ul>
+		</div>
+		<button id=banner_right>&#62;</button>
+	</div>
 	<div class="container">
 		식료품  Top 5
 		<div class=top5>

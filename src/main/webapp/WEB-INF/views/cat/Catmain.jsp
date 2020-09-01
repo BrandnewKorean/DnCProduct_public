@@ -14,12 +14,13 @@
 </head>
 <body>
 	<jsp:include page="../Header.jsp"></jsp:include>
-	<div class="intro">
+	<div class=intro>
+		<img id=background src="/resources/image/catmain.png">
 		<canvas id=w_canvas></canvas>
-		<div class="head_message">
-		All information about Cat<br>
-		<a>Show off your pet and get useful information</a>
-		</div>
+	</div>
+	<div class="head_message">
+	All information about Cat<br>
+	<a>Show off your pet and get useful information</a>
 	</div>
 	<ul class=main_menu>
 		<li id=diaryf><a>Diary</a></li>

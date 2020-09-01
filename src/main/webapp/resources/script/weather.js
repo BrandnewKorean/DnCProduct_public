@@ -1,9 +1,13 @@
 $(function(){
+	var background = document.getElementById('background');
 	var wCanvas = document.getElementById('w_canvas');
 	var ctx = wCanvas.getContext('2d');
 	
-	wCanvas.width = window.innerWidth;
-	wCanvas.height = window.innerHeight * 0.7;
+	background.width = window.innerWidth;
+	background.height = window.innerHeight * 0.7;
+	
+	wCanvas.width = background.width;
+	wCanvas.height = background.height;
 	
 	var width = wCanvas.width;
 	var height = wCanvas.height;
