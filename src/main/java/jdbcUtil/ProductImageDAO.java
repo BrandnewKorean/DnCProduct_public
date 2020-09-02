@@ -18,4 +18,8 @@ public class ProductImageDAO {
 	public List<ProductImageVO> selectList(ProductImageVO piv){
 		return sqlsession.selectList(NameSpace+"selectList", piv);
 	}
+	
+	public ProductImageVO selectOne(ProductImageVO piv) {
+		return sqlsession.selectOne(NameSpace+"selectOne",piv);
+	}
 }

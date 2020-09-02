@@ -143,11 +143,11 @@ public class StoreController {
 	}
 	
 	
-	@RequestMapping(value="basketForm")
-	public ModelAndView basketForm(HttpServletRequest request,ModelAndView mv,BasketVO bkv) {
+	@RequestMapping(value="catbasketform")
+	public ModelAndView catbasketform(HttpServletRequest request,ModelAndView mv,BasketVO bkv) {
 		HttpSession session = request.getSession(false);
 		List<BasketVO> list = null;
-		Map<Integer,List<ProductImageVO>> imageMap = new HashMap<>();
+		Map<Integer,ProductImageVO> imageMap = new HashMap<>();
 		Map<Integer,CatStoreVO> storeMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
@@ -170,16 +170,9 @@ public class StoreController {
 				
 				piv.setProductcode(cv.getProductcode());
 				
-				List<ProductImageVO> imagelist = piservice.selectList(piv);
-				for(int j=0;j<imagelist.size();j++) {
-					if(imagelist.get(j).getIsmain() && j != 0) {
-						ProductImageVO temp1 = imagelist.get(j);
-						ProductImageVO temp2 = imagelist.get(0);
-						imagelist.set(0, temp1);
-						imagelist.set(j, temp2);
-					}
-				}
-				imageMap.put(list.get(i).getSeq(),imagelist);
+				ProductImageVO image = piservice.selectOne(piv);
+				
+				imageMap.put(list.get(i).getSeq(),image);
 			}
 		}
 		
@@ -187,12 +180,12 @@ public class StoreController {
 		mv.addObject("imageMap", imageMap);
 		mv.addObject("storeMap", storeMap);
 		mv.addObject("list", list);
-		mv.setViewName("clientStore/basketForm"); // 위치
+		mv.setViewName("cat/store/CatBasketForm"); // 위치
 		return mv;
 	}
 	
-	@RequestMapping(value="basket")
-	public ModelAndView basket(HttpServletRequest request,ModelAndView mv, BasketVO bkv) {
+	@RequestMapping(value="catbasket")
+	public ModelAndView catbasket(HttpServletRequest request,ModelAndView mv, BasketVO bkv) {
 		HttpSession session = request.getSession(false);
 		if(session !=null && session.getAttribute("logID")!=null) {
 			bkv.setId((String)session.getAttribute("logID"));
@@ -211,7 +204,7 @@ public class StoreController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}//basket()
+	}//catbasket()
 	
 	@RequestMapping(value = "productimage")
 	public ModelAndView productimage(ModelAndView mv, ProductImageVO piv) {

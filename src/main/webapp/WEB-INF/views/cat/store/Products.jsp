@@ -29,7 +29,7 @@
 			<div id=buy_buttons>
 				<button class=number_buttons id=number_minus>-</button><input id=number_input type="text"><button class=number_buttons id=number_plus>+</button><br>
 				총 <a id=number></a> 개 <a id=total_price></a>원<br>
-				<button id=shopping_basket>장바구니</button> <button id=payment>구매하기</button>
+				<button id=shopping_basket>장바구니에 담기</button> <button id=payment>구매하기</button>
 			</div>
 		</div>
 	</div>
