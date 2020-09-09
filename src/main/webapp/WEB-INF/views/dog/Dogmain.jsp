@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="../Header.jsp"></jsp:include>
-	<img id=test_image src="/resources/image/raindog.jpg">
+	<img id=test_image src="/resources/image/rainy.jpg">
 	<canvas id="test_canvas"></canvas>
 
 	<div class="main_menu">
