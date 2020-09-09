@@ -27,6 +27,8 @@ $(function(){
 				+"&group2="+group2;
 	});
 });
+
+
 </script>
 </head>
 <body>

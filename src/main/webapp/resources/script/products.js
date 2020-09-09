@@ -52,4 +52,32 @@ $(function(){
 		$('#number').text(number);
 		$('#total_price').text(df.format(number*price));
 	});
+	
+	$('#shopping_basket').click(function(){
+		$.ajax({
+			url:'basket',
+			data:{
+				seq: $('#seq').val()
+			},
+			success:function(data){
+				switch(data.code){
+				case 0:
+					alert('이미 장바구니에 등록되었습니다');
+					break;
+				case 1:
+					alert('장바구니에 추가되었습니다');
+					break;
+				case 2:
+					alert('장바구니에 추가 실패');
+					break;
+				case 3:
+					alert('로그인 후 이용해주세요');
+					break;
+				default : 
+					alert('error');
+					break;
+				}
+			}
+		});
+	});
 });

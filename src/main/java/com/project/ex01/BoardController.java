@@ -52,17 +52,38 @@ public class BoardController {
 	
 	@RequestMapping(value="likeCheck")
 	public ModelAndView likeCheck(HttpServletRequest request,ModelAndView mv,CatBoardHeartVO bhv) {
+		
+		//1. session에 있는 ID 값 가져오기
 		HttpSession session = request.getSession(false);
 		if(session !=null && session.getAttribute("logID")!=null) {
 			bhv.setId((String) session.getAttribute("logID"));
+		//2. 
+//			hservice ==> 좋아요  service 
+//				selectlike()   catboard_heart에서 seq와 id가 같은 많은 것을 검색하라 
+//				likeCheck()    catboard에 있는 heart 값을 수정해라 
+//				likeinsert()   coatboard_heart에 seq 값과 id 값을 삽입하라
+//				likedelete()   seq와 id 값을 삭제하라
+			
+			//code 0 ==> 좋아요삭제성공
+			//code 1==> 좋아요 삭제 실패
+			
+			//code 2==> 좋아요 추가 성공
+			//code 3==> 좋아요 추가 실패
+			
+			//code 4==> 로그인 실패
+			
+			//default ==> error
+//			
 			if(hservice.selectlike(bhv) != null) {
 				if(hservice.likedelete(bhv)>0) {
+					System.out.println("좋아요 삭제");
 					mv.addObject("code", 0);
 				}else {
 					mv.addObject("code", 1);
 				}
 			}else {
 				if(hservice.likeinsert(bhv)>0) {
+					System.out.println("좋아요추가");
 					mv.addObject("code", 2);
 				}else {
 					mv.addObject("code", 3);
@@ -155,6 +176,7 @@ public class BoardController {
 		search.setSnoEno();
 		
 		List<CatBoardVO> list = service.searchList(search);
+		System.out.println("this is list =>" +list);
 		List<CatBoardNoticeVO> noticelist = nservice.selectList();
 		
 		PageMaker pageMaker = new PageMaker();
@@ -174,6 +196,20 @@ public class BoardController {
 		}
 		
 		
+		//id값 가져오기
+		//list에서 seq값을 가져와서 boardheartvo 에 넣기
+		//session에서 ID값을 가져와서 boardheartvo 에 넣기
+		
+		//likeMap을 사용한 이유
+		//key : seq   value: true & false
+		//seq 3은 false 
+		//seq 2는 true
+		
+		//==> seq 값마다 좋아요가 off될 수도 on 될 수도 있어서
+		// hashmap을 사용
+		
+		
+		
 		String id = (String)request.getSession().getAttribute("logID");
 		Map<Integer,Boolean> likeMap = new HashMap<>();
 		for(int i=0;i<list.size();i++) {
@@ -190,7 +226,6 @@ public class BoardController {
 		
 		mv.addObject("noticelist",noticelist);
 		mv.addObject("likeMap", likeMap);
-		mv.addObject("pageMaker",pageMaker);
 		mv.addObject("list",list);
 		mv.setViewName("cat/board/catboard");
 		return mv;
@@ -258,6 +293,13 @@ public class BoardController {
 	public ModelAndView catboardview(HttpServletRequest request,ModelAndView mv, CatBoardVO bv) {
 		//글번호로 글검색
 		
+		//session에서 id값 가져오기
+		//catboard와 달리 여기서는 map을 쓸 필요가 없음
+		// 왜?? catboardview 에는 seq 값이 달라질 수 없음(seq가 고정)
+		//그래서 boolean 으로 true & false 값만 확인하면 됨
+		
+		
+		
 		String id = (String)request.getSession().getAttribute("logID");
 		
 		Boolean islike;
@@ -275,9 +317,11 @@ public class BoardController {
 		service.countUp(bv);
 		bv=service.selectOne(bv);
 		
+		System.out.println("this is bv => " + bv);
+		
+		//여기서부터
 		List<CatBoardCommentVO> comment = cservice.selectList(bv.getSeq());
 		
-		mv.addObject("isnotice", false);
 		mv.addObject("comment", comment);
 		mv.addObject("islike", islike);
 		mv.addObject("bv", bv);
@@ -287,6 +331,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "catboardnoticeview")
 	public ModelAndView catboardnoticeview(ModelAndView mv, CatBoardNoticeVO bnv) {
+		
 		nservice.countUp(bnv);
 		bnv = nservice.selectOne(bnv);
 		
