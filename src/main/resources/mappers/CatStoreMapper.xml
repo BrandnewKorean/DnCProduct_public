@@ -6,7 +6,8 @@
 <mapper namespace="ex01.mappers.CatStoreMapper">
 	<select id="selectTop5" resultType="vo.CatStoreVO">
 		select * from
-		(select s.*,ROW_NUMBER() OVER(order by ))
+		(select c.*, ROW_NUMBER() OVER(order by sales_quantity) rnum from catstore c, product p
+		where group1=#{group1} and c.productcode = p.productcode order by sales_quantity) where rnum between 1 and 5
 	</select>
 	<select id="selectList" resultType="vo.CatStoreVO">
 		select * from catstore where group1=#{group1} and group2=#{group2}
