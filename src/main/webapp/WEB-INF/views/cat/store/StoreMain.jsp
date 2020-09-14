@@ -27,21 +27,14 @@
 		</div>
 	</div>
 	<div class="container">
-		식료품  Top 5
 		<div class=top5>
-			식료품 Top5 이미지 영역
-		</div>
-		배변/위생용품  Top 5
-		<div class=top5>
-			배변/위생용품 Top5 이미지 영역
-		</div>
-		미용용품  Top 5
-		<div class=top5>
-			미용용품 Top5 이미지 영역
-		</div>
-		생활용품  Top 5
-		<div class=top5>
-			생활용품 Top5 이미지 영역
+			<button id=food class=top5_buttons>식료품</button>
+			<button id=medic class=top5_buttons>배변/위생용품</button>
+			<button id=beauty class=top5_buttons>미용용품</button>
+			<button id=live class=top5_buttons>생활용품</button>
+			<div id=top5_contents>
+				내용영역
+			</div>
 		</div>
 	</div>
 	<jsp:include page="StoreFooter.jsp"></jsp:include>

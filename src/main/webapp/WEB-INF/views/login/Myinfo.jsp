@@ -32,6 +32,7 @@
 	<button id=logout>logout</button>
 	<button id=updatef>update</button>
 	<button id=delete>회원탈퇴</button>
+	<a href="catbasketform"><button>장바구니</button></a>
 <script src="http://code.jquery.com/jquery-latest.min.js?ver=<%= System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="resources/script/myinfo.js?ver=<%= System.currentTimeMillis()%>"></script>
 </body>

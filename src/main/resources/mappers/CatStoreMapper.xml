@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="ex01.mappers.CatStoreMapper">
+	<select id="selectTop5" resultType="vo.CatStoreVO">
+		select * from
+		(select s.*,ROW_NUMBER() OVER(order by ))
+	</select>
 	<select id="selectList" resultType="vo.CatStoreVO">
 		select * from catstore where group1=#{group1} and group2=#{group2}
 	</select>
@@ -12,6 +16,8 @@
 		select * from catstore where seq=#{seq}
 	</select>
 	
+	<select id=""></select>
+	
 	<select id="searchRowCount" resultType="int">
 		<![CDATA[
 		select count(*) from catstore where (seq>0]]>
@@ -19,13 +25,31 @@
 	</select>
 	
 	<select id="searchList" resultType="vo.CatStoreVO">
-		<![CDATA[
 		select * from 
-		(select s.*,ROW_NUMBER() OVER(order by seq desc) rnum
-		from catstore s where seq>0]]>
+		(select s.*,ROW_NUMBER() OVER(<include refid="order"/>) rnum
+		from catstore s where seq>0
 		<include refid="search"></include>
-		where rnum between #{startno} and #{endno} order by seq desc
-	</select>
+		where rnum between #{startno} and #{endno} <include refid="order"/>
+ 	</select>
+	
+	<sql id="order">
+		<choose>
+			<when test="order1 == 'seq' and order2 == 'desc'">
+				order by seq desc
+			</when>
+			<when test="order1 == 'seq' and order2 == 'asc'">
+				order by seq asc
+			</when>
+			<when test="order1 == 'price' and order2 == 'desc'">
+				order by price desc
+			</when>
+			<when test="order1 == 'price' and order2 == 'asc'">
+				order by price asc
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</sql>
 	
 	<sql id="search">
 		<choose>

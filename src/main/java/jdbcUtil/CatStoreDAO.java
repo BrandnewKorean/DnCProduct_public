@@ -34,6 +34,6 @@ public class CatStoreDAO {
 	}
 	
 	public List<CatStoreVO> selectTop5(CatStoreVO cs){
-		return sqlsession.selectList(NameSpace+"selectTop5", cs);
+		return sqlsession.selectList(NameSpace+"selectTop5",cs);
 	}
 }

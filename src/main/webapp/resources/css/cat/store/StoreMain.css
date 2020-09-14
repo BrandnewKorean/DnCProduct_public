@@ -52,14 +52,21 @@ body{
 	background-color: yellow;
 	width: 90%;
 	margin: 0 auto;
-	text-align: left;
-	font-size: 20pt;
-	font-weight: bold;
 }
 .top5{
 	width: 100%;
 	margin: 0 auto;
-	background-color: red;
-	font-size: medium;
-	font-weight: normal;
+	text-align: right;
+	background-color: snow;
+}
+.top5_buttons{
+	margin:0;
+	padding: 0;
+	width: 90px;
+	font-weight: bold;
+	
+}
+#top5_contents{
+	border-top: 5px solid;
+	border-bottom: 5px solid;
 }
