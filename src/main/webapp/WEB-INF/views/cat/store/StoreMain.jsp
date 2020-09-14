@@ -15,7 +15,7 @@
 	<div class=intro>
 		<div id=ad_banner>
 			<ul class=slide_wrap>
-				<li class=slide_item><img class=item src="/resources/image/choose-cat-brush.jpg"></li>
+				<li class=slide_item><a href="products?productcode=cat03010003&seq=163"><img class=item src="/resources/image/choose-cat-brush.jpg"></a></li>
 				<li class=slide_item><img class=item src="/resources/image/142617898-cute-persian-kitten-playing-on-cat-tower.jpg"></li>
 				<li class=slide_item><img class=item src="/resources/image/84808a6f400907b372d958de64ea15c4.jpg"></li>
 				<li class=slide_item><img class=item src="/resources/image/btn_google_signin_light_normal_web.png"></li>

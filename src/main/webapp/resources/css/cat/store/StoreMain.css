@@ -1,11 +1,11 @@
 @charset "UTF-8";
 body{
 	margin: 0;
+	background-color: snow;
 }
 .intro{
 	position: relative;
 	width: 100%;
-	background-color: green;
 	text-align: center;
 }
 #ad_banner{

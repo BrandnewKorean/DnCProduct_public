@@ -40,9 +40,6 @@ $(function(){
 		$('.slide_wrap').css({
 			transform: "translate(-"+(window.innerWidth * 0.9)*banner+"px)"
 		});
-		setTimeout(function(){
-			interval = setInterval('start()',3000);
-		},1000);
 	});
 	
 	$('#banner_right').click(function(){
@@ -57,9 +54,6 @@ $(function(){
 		$('.slide_wrap').css({
 			transform: "translate(-"+(window.innerWidth * 0.9)*banner+"px)"
 		});
-		setTimeout(function(){
-			interval = setInterval('start()',3000);
-		},1000);
 	});
 });
 
