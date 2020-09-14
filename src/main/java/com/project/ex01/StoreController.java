@@ -39,6 +39,46 @@ public class StoreController {
 	@Autowired
 	BasketService bservice;
 	
+	@RequestMapping(value = "top5")
+	public ModelAndView top5(CatStoreVO cv, ModelAndView mv) {
+		System.out.println(cv.getGroup1());
+		List<CatStoreVO> list = service.selectTop5(cv);
+		Map<Integer, List<ProductImageVO>> productimageMap = new HashMap<>();
+		Map<Integer, ProductVO> productMap = new HashMap<>();
+		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int j=0;j<imagelist.size();j++) {
+				if(imagelist.get(j).getIsmain() && j != 0) {
+					ProductImageVO temp1 = imagelist.get(j);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(j, temp2);
+				}
+			}
+			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
+			productimageMap.put(list.get(i).getSeq(), imagelist);
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+		}
+		
+		mv.addObject("productMap", productMap);
+		mv.addObject("productimageMap",productimageMap);
+		mv.addObject("priceMap", priceMap);
+		mv.addObject("list", list);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	@RequestMapping(value = "storemain")
 	public ModelAndView storemain(ModelAndView mv) {
 		mv.setViewName("cat/store/StoreMain");
@@ -47,23 +87,18 @@ public class StoreController {
 	
 	@RequestMapping(value = "catstoreview")
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
 		if(search.getKeyword() == null) search.setKeyword("");
 		
 		search.setPerPage(12);
 		search.setSnoEno();
 		System.out.println(search);
-		
-		// 전체 list 불러오기
-		
-		//42 개 중에 10개를 검색했습니다
-		
-		//1. 42개
-			//searchrowcount
-			
-		
-		//2. 10개 
-			//searchList
-		
 		
 		List<CatStoreVO> list = service.searchList(search);
 		
@@ -143,11 +178,11 @@ public class StoreController {
 	}
 	
 	
-	@RequestMapping(value="basketForm")
-	public ModelAndView basketForm(HttpServletRequest request,ModelAndView mv,BasketVO bkv) {
+	@RequestMapping(value="catbasketform")
+	public ModelAndView catbasketform(HttpServletRequest request,ModelAndView mv,BasketVO bkv) {
 		HttpSession session = request.getSession(false);
 		List<BasketVO> list = null;
-		Map<Integer,List<ProductImageVO>> imageMap = new HashMap<>();
+		Map<Integer,ProductImageVO> imageMap = new HashMap<>();
 		Map<Integer,CatStoreVO> storeMap = new HashMap<>();
 		Map<Integer,ProductVO> productMap = new HashMap<>();
 		
@@ -170,16 +205,9 @@ public class StoreController {
 				
 				piv.setProductcode(cv.getProductcode());
 				
-				List<ProductImageVO> imagelist = piservice.selectList(piv);
-				for(int j=0;j<imagelist.size();j++) {
-					if(imagelist.get(j).getIsmain() && j != 0) {
-						ProductImageVO temp1 = imagelist.get(j);
-						ProductImageVO temp2 = imagelist.get(0);
-						imagelist.set(0, temp1);
-						imagelist.set(j, temp2);
-					}
-				}
-				imageMap.put(list.get(i).getSeq(),imagelist);
+				ProductImageVO image = piservice.selectOne(piv);
+				
+				imageMap.put(list.get(i).getSeq(),image);
 			}
 		}
 		
@@ -187,12 +215,12 @@ public class StoreController {
 		mv.addObject("imageMap", imageMap);
 		mv.addObject("storeMap", storeMap);
 		mv.addObject("list", list);
-		mv.setViewName("clientStore/basketForm"); // 위치
+		mv.setViewName("cat/store/CatBasketForm"); // 위치
 		return mv;
 	}
 	
-	@RequestMapping(value="basket")
-	public ModelAndView basket(HttpServletRequest request,ModelAndView mv, BasketVO bkv) {
+	@RequestMapping(value="catbasket")
+	public ModelAndView catbasket(HttpServletRequest request,ModelAndView mv, BasketVO bkv) {
 		HttpSession session = request.getSession(false);
 		if(session !=null && session.getAttribute("logID")!=null) {
 			bkv.setId((String)session.getAttribute("logID"));
@@ -211,7 +239,7 @@ public class StoreController {
 		}
 		mv.setViewName("jsonView");
 		return mv;
-	}//basket()
+	}//catbasket()
 	
 	@RequestMapping(value = "productimage")
 	public ModelAndView productimage(ModelAndView mv, ProductImageVO piv) {

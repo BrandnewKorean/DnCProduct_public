@@ -11,7 +11,7 @@ public class PageVO<T> {
 	private int startno; // start Row No
 	private int endno; // end Row No
 	private int perPageNO=10; // 한 화면에 출력되는 PageNo 갯수 (paging2 에서 사용)
-						  
+	
 	public List<T> getList() {
 		return list;
 	}
@@ -56,8 +56,7 @@ public class PageVO<T> {
 	}
 	@Override
 	public String toString() {
-		return "PageVO [list=" + list + ", currentPage=" + currentPage + ", perPage=" + perPage + ", totalCount=" + totalCount
-				+ ", startno=" + startno + ", endno=" + endno + ", perPageNO=" + perPageNO + "]";
+		return "PageVO [list=" + list + ", currentPage=" + currentPage + ", perPage=" + perPage + ", totalCount="
+				+ totalCount + ", startno=" + startno + ", endno=" + endno + ", perPageNO=" + perPageNO + "]";
 	}
-	
 } // class

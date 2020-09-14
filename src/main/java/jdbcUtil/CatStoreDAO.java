@@ -32,4 +32,8 @@ public class CatStoreDAO {
 	public CatStoreVO selectOne(CatStoreVO cs) {
 		return sqlsession.selectOne(NameSpace+"selectOne", cs);
 	}
+	
+	public List<CatStoreVO> selectTop5(CatStoreVO cs){
+		return sqlsession.selectList(NameSpace+"selectTop5",cs);
+	}
 }

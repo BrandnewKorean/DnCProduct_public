@@ -1,6 +1,7 @@
 @charset "UTF-8";
 body{
 	margin: 0;
+	background-color: snow;
 }
 .intro{
 	position: relative;
@@ -51,14 +52,55 @@ body{
 	background-color: yellow;
 	width: 90%;
 	margin: 0 auto;
-	text-align: left;
-	font-size: 20pt;
-	font-weight: bold;
 }
 .top5{
 	width: 100%;
 	margin: 0 auto;
-	background-color: red;
-	font-size: medium;
-	font-weight: normal;
+	text-align: right;
+	background-color: snow;
+}
+#top5_menu{
+	display: table;
+	position: relative;
+	table-layout: fixed;
+	right: 0;
+	background-color: snow;
+}
+.top5_buttons{
+	display: table-cell;
+	background-color: Lavender;
+	position: relative;
+	margin:0;
+	padding: 0;
+	width: 90px;
+	font-weight: bold;
+	bottom: -6px;
+	height: 30px;
+	border: none;
+	outline: none;
+}
+.active{
+	border-top: 3px solid;
+	background-color: LightSteelBlue;
+}
+#top5_contents{
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-top: 5px solid;
+	border-bottom: 5px solid;
+}
+.top{
+	display: table-cell;
+	height: 300px;
+	text-align: center;
+}
+.top_images{
+	width: 90%;
+	height: 200px;
+	overflow: hidden;
+}
+.top_images:hover .top_image{
+	transform: scale(1.1);  
+	transition: 0.2s;
 }

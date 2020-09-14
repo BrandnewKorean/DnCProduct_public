@@ -55,7 +55,7 @@ $(function(){
 	
 	$('#shopping_basket').click(function(){
 		$.ajax({
-			url:'basket',
+			url:'catbasket',
 			data:{
 				seq: $('#seq').val()
 			},

@@ -15,7 +15,7 @@
 	<div class=intro>
 		<div id=ad_banner>
 			<ul class=slide_wrap>
-				<li class=slide_item><img class=item src="/resources/image/choose-cat-brush.jpg"></li>
+				<li class=slide_item><a href="products?productcode=cat03010003&seq=163"><img class=item src="/resources/image/choose-cat-brush.jpg"></a></li>
 				<li class=slide_item><img class=item src="/resources/image/142617898-cute-persian-kitten-playing-on-cat-tower.jpg"></li>
 				<li class=slide_item><img class=item src="/resources/image/84808a6f400907b372d958de64ea15c4.jpg"></li>
 				<li class=slide_item><img class=item src="/resources/image/btn_google_signin_light_normal_web.png"></li>
@@ -27,21 +27,25 @@
 		</div>
 	</div>
 	<div class="container">
-		식료품  Top 5
 		<div class=top5>
-			식료품 Top5 이미지 영역
-		</div>
-		배변/위생용품  Top 5
-		<div class=top5>
-			배변/위생용품 Top5 이미지 영역
-		</div>
-		미용용품  Top 5
-		<div class=top5>
-			미용용품 Top5 이미지 영역
-		</div>
-		생활용품  Top 5
-		<div class=top5>
-			생활용품 Top5 이미지 영역
+			<div id=top5_menu>
+				<button id=food class=top5_buttons>식료품</button>
+				<button id=medic class=top5_buttons>배변/위생용품</button>
+				<button id=beauty class=top5_buttons>미용용품</button>
+				<button id=live class=top5_buttons>생활용품</button>
+			</div>
+			<div id=top5_contents>
+				<div class=top id=t1>
+				</div>
+				<div class=top id=t2>
+				</div>
+				<div class=top id=t3>
+				</div>
+				<div class=top id=t4>
+				</div>
+				<div class=top id=t5>
+				</div>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="StoreFooter.jsp"></jsp:include>

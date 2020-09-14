@@ -272,7 +272,7 @@ $(function(){
 					break;
 				default:
 					alert('error');
-					location.reload();
+					location.reload();	
 					break;
 				}
 			}

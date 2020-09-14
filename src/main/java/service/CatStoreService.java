@@ -10,4 +10,5 @@ public interface CatStoreService {
 	int searchRowCount(StoreSearch search);
 	List<CatStoreVO> searchList(StoreSearch search);
 	CatStoreVO selectOne(CatStoreVO cs);
+	List<CatStoreVO> selectTop5(CatStoreVO cs);
 }

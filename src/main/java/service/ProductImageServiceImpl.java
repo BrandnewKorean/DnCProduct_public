@@ -19,4 +19,9 @@ public class ProductImageServiceImpl implements ProductImageService{
 		return dao.selectList(piv);
 	}
 
+	@Override
+	public ProductImageVO selectOne(ProductImageVO piv) {
+		return dao.selectOne(piv);
+	}
+
 }
