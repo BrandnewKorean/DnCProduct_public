@@ -39,6 +39,17 @@ public class StoreController {
 	@Autowired
 	BasketService bservice;
 	
+	@RequestMapping(value = "top5")
+	public ModelAndView top5(StoreSearch search, ModelAndView mv) {
+		System.out.println(search);
+		search.setPerPage(5);
+		search.setSnoEno();
+		List<CatStoreVO> list = service.searchList(search);
+		mv.addObject("list",list);
+		mv.setViewName("jsonView");
+		return mv;
+	}
+	
 	@RequestMapping(value = "storemain")
 	public ModelAndView storemain(ModelAndView mv) {
 		mv.setViewName("cat/store/StoreMain");
@@ -47,6 +58,13 @@ public class StoreController {
 	
 	@RequestMapping(value = "catstoreview")
 	public ModelAndView catstoreview(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
 		if(search.getKeyword() == null) search.setKeyword("");
 		
 		search.setPerPage(12);
@@ -63,8 +81,6 @@ public class StoreController {
 		
 		//2. 10개 
 			//searchList
-		
-		
 		List<CatStoreVO> list = service.searchList(search);
 		
 		System.out.println("this is list = "+list);

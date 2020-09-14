@@ -26,9 +26,43 @@ $(function(){
 				+"&group1="+group1
 				+"&group2="+group2;
 	});
+	
+	$('#price_high').click(function(){
+		var group1 = "${search.group1}";
+		var group2 = "${search.group2}";
+		var order1 = "price";
+		var order2 = "desc";
+		self.location = "catstoreview?"
+				+"&group1="+group1
+				+"&group2="+group2
+				+"&order1="+order1
+				+"&order2="+order2;
+	});
+	
+	$('#price_low').click(function(){
+		var group1 = "${search.group1}";
+		var group2 = "${search.group2}";
+		var order1 = "price";
+		var order2 = "asc";
+		self.location = "catstoreview?"
+				+"&group1="+group1
+				+"&group2="+group2
+				+"&order1="+order1
+				+"&order2="+order2;
+	});
+	
+	$('#seq_desc').click(function(){
+		var group1 = "${search.group1}";
+		var group2 = "${search.group2}";
+		var order1 = "seq";
+		var order2 = "desc";
+		self.location = "catstoreview?"
+				+"&group1="+group1
+				+"&group2="+group2
+				+"&order1="+order1
+				+"&order2="+order2;
+	});
 });
-
-
 </script>
 </head>
 <body>
@@ -36,6 +70,9 @@ $(function(){
 	<div class=container>
 		<c:choose>
 			<c:when test="${list.size() > 0}">
+				<button id="seq_desc">등록일순</button>
+				<button id="price_high">높은가격순</button>
+				<button id="price_low">낮은가격순</button>
 				<input type="text" id="keyword_in_result"> <button id=search_in_resultButton>검색</button><br>
 				<c:forEach var="pl" items="${list}">
 					<div class=products id="${pl.productcode}_${pl.seq}">
@@ -57,8 +94,8 @@ $(function(){
 	</div>
 	<div class=blocks>
 		<c:if test="${pageMaker.prev}">
-			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}">First</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}">Prev&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">First</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">Prev&nbsp;</a>
 		</c:if>
 		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 			<c:choose>
@@ -66,13 +103,13 @@ $(function(){
 					<font size="5" color="orange">${i}</font>&nbsp;
 				</c:when>
 				<c:otherwise>
-					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}">${i}</a>&nbsp;
+					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">${i}</a>&nbsp;
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}">Next&nbsp;&nbsp;</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}">End&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">Next&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">End&nbsp;&nbsp;</a>
 		</c:if>
 	</div>
 	<jsp:include page="StoreFooter.jsp"></jsp:include>

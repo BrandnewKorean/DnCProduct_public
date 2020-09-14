@@ -52,15 +52,55 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="resources/script/DecimalFormat.js"></script>
 <script>
 $(function(){
 	var number = 1;
 	var price = new Array();
-	$('.prices').each(function(){
+	$('.product_price').each(function(){
 		price.push(parseInt($(this).text()));
 	});
-	console.log(price);
+	
+	var df = new DecimalFormat("###,###");
+	
+	$('#number').text(number);
+	$('#total_price').text(df.format(price[0]));
+	$('#number_input').val(number);
+	
+	$('#number_minus').click(function(){
+		number--;
+		if(number <= 0) number = 1;
+		$('#number').text(number);
+		$('#number_input').val(number);
+		$('#total_price').text(df.format(number*price[0]));
+	});
+	
+	$('#number_plus').click(function(){
+		number++;
+		$('#number').text(number);
+		$('#number_input').val(number);
+		$('#total_price').text(df.format(number*price[0]));
+	});
+	
+	$('#number_input').focusout(function() {
+		if(parseInt($('#number_input').val())){
+			if(parseInt($('#number_input').val()) < 1){
+				alert('수량은 1이상만 입력 가능합니다');
+				$('#number_input').val(number);
+			}else{
+				number = parseInt($('#number_input').val());
+			}
+		}else{
+			alert('잘못 입력');
+			$('#number_input').val(number);
+		}
+		
+		$('#number').text(number);
+		$('#total_price').text(df.format(number*price[0]));
+	});
+	
 });
+
 </script>
 </head>
 <body>
@@ -79,10 +119,13 @@ $(function(){
 					${productMap.get(list.seq).name}
 				</span>
 				<span class="cell col4">
-					<a class=prices>${storeMap.get(list.seq).price}</a><br>
-					<button class=number_buttons id=number_minus>-</button><input id=number_input type="text"><button class=number_buttons id=number_plus>+</button><br>
-					총 <a id=number></a> 개 <a id=total_price></a>원<br>
-					<button class=buy>구매하기</button>
+					<a class=product_price>${storeMap.get(list.seq).price}</a><br>
+					<button class=number_buttons id=number_plus>+</button>
+					<input id=number_input type="text" size="10">
+					<button class=number_buttons id=number_minus>-</button><br>
+					총 <a id=number></a> 개
+					<a id=total_price></a>원<br>	
+					<button class=payment>구매하기</button>
 				</span>
 			</div>
 		</c:forEach>

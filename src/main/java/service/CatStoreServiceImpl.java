@@ -35,4 +35,9 @@ public class CatStoreServiceImpl implements CatStoreService{
 		return dao.selectOne(cs);
 	}
 
+	@Override
+	public List<CatStoreVO> selectTop5(CatStoreVO cs) {
+		return dao.selectTop5(cs);
+	}
+
 }
