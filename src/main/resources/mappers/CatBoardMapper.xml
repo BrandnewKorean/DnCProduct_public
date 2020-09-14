@@ -5,6 +5,22 @@
   
 <mapper namespace="ex01.mappers.CatBoardMapper">
 
+	<insert id="likeinsert">
+		insert into catboard_heart values(#{seq},#{id})
+	</insert>
+
+	<update id="likeCheck">
+		update catboard set heart=(select count(*) from catboard_heart where seq=#{seq}) where seq=#{seq}
+	</update>
+	
+	<delete id="likedelete">
+		delete from catboard_heart where seq=#{seq} and id=#{id}
+	</delete>
+	
+	<select id="selectlike" resultType="vo.CatBoardHeartVO">
+		select * from catboard_heart where seq=#{seq} and id=#{id}
+	</select>
+
 	<update id="updatecomments">
 		update CatBoard set comments=(select count(*) from catboardcomment where seq=#{seq}), cnt=cnt-1 where seq=#{seq}
 	</update>
@@ -17,7 +33,7 @@
   
 	<select id="searchList" resultType="vo.CatBoardVO">
 		<![CDATA[
-		select seq,title,id,regdate,cnt,comments from 
+		select seq,title,id,regdate,cnt,comments,heart from 
 		(select b.*,ROW_NUMBER() OVER(order by seq desc) rnum
 		from catboard b where seq>0 ]]>
   		<include refid="search"></include>
@@ -48,7 +64,7 @@
   	</select>
   	
   	<select id="selectOne" resultType="vo.CatBoardVO">
-  		select seq,id,title,content,regdate,cnt,comments from CatBoard 
+  		select seq,id,title,content,regdate,cnt,comments,heart from CatBoard 
   		where seq=#{seq}
   	</select>
   	

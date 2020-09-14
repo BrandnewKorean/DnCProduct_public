@@ -2,12 +2,12 @@ $(function(){
 	
 	$('*').mouseup(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/dog_default.cur"), auto');
+		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_default.cur"), auto');
 	})
 	
 	$('*').mousedown(function(e){
 		e.stopImmediatePropagation();
-		$('*').css('cursor', 'url("/ex01/resources/cursor/dog_click.cur"), auto');
+		$('*').css('cursor', 'url("/ex01/resources/cursor/cat_click.cur"), auto');
 	}); 
 	 
 	$.ajax({
@@ -43,7 +43,7 @@ $(function(){
 	});
 	
 	$('#catmainlogo').click(function(){
-		location.href = "dogmain";
+		location.href = "catmain";
 	});
 	
 	$('#logout').click(function(){

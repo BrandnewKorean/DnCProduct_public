@@ -55,7 +55,7 @@ body{
 }
 .bluepointer{
 	position: absolute;
-	background-image: url("/resources/image/pinbb.png");
+	background-image: url("/resources/image/heart.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 50px;
@@ -67,7 +67,7 @@ body{
 }
 .redpointer{
 	position: absolute;
-	background-image: url("/resources/image/pinrb.png");
+	background-image: url("/resources/image/heart1.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 50px;
@@ -120,4 +120,8 @@ body{
 	height: 75%;
 	left: 70%;
 	bottom: 0;
+}
+#select{
+	font-family: monospace;
+	font-size: 10px;
 }

@@ -26,17 +26,89 @@ $(function(){
 				keyword: "${search1.keyword}"
 			},
 			beforeSend: function(){
-				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; width: 100%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
 			},
 			success: function(result){
 				$('#result1').html(result);
 			},
 		});
 	});
+	
+	$('#result1_first_page').click(function(){
+		$.ajax({
+			url: "searchresult1",
+			data:{
+				currentPage: 1,
+				perPage: 10,
+				keyword: "${search1.keyword}"
+			},
+			beforeSend: function(){
+				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result1').html(result);
+			}
+		});
+	});
+	
+	$('#result1_prev_page').click(function(){
+		$.ajax({
+			url: "searchresult1",
+			data:{
+				currentPage: "${pageMaker1.startPageNo-1}",
+				perPage: 10,
+				keyword: "${search1.keyword}"
+			},
+			beforeSend: function(){
+				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result1').html(result);
+			}
+		});
+	});
+	
+	$('#result1_next_page').click(function(){
+		$.ajax({
+			url: "searchresult1",
+			data:{
+				currentPage: "${pageMaker1.endPageNo+1}",
+				perPage: 10,
+				keyword: "${search1.keyword}"
+			},
+			beforeSend: function(){
+				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result1').html(result);
+			}
+		});
+	});
+	
+	$('#result1_end_page').click(function(){
+		$.ajax({
+			url: "searchresult1",
+			data:{
+				currentPage: "${pageMaker1.lastPageNo}",
+				perPage: 10,
+				keyword: "${search1.keyword}"
+			},
+			beforeSend: function(){
+				$('#result1').append('<div style="position:absolute; left: 50%; top: 25%; height: 100%; z-index: 1;"><img src="resources/image/catloading.gif" style="position:relative; left: -50%; height: 50%;"></div>')
+			},
+			success: function(result){
+				$('#result1').html(result);
+			}
+		});
+	});
 });
 </script>
 </head>
 <body>
+	<span style="color: red;">
+		총 ${pageMaker1.getTotalRow()} 개의 상품 중 ${list1.size()}개의 상품이 검색되었습니다.
+	</span>	
+	<br>
 	<c:choose>
 		<c:when test='${list1.size() > 0}'>
 			<c:forEach var="pl1" items='${list1}'>
@@ -55,8 +127,8 @@ $(function(){
 	</c:choose>
 	<div class=blocks>
 		<c:if test='${pageMaker1.prev}'>
-			<a href='catstoreview${pageMaker1.makeSearch(1)}&group1=${search1.group1}'>First</a>
-			<a href='catstoreview${pageMaker1.makeSearch(pageMaker1.startPageNo-1)}&group1=${search1.group1}&group2=${search1.group2}'>Prev&nbsp;</a>
+			<button id=result1_next_page>Next</button>
+			<button id=result1_end_page>End</button>
 		</c:if>
 		<c:forEach begin='${pageMaker1.startPageNo}' end='${pageMaker1.endPageNo}' var="i">
 			<c:choose>
@@ -70,8 +142,8 @@ $(function(){
 			</c:choose>
 		</c:forEach>
 		<c:if test='${pageMaker1.next && pageMaker1.endPageNo > 0}'>
-			<a href='catstoreview${pageMaker1.makeSearch(pageMaker1.endPageNo+1)}&group1=${search1.group1}&group2=${search1.group2}'>Next&nbsp;&nbsp;</a>
-			<a href='catstoreview${pageMaker1.makeSearch(pageMaker1.lastPageNo)}&group1=${search1.group1}&group2=${search1.group2}'>End&nbsp;&nbsp;</a>
+			<button id=result1_next_page>Next</button>
+			<button id=result1_end_page>End</button>
 		</c:if>
 	</div>
 </body>

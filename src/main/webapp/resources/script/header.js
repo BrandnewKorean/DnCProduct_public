@@ -8,13 +8,13 @@ $(function(){
 			success: function(data){
 				if(data.cv.profile == ""){
 					$('#profile_image').css({
-						backgroundImage: 'url("/ex01/resources/profile/default_client.png")',
+						backgroundImage: 'url("/resources/profile/default_client.png")',
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover" 
 					});
 				}else{
 					$('#profile_image').css({
-						backgroundImage: 'url("/ex01/resources/profile/'+data.cv.profile+'")',
+						backgroundImage: 'url("/resources/profile/'+data.cv.profile+'")',
 						backgroundRepeat: "no-repeat",
 						backgroundSize: "cover" 
 					});
@@ -35,7 +35,15 @@ $(function(){
 		});
 		
 		$('#catmainlogo').click(function(){
-			location.href = "home";
+			location.href = "catmain";
+		});
+		
+		var angle = 0;
+		$('#header_navigation_btn').click(function(){
+			angle += 180;
+			console.log(angle);
+			$('#header_navigation_btn').css('transform','rotate('+angle+'deg)');
+			$('.header_navigation').slideToggle('slow');
 		});
 	}else{
 		$('.text').hover(function(){

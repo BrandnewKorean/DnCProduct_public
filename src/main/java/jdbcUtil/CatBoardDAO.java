@@ -1,16 +1,13 @@
 package jdbcUtil;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.connect.Connection;
 import org.springframework.stereotype.Repository;
 
 import searchCriteria.Search;
+import vo.CatBoardHeartVO;
 import vo.CatBoardVO;
 import vo.PageVO;
 
@@ -78,8 +75,20 @@ public class CatBoardDAO {
 		return sqlsession.selectOne(NameSpace+"insertseq");
 	}
 	
+	public int likeCheck(CatBoardHeartVO bhv) {
+		return sqlsession.update(NameSpace+"likeCheck",bhv);
+	}
 	
+	public int likeinsert(CatBoardHeartVO bhv) {
+		return sqlsession.insert(NameSpace+"likeinsert",bhv);
+	}
 	
+	public CatBoardHeartVO selectlike(CatBoardHeartVO bhv) {
+		return sqlsession.selectOne(NameSpace+"selectlike", bhv);
+	}
 	
+	public int likedelete(CatBoardHeartVO bhv) {
+		return sqlsession.delete(NameSpace+"likedelete", bhv);
+	}
 
 } // boardDAO

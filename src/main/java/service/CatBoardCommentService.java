@@ -6,8 +6,6 @@ import vo.CatBoardCommentVO;
 
 public interface CatBoardCommentService {
 
-	
-	
 	CatBoardCommentVO selectOne(CatBoardCommentVO bcv);
 	
 	List<CatBoardCommentVO> selectList(int seq);
@@ -17,5 +15,6 @@ public interface CatBoardCommentService {
 	int update(CatBoardCommentVO bcv);
 	
 	int delete(CatBoardCommentVO bcv);
+	
 	
 }//interface

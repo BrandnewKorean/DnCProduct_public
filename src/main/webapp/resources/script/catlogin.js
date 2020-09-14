@@ -4,7 +4,6 @@ $(function(){
 			id: $('#id').val(),
 			password: $('#password').val()
 		}
-		
 		$.ajax({
 			url: 'login',
 			Type: 'get',
@@ -23,7 +22,6 @@ $(function(){
 			}
 		});
 	});
-	
 	$('#cancel').click(function(){
 		location.href = 'home';
 	});

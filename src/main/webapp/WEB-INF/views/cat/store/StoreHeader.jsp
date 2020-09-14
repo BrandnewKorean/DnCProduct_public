@@ -29,7 +29,7 @@ $(function(){
 		<img id="catmainlogo" src="resources/image/logob.png" width=7%>
 		<div id="storemenu">
 			<label id=search_label for="keyword">
-				<input type="text" name="keyword" id="keyword" title="통합검색" value="${pageMaker.search.keyword}">
+				<input type="text" name="keyword" id="keyword" title="통합검색">
 				<button id="searchButton"><img src="resources/image/search_button.png" width=27px height=27px></button>
 			</label>
 			<br>

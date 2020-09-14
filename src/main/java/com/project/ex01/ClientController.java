@@ -14,7 +14,6 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.Validate;
 import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -299,6 +298,7 @@ public class ClientController {
 		return mv;
 	} // delete
 	
+	
 	@RequestMapping(value = "updatef")
 	public ModelAndView updatef(HttpServletRequest request, ModelAndView mv) {
 		ClientVO cv = new ClientVO();
@@ -312,6 +312,7 @@ public class ClientController {
 
 	@RequestMapping(value = "update")
 	public ModelAndView update(HttpServletRequest request, ModelAndView mv, ClientVO cv) {
+		cv.setPassword(passwordEncoder.encode(cv.getPassword()));
 		if(service.update(cv) > 0) {
 			mv.addObject("code", 0);
 		}else {
@@ -434,7 +435,7 @@ public class ClientController {
 			} catch (Exception e) {
 				System.out.println("mailSending Exception => "+e.toString());
 			}
-
+				
 		}else {
 			mv.addObject("result", false);
 		}
@@ -456,13 +457,15 @@ public class ClientController {
 	    		'A','B','C','D','E','F','G','H','I','J','K','L','M', 
 	    		'N','O','P','Q','R','S','T','U','V','W','X','Y','Z' };
 	    
-	    for(int i=0; i<10; i++) {
+	    char a ='!';
+	    for(int i=0; i<9; i++) {
 	    	password += charArr[r.nextInt(33)];
 	    }
 	    
+	    password += a;
 		cv = service.sendFindPw(cv);
+
 		if(cv != null) {
-			mv.addObject("result", true);
 			String encodedPassword = passwordEncoder.encode(password);
 			if(passwordEncoder.matches(password, encodedPassword)) {
 				cv.setPassword(passwordEncoder.encode(password));
@@ -473,7 +476,7 @@ public class ClientController {
 			String content = 
 					"<h1>DnCProduct</h1>"
 					+ "<h3>요청하신 임시 비밀번호는</h3>"
-					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ password + "!"+ "</p>"
+					+ "<p style=\"font-weight:bold; font-size:15px;\">"+ password +"</p>"
 					+ "입니다.";
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -486,13 +489,17 @@ public class ClientController {
 				
 				mailSender.send(message);
 				service.passwordChange(cv); // 임시 비밀번호로 업데이트
+				System.out.println("this is cv = "+cv);
 				
 			} catch (Exception e) {
 				System.out.println("mailSending Exception => "+e.toString());
 			}
+			mv.addObject("result", true);
 		}else {
 			mv.addObject("result", false);
 		}
+		
+
 		mv.addObject("email", cv.getEmail());
 		mv.setViewName("jsonView");
 		return mv;

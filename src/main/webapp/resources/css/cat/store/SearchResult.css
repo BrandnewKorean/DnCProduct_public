@@ -13,6 +13,7 @@
 	background-color: LightSteelBlue;
 	min-height: 150px;
 	text-align: center;
+	width: 100%;
 }
 .products{
 	display: inline-block;

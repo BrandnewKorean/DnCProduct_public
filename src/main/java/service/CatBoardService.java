@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import searchCriteria.Search;
+import vo.CatBoardHeartVO;
 import vo.CatBoardVO;
 import vo.PageVO;
 
@@ -32,4 +33,5 @@ public interface CatBoardService {
 	PageVO<CatBoardVO> pageList(PageVO<CatBoardVO> pvo); //pageList()
 
 	int insertseq();
+	
 } // interface

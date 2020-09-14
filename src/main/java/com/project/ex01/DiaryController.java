@@ -104,6 +104,7 @@ public class DiaryController {
 					for(int i=0;i<files.size();i++) {
 						String filename = dv.getWdate()+"_"+dv.getId()+"_"+files.get(i).getOriginalFilename();
 						duv.setSeq(dv.getSeq());
+						duv.setId(dv.getId());
 						duv.setWdate(dv.getWdate());
 						duv.setFilename(files.get(i).getOriginalFilename());
 						System.out.println(duv);
