@@ -39,5 +39,28 @@
 	font-size: 10pt;
 }
 .blocks{
+	display: table;
+	position: relative;
+	table-layout: fixed;
 	text-align: center;
+	margin: 0 auto;
+}
+.blocks > a{
+	text-decoration: none;
+}
+.page_buttons{
+	display: table-cell;
+	margin: 2px;
+	border: 1px solid gray;
+	width: 30px;
+	height: 30px;
+	background-color: white;
+}
+.currentpage{
+	background-color: red;
+	color: white;
+}
+.page_buttons:hover{
+	background-color: red;
+	color: white;
 }
