@@ -94,22 +94,22 @@ $(function(){
 	</div>
 	<div class=blocks>
 		<c:if test="${pageMaker.prev}">
-			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">First</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">Prev&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}"><button class=page_buttons>First</button></a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.startPageNo-1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}"><button class=page_buttons>Prev</button></a>
 		</c:if>
 		<c:forEach begin="${pageMaker.startPageNo}" end="${pageMaker.endPageNo}" var="i">
 			<c:choose>
 				<c:when test="${pageMaker.search.currentPage==i}">
-					<font size="5" color="orange">${i}</font>&nbsp;
+					<button class="page_buttons currentpage">${i}</button>
 				</c:when>
 				<c:otherwise>
-					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">${i}</a>&nbsp;
+					<a href="catstoreview${pageMaker.makeSearch(i)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}"><button class=page_buttons>${i}</button></a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:if test="${pageMaker.next && pageMaker.endPageNo > 0}">
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">Next&nbsp;&nbsp;</a>
-			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}">End&nbsp;&nbsp;</a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.endPageNo+1)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}"><button class=page_buttons>Next</button></a>
+			<a href="catstoreview${pageMaker.makeSearch(pageMaker.lastPageNo)}&group1=${search.group1}&group2=${search.group2}&order1=${search.order1}&order2=${search.order2}"><button class=page_buttons>End</button></a>
 		</c:if>
 	</div>
 	<jsp:include page="StoreFooter.jsp"></jsp:include>

@@ -15,10 +15,10 @@
 	<div class=intro>
 		<div id=ad_banner>
 			<ul class=slide_wrap>
-				<li class=slide_item><img class=item src="/resources/image/choose-cat-brush.jpg"></li>
-				<li class=slide_item><img class=item src="/resources/image/142617898-cute-persian-kitten-playing-on-cat-tower.jpg"></li>
-				<li class=slide_item><img class=item src="/resources/image/84808a6f400907b372d958de64ea15c4.jpg"></li>
-				<li class=slide_item><img class=item src="/resources/image/btn_google_signin_light_normal_web.png"></li>
+				<li class=slide_item><a href="products?productcode=cat03010003&seq=163"><img class=item src="/resources/catstoreevent/choose-cat-brush.jpg"></a></li>
+				<li class=slide_item><a href="products?productcode=cat02020011&seq=131"><img class=item src="/resources/catstoreevent/catstoreevent2.png"></a></li>
+				<li class=slide_item><a href="products?productcode=cat01010041&seq=41"><img class=item src="/resources/catstoreevent/saryo.jpg"></a></li>
+				<li class=slide_item><a href="products?productcode=cat04030008&seq=288"><img class=item src="/resources/catstoreevent/cattower.PNG"></a></li>
 			</ul>
 		</div>
 		<div id=ad_banner_remote>
@@ -28,12 +28,24 @@
 	</div>
 	<div class="container">
 		<div class=top5>
-			<button id=food class=top5_buttons>식료품</button>
-			<button id=medic class=top5_buttons>배변/위생용품</button>
-			<button id=beauty class=top5_buttons>미용용품</button>
-			<button id=live class=top5_buttons>생활용품</button>
+			<div id=top5_menu>
+				<font size="10">TOP 5</font>
+				<button id=food class=top5_buttons>식료품</button>
+				<button id=medic class=top5_buttons>배변/위생용품</button>
+				<button id=beauty class=top5_buttons>미용용품</button>
+				<button id=live class=top5_buttons>생활용품</button>
+			</div>
 			<div id=top5_contents>
-				내용영역
+				<div class=top id=t1>
+				</div>
+				<div class=top id=t2>
+				</div>
+				<div class=top id=t3>
+				</div>
+				<div class=top id=t4>
+				</div>
+				<div class=top id=t5>
+				</div>
 			</div>
 		</div>
 	</div>

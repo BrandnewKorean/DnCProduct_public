@@ -40,12 +40,41 @@ public class StoreController {
 	BasketService bservice;
 	
 	@RequestMapping(value = "top5")
-	public ModelAndView top5(StoreSearch search, ModelAndView mv) {
-		System.out.println(search);
-		search.setPerPage(5);
-		search.setSnoEno();
-		List<CatStoreVO> list = service.searchList(search);
-		mv.addObject("list",list);
+	public ModelAndView top5(CatStoreVO cv, ModelAndView mv) {
+		System.out.println(cv.getGroup1());
+		List<CatStoreVO> list = service.selectTop5(cv);
+		Map<Integer, List<ProductImageVO>> productimageMap = new HashMap<>();
+		Map<Integer, ProductVO> productMap = new HashMap<>();
+		
+		DecimalFormat fm = new DecimalFormat("###,###");
+		Map<Integer,String> priceMap = new HashMap<>();
+		
+		for(int i=0;i<list.size();i++) {
+			ProductVO pv = new ProductVO();
+			ProductImageVO piv = new ProductImageVO();
+			
+			pv.setProductcode(list.get(i).getProductcode());
+			piv.setProductcode(list.get(i).getProductcode());
+			
+			List<ProductImageVO> imagelist = piservice.selectList(piv);
+			for(int j=0;j<imagelist.size();j++) {
+				if(imagelist.get(j).getIsmain() && j != 0) {
+					ProductImageVO temp1 = imagelist.get(j);
+					ProductImageVO temp2 = imagelist.get(0);
+					imagelist.set(0, temp1);
+					imagelist.set(j, temp2);
+				}
+			}
+			
+			priceMap.put(list.get(i).getSeq(), fm.format(list.get(i).getPrice()));
+			productimageMap.put(list.get(i).getSeq(), imagelist);
+			productMap.put(list.get(i).getSeq(), pservice.selectOne(pv));
+		}
+		
+		mv.addObject("productMap", productMap);
+		mv.addObject("productimageMap",productimageMap);
+		mv.addObject("priceMap", priceMap);
+		mv.addObject("list", list);
 		mv.setViewName("jsonView");
 		return mv;
 	}
@@ -71,16 +100,6 @@ public class StoreController {
 		search.setSnoEno();
 		System.out.println(search);
 		
-		// 전체 list 불러오기
-		
-		//42 개 중에 10개를 검색했습니다
-		
-		//1. 42개
-			//searchrowcount
-			
-		
-		//2. 10개 
-			//searchList
 		List<CatStoreVO> list = service.searchList(search);
 		
 		System.out.println("this is list = "+list);

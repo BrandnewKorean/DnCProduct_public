@@ -39,5 +39,4 @@ public class CatStoreServiceImpl implements CatStoreService{
 	public List<CatStoreVO> selectTop5(CatStoreVO cs) {
 		return dao.selectTop5(cs);
 	}
-
 }
