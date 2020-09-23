@@ -13,6 +13,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+servlet-context.xml
+pom.xml
 
 # External tool builders
 .externalToolBuilders/
@@ -74,6 +76,11 @@ local.properties
 # End of https://www.gitignore.io/api/eclipse
 src/main/webapp/WEB-INF/spring/root-context.xml
 
-# Intellij
-.idea/
-okky.iml
+# servlet-context
+src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+
+# Social login
+KakaoLoginBO.java
+KakaoLoginApi.java
+NaverLoginBO.java
+NaverLoginApi.java
