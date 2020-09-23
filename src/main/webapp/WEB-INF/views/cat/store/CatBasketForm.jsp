@@ -130,9 +130,9 @@ $(function(){
 			</div>
 		</c:forEach>
 	</div>
-	<div id=total>
-		Total 영역
-	</div>
+<!-- 	<div id=total> -->
+<!-- 		Total 영역 -->
+<!-- 	</div> -->
 	<jsp:include page="StoreFooter.jsp"></jsp:include>
 </body>
 </html>

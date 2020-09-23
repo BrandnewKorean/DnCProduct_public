@@ -541,7 +541,7 @@ function build(y, m, d){
 	$('.days').click(function(){
 		if($(this).html() != '&nbsp;'){
 			$('.days').css({
-				backgroundColor: "yellow"
+				backgroundColor: "snow"
 			});
 			$(this).css({
 				backgroundColor: "red"
