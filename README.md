@@ -1,8 +1,6 @@
 # DnCProduct_public
 <hr>
 
-# 개요
-
 # 개발 환경
 * Eclipse 2020-03
 * Oracle 11g 11.2.0
