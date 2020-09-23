@@ -259,6 +259,14 @@ public class StoreController {
 	
 	@RequestMapping(value = "searchresult1")
 	public ModelAndView searchresult1(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
+		if(search.getKeyword() == null) search.setKeyword("");
 		search.setSnoEno();
 		search.setGroup1("식료품");
 		
@@ -307,6 +315,14 @@ public class StoreController {
 	
 	@RequestMapping(value = "searchresult2")
 	public ModelAndView searchresult2(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
+		if(search.getKeyword() == null) search.setKeyword("");
 		search.setSnoEno();
 		search.setGroup1("배변/위생용품");
 		
@@ -355,6 +371,14 @@ public class StoreController {
 	
 	@RequestMapping(value = "searchresult3")
 	public ModelAndView searchresult3(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
+		if(search.getKeyword() == null) search.setKeyword("");
 		search.setSnoEno();
 		search.setGroup1("미용용품");
 		
@@ -403,6 +427,14 @@ public class StoreController {
 	
 	@RequestMapping(value = "searchresult4")
 	public ModelAndView searchresult4(StoreSearch search, ModelAndView mv) {
+		if(search.getOrder1() == null) {
+			search.setOrder1("seq");
+		}
+		if(search.getOrder2() == null) {
+			search.setOrder2("desc");
+		}
+		
+		if(search.getKeyword() == null) search.setKeyword("");
 		search.setSnoEno();
 		search.setGroup1("생활용품");
 		

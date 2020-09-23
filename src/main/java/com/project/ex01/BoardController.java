@@ -195,20 +195,44 @@ public class BoardController {
 			request.getSession().setAttribute("view", false);
 		}
 		
-		
-		//id값 가져오기
-		//list에서 seq값을 가져와서 boardheartvo 에 넣기
-		//session에서 ID값을 가져와서 boardheartvo 에 넣기
-		
-		//likeMap을 사용한 이유
-		//key : seq   value: true & false
-		//seq 3은 false 
-		//seq 2는 true
-		
-		//==> seq 값마다 좋아요가 off될 수도 on 될 수도 있어서
-		// hashmap을 사용
-		
-		
+		for(int i=0;i<list.size();i++) {
+			String regdate = list.get(i).getRegdate();
+			Date current = new Date();
+			SimpleDateFormat fm = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date reg = fm.parse(regdate);
+			
+			long diff = current.getTime() - reg.getTime();
+			long diffsec = (diff / 1000 % 60);
+			long diffmin = (diff / (60 * 1000) % 60);
+			long diffhour = (diff / (60 * 60 * 1000));
+			long diffday = (diff / (24*60*60*1000));
+			
+			if(diffday <= 0) {
+				if(diffhour <= 0) {
+					if(diffmin <= 0) {
+						if(diffsec < 30) {
+							regdate = "방금";
+						}else {
+							regdate = diffsec+"초 전";
+						}
+					}else {
+						regdate = diffmin+"분 전";
+					}
+				}else {
+					regdate = diffhour+"시간 전";
+				}
+			}else {
+				if(diffday > 0 && diffday < 7) {
+					regdate = diffday+"일 전";
+				}else {
+					SimpleDateFormat fm2 = new SimpleDateFormat("yyyy/MM/dd");
+					Date r = fm2.parse(regdate);
+					String regd = fm2.format(r);
+					regdate = regd;
+				}
+			}
+			list.get(i).setRegdate(regdate);
+		}
 		
 		String id = (String)request.getSession().getAttribute("logID");
 		Map<Integer,Boolean> likeMap = new HashMap<>();
